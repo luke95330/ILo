@@ -1,0 +1,111 @@
+# ILô — Changelog / Historique
+
+[English](#english) · [Français](#français)
+
+## English
+
+### ILô 1.4.4
+
+Fixed an overlap when ILô Media sits to the right of Start. The dock now accounts for the space reserved by the visible player when positioning the notification area and releases it when the player hides.
+
+### ILô 1.4.3
+
+Added a PayPal donation button to the dock’s Windhawk page.
+
+### ILô 1.4.2
+
+Completed the English settings reference for all 57 options, including defaults and available choices. Clarified several English labels and added the missing app-divider placement description. Existing settings keys and defaults were preserved.
+
+### ILô 1.4.1
+
+Added support for layout updates from ILô Media. The dock recalculates its width when the compact player changes size or disappears, closing the empty gap after playback ends.
+
+### ILô 1.4
+
+Separated zoom levels for application and notification icons and raised both limits to 250%. Application icons can use a larger source image for sharper magnification. Added an option to keep a visible button background at its normal size.
+
+### ILô 1.3
+
+Added two styles for application icons. **Zoom**, the new default, enlarges only the hovered icon around its center, like the notification area. **MacOS** also animates neighboring icons.
+
+### ILô 1.2
+
+Extended hover zoom to notification icons. The entire notification area, the hidden-icons chevron, and the clock can be excluded. The chevron and clock keep their native size by default.
+
+### ILô 1.1.3
+
+Raised the default application hover zoom from 145% to 180%.
+
+### ILô 1.1.2
+
+Added an option, enabled by default, to hide application button backgrounds while hover zoom is active.
+
+### ILô 1.1.1
+
+Made the application button background follow the icon’s scale and movement during hover zoom.
+
+### ILô 1.1
+
+Introduced optional hover magnification for application icons. Users could set the zoom level, number of neighboring icons, spread and transition duration, and choose whether to include Start.
+
+### ILô 1.0
+
+First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment from TAI Dock 1.0.3, validated on Windows 11 build 26300.10075. Added French settings and shipped the compact profile with a dock height of 24, a vertical dock offset of 8 and a separate notification icon offset of 0.
+
+### vitaliiorlov baseline 1.5.278-vo
+
+Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
+
+## Français
+
+### ILô 1.4.4
+
+Correction du chevauchement lorsque le lecteur ILô Media se trouve à droite de Démarrer. Le dock tient compte de la place réservée au lecteur visible pour positionner la zone de notification et libère cet espace lorsque le lecteur se masque.
+
+### ILô 1.4.3
+
+Ajout d’un bouton de don PayPal sur la page du dock dans Windhawk.
+
+### ILô 1.4.2
+
+Ajout d’un guide anglais complet des 57 réglages, avec les valeurs par défaut et les choix disponibles. Plusieurs libellés anglais ont été précisés et la description manquante de la position des séparateurs a été ajoutée. Les clés et les valeurs par défaut ont été conservées.
+
+### ILô 1.4.1
+
+Prise en charge des notifications de changement de taille d’ILô Media. Le dock recalcule sa largeur lorsque le lecteur compact change de taille ou disparaît, ce qui supprime l’espace vide après la fermeture du lecteur.
+
+### ILô 1.4
+
+Réglages de zoom distincts pour les applications et la zone de notification, avec un plafond de 250 % dans les deux cas. Les icônes d’application peuvent utiliser une image source plus grande pour améliorer la netteté. Une nouvelle option conserve le fond visible des boutons à sa taille normale.
+
+### ILô 1.3
+
+Ajout de deux styles pour les applications. **Zoom**, le nouveau choix par défaut, agrandit uniquement l’icône survolée autour de son centre, comme dans la zone de notification. **MacOS** anime aussi les icônes voisines.
+
+### ILô 1.2
+
+Extension du zoom aux icônes de notification. Il est possible d’exclure toute la zone, le chevron des icônes masquées ou l’horloge. Le chevron et l’horloge conservent leur taille native par défaut.
+
+### ILô 1.1.3
+
+Passage du zoom par défaut des applications de 145 % à 180 %.
+
+### ILô 1.1.2
+
+Ajout d’une option, activée par défaut, pour masquer le fond des boutons d’application lorsque le zoom au survol est actif.
+
+### ILô 1.1.1
+
+Le fond du bouton d’application suit désormais l’agrandissement et le déplacement de l’icône pendant le survol.
+
+### ILô 1.1
+
+Première version du zoom facultatif au survol des icônes d’application. Les réglages permettent de choisir le grossissement, le nombre d’icônes voisines, leur écartement, la durée de transition et l’inclusion du bouton Démarrer.
+
+### ILô 1.0
+
+Première version sous le nom **ILô**, par Mighty-Luke. Reprise du centrage de la zone de notification de TAI Dock 1.0.3, validé sur Windows 11 build 26300.10075. Ajout des réglages en français et du profil compact avec une hauteur de 24, un décalage vertical du dock de 8 et un décalage distinct de 0 pour les icônes de notification.
+
+### Base de vitaliiorlov 1.5.278-vo
+
+Point de départ d’ILô. Cette version du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) reposait sur la barre flottante TAI de DarkionAvey. Elle gérait déjà la zone cliquable limitée au dock, le placement des notifications sur l’écran principal et la journalisation facultative de la position des volets. [Notes archivées du fork d’origine](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
