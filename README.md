@@ -6,6 +6,8 @@ ILô turns the Windows 11 taskbar into a floating dock that centers your apps an
 
 Add zoom options for programs and systray (MacOS Dock Style)
 
+The optional [ILô Media player](https://github.com/luke95330/ILo_Media) adds album art and playback controls to the dock.
+
 ## Installation
 
 Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
@@ -15,6 +17,8 @@ Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.c
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 
 Offre des options de zoom pour les programmes et la zone de notification (Style MacOS)
+
+Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’afficher la pochette et les commandes de lecture dans le dock.
 
 ## Installation
 
