@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.4.3
+// @version         1.4.4
 // @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -12362,7 +12362,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       &taskbarChildrenMeasurement,
       &state.taskbarChildStyleCache,
       childStyleGeneration);
-  const double childrenWidthTaskbarDbl =
+  double childrenWidthTaskbarDbl =
       taskbarChildrenMeasurement.totalWidth;
   childrenCountTaskbar = taskbarChildrenMeasurement.validChildrenCount;
   taskbarLeftEdge = taskbarChildrenMeasurement.leftMostEdge;
@@ -12380,6 +12380,23 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     startButtonWidth = startButtonAnchorRect.Width;
     startButtonHeight = startButtonAnchorRect.Height;
     state.lastStartButtonXActual = static_cast<float>(startButtonAnchorRect.X);
+  }
+  // ILô Media places an anchored player in RootGrid and reserves space
+  // with a margin on Start. The sum of repeater button widths omits that gap.
+  if (!g_unloading && startButtonElement && startButtonWidth > 0) {
+    auto media = FindChildByName(rootGridTaskBar, L"IloMediaPlayerHost");
+    if (media && media.Visibility() == Visibility::Visible && media.ActualWidth() > 0) {
+      const auto startEnd = startButtonLeft + startButtonWidth;
+      const double reserved = startButtonElement.Margin().Right;
+      const double mediaLeft = media.Margin().Left;  // in RootGrid DIPs, as is startEnd
+      if (reserved > 0 && mediaLeft >= startEnd - 2.0 && mediaLeft < startEnd + reserved) {
+        // Only count the missing part: some Windows layouts already include
+        // the reservation inside a measured button wrapper.
+        const double occupied = std::max(taskbarRightEdge - taskbarLeftEdge,
+            mediaLeft + media.ActualWidth() - startButtonLeft);
+        childrenWidthTaskbarDbl += std::clamp(occupied - childrenWidthTaskbarDbl, 0.0, reserved);
+      }
+    }
   }
   if (!g_unloading && childrenWidthTaskbarDbl <= 0) {
     Wh_Log(L"Error: childrenWidthTaskbarDbl <= 0");
