@@ -1,10 +1,11 @@
 // ==WindhawkMod==
-// @id              taskbar-dock-like-vo
-// @name            TAI (taskbar as island) for Windows 11 - vo fork
-// @description     Centers and floats the taskbar as an animated dock. Fork changes are linked under Details.
-// @version         1.5.278-vo
-// @author          vitaliiorlov (fork of DarkionAvey)
-// @github          https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed
+// @id              ilo
+// @name            ILô
+// @name:fr-FR      ILô
+// @description     Centered Windows 11 dock with a floating background and notification area.
+// @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
+// @version         1.4.1
+// @author          Mighty-Luke
 // @include         explorer.exe
 // @include         StartMenuExperienceHost.exe
 // @include         ShellHost.exe
@@ -14,99 +15,82 @@
 // ==/WindhawkMod==
 // This mod is based on code released under the GNU General Public License v3.0.
 // Fork of https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed
-// For bug reports and feedback about this fork:
-// https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed
+// Local fork of https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed
 // ==WindhawkModReadme==
 /*
-![Screenshot](https://raw.githubusercontent.com/vitaliiorlov/windhawk-taskbar-centered-condensed/main/screenshot.png)
-# TAI (Taskbar as (an) island) for Windows 11
-TAI lets you transform your Windows 11 taskbar into a smooth floating dock without losing any of the original taskbar functionality!
-# Bug reports
-This is a fork. File issues with **this fork** here: https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed/issues
-For problems that also reproduce on upstream TAI, please report them upstream
-instead: https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed/issues
----
-> ## 🍴 This is a personal fork
->
-> Upstream: [DarkionAvey/windhawk-taskbar-centered-condensed](https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed).
-> This fork ([vitaliiorlov/windhawk-taskbar-centered-condensed](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed))
-> tracks upstream closely; everything it adds or fixes on top is listed in
-> [What's different from upstream](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed/blob/main/FORK-CHANGES.md).
->
-> ### ⚠️ Own mod ID since 1.5.271
->
-> This fork used to share the mod ID `taskbar-dock-like` with the original
-> TAI. It now has its own, `taskbar-dock-like-vo`, so Windhawk keeps the two
-> apart. **If TAI is already installed** (the original or an earlier build of
-> this fork), update it the usual way: open it in Windhawk, click **Edit**,
-> paste the new code over it and compile. Windhawk moves it to the new ID and
-> keeps your settings. Don't install it with **Create a new mod** while the
-> old one is there: you would get two copies, and this one stays off until
-> the old one is removed or disabled. See *How to Install* below.
->
-> ### Building
->
-> ```powershell
-> python assemble-mod.py
-> ```
->
-> Requires `requests` and `art`. The pipeline fetches the latest
-> `taskbar-icon-size` and `taskbar-start-button-position` from ramensoftware on
-> every run and re-applies the patches, so a build can start failing when those
-> upstream sources change. That is deliberate: `dependencies/cpp_patcher.py`
-> raises rather than silently emitting a broken mod. Fork changes belong in
-> `mod-parts/`, `dependencies/patches/`, or the processors — never in
-> `dependencies/modified-dependencies/`, which is regenerated output.
->
-> ### Symbol cache
->
-> `.github/workflows/symbol-cache.yml` runs `tools/update-symbol-cache.py`
-> every hour and whenever the mod changes on `main`. The script reads the
-> ported symbols that windhawk-mod-symbol-cache has for the DLLs the mod
-> hooks and writes the mod's symbols from them to the `symbol-cache` branch,
-> in the format of Windhawk's online symbol cache, and the mod points Windhawk
-> at `taskbar-dock-like-vo/` there. A symbol that a ported file doesn't have
-> is left out, so Windhawk looks for it in Microsoft's symbol file, and a
-> cache file is removed once Microsoft has published that file. The script
-> needs Python 3.14 or later and nothing else; to run it by hand, give
-> `--output` a checkout of the `symbol-cache` branch.
----
-## 🚀 How to Install (Development Build)
-⚠️ **Note:** Please disable any mods that affect taskbar height or taskbar icons—this mod already includes those
-features.
-1. [Install Windhawk](https://windhawk.net/) if you haven't already.
-2. Copy the contents of [
-   `assembled-mod.cpp`](https://raw.githubusercontent.com/vitaliiorlov/windhawk-taskbar-centered-condensed/main/assembled-mod.cpp)
-   to your clipboard.
-3. Open **WindHawk** and navigate to: `Explore` → `Create a new mod`.
-   **Already have TAI** (the original or an earlier build of this fork)? Open
-   it in Windhawk and click **Edit** instead: pasting over it moves it to this
-   fork's mod ID and keeps your settings.
-4. Press `Ctrl+A` to select all, then `Ctrl+V` to paste.
-5. Click **Compile Mod** button on the top left corner.
-6. Change the mod's settings to fit your preference.
-If the mod doesn't start after an update (for example, when a Windows update
-broke the previous version), turn it off and on again in Windhawk; if that
-doesn't help at once, wait a minute and repeat. Restarting Explorer won't
-help: Windhawk doesn't retry a mod that failed to load there for up to 4 hours.
-The first time Explorer starts after a Windows update, Windhawk looks up
-this mod's symbols for the updated Windows files. While Microsoft hasn't
-published them yet, they come from this repository's symbol cache (see
-*Symbol cache* above); if the mod started before they got there, turn it
-off and on again later. Otherwise Windhawk downloads them
-from Microsoft. After a large update that can take a few minutes (one in
-October 2026 needed about 185 MB). Until it finishes, Explorer can take a
-little longer to appear and the taskbar keeps Windows' own sizes; it is
-restyled once the download is done. Restarting Explorer meanwhile only
-starts the download over.
----
-## 🛠 Source Code
-The actual mod code is split into files under [
-`mod-parts/`](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed/blob/main/mod-parts/), which are later merged together using a Python script.
-❗ **Do not edit `assembled-mod.cpp` manually**, as any changes will be overwritten in the next build cycle. Instead,
-modify the source files in the `mod-parts` directory.
----
-## 🙌 Credits
+# ILô
+
+## Français
+
+ILô centre les applications et la zone de notification dans un dock. La marge inférieure est réglée à 8 et le décalage des icônes de notification à 0. Le centrage provient de TAI Dock 1.0.3, validé sur Windows 11 build 26300.10075.
+
+**Installation.** Désactivez l’ancien dock, puis créez un mod local dans Windhawk avec ce fichier et compilez-le. Le profil de Mighty-Luke est intégré aux réglages par défaut.
+
+**Compatibilité.** Le mod utilise des composants internes de la barre Windows 11. Une mise à jour peut modifier leur organisation ou leurs symboles. Le placement reconnaît la zone de notification imbriquée et l’ancienne disposition séparée. Les options de personnalisation et de positionnement sont décrites en français dans l’onglet Paramètres.
+
+<details>
+<summary>Référence des réglages du dock</summary>
+
+| Réglage | Description |
+| --- | --- |
+| Hauteur de la barre des tâches | Règle la hauteur demandée pour la barre. Valeur par défaut : 24. |
+| Taille des icônes des applications | Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22. |
+| Taille des boutons des applications | Règle la largeur et la hauteur des boutons. Valeur par défaut : 20. |
+| Décalage vertical du dock | Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8. |
+| Espacement avant la zone de notification | Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5. |
+| Décalage vertical des icônes de notification | Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0. |
+| Marges latérales du fond | Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2. |
+| Fond sur toute la largeur | Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut. |
+| Exclure le bouton « Afficher le Bureau » | Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut. |
+| Arrondi du dock | Règle le rayon des coins du fond. Valeur par défaut : 12. |
+| Arrondi des boutons | Règle le rayon des coins des boutons d’application. Valeur par défaut : 8. |
+| Coins inférieurs droits | Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut. |
+| Personnaliser le fond du dock | Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut. |
+| Utiliser un fond uni | Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut. |
+| Opacité du fond | De 0 (transparent) à 100 (opaque). Valeur par défaut : 100. |
+| Intensité de la teinte | De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45. |
+| Luminosité du fond | De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15. |
+| Intensité du flou | Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5. |
+| Couleur de teinte | Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair. |
+| Saturation du fond | Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100. |
+| Inversion des couleurs du fond | Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10. |
+| Couleur de repli | Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. |
+| Opacité du contour et des séparateurs | Règle leur opacité de 0 à 100. Valeur par défaut : 0. |
+| Couleur du contour et des séparateurs | Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff. |
+| Épaisseur du contour (%) | Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8. |
+| Épaisseur des séparateurs (%) | Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8. |
+| Hauteur des séparateurs (%) | Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40. |
+| Position des séparateurs | Choisis le côté du bouton où placer le séparateur. |
+| Applications avec séparateur | Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse. |
+| Séparateur de la zone de notification | Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut. |
+| Personnaliser les icônes de notification | Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut. |
+| Taille des icônes de notification | Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15. |
+| Taille des boutons de notification | Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30. |
+| Aligner Démarrer et Recherche | Aligne ces menus sur le dock. Activé par défaut. |
+| Aligner les paramètres rapides | Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut. |
+| Aligner le centre de notifications | Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut. |
+| Aligner les volets à l’intérieur du dock | Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut. |
+| Aligner les notifications sur l’écran principal uniquement | Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut. |
+| Aligner le sélecteur de clavier | Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut. |
+| Aligner les menus des icônes de notification | Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut. |
+| Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. |
+| Limiter la zone interactive au dock | Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification. |
+| Révéler la barre uniquement sous le dock | Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut. |
+| Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. |
+
+</details>
+
+**Zoom au survol.** Activez « Agrandissement des icônes au survol » dans les paramètres. Le profil proposé utilise un zoom centré de 180 % et une transition de 120 ms. Le style MacOS étend l’effet aux voisines. Le zoom reste dans la zone cliquable du bouton.
+
+## English
+
+Enable **Magnify icons on hover** to try magnification. The default profile uses 180% centered zoom and a 120 ms transition. Choose MacOS style for the neighboring-icon wave.
+
+ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and compile this file as a new local mod. Mighty-Luke’s profile is built into the defaults.
+
+## Origine et crédits / Credits
+
+- [vitaliiorlov](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) — fork parent et cache de symboles utilisé par le mod.
 - [DarkionAvey](https://github.com/DarkionAvey): the original
   [TAI](https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed),
   which this fork builds on.
@@ -120,28 +104,28 @@ modify the source files in the `mod-parts` directory.
 # Options
 | Property | Name | Description | Accepted values |
 | --- | --- | --- | --- |
-| `TaskbarHeight` | Taskbar height | Set the height of the taskbar. Default is 74 | Non-negative integer |
-| `TaskbarIconSize` | Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 42 | Non-negative integer |
-| `TaskbarButtonSize` | Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 72 | Non-negative integer |
-| `TaskbarOffsetY` | Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 6 | Non-negative integer |
-| `TrayTaskGap` | Tray task gap | Adjust the space between the task area and the tray area. Default is 10 | Non-negative integer |
+| `TaskbarHeight` | Taskbar height | Set the height of the taskbar. Default is 24 | Non-negative integer |
+| `TaskbarIconSize` | Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22 | Non-negative integer |
+| `TaskbarButtonSize` | Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 20 | Non-negative integer |
+| `TaskbarOffsetY` | Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | Non-negative integer |
+| `TrayTaskGap` | Tray task gap | Adjust the space between the task area and the tray area. Default is 5 | Non-negative integer |
 | `TaskbarBackgroundHorizontalPadding` | Taskbar background horizontal padding | Set the horizontal padding on both sides of the taskbar background. Default is 2 | Non-negative integer |
 | `FullWidthTaskbarBackground` | Full-width taskbar background | When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off | Boolean (true/false) |
 | `IgnoreShowDesktopButton` | Ignore "Show Desktop" button | When enabled, the "Show Desktop" button is ignored in width calculations. Default is off | Boolean (true/false) |
-| `TaskbarCornerRadius` | Taskbar corner radius | Controls how rounded the taskbar corners appear. Default is 22 | Non-negative integer |
-| `TaskButtonCornerRadius` | Task button corner radius | Controls how rounded the corners of individual task buttons are. Default is 18 | Non-negative integer |
+| `TaskbarCornerRadius` | Taskbar corner radius | Controls how rounded the taskbar corners appear. Default is 12 | Non-negative integer |
+| `TaskButtonCornerRadius` | Task button corner radius | Controls how rounded the corners of individual task buttons are. Default is 8 | Non-negative integer |
 | `FlatTaskbarBottomCorners` | Flat bottom corners | When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off | Boolean (true/false) |
 | `CustomizeTaskbarBackground` | Stylize the taskbar background | When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on | Boolean (true/false) |
 | `DisableCustomBlurBackground` | Disable custom blur background | When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off | Boolean (true/false) |
 | `TaskbarBackgroundOpacity` | Background opacity | Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100 | Non-negative integer |
-| `TaskbarBackgroundTint` | Background tint | Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 0 | Non-negative integer |
-| `TaskbarBackgroundLuminosity` | Background luminosity | Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 20 | Non-negative integer |
-| `TaskbarBackgroundBlurAmount` | Background blur amount | WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 30 | Non-negative integer |
+| `TaskbarBackgroundTint` | Background tint | Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45 | Non-negative integer |
+| `TaskbarBackgroundLuminosity` | Background luminosity | Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15 | Non-negative integer |
+| `TaskbarBackgroundBlurAmount` | Background blur amount | WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5 | Non-negative integer |
 | `TaskbarBackgroundTintColor` | Background tint color | WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode. | Text |
-| `TaskbarBackgroundTintSaturation` | Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 200. Max is 500 | Non-negative integer |
+| `TaskbarBackgroundTintSaturation` | Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500 | Non-negative integer |
 | `TaskbarBackgroundInversion` | Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | Non-negative integer |
 | `TaskbarBackgroundFallbackColor` | Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | Text |
-| `TaskbarBorderOpacity` | Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 10 | Non-negative integer |
+| `TaskbarBorderOpacity` | Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0 | Non-negative integer |
 | `TaskbarBorderColorHex` | Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | string hex color |
 | `TaskbarBorderThickness` | Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | unsigned int percentage |
 | `AppsDividerThickness` | Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | unsigned int percentage |
@@ -156,7 +140,7 @@ modify the source files in the `mod-parts` directory.
 | `MoveFlyoutControlCenter` | Move Control Center with Taskbar | When enabled, the Control Center is moved to align with taskbar size and location. Default is on. | Boolean (true/false) |
 | `MoveFlyoutNotificationCenter` | Move Notification Center with Taskbar | When enabled, the Notification Center is moved to align with taskbar size and location. Default is on. | Boolean (true/false) |
 | `AlignFlyoutInner` | Align flyout windows to the inside of the taskbar | When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on. | Boolean (true/false) |
-| `NotificationCenterPrimaryOnly` | Notification Center on primary monitor only | When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is off. | Boolean (true/false) |
+| `NotificationCenterPrimaryOnly` | Notification Center on primary monitor only | When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on. | Boolean (true/false) |
 | `MoveFlyoutKeyboardLayout` | Move keyboard layout flyout with Taskbar | When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on. | Boolean (true/false) |
 | `MoveTrayContextMenus` | Move tray icon menus with Taskbar | When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on. | Boolean (true/false) |
 | `StartMenuOnActiveMonitor` | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | Boolean (true/false) |
@@ -166,134 +150,302 @@ modify the source files in the `mod-parts` directory.
 // ==/WindhawkModReadme==
 // ==WindhawkModSettings==
 /*
-- TaskbarHeight: 74
+- TaskbarHeight: 24
   $name: Taskbar height
-  $description: Set the height of the taskbar. Default is 74
-- TaskbarIconSize: 42
+  $name:fr-FR: "Hauteur de la barre des tâches"
+  $description: Set the height of the taskbar. Default is 24
+  $description:fr-FR: "Règle la hauteur demandée pour la barre. Valeur par défaut : 24."
+- TaskbarIconSize: 22
   $name: Taskbar icon size
-  $description: Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 42
-- TaskbarButtonSize: 72
+  $name:fr-FR: "Taille des icônes des applications"
+  $description: Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22
+  $description:fr-FR: "Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22."
+- TaskbarButtonSize: 20
   $name: Taskbar button size
-  $description: Set the size (width and height) of taskbar buttons. Default is 72
-- TaskbarOffsetY: 6
+  $name:fr-FR: "Taille des boutons des applications"
+  $description: Set the size (width and height) of taskbar buttons. Default is 20
+  $description:fr-FR: "Règle la largeur et la hauteur des boutons. Valeur par défaut : 20."
+- TaskbarOffsetY: 8
   $name: Taskbar vertical offset
-  $description: Move the taskbar up or down. Padding of the same value is applied to the top. Default is 6
-- TrayTaskGap: 10
+  $name:fr-FR: "Décalage vertical du dock"
+  $description: Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8
+  $description:fr-FR: "Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."
+- TrayTaskGap: 5
   $name: Tray task gap
-  $description: Adjust the space between the task area and the tray area. Default is 10
+  $name:fr-FR: "Espacement avant la zone de notification"
+  $description: Adjust the space between the task area and the tray area. Default is 5
+  $description:fr-FR: "Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."
+- TrayContentOffsetY: 0
+  $name: Notification area vertical offset
+  $name:fr-FR: "Décalage vertical des icônes de notification"
+  $description: Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.
+  $description:fr-FR: "Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."
 - TaskbarBackgroundHorizontalPadding: 2
   $name: Taskbar background horizontal padding
+  $name:fr-FR: "Marges latérales du fond"
   $description: Set the horizontal padding on both sides of the taskbar background. Default is 2
+  $description:fr-FR: "Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2."
 - FullWidthTaskbarBackground: false
   $name: Full-width taskbar background
+  $name:fr-FR: "Fond sur toute la largeur"
   $description: When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off
+  $description:fr-FR: "Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut."
 - IgnoreShowDesktopButton: false
   $name: Ignore "Show Desktop" button
+  $name:fr-FR: "Exclure le bouton « Afficher le Bureau »"
   $description: When enabled, the "Show Desktop" button is ignored in width calculations. Default is off
-- TaskbarCornerRadius: 22
+  $description:fr-FR: "Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut."
+- TaskbarCornerRadius: 12
   $name: Taskbar corner radius
-  $description: Controls how rounded the taskbar corners appear. Default is 22
-- TaskButtonCornerRadius: 18
+  $name:fr-FR: "Arrondi du dock"
+  $description: Controls how rounded the taskbar corners appear. Default is 12
+  $description:fr-FR: "Règle le rayon des coins du fond. Valeur par défaut : 12."
+- TaskButtonCornerRadius: 8
   $name: Task button corner radius
-  $description: Controls how rounded the corners of individual task buttons are. Default is 18
+  $name:fr-FR: "Arrondi des boutons"
+  $description: Controls how rounded the corners of individual task buttons are. Default is 8
+  $description:fr-FR: "Règle le rayon des coins des boutons d’application. Valeur par défaut : 8."
 - FlatTaskbarBottomCorners: false
   $name: Flat bottom corners
+  $name:fr-FR: "Coins inférieurs droits"
   $description: When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off
+  $description:fr-FR: "Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut."
 - CustomizeTaskbarBackground: true
   $name: Stylize the taskbar background
+  $name:fr-FR: "Personnaliser le fond du dock"
   $description: When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on
+  $description:fr-FR: "Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut."
 - DisableCustomBlurBackground: false
   $name: Disable custom blur background
+  $name:fr-FR: "Utiliser un fond uni"
   $description: When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off
+  $description:fr-FR: "Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut."
 - TaskbarBackgroundOpacity: 100
   $name: Background opacity
+  $name:fr-FR: "Opacité du fond"
   $description: Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100
-- TaskbarBackgroundTint: 0
+  $description:fr-FR: "De 0 (transparent) à 100 (opaque). Valeur par défaut : 100."
+- TaskbarBackgroundTint: 45
   $name: Background tint
-  $description: Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 0
-- TaskbarBackgroundLuminosity: 20
+  $name:fr-FR: "Intensité de la teinte"
+  $description: Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45
+  $description:fr-FR: "De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45."
+- TaskbarBackgroundLuminosity: 15
   $name: Background luminosity
-  $description: Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 20
-- TaskbarBackgroundBlurAmount: 30
+  $name:fr-FR: "Luminosité du fond"
+  $description: Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15
+  $description:fr-FR: "De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15."
+- TaskbarBackgroundBlurAmount: 5
   $name: Background blur amount
-  $description: WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 30
+  $name:fr-FR: "Intensité du flou"
+  $description: WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5
+  $description:fr-FR: "Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5."
 - TaskbarBackgroundTintColor: "{ThemeResource CardStrokeColorDefaultSolid}"
   $name: Background tint color
+  $name:fr-FR: "Couleur de teinte"
   $description: WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode.
-- TaskbarBackgroundTintSaturation: 200
+  $description:fr-FR: "Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair."
+- TaskbarBackgroundTintSaturation: 100
   $name: Background saturation
-  $description: WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 200. Max is 500
+  $name:fr-FR: "Saturation du fond"
+  $description: WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500
+  $description:fr-FR: "Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100."
 - TaskbarBackgroundInversion: 10
   $name: Background inversion
+  $name:fr-FR: "Inversion des couleurs du fond"
   $description: Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10
+  $description:fr-FR: "Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10."
 - TaskbarBackgroundFallbackColor: "{ThemeResource CardStrokeColorDefaultSolid}"
   $name: Background fallback color
+  $name:fr-FR: "Couleur de repli"
   $description: Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}
-- TaskbarBorderOpacity: 10
+  $description:fr-FR: "Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."
+- TaskbarBorderOpacity: 0
   $name: Border opacity
-  $description: Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 10
+  $name:fr-FR: "Opacité du contour et des séparateurs"
+  $description: Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0
+  $description:fr-FR: "Règle leur opacité de 0 à 100. Valeur par défaut : 0."
 - TaskbarBorderColorHex: "#ffffff"
   $name: Border color (HEX)
+  $name:fr-FR: "Couleur du contour et des séparateurs"
   $description: Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`
+  $description:fr-FR: "Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."
 - TaskbarBorderThickness: 8
   $name: Taskbar border thickness scale (%)
+  $name:fr-FR: "Épaisseur du contour (%)"
   $description: Set the scale of the taskbar border. Range 0-100. Default is 8
+  $description:fr-FR: "Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."
 - AppsDividerThickness: 8
   $name: Apps divider thickness scale (%)
+  $name:fr-FR: "Épaisseur des séparateurs (%)"
   $description: Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8
+  $description:fr-FR: "Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8."
 - AppsDividerVerticalScale: 40
   $name: Apps divider vertical scale (%)
+  $name:fr-FR: "Hauteur des séparateurs (%)"
   $description: Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40
+  $description:fr-FR: "Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40."
 - AppsDividerAlignment: ""
   $name: Choose the side on which the app dividers should appear
+  $name:fr-FR: "Position des séparateurs"
+  $description:fr-FR: "Choisis le côté du bouton où placer le séparateur."
   $options:
   - left: Left side
   - right: Right side
+  $options:fr-FR:
+  - left: À gauche
+  - right: À droite
 - DividedAppNames: ""
   $name: App names for divider placement
+  $name:fr-FR: "Applications avec séparateur"
   $description: Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\+\+; Settings). Case-insensitive and supports regex.
+  $description:fr-FR: "Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse."
 - TrayAreaDivider: false
   $name: Tray area divider
+  $name:fr-FR: "Séparateur de la zone de notification"
   $description: When enabled, the tray area will be separated by a divider. Default is off
+  $description:fr-FR: "Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut."
 - StyleTrayArea: false
   $name: Modify the tray area appearance
+  $name:fr-FR: "Personnaliser les icônes de notification"
   $description: When enabled, the options for tray icon size will take effect. Default is off
+  $description:fr-FR: "Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."
 - TrayIconSize: 15
   $name: Tray icon size
+  $name:fr-FR: "Taille des icônes de notification"
   $description: Set the width and height of tray icons. Minimum is 15. Default is 15
+  $description:fr-FR: "Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."
 - TrayButtonSize: 30
   $name: Tray button size
+  $name:fr-FR: "Taille des boutons de notification"
   $description: Set the size (width and height) of tray buttons. Minimum is 20. Default is 30
+  $description:fr-FR: "Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."
 - MoveFlyoutStartMenu: true
   $name: Move Start Menu with Taskbar
+  $name:fr-FR: "Aligner Démarrer et Recherche"
   $description: When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on.
+  $description:fr-FR: "Aligne ces menus sur le dock. Activé par défaut."
 - MoveFlyoutControlCenter: true
   $name: Move Control Center with Taskbar
+  $name:fr-FR: "Aligner les paramètres rapides"
   $description: When enabled, the Control Center is moved to align with taskbar size and location. Default is on.
+  $description:fr-FR: "Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut."
 - MoveFlyoutNotificationCenter: true
   $name: Move Notification Center with Taskbar
+  $name:fr-FR: "Aligner le centre de notifications"
   $description: When enabled, the Notification Center is moved to align with taskbar size and location. Default is on.
+  $description:fr-FR: "Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut."
 - AlignFlyoutInner: true
   $name: Align flyout windows to the inside of the taskbar
+  $name:fr-FR: "Aligner les volets à l’intérieur du dock"
   $description: When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on.
-- NotificationCenterPrimaryOnly: false
+  $description:fr-FR: "Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut."
+- NotificationCenterPrimaryOnly: true
   $name: Notification Center on primary monitor only
-  $description: When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is off.
+  $name:fr-FR: "Aligner les notifications sur l’écran principal uniquement"
+  $description: When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on.
+  $description:fr-FR: "Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut."
 - MoveFlyoutKeyboardLayout: true
   $name: Move keyboard layout flyout with Taskbar
+  $name:fr-FR: "Aligner le sélecteur de clavier"
   $description: When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on.
+  $description:fr-FR: "Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut."
 - MoveTrayContextMenus: true
   $name: Move tray icon menus with Taskbar
+  $name:fr-FR: "Aligner les menus des icônes de notification"
   $description: When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.
+  $description:fr-FR: "Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."
 - StartMenuOnActiveMonitor: true
   $name: Open Start on the monitor in use
+  $name:fr-FR: "Ouvrir Démarrer sur l’écran actif"
   $description: When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.
+  $description:fr-FR: "Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."
+- ClipTaskbarWindowToDock: false
+  $name: Restrict the taskbar window to the dock
+  $name:fr-FR: "Limiter la zone interactive au dock"
+  $description: Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.
+  $description:fr-FR: "Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."
 - AutoHideShowUnderTaskbarOnly: true
   $name: Show an auto-hidden taskbar only from under it
+  $name:fr-FR: "Révéler la barre uniquement sous le dock"
   $description: When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.
+  $description:fr-FR: "Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."
 - LogFlyoutPlacement: false
   $name: Log flyout placement to a file
+  $name:fr-FR: "Journaliser la position des volets"
   $description: When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.
+  $description:fr-FR: "Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."
+- HoverZoomEnabled: false
+  $name: "Magnify icons on hover"
+  $name:fr-FR: "Agrandissement des icônes au survol"
+  $description: "Magnify application icons when the mouse passes over them."
+  $description:fr-FR: "Agrandit les icônes des applications au passage de la souris."
+- HoverZoomStyle: zoom
+  $name: "Application zoom style"
+  $name:fr-FR: "Style de zoom des applications"
+  $description: "Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons."
+  $description:fr-FR: "Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."
+  $options:
+  - zoom: Zoom style
+  - macos: MacOS style
+  $options:fr-FR:
+  - zoom: Style zoom
+  - macos: Style MacOS
+- HoverZoomHideBackground: true
+  $name: "Hide icon backgrounds when hover zoom is enabled"
+  $name:fr-FR: "Masquer le fond des icônes quand le zoom est activé"
+  $description: "Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds."
+  $description:fr-FR: "Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."
+- HoverZoomDisableBackgroundZoom: false
+  $name: "Disable icon background zoom"
+  $name:fr-FR: "Désactiver le zoom du fond des icônes"
+  $description: "Keep the visible application button background at its normal size and position."
+  $description:fr-FR: "Garde le fond visible des boutons d’application à sa taille et à sa position normales."
+- HoverZoomPercent: 180
+  $name: "Maximum application zoom (%)"
+  $name:fr-FR: "Zoom maximal des applications (%)"
+  $description: "110–250%. Available space in the button limits the effective zoom."
+  $description:fr-FR: "De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."
+- HoverZoomTrayPercent: 180
+  $name: "Maximum notification area zoom (%)"
+  $name:fr-FR: "Zoom maximal de la zone de notification (%)"
+  $description: "110–250%. Available space in the tray button limits the effective zoom."
+  $description:fr-FR: "De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."
+- HoverZoomNeighbors: 1
+  $name: "Neighbors on each side (MacOS)"
+  $name:fr-FR: "Voisines de chaque côté (MacOS)"
+  $description: "0, 1 or 2 neighboring icons on each side."
+  $description:fr-FR: "0 pour l’icône seule, 1 ou 2 pour étendre l’effet aux voisines."
+- HoverZoomSpread: true
+  $name: "Spread neighboring icons (MacOS)"
+  $name:fr-FR: "Écarter les icônes voisines (MacOS)"
+  $description: "Shift icons within their clickable buttons."
+  $description:fr-FR: "Décale les icônes dans la limite de leur zone cliquable."
+- HoverZoomDuration: 120
+  $name: "Transition duration (ms)"
+  $name:fr-FR: "Durée de transition (ms)"
+  $description: "0–300 ms. Zero applies changes immediately."
+  $description:fr-FR: "De 0 à 300 ms. À 0, le zoom est instantané."
+- HoverZoomStart: false
+  $name: "Include Start"
+  $name:fr-FR: "Inclure le bouton Démarrer"
+  $description: "Apply magnification to the Start glyph too."
+  $description:fr-FR: "Étend le zoom à l’icône du bouton Démarrer."
+- HoverZoomExcludeTray: false
+  $name: "Exclude the entire notification area"
+  $name:fr-FR: "Exclure toute la zone de notification du zoom"
+  $description: "When checked, all tray icons use their native size even when dock magnification is enabled."
+  $description:fr-FR: "Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire."
+- HoverZoomExcludeChevron: true
+  $name: "Exclude the hidden icons chevron"
+  $name:fr-FR: "Exclure le chevron des applications masquées"
+  $description: "Keep the chevron at its native size when tray magnification is enabled."
+  $description:fr-FR: "Conserve la taille habituelle de la flèche qui ouvre les icônes masquées."
+- HoverZoomExcludeClock: true
+  $name: "Exclude date and time"
+  $name:fr-FR: "Exclure la date et l’heure"
+  $description: "Keep the clock text at its native size when tray magnification is enabled."
+  $description:fr-FR: "Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible."
 */
 // ==/WindhawkModSettings==
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -348,10 +500,10 @@ int g_taskbarHeight;
 std::atomic<DWORD> g_shellIconLoaderV2_LoadAsyncIcon__ResumeCoro_ThreadId;
 bool g_inSystemTrayController_UpdateFrameSize;
 bool g_taskbarButtonWidthCustomized;
-constexpr int kDefaultTaskbarHeight = 74;
-constexpr int kDefaultTaskbarIconSize = 42;
-constexpr int kDefaultTaskbarButtonSize = 74;
-constexpr int kDefaultTaskbarOffsetY = 6;
+constexpr int kDefaultTaskbarHeight = 24;
+constexpr int kDefaultTaskbarIconSize = 22;
+constexpr int kDefaultTaskbarButtonSize = 20;
+constexpr int kHeightCapPaddingPerSide = 6;
 constexpr int kSystemSmallTaskbarIconSize = 16;
 constexpr int kSystemMediumTaskbarIconSize = 24;
 constexpr int kSystemSmallTaskbarButtonSize = 32;
@@ -421,7 +573,10 @@ typedef enum MONITOR_DPI_TYPE {
 #include <mutex>
 #include <regex>
 struct ModSettings {
+  bool zoomDisableBackgroundZoom, zoomMacStyle, zoomExcludeTray, zoomExcludeChevron, zoomExcludeClock, zoomEnabled, zoomHideBackground, zoomSpread, zoomStart;
+  int zoomTrayPercent, zoomPercent, zoomNeighbors, zoomDuration;
   int userDefinedTrayTaskGap;
+  int trayContentOffsetY;
   int userDefinedTaskbarBackgroundHorizontalPadding;
   unsigned int userDefinedTaskbarOffsetY;
   unsigned int userDefinedTaskbarHeight;
@@ -471,6 +626,9 @@ bool GetUserDefinedNotificationCenterPrimaryOnly() {
   return g_settings.userDefinedNotificationCenterPrimaryOnly;
 }
 // Fork addition: see TaskbarRevealZoneTai.
+// Read once before installing region hooks. A reload selects either path
+// for the entire lifetime of this instance, including teardown.
+static bool g_clipTaskbarWindowToDock = false;
 bool GetUserDefinedAutoHideShowUnderTaskbarOnly() {
   std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
   return g_settings.userDefinedAutoHideShowUnderTaskbarOnly;
@@ -499,7 +657,107 @@ struct TaskbarState {
   float lastTargetWidth{0};
   float lastTargetOffsetX{0};
   float lastTargetOffsetY{0};
-  float initOffsetX{-1};
+  winrt::weak_ref<FrameworkElement> renderPanel;
+  Media::TranslateTransform trayRenderShift{nullptr};
+  Media::Transform savedRenderTransform{nullptr};
+  bool hadLocalRenderTransform{};
+  void RestorePanelShift() {
+    if (auto panel = renderPanel.get(); panel && trayRenderShift &&
+        panel.RenderTransform() == trayRenderShift) {
+      if (hadLocalRenderTransform) panel.RenderTransform(savedRenderTransform);
+      else panel.ClearValue(UIElement::RenderTransformProperty());
+    }
+    renderPanel = {};
+    savedRenderTransform = nullptr;
+    trayRenderShift = nullptr;
+  }
+
+  bool SetPanelShift(FrameworkElement const& panel, float dx, float dy, float tolerance) {
+    if (renderPanel.get() != panel ||
+        (trayRenderShift && panel.RenderTransform() != trayRenderShift)) {
+      RestorePanelShift();
+    }
+    if (!trayRenderShift) {
+      auto prop = UIElement::RenderTransformProperty();
+      auto local = panel.ReadLocalValue(prop);
+      bool isLocal = local != DependencyProperty::UnsetValue();
+      auto original = panel.RenderTransform();
+      if (isLocal && local && !local.try_as<Media::Transform>()) return false;
+      if (original) {
+        // Leave a template's active rotation, scale or offset under its control.
+        auto matrix = original.Inverse();
+        if (!matrix) return false;
+        auto origin = original.TransformPoint({0,0});
+        auto x = original.TransformPoint({1,0});
+        auto y = original.TransformPoint({0,1});
+        if (std::abs(origin.X) + std::abs(origin.Y) + std::abs(x.X-1) +
+            std::abs(x.Y) + std::abs(y.X) + std::abs(y.Y-1) > 0.001f) return false;
+      }
+      Media::TranslateTransform shift;
+      shift.X(dx);
+      shift.Y(dy);
+      panel.RenderTransform(shift);
+      savedRenderTransform = original;
+      hadLocalRenderTransform = isLocal;
+      trayRenderShift = shift;
+      renderPanel = winrt::make_weak(panel);
+    } else if (std::abs(trayRenderShift.X() - dx) > tolerance) {
+      trayRenderShift.X(dx);
+    }
+    if (std::abs(trayRenderShift.Y() - dy) > 0.001f) trayRenderShift.Y(dy);
+    return true;
+  }
+
+  winrt::weak_ref<FrameworkElement> translatedTray;
+  float nativeTrayX{};
+  float appliedTrayX{};
+  float nativeTrayY{}, appliedTrayY{};
+  bool ownsTrayY = false;
+  Thickness initialTrayMargin{}, writtenTrayMargin{};
+  bool hasTrayMargin = false;
+  winrt::weak_ref<FrameworkElement> loweredBackground;
+  int32_t nativeBackgroundZ{};
+  int32_t appliedBackgroundZ{};
+  bool hadLocalBackgroundZ{};
+
+  void RestoreTrayTranslation() {
+    RestorePanelShift();
+    if (auto host = translatedTray.get()) {
+      if (hasTrayMargin) {
+        auto margin = host.Margin();
+        if (margin.Top == writtenTrayMargin.Top && margin.Bottom == writtenTrayMargin.Bottom) {
+          margin.Top = initialTrayMargin.Top;
+          margin.Bottom = initialTrayMargin.Bottom;
+          host.Margin(margin);
+        }
+      }
+      auto value = host.Translation();
+      if (ownsTrayY && value.y == appliedTrayY) {
+        value.y = nativeTrayY;
+        host.Translation(value);
+      }
+      if (value.x == appliedTrayX) {
+        value.x = nativeTrayX;
+        host.Translation(value);
+      }
+    }
+    ownsTrayY = false;
+    hasTrayMargin = false;
+    translatedTray = {};
+  }
+
+  void RestoreBackgroundOrder() {
+    if (auto background = loweredBackground.get()) {
+      if (Controls::Canvas::GetZIndex(background) == appliedBackgroundZ) {
+        if (hadLocalBackgroundZ) {
+          Controls::Canvas::SetZIndex(background, nativeBackgroundZ);
+        } else {
+          background.ClearValue(Controls::Canvas::ZIndexProperty());
+        }
+      }
+    }
+    loweredBackground = {};
+  }
   bool wasOverflowing{false};
   // Fork addition: the bounds of the island clip ApplyStyle last set on the
   // taskbar window (UpdateTaskbarWindowRegion), empty when none, and its corner
@@ -1416,9 +1674,8 @@ std::optional<bool> IsOsFeatureEnabled(UINT32 featureId) {
     }
     return std::nullopt;
 }
-FrameworkElement EnumChildElements(
-    FrameworkElement element,
-    std::function<bool(FrameworkElement)> enumCallback) {
+template<typename Callback>
+FrameworkElement EnumChildElements(FrameworkElement element, Callback&& enumCallback) {
     int childrenCount = Media::VisualTreeHelper::GetChildrenCount(element);
     for (int i = 0; i < childrenCount; i++) {
         auto child = Media::VisualTreeHelper::GetChild(element, i)
@@ -1444,6 +1701,26 @@ FrameworkElement FindChildByClassName(FrameworkElement element,
         return winrt::get_class_name(child) == className;
     });
 }
+FrameworkElement FindTaskFrameTai(FrameworkElement root) {
+    if (!root || winrt::get_class_name(root) == L"Taskbar.TaskbarFrame") {
+        return root;
+    }
+    return FindChildByClassName(root, L"Taskbar.TaskbarFrame");
+}
+
+FrameworkElement TrayContentTai(FrameworkElement item) {
+    if (winrt::get_class_name(item) != L"Taskbar.TaskbarExtensionElement") {
+        return nullptr;
+    }
+    auto host = item.try_as<Controls::ContentControl>();
+    if (!host) return nullptr;
+    auto content = host.Content().try_as<FrameworkElement>();
+    if (content && winrt::get_class_name(content) == L"SystemTray.SystemTrayFrame") {
+        return content;
+    }
+    return nullptr;
+}
+
 bool IsVerticalTaskbar() {
     APPBARDATA appBarData = {
         .cbSize = sizeof(APPBARDATA),
@@ -1527,6 +1804,10 @@ ResourceDictionary_Lookup_SearchUxUi_Hook(
     OverrideResourceDirectoryLookup(__FUNCTION__, key, ret);
     return ret;
 }
+static std::atomic<int> appIconSourcePercent{100};
+static int AppIconSourceSize(int layoutSize) {
+    return MulDiv(layoutSize, appIconSourcePercent.load(std::memory_order_relaxed), 100);
+}
 using IconUtils_GetIconSize_t = void(WINAPI*)(bool isSmall,
                                               int type,
                                               SIZE* size);
@@ -1543,8 +1824,9 @@ void WINAPI IconUtils_GetIconSize_Hook(bool isSmall, int type, SIZE* size) {
     }
     IconUtils_GetIconSize_Original(isSmall, type, size);
     if (!g_unloading && !isSmall) {
-        size->cx = MulDiv(size->cx, g_settings_tbiconsize.iconSize, 24);
-        size->cy = MulDiv(size->cy, g_settings_tbiconsize.iconSize, 24);
+        const int sourceSize = AppIconSourceSize(g_settings_tbiconsize.iconSize);
+        size->cx = MulDiv(size->cx, sourceSize, 24);
+        size->cy = MulDiv(size->cy, sourceSize, 24);
     }
 }
 using IconContainer_IsStorageRecreationRequired_t = bool(WINAPI*)(void* pThis,
@@ -1599,7 +1881,7 @@ ULONG_PTR WINAPI CIconLoadingFunctions_GetClassLongPtrW_Hook(void* pThis,
         return CIconLoadingFunctions_GetClassLongPtrW_Original(pThis, hWnd,
                                                                nIndex);
     }
-    if (!g_unloading && nIndex == GCLP_HICON && g_settings_tbiconsize.iconSize <= 16) {
+    if (!g_unloading && nIndex == GCLP_HICON && AppIconSourceSize(g_settings_tbiconsize.iconSize) <= 16) {
         nIndex = GCLP_HICONSM;
     }
     ULONG_PTR ret =
@@ -1631,7 +1913,7 @@ CIconLoadingFunctions_SendMessageCallbackW_Hook(void* pThis,
             pThis, hWnd, Msg, wParam, lParam, lpResultCallBack, dwData);
     }
     if (!g_unloading && Msg == WM_GETICON && wParam == ICON_BIG &&
-        g_settings_tbiconsize.iconSize <= 16) {
+        AppIconSourceSize(g_settings_tbiconsize.iconSize) <= 16) {
         wParam = ICON_SMALL2;
     }
     BOOL ret = CIconLoadingFunctions_SendMessageCallbackW_Original(
@@ -3294,8 +3576,7 @@ LRESULT WINAPI SendMessageTimeoutW_Hook(HWND hWnd,
     if (g_shellIconLoaderV2_LoadAsyncIcon__ResumeCoro_ThreadId ==
             GetCurrentThreadId() &&
         !g_unloading && Msg == WM_GETICON && wParam == ICON_BIG &&
-        (g_smallIconSize ? g_settings_tbiconsize.iconSizeSmall : g_settings_tbiconsize.iconSize) <=
-            16) {
+        AppIconSourceSize(g_smallIconSize ? g_settings_tbiconsize.iconSizeSmall : g_settings_tbiconsize.iconSize) <= 16) {
         wParam = ICON_SMALL2;
     }
     LRESULT ret = SendMessageTimeoutW_Original(hWnd, Msg, wParam, lParam,
@@ -3304,6 +3585,10 @@ TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam);
     return ret;
 }
 void LoadSettingsTBIconSize() {
+    const int sourcePercent = Wh_GetIntSetting(L"HoverZoomEnabled")
+        ? ClampInt(ReadPositiveIntSettingOrDefault(L"HoverZoomPercent", 180), 110, 250)
+        : 100;
+    appIconSourcePercent.store(sourcePercent, std::memory_order_relaxed);
     const int requestedHeight =
         ReadPositiveIntSettingOrDefault(L"TaskbarHeight", kDefaultTaskbarHeight);
     int taskbarHeight = ClampInt(abs(requestedHeight), kMinTaskbarHeight, kMaxTaskbarHeight);
@@ -3317,7 +3602,7 @@ void LoadSettingsTBIconSize() {
     g_settings_tbiconsize.taskbarHeight = ClampInt(
         taskbarHeight + heightExpansion,
         kMinTaskbarHeight,
-        kMaxTaskbarHeight + (kDefaultTaskbarOffsetY * 2));
+        kMaxTaskbarHeight + (kHeightCapPaddingPerSide * 2));
     const int requestedButtonSize =
         ReadPositiveIntSettingOrDefault(L"TaskbarButtonSize", kDefaultTaskbarButtonSize);
     const int taskbarButtonSize =
@@ -4254,7 +4539,6 @@ enum class Target {
 };
 Target g_target;
 std::atomic<bool> g_taskbarViewDllLoadedStartButtonPosition;
-thread_local bool g_TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride;
 thread_local bool g_inShowStartButtonContextMenu;
 HWND g_searchMenuWnd, g_startMenuWnd;
 // The search menu's x before it was moved, or y with a vertical taskbar.
@@ -4366,7 +4650,7 @@ SystemButton IdentifySystemButton(FrameworkElement element) {
         if (element.Name() == L"AugmentedEntryPointButton") {
             return SystemButton::Widgets;
         }
-    } else if (className == L"Taskbar.TaskbarExtensionElement") {
+    } else if (className == L"Taskbar.TaskbarExtensionElement" && !TrayContentTai(element)) {
         return SystemButton::Search;
     }
     return SystemButton::None;
@@ -4500,9 +4784,7 @@ void UpdatePinnedSystemButtonMargin(FrameworkElement element) {
 }
 // Collapses a pinned cluster button (the start button always, plus the search
 // and task view buttons when the option is on) out of the centered group;
-// IIUIElement_Arrange_Hook_StartButtonPosition positions it. Buttons that aren't pinned, and
-// everything while unloading, are restored to the centered group. Runs on the
-// taskbar thread.
+// Buttons outside the cluster are restored. Runs on the taskbar thread.
 void ApplyClusterButtonCollapse(FrameworkElement element) {
     SystemButton systemButton = IdentifySystemButton(element);
     if (systemButton != SystemButton::Start &&
@@ -4572,7 +4854,7 @@ bool ApplyStyle(XamlRoot xamlRoot) {if(true)return false;
     FrameworkElement taskbarFrameRepeater = nullptr;
     FrameworkElement child = xamlRootContent;
     if (child &&
-        (child = FindChildByClassName(child, L"Taskbar.TaskbarFrame")) &&
+        (child = FindTaskFrameTai(child)) &&
         (child = FindChildByName(child, L"RootGrid")) &&
         (child = FindChildByName(child, L"TaskbarFrameRepeater"))) {
         taskbarFrameRepeater = child;
@@ -4830,75 +5112,6 @@ void ApplySettingsStartButtonPosition(HWND hTaskbarWnd) {
             hTaskbarWnd, [](void* pParam) { ApplySettingsFromTaskbarThread(); }, 0);
     }
 }
-using IUIElement_Arrange_t =
-    HRESULT(WINAPI*)(void* pThis, winrt::Windows::Foundation::Rect rect);
-IUIElement_Arrange_t IUIElement_Arrange_Original;
-HRESULT WINAPI IIUIElement_Arrange_Hook_StartButtonPosition(void* pThis,
-                                       winrt::Windows::Foundation::Rect rect) {
-    auto original = [=] { return IUIElement_Arrange_Original(pThis, rect); };
-if(true)return original();
-    if (!g_TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride || g_unloading) {
-        return original();
-    }
-    FrameworkElement element = nullptr;
-    ((IUnknown*)pThis)
-        ->QueryInterface(winrt::guid_of<FrameworkElement>(),
-                         winrt::put_abi(element));
-    if (!element) {
-        return original();
-    }
-    SystemButton systemButton = IdentifySystemButton(element);
-    // The widgets button needs repositioning whether or not the option is on,
-    // so handle it before the pinned-cluster check below.
-    if (systemButton == SystemButton::Widgets) {
-        ScheduleOnTaskbarThread(element, ApplyWidgetMargin);
-        return original();
-    }
-    // The pinned cluster (the start button, plus search and task view when the
-    // option is on) is moved to the left below. Everything else (the app
-    // buttons) is left alone.
-    if (!IsPinnedClusterButton(systemButton)) {
-        return original();
-    }
-    auto taskbarFrameRepeater =
-        Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-    if (!taskbarFrameRepeater) {
-        return original();
-    }
-    bool vertical = IsVerticalTaskbar(taskbarFrameRepeater);
-    // A collapse along the other axis is left over from before the taskbar
-    // orientation changed.
-    Thickness margin = element.Margin();
-    if (TrailingMargin(margin, !vertical) < 0) {
-        ScheduleOnTaskbarThread(element, ApplyClusterButtonCollapse);
-    }
-    // Find the widgets button at its left-pinned position. When present, it
-    // sits right of the start button (or cluster) and anchors it against the
-    // centered group.
-    auto widgetElement = EnumRepeaterChildElements(
-        taskbarFrameRepeater, [](FrameworkElement child) {
-            return IdentifySystemButton(child) == SystemButton::Widgets &&
-                   IsWidgetsButtonPinned(child);
-        });
-    // Without that anchor, adjust the margin so the start button (or cluster)
-    // doesn't overlap the centered group.
-    if (!widgetElement) {
-        ScheduleOnTaskbarThread(element, UpdatePinnedSystemButtonMargin);
-    }
-    // Pin it to the left in cluster order: the start button gets offset 0,
-    // then search, then task view.
-    double offset = ComputePinnedSystemButtonOffset(taskbarFrameRepeater,
-                                                    systemButton, vertical);
-    Wh_Log(L"Pinning system button %d to %s=%.1f", (int)systemButton,
-           vertical ? L"y" : L"x", offset);
-    winrt::Windows::Foundation::Rect newRect = rect;
-    if (vertical) {
-        newRect.Y = offset;
-    } else {
-        newRect.X = offset;
-    }
-    return IUIElement_Arrange_Original(pThis, newRect);
-}
 // The layout of MSVC's std::vector, which the mod's own STL may not match.
 struct MsvcRectVector {
     winrt::Windows::Foundation::Rect* first;
@@ -4945,34 +5158,6 @@ MsvcRectVector* WINAPI TaskbarFrame_ChildItemBounds_Hook(void* pThis) {
     }
     return bounds;
 }
-using TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_t =
-    HRESULT(WINAPI*)(void* pThis,
-                     void* context,
-                     winrt::Windows::Foundation::Size size,
-                     winrt::Windows::Foundation::Size* resultSize);
-TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_t
-    TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_Original;
-HRESULT WINAPI TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_Hook(
-    void* pThis,
-    void* context,
-    winrt::Windows::Foundation::Size size,
-    winrt::Windows::Foundation::Size* resultSize) {
-    [[maybe_unused]] static bool hooked = [] {
-        Shapes::Rectangle rectangle;
-        IUIElement element = rectangle;
-        void** vtable = *(void***)winrt::get_abi(element);
-        auto arrange = (IUIElement_Arrange_t)vtable[92];
-        WindhawkUtils::SetFunctionHook(arrange, IIUIElement_Arrange_Hook_StartButtonPosition,
-                                       &IUIElement_Arrange_Original);
-        Wh_ApplyHookOperations();
-        return true;
-    }();
-    g_TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride = true;
-    HRESULT ret = TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_Original(
-        pThis, context, size, resultSize);
-    g_TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride = false;
-    return ret;
-}
 using ExperienceToggleButton_UpdateButtonPadding_t = void(WINAPI*)(void* pThis);
 // The start button context menu is centered over the start button or aligned to
 // its leading edge depending on the taskbar alignment (TaskbarFrame's
@@ -5004,6 +5189,7 @@ void WINAPI ShowStartButtonContextMenuResumeCoro_Hook(void* coroFrame) {
     ShowStartButtonContextMenuResumeCoro_Original(coroFrame);
     g_inShowStartButtonContextMenu = prev;
 }
+static UINT iloMediaLayoutMessage = 0;
 bool IsTaskbarGeometryMessage(UINT msg) {
   switch (msg) {
     case WM_SIZE:
@@ -5047,7 +5233,9 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
     if (TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam)) {
         return ret;
       }
-  if (IsTaskbarGeometryMessage(Msg)) {
+  if (iloMediaLayoutMessage && Msg == iloMediaLayoutMessage) {
+    ApplySettingsDebounced(1);
+  } else if (IsTaskbarGeometryMessage(Msg)) {
     ApplySettingsFromTaskbarThreadGeometryChanged();
   } else {
     ApplySettingsFromTaskbarThreadIfRequired();
@@ -5064,7 +5252,9 @@ LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, W
        if (TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam)) {
     return ret;
   }
-  if (IsTaskbarGeometryMessage(Msg)) {
+  if (iloMediaLayoutMessage && Msg == iloMediaLayoutMessage) {
+    ApplySettingsDebounced(1);
+  } else if (IsTaskbarGeometryMessage(Msg)) {
     ApplySettingsFromTaskbarThreadGeometryChanged();
   } else {
     ApplySettingsFromTaskbarThreadIfRequired();
@@ -5395,35 +5585,10 @@ void WINAPI Hook_StartItemPlateEntranceAnimation_call(const bool& b) {
   }
   ApplySettingsFromTaskbarThreadImmediately();
 }
-using TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_t = void(WINAPI*)(void* pThis);
-TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_t TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Original;
-static void WINAPI TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Hook(void* pThis) {
-  Wh_Log(L"Method called: TaskbarTelemetry_StartEntranceAnimationCompleted");
-  if (TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Original) {
-    TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Original(pThis);
-  }
-  return;
-}
-using TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_t = void(WINAPI*)(void* pThis);
-TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_t TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Original;
-static void WINAPI TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Hook(void* pThis) {
-  if (TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Original) {
-    TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Original(pThis);
-  }
-  Wh_Log(L"Method called: TaskbarTelemetry_StartHideAnimationCompleted");
-  return;
-}
 bool HookTaskbarViewDllSymbolsStartButtonPosition(HMODULE module) {
     // Taskbar.View.dll
     WindhawkUtils::SYMBOL_HOOK symbolHooks[] = {{{LR"(public: static void __cdecl TaskbarTelemetry::StartItemEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemEntranceAnimation, Hook_StartItemEntranceAnimation_call},
     {{LR"(public: static void __cdecl TaskbarTelemetry::StartItemPlateEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemPlateEntranceAnimation, Hook_StartItemPlateEntranceAnimation_call},
-    {{LR"(public: static void __cdecl TaskbarTelemetry::StartHideAnimationCompleted(void))"}, &TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Original, TaskbarTelemetry_StartHideAnimationCompleted_WithoutArgs_Hook},
-    {{LR"(public: static void __cdecl TaskbarTelemetry::StartEntranceAnimationCompleted(void))"}, &TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Original, TaskbarTelemetry_StartEntranceAnimationCompleted_WithoutArgs_Hook},
-        {
-            {LR"(public: virtual int __cdecl winrt::impl::produce<struct winrt::Taskbar::implementation::TaskbarCollapsibleLayout,struct winrt::Microsoft::UI::Xaml::Controls::IVirtualizingLayoutOverrides>::ArrangeOverride(void *,struct winrt::Windows::Foundation::Size,struct winrt::Windows::Foundation::Size *))"},
-            &TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_Original,
-            TaskbarCollapsibleLayoutXamlTraits_ArrangeOverride_Hook,
-        },
         {
             {LR"(protected: virtual void __cdecl winrt::Taskbar::implementation::ExperienceToggleButton::UpdateButtonPadding(void))"},
             &ExperienceToggleButton_UpdateButtonPadding_Original,
@@ -8657,15 +8822,23 @@ void ApplySettingsFromTaskbarThreadIfRequired() {
 }
 void SetDividerForElement(FrameworkElement const& element, float const& panelHeight, bool dividerVisible, bool dividerShouldBeOnLeft = g_settings.userDefinedDividerLeftAligned) {
   if (!element) return;
-  if (panelHeight <= 0.0f) return;
+  using Hosting::ElementCompositionPreview;
+  constexpr wchar_t dividerTag[] = L"taskbar-dock-like-vo:divider";
+  auto attached = ElementCompositionPreview::GetElementChildVisual(element);
+  const bool ours = attached && attached.Comment() == dividerTag;
+  if (!dividerVisible || g_unloading || panelHeight <= 0.0f) {
+    if (ours) ElementCompositionPreview::SetElementChildVisual(element, nullptr);
+    return;
+  }
+  if (attached && !ours) return;  // Leave Windows' visual in place.
   auto visual = winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::GetElementVisual(element);
   if (!visual) return;
   auto compositor = visual.Compositor();
   if (!compositor) return;
   auto shapeVisual = compositor.CreateShapeVisual();
   if (!shapeVisual) return;
-  dividerVisible = dividerVisible && !g_unloading;
-  if (dividerVisible) {
+  shapeVisual.Comment(dividerTag);
+  {
     auto lineGeometry = compositor.CreateLineGeometry();
     if (!lineGeometry) return;
     auto lineShape = compositor.CreateSpriteShape(lineGeometry);
@@ -8922,6 +9095,534 @@ struct ChildrenLayoutMeasurementTai {
   int validChildrenCount{0};
   int visualChildCount{0};
 };
+#include <winrt/Windows.UI.Input.h>
+#include <winrt/Windows.Devices.Input.h>
+#include <winrt/Windows.UI.Xaml.Input.h>
+
+// Icons animate inside their original input tiles. Layout and the tray never move.
+#include <winrt/Windows.UI.Xaml.Data.h>
+struct IloZoomPose {
+  double scale = 1, shift = 0, shiftY = 0;
+};
+struct IloZoomTransform {
+  FrameworkElement element{nullptr};
+  Media::CompositeTransform transform{nullptr};
+  winrt::Windows::Foundation::IInspectable original{nullptr};
+  void Restore() {
+    if (transform && element.RenderTransform() == transform) {
+      auto prop = UIElement::RenderTransformProperty();
+      if (original == DependencyProperty::UnsetValue()) element.ClearValue(prop);
+      else element.SetValue(prop, original);
+    }
+    transform = nullptr;
+    original = nullptr;
+  }
+  bool Prepare() {
+    if (transform && element.RenderTransform() == transform) return true;
+    Restore();
+    auto prop = UIElement::RenderTransformProperty();
+    auto local = element.ReadLocalValue(prop);
+    if (local && local != DependencyProperty::UnsetValue() && !local.try_as<Media::Transform>())
+      return false;
+    if (auto native = element.RenderTransform()) {
+      auto m = native.TransformBounds({0,0,1,1});
+      auto a = native.TransformPoint({1,0});
+      if (std::abs(m.X)+std::abs(m.Y)+std::abs(m.Width-1)+std::abs(m.Height-1)+
+          std::abs(a.X-1)+std::abs(a.Y) > 0.001) return false;
+    }
+    original = local;
+    transform = Media::CompositeTransform();
+    element.RenderTransform(transform);
+    return true;
+  }
+};
+
+struct IloZoomIcon : IloZoomTransform {
+  FrameworkElement button{nullptr}, icon{nullptr};
+  IloZoomTransform plate;
+  bool plateHidden = false;
+  winrt::Windows::Foundation::IInspectable savedOpacity{nullptr};
+  Data::BindingBase savedBinding{nullptr};
+
+  void HideBackground(bool hide) {
+    if (!plate.element || hide == plateHidden) return;
+    auto prop = UIElement::OpacityProperty();
+    if (hide) {
+      savedOpacity = plate.element.ReadLocalValue(prop);
+      if (auto binding = plate.element.GetBindingExpression(prop)) {
+        savedBinding = binding.ParentBinding();
+      } else if (savedOpacity != DependencyProperty::UnsetValue() &&
+                 !savedOpacity.try_as<winrt::Windows::Foundation::IReference<double>>()) {
+        // Leave a template-owned expression intact.
+        savedOpacity = nullptr;
+        return;
+      }
+      plate.element.Opacity(0);
+      plateHidden = true;
+    } else {
+      auto local = plate.element.ReadLocalValue(prop);
+      auto value = local.try_as<winrt::Windows::Foundation::IReference<double>>();
+      if (value && value.Value() == 0) {
+        if (savedBinding) plate.element.SetBinding(prop, savedBinding);
+        else if (savedOpacity == DependencyProperty::UnsetValue()) plate.element.ClearValue(prop);
+        else plate.element.SetValue(prop, savedOpacity);
+      }
+      savedOpacity = nullptr;
+      savedBinding = nullptr;
+      plateHidden = false;
+    }
+  }
+
+  void Release() {
+    HideBackground(false);
+    Restore();
+  }
+  IloZoomPose from{}, current{}, target{};
+  std::chrono::steady_clock::time_point since{};
+
+  IloZoomIcon(FrameworkElement const& owner, FrameworkElement const& glyph,
+              FrameworkElement const& background)
+      : button(owner), icon(glyph) {
+    element = glyph;
+    plate.element = background;
+  }
+
+  void Restore() {
+    plate.Restore();
+    IloZoomTransform::Restore();
+    from = current = target = {};
+  }
+
+  void ApplyPose() {
+    transform.ScaleX(current.scale);
+    transform.ScaleY(current.scale);
+    transform.TranslateX(current.shift);
+    transform.TranslateY(current.shiftY);
+    if (plate.transform && plate.element.RenderTransform() == plate.transform) {
+      plate.transform.ScaleX(current.scale);
+      plate.transform.ScaleY(current.scale);
+      plate.transform.TranslateX(current.shift);
+      plate.transform.TranslateY(current.shiftY);
+    }
+  }
+
+  void SetPlatePivot(double pivotX, double pivotY) {
+    if (!plate.element || !plate.Prepare()) return;
+    // Use the glyph's scale pivot in button coordinates, including any
+    // template margins. An origin tied to the background's own bottom
+    // would pull it away from the glyph as the scale changes.
+    auto node = plate.element;
+    while (node && node != button) {
+      const auto offset = node.ActualOffset();
+      pivotX -= offset.x;
+      pivotY -= offset.y;
+      node = Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>();
+    }
+    if (!node) {
+      plate.Restore();
+      return;
+    }
+    const auto origin = plate.element.RenderTransformOrigin();
+    plate.transform.CenterX(pivotX - plate.element.ActualWidth() * origin.X);
+    plate.transform.CenterY(pivotY - plate.element.ActualHeight() * origin.Y);
+  }
+};
+
+static double IloZoomWeight(double distance, int neighbors) {
+  const double t = std::clamp(1.0 - std::abs(distance)/(neighbors + 0.5), 0.0, 1.0);
+  return t*t*(3-2*t);
+}
+static FrameworkElement IloStartGlyph(FrameworkElement const& node, int levels) {
+  if (!node || !levels) return nullptr;
+  FrameworkElement found{nullptr};
+  EnumChildElements(node, [&](FrameworkElement child) {
+    const auto type = winrt::get_class_name(child);
+    if (child.Name() == L"Icon" || child.try_as<Controls::Image>() ||
+        child.try_as<Controls::IconElement>() || type == L"Microsoft.UI.Xaml.Controls.AnimatedVisualPlayer")
+      found = child;
+    else found = IloStartGlyph(child, levels-1);
+    return bool(found);
+  });
+  return found;
+}
+
+// Probe only known icon groups. Calendar, language, desktop and overflow
+// flyouts are separate surfaces and should retain their native interaction.
+static FrameworkElement IloTrayGlyph(FrameworkElement const& owner, int depth) {
+  if (!depth) return nullptr;
+  FrameworkElement glyph{nullptr};
+  EnumChildElements(owner, [&](FrameworkElement child) {
+    auto type = winrt::get_class_name(child);
+    if (child.try_as<Controls::Image>() || child.try_as<Controls::FontIcon>() ||
+        type == L"SystemTray.TextIconContent") {
+      glyph = child;
+    } else {
+      glyph = IloTrayGlyph(child, depth - 1);
+    }
+    return bool(glyph);
+  });
+  return glyph;
+}
+
+static FrameworkElement IloClockText(FrameworkElement const& owner, PCWSTR name, int depth) {
+  if (!depth) return nullptr;
+  FrameworkElement text{nullptr};
+  EnumChildElements(owner, [&](FrameworkElement child) {
+    if (child.Name() == name && child.try_as<Controls::TextBlock>()) text = child;
+    else text = IloClockText(child, name, depth - 1);
+    return bool(text);
+  });
+  return text;
+}
+
+static FrameworkElement IloClockGlyph(FrameworkElement const& owner) {
+  auto time = IloClockText(owner, L"TimeInnerTextBlock", 12);
+  auto date = IloClockText(owner, L"DateInnerTextBlock", 12);
+  if (!time || !date) return time ? time : date;
+  for (auto node = time; node && node != owner;
+       node = Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>()) {
+    for (auto other = date; other && other != owner;
+         other = Media::VisualTreeHelper::GetParent(other).try_as<FrameworkElement>()) {
+      if (node == other) return node;
+    }
+  }
+  return nullptr;
+}
+
+static void IloCollectTrayIcons(FrameworkElement const& group, int depth,
+    std::vector<std::pair<FrameworkElement, FrameworkElement>>& items) {
+  if (!group || !depth) return;
+  const auto name = group.Name();
+  const auto type = winrt::get_class_name(group);
+  if (type == L"SystemTray.ChevronIconView" || name == L"ChevronIcon") {
+    if (!g_settings.zoomExcludeChevron) {
+      if (auto glyph = IloTrayGlyph(group, 10)) items.emplace_back(group, glyph);
+    }
+    return;
+  }
+  if (name == L"NotifyItemIcon" || name == L"SystemTrayIcon") {
+    if (auto glyph = IloTrayGlyph(group, 10)) items.emplace_back(group, glyph);
+    return;
+  }
+  EnumChildElements(group, [&](FrameworkElement child) {
+    IloCollectTrayIcons(child, depth - 1, items);
+    return false;
+  });
+}
+
+struct IloHoverZoom {
+  using Clock = std::chrono::steady_clock;
+  FrameworkElement panel{nullptr};
+  DispatcherTimer timer{nullptr};
+  Input::PointerEventHandler move{nullptr}, leave{nullptr};
+  winrt::event_token tick{}, moved{}, entered{}, exited{}, canceled{}, unloaded{};
+  std::vector<IloZoomIcon> icons;
+  int percent=180, neighbors=1, duration=120;
+  bool spread=true, running=false;
+  bool trayMode=false;
+  bool macStyle=false;
+  bool animateBackground=true;
+  std::optional<winrt::Windows::Foundation::Point> lastPoint;
+
+  void Frame() {
+    bool busy=false;
+    auto now=Clock::now();
+    for (auto& item : icons) {
+      if (!item.transform) continue;
+      if (item.icon.RenderTransform()!=item.transform) { item.Restore(); continue; }
+      if (item.current.scale == item.target.scale && item.current.shift == item.target.shift &&
+          item.current.shiftY == item.target.shiftY) {
+        if (item.current.scale == 1 && item.current.shift == 0 && item.current.shiftY == 0) item.Restore();
+        continue;
+      }
+      double ms=std::chrono::duration<double,std::milli>(now-item.since).count();
+      double t=duration ? std::min(1.0,ms/duration) : 1.0;
+      double f=1-(1-t)*(1-t)*(1-t);
+      if (t>=1) item.current=item.target;
+      else {
+        item.current={item.from.scale+(item.target.scale-item.from.scale)*f,
+                      item.from.shift+(item.target.shift-item.from.shift)*f,
+                      item.from.shiftY+(item.target.shiftY-item.from.shiftY)*f};
+        busy=true;
+      }
+      item.ApplyPose();
+      if (t>=1 && item.current.scale==1 && item.current.shift==0) item.Restore();
+    }
+    if (busy && !running) { timer.Start(); running=true; }
+    if (!busy && running) { timer.Stop(); running=false; }
+  }
+  void Point(std::optional<winrt::Windows::Foundation::Point> pos) {
+    // All positions here are DIPs in the repeater, including at fractional DPI.
+    lastPoint = pos;
+    if (running) Frame();
+    if (trayMode || !macStyle) {
+      PointCentered(pos);
+      return;
+    }
+    bool inside=false;
+    if (pos) for (auto& item : icons) {
+      const auto off=item.button.ActualOffset();
+      if (pos->X>=off.x && pos->X<off.x+item.button.ActualWidth() &&
+          pos->Y>=off.y && pos->Y<off.y+item.button.ActualHeight()) {inside=true;break;}
+    }
+    auto now=Clock::now();
+    for (auto& item : icons) {
+      IloZoomPose next;
+      const double w=item.button.ActualWidth();
+      if (inside && w>0) {
+        const double distance=(item.button.ActualOffset().x+w*0.5-pos->X)/w;
+        const double weight=IloZoomWeight(distance,neighbors);
+        const double iw=item.icon.ActualWidth(), ih=item.icon.ActualHeight();
+        if (weight>0 && iw>0 && ih>0) {
+          // Sum arranged offsets only; our render transform must not feed back.
+          FrameworkElement el=item.icon;
+          double left=0,top=0;
+          while (el && el!=item.button) {
+            auto off=el.ActualOffset(); left+=off.x;top+=off.y;
+            el=Media::VisualTreeHelper::GetParent(el).try_as<FrameworkElement>();
+          }
+          if (el && item.Prepare()) {
+            const double room=std::max(0.0,std::min(left,w-left-iw));
+            const double extra=std::min({(percent/100.0-1)*weight,2*room/iw,
+                                         std::max(0.0,item.button.ActualHeight()-ih)/ih});
+            auto origin=item.icon.RenderTransformOrigin();
+            item.transform.CenterX(iw*(0.5-origin.X));
+            item.transform.CenterY(ih*(1-origin.Y));
+            if (animateBackground) item.SetPlatePivot(left + iw * 0.5, top + ih);
+            next.scale=1+extra;
+            next.shiftY=std::max(0.0,extra*ih-top);
+            if (spread) {
+              double free=std::max(0.0,room-iw*extra*0.5);
+              next.shift=std::clamp(distance*weight*iw*(percent/100.0-1),-free,free);
+            }
+          }
+        }
+      }
+      if (item.target.scale!=next.scale || item.target.shift!=next.shift || item.target.shiftY!=next.shiftY) {
+        item.from=item.current;item.target=next;item.since=now;
+      }
+    }
+    Frame();
+  }
+  void PointCentered(std::optional<winrt::Windows::Foundation::Point> pos) {
+    const auto now = Clock::now();
+    for (auto& item : icons) {
+      double scale = 1;
+      if (pos && item.button.ActualWidth() > 0 && item.button.ActualHeight() > 0) {
+        const auto point = panel.TransformToVisual(item.button).TransformPoint(*pos);
+        const double w = item.button.ActualWidth(), h = item.button.ActualHeight();
+        if (point.X >= 0 && point.X < w && point.Y >= 0 && point.Y < h) {
+          const double iw = item.icon.ActualWidth(), ih = item.icon.ActualHeight();
+          if (iw > 0 && ih > 0) {
+            // ActualOffset excludes the zoom's own render transform.
+            double cx = iw / 2, cy = ih / 2;
+            auto node = item.icon;
+            while (node && node != item.button) {
+              auto offset = node.ActualOffset();
+              cx += offset.x;
+              cy += offset.y;
+              node = Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>();
+            }
+            // A layered Windows font glyph often fills its layout slot. Its
+            // painted size is given by the native font rather than that slot.
+            double inkW = iw, inkH = ih;
+            if (trayMode && winrt::get_class_name(item.icon) == L"SystemTray.TextIconContent") {
+              if (auto grid = FindChildByName(item.icon, L"ContainerGrid")) {
+                if (auto layer = FindChildByName(grid, L"Base")) {
+                  auto text = FindChildByName(layer,L"InnerTextBlock").try_as<Controls::TextBlock>();
+                  if (text && text.FontSize() > 0) {
+                    inkW = std::min(iw, text.FontSize());
+                    inkH = std::min(ih, text.FontSize());
+                  }
+                }
+              }
+            }
+            if (node) scale = std::max(1.0, std::min({percent / 100.0,
+                2 * std::min(cx, w-cx) / inkW, 2 * std::min(cy, h-cy) / inkH}));
+            if (scale > 1 && item.Prepare()) {
+              auto origin = item.icon.RenderTransformOrigin();
+              item.transform.CenterX(iw * (0.5-origin.X));
+              item.transform.CenterY(ih * (0.5-origin.Y));
+              if (!trayMode && animateBackground) item.SetPlatePivot(cx, cy);
+            } else scale = 1;
+          }
+        }
+      }
+      if (item.target.scale != scale || item.target.shift != 0 || item.target.shiftY != 0) {
+        item.from = item.current;
+        item.target = {scale, 0, 0};
+        item.since = now;
+      }
+    }
+    Frame();
+  }
+
+  void SyncTray(FrameworkElement const& root) {
+    if (panel != root) { Clear(); Bind(root); }
+    trayMode = true;
+    percent = g_settings.zoomTrayPercent;
+    duration = g_settings.zoomDuration;
+    std::vector<std::pair<FrameworkElement, FrameworkElement>> items;
+    for (auto name : {L"NotificationAreaIcons", L"ControlCenterButton", L"NotifyIconStack"}) {
+      IloCollectTrayIcons(FindChildByName(root, name), 12, items);
+    }
+    for (auto groupName : {L"NotificationCenterButton", L"SecondaryClockStack"}) {
+      auto notification = FindChildByName(root, groupName);
+      if (!notification) continue;
+      // Bell and calendar can share one native flyout. Register each icon view
+      // separately so hovering the bell does not magnify the clock.
+      auto clock = IloClockGlyph(notification);
+      auto owner = clock;
+      while (owner && owner != notification && owner.Name() != L"SystemTrayIcon")
+        owner = Media::VisualTreeHelper::GetParent(owner).try_as<FrameworkElement>();
+      IloCollectTrayIcons(notification, 12, items);
+      if (clock && owner) {
+        std::erase_if(items, [&](auto const& pair) { return pair.first == owner; });
+        if (!g_settings.zoomExcludeClock) items.emplace_back(owner, clock);
+      }
+    }
+    std::vector<IloZoomIcon> next;
+    next.reserve(items.size());
+    for (auto const& [owner, glyph] : items) {
+      auto old = std::find_if(icons.begin(), icons.end(), [&](auto const& item) {
+        return item.button == owner && item.icon == glyph;
+      });
+      if (old != icons.end()) next.push_back(std::move(*old));
+      else next.emplace_back(owner, glyph, nullptr);
+    }
+    for (auto& old : icons) if (old.icon) old.Release();
+    icons.swap(next);
+    if (lastPoint) Point(lastPoint);
+  }
+
+  void Bind(FrameworkElement const& root) {
+    panel=root;
+    timer=DispatcherTimer();
+    timer.Interval(std::chrono::milliseconds(16));
+    tick=timer.Tick([this](auto const&,auto const&) noexcept {
+      try { Frame(); } catch (...) { timer.Stop();running=false; }
+    });
+    move=Input::PointerEventHandler([this](auto const&,Input::PointerRoutedEventArgs const& e) noexcept {
+      try {
+        if(e.Pointer().PointerDeviceType()==winrt::Windows::Devices::Input::PointerDeviceType::Mouse)
+          Point(e.GetCurrentPoint(panel).Position());
+      } catch (...) {}
+    });
+    leave=Input::PointerEventHandler([this](auto const&,auto const&) noexcept {
+      try { Point(std::nullopt); } catch (...) {}
+    });
+    moved=panel.PointerMoved(move);
+    entered=panel.PointerEntered(move);
+    exited=panel.PointerExited(leave);
+    canceled=panel.PointerCanceled(leave);
+    unloaded=panel.Unloaded([this](auto const&,auto const&) noexcept {
+      try { Clear(); } catch (...) {}
+    });
+  }
+  void Clear() {
+    if(panel && unloaded.value) panel.Unloaded(unloaded);
+    if(timer) {timer.Stop();timer.Tick(tick);timer=nullptr;}
+    if(panel && move) {
+      if (moved.value) panel.PointerMoved(moved);
+      if (entered.value) panel.PointerEntered(entered);
+    }
+    if(panel && leave) {
+      if (exited.value) panel.PointerExited(exited);
+      if (canceled.value) panel.PointerCanceled(canceled);
+    }
+    for (auto& item:icons) item.Release();
+    icons.clear();running=false;panel=nullptr;move=nullptr;leave=nullptr;
+    moved=entered=exited=canceled=unloaded={};
+    lastPoint.reset();
+  }
+  void Sync(FrameworkElement const& root, ChildrenLayoutMeasurementTai const& layout) {
+    if(panel!=root){Clear();Bind(root);}
+    const bool showAnimatedBackground = !g_settings.zoomHideBackground && !g_settings.zoomDisableBackgroundZoom;
+    if (macStyle != g_settings.zoomMacStyle || animateBackground != showAnimatedBackground) {
+      animateBackground = showAnimatedBackground;
+      for (auto& item : icons) item.Restore();
+      macStyle = g_settings.zoomMacStyle;
+    }
+    percent=g_settings.zoomPercent;neighbors=g_settings.zoomNeighbors;
+    duration=g_settings.zoomDuration;spread=g_settings.zoomSpread;
+    std::vector<IloZoomIcon> next;
+    next.reserve(layout.children.size());
+    for(auto const& entry:layout.children) {
+      auto b=entry.element;
+      FrameworkElement icon{nullptr}, background{nullptr};
+      if(entry.className==L"Taskbar.TaskListButton"){
+        auto inner=FindChildByName(b,L"IconPanel");
+        if(!inner) inner=FindChildByClassName(b,L"Taskbar.TaskListLabeledButtonPanel");
+        if(!inner) inner=FindChildByClassName(b,L"Taskbar.TaskListButtonPanel");
+        if (inner) {
+          icon = FindChildByName(inner, L"Icon");
+          background = FindChildByName(inner, L"BackgroundElement");
+        }
+      } else if(entry.isStartButton && g_settings.zoomStart) {
+        auto inner = FindChildByName(b, L"ExperienceToggleButtonRootPanel");
+        icon = IloStartGlyph(inner, 5);
+        if (inner) background = FindChildByName(inner, L"BackgroundElement");
+      }
+      if (!icon) continue;
+      if (!background) background = FindChildByName(b, L"BackgroundElement");
+      auto old=std::find_if(icons.begin(),icons.end(),[&](auto& i){return i.icon==icon && i.button==b && i.plate.element==background;});
+      if(old!=icons.end()) next.push_back(std::move(*old));
+      else next.emplace_back(b, icon, background);
+    }
+    for(auto& item:icons) if(item.icon) item.Release();
+    icons.swap(next);
+    for (auto& item : icons) item.HideBackground(g_settings.zoomHideBackground);
+    if (lastPoint) Point(lastPoint);
+  }
+};
+
+// Each controller and its XAML subscriptions belong to one UI dispatcher.
+static std::mutex iloZoomMutex;
+struct IloZoomBinding {
+  DWORD thread;
+  bool tray;
+  std::wstring monitor;
+  winrt::Windows::UI::Core::CoreDispatcher dispatcher;
+  std::shared_ptr<IloHoverZoom> zoom;
+};
+static std::vector<IloZoomBinding> iloZoomBindings;
+static void IloSyncZoom(std::wstring const& monitor,FrameworkElement const& panel,
+                        ChildrenLayoutMeasurementTai const& children, bool tray = false) {
+  const bool enabled = g_settings.zoomEnabled && (!tray || !g_settings.zoomExcludeTray) && !g_unloading;
+  std::shared_ptr<IloHoverZoom> zoom;
+  {
+    std::lock_guard lock(iloZoomMutex);
+    auto it=std::find_if(iloZoomBindings.begin(),iloZoomBindings.end(),[&](auto const& b){
+      return b.thread==GetCurrentThreadId() && b.monitor==monitor && b.tray==tray;
+    });
+    if(!enabled) {
+      if(it==iloZoomBindings.end()) return;
+      zoom=it->zoom;
+      iloZoomBindings.erase(it);
+    } else {
+      if(it==iloZoomBindings.end()) {
+        zoom=std::make_shared<IloHoverZoom>();
+        iloZoomBindings.push_back({GetCurrentThreadId(),tray,monitor,panel.Dispatcher(),zoom});
+      } else zoom=it->zoom;
+    }
+  }
+  if (!enabled || g_unloading) zoom->Clear();
+  else if (tray) zoom->SyncTray(panel);
+  else zoom->Sync(panel,children);
+}
+static void IloShutdownZoom() {
+  std::vector<IloZoomBinding> bindings;
+  {std::lock_guard lock(iloZoomMutex); bindings.swap(iloZoomBindings);}
+  for(auto& b:bindings){
+    try {
+      if(b.dispatcher.HasThreadAccess()) b.zoom->Clear();
+      else b.dispatcher.RunAsync(winrt::Windows::UI::Core::CoreDispatcherPriority::High,
+          [zoom=b.zoom]{zoom->Clear();}).get();
+    } catch(winrt::hresult_error const& e) { Wh_Log(L"Hover zoom dispatcher shutdown: %08X",e.code().value); }
+  }
+}
+
+
 ChildrenLayoutMeasurementTai CaptureChildrenLayoutTai(
     FrameworkElement const& element) {
   ChildrenLayoutMeasurementTai measurement;
@@ -8940,6 +9641,11 @@ ChildrenLayoutMeasurementTai CaptureChildrenLayoutTai(
       continue;
     }
     observation.className = winrt::get_class_name(observation.element);
+    if (observation.className == L"Taskbar.TaskbarExtensionElement" &&
+        TrayContentTai(observation.element)) {
+      --measurement.visualChildCount;
+      continue;
+    }
     observation.isStartButton =
         IsStartButtonElement(observation.element, observation.className);
     if (observation.className != L"Taskbar.AugmentedEntryPointButton") {
@@ -8989,6 +9695,8 @@ void RefreshChildrenLayoutMeasurementTai(
   for (auto& observation : measurement->children) {
     observation.hasValidRect = false;
     observation.hasValidRootRect = false;
+    // Collapsed tray elements can retain the width from their last arrange pass.
+    if (!rootBoundsRelativeTo && observation.element.Visibility() == Visibility::Collapsed) continue;
     try {
       auto transform =
           observation.element.TransformToVisual(boundsRelativeTo);
@@ -9534,7 +10242,7 @@ void SetTaskbarOverflowButtonSuppressed(FrameworkElement const& overflowButton,
 // ---- Temporary taskbar geometry diagnostics -------------------------------
 // Set to false after collecting logs. The throttle keeps ApplyStyle from
 // flooding Windhawk logs during insertion/removal animations.
-constexpr bool kDebugTaskbarGeometry = true;
+constexpr bool kDebugTaskbarGeometry = false;
 constexpr int64_t kDebugTaskbarGeometryMinIntervalMs = 250;
 std::atomic<int64_t> g_lastTaskbarGeometryDebugLogMs = 0;
 bool ShouldLogTaskbarGeometry(bool interesting) {
@@ -9920,8 +10628,24 @@ void UpdateGlobalSettings() {
   if (appsDividerAlignment) {
     Wh_FreeStringSetting(appsDividerAlignment);
   }
+  PCWSTR zoomStyle = Wh_GetStringSetting(L"HoverZoomStyle");
+  g_settings.zoomMacStyle = zoomStyle && _wcsicmp(zoomStyle, L"macos") == 0;
+  if (zoomStyle) Wh_FreeStringSetting(zoomStyle);
+  g_settings.zoomEnabled = getInt(L"HoverZoomEnabled") != 0;
+  g_settings.zoomHideBackground = getInt(L"HoverZoomHideBackground") != 0;
+  g_settings.zoomExcludeTray = getInt(L"HoverZoomExcludeTray") != 0;
+  g_settings.zoomExcludeChevron = getInt(L"HoverZoomExcludeChevron") != 0;
+  g_settings.zoomExcludeClock = getInt(L"HoverZoomExcludeClock") != 0;
+  g_settings.zoomSpread = getInt(L"HoverZoomSpread") != 0;
+  g_settings.zoomStart = getInt(L"HoverZoomStart") != 0;
+  g_settings.zoomPercent = clamp(getInt(L"HoverZoomPercent"),110,250);
+  g_settings.zoomTrayPercent = clamp(getInt(L"HoverZoomTrayPercent"),110,250);
+  g_settings.zoomDisableBackgroundZoom = getInt(L"HoverZoomDisableBackgroundZoom") != 0;
+  g_settings.zoomNeighbors = clamp(getInt(L"HoverZoomNeighbors"),0,2);
+  g_settings.zoomDuration = clamp(getInt(L"HoverZoomDuration"),0,300);
   // Gaps & Padding (non-negative)
   g_settings.userDefinedTrayTaskGap = g_unloading ? 0 : std::max(0, getInt(L"TrayTaskGap"));
+  g_settings.trayContentOffsetY = std::clamp<int>(getInt(L"TrayContentOffsetY"), -12, 12);
   g_settings.userDefinedTaskbarBackgroundHorizontalPadding = g_unloading ? 0 : std::max(0, getInt(L"TaskbarBackgroundHorizontalPadding"));
   // Offset Y (negative up; non-positive settings sit on the screen edge)
   const int offsetY = std::max(-2, getInt(L"TaskbarOffsetY"));
@@ -10308,8 +11032,8 @@ static HRGN FitWindowsTaskbarRegionTai(HWND window, HRGN region) {
       return region;
     }
     auto& zone = it->second;
-    zone.hasWindowsRegion =
-        region && GetRgnBox(region, &zone.windowsRegion) != ERROR;
+    const int regionType = region ? GetRgnBox(region, &zone.windowsRegion) : ERROR;
+    zone.hasWindowsRegion = region && regionType != ERROR;
     zone.applied = false;
     // Windows clearing its region as the taskbar comes back on its monitor:
     // from here the region is UpdateTaskbarWindowRegion's.
@@ -10320,13 +11044,15 @@ static HRGN FitWindowsTaskbarRegionTai(HWND window, HRGN region) {
       return region;
     }
     zone.applied = true;
+    if (regionType == SIMPLEREGION && EqualRect(&fitted, &zone.windowsRegion)) {
+      return region;
+    }
   }
   HRGN fittedRegion = CreateRectRgnIndirect(&fitted);
   if (!fittedRegion) {
     return region;
   }
-  Wh_Log(L"[RevealZone] %p Windows' region cut to (%ld,%ld)-(%ld,%ld)",
-         window, fitted.left, fitted.top, fitted.right, fitted.bottom);
+  // Explorer frequently reapplies the same region during auto-hide.
   if (region) {
     // SetWindowRgn would have taken ownership of it.
     DeleteObject(region);
@@ -11423,7 +12149,10 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   }
   std::lock_guard<std::recursive_mutex> stateLock(stateHandle->mutex);
   auto& state = *stateHandle;
-  Wh_Log(L"ApplyStyle for monitor: %s", monitorName.c_str());
+  if (g_unloading) {
+    state.RestoreTrayTranslation();
+    state.RestoreBackgroundOrder();
+  }
   // Fork addition: see g_xamlRootMonitorNamesTai.
   RecordXamlRootMonitorTai(xamlRootContent, monitorName);
   g_scheduled_low_priority_update = false;
@@ -11451,7 +12180,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   auto snapPx = [rasterizationScale](float value) -> float {
     return SnapToPhysicalPixel(value, rasterizationScale);
   };
-  auto taskFrame = FindChildByClassName(xamlRootContent, L"Taskbar.TaskbarFrame");
+  auto taskFrame = FindTaskFrameTai(xamlRootContent);
   if (!taskFrame) {
     Wh_Log(L"Failed to find Taskbar.TaskbarFrame");
     return false;
@@ -11483,18 +12212,32 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     return false;
   }
   auto trayFrame = FindChildByClassName(xamlRootContent, L"SystemTray.SystemTrayFrame");
+  FrameworkElement trayHost = nullptr;
+  bool nestedTray = false;
+  if (!trayFrame) {
+    EnumChildElements(taskbarFrameRepeater, [&](FrameworkElement item) {
+      trayFrame = TrayContentTai(item);
+      if (trayFrame) trayHost = item;
+      return static_cast<bool>(trayFrame);
+    });
+    nestedTray = static_cast<bool>(trayFrame);
+  }
   if (!trayFrame) {
     Wh_Log(L"Failed to find SystemTray.SystemTrayFrame");
     return false;
   }
   auto systemTrayFrameGrid = FindChildByName(trayFrame, L"SystemTrayFrameGrid");
   if (!systemTrayFrameGrid) {
-    Wh_Log(L"Failed to find SystemTrayFrameGrid in trayFrame");
-    return false;
+    // Some templates add a single presenter/border between frame and panel.
+    EnumChildElements(trayFrame, [&](FrameworkElement child) {
+      if (child.try_as<Controls::ContentPresenter>() || child.try_as<Controls::Border>()) {
+        systemTrayFrameGrid = FindChildByName(child, L"SystemTrayFrameGrid");
+      }
+      return static_cast<bool>(systemTrayFrameGrid);
+    });
   }
-  auto showDesktopButton = FindChildByName(systemTrayFrameGrid, L"ShowDesktopStack");
-  if (!showDesktopButton) {
-    Wh_Log(L"Failed to find ShowDesktopStack in systemTrayFrameGrid");
+  if (!systemTrayFrameGrid) {
+    Wh_Log(L"Failed to find SystemTrayFrameGrid in trayFrame");
     return false;
   }
   auto taskbarBackground = FindChildByClassName(rootGridTaskBar, L"Taskbar.TaskbarBackground");
@@ -11512,23 +12255,10 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     Wh_Log(L"Failed to find BackgroundFill in backgroundFillParent");
     return false;
   }
-  auto notificationAreaIcons = FindChildByName(systemTrayFrameGrid, L"NotificationAreaIcons");
-  if (!notificationAreaIcons) {
-    Wh_Log(L"Failed to find NotificationAreaIcons in systemTrayFrameGrid");
-    return false;
-  }
-  auto itemsPresenter = FindChildByClassName(notificationAreaIcons, L"Windows.UI.Xaml.Controls.ItemsPresenter");
-  if (!itemsPresenter) {
-    Wh_Log(L"Failed to find ItemsPresenter in notificationAreaIcons");
-    return false;
-  }
-  auto stackPanel = FindChildByClassName(itemsPresenter, L"Windows.UI.Xaml.Controls.StackPanel");
-  if (!stackPanel) {
-    Wh_Log(L"Failed to find StackPanel in itemsPresenter");
-    return false;
-  }
   auto taskbarChildrenMeasurement =
       CaptureChildrenLayoutTai(taskbarFrameRepeater);
+  IloSyncZoom(monitorName, taskbarFrameRepeater, taskbarChildrenMeasurement);
+  IloSyncZoom(monitorName, systemTrayFrameGrid, taskbarChildrenMeasurement, true);
   bool widgetPresent = IsTaskbarWidgetsEnabled();
   auto widgetElement = widgetPresent
       ? FindCapturedChildByClassNameTai(
@@ -11565,7 +12295,9 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     Wh_Log(L"root width is too small");
     return false;
   }
-   const double taskbarVirtualSurfaceWidth = g_unloading
+  // A nested notification area is laid out at the far edge of this surface.
+  // Keep that slot inside the native viewport and let Windows handle overflow.
+  const double taskbarVirtualSurfaceWidth = (g_unloading || nestedTray)
       ? rootWidth
       : CalculateDynamicTaskbarVirtualSurfaceWidth(
             taskbarChildrenMeasurement.visualChildCount,
@@ -11671,9 +12403,9 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     state.lastTaskbarData.rightMostEdge = rightMostEdgeTaskbar;
     state.lastTaskbarData.childrenWidth = childrenWidthTaskbar;
   }
-  trayFrame.Clip(nullptr);
-    DisableElementClip(systemTrayFrameGrid);
-  DisableClipForAncestorChain(systemTrayFrameGrid);
+  if (!nestedTray) {
+    DisableClipForAncestorChain(systemTrayFrameGrid);
+  }
   auto trayHorizontalAlignmentRef = trayFrame
       .GetValue(FrameworkElement::HorizontalAlignmentProperty())
       .try_as<winrt::Windows::Foundation::IReference<HorizontalAlignment>>();
@@ -11723,9 +12455,10 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     Wh_Log(L"Error: childrenCountTray <= 0");
     return false;
   }
-  const double showDesktopButtonActualWidth = showDesktopButton ? showDesktopButton.ActualWidth() : 0.0;
-  if (g_settings.userDefinedIgnoreShowDesktopButton && showDesktopButtonActualWidth > 0.0) {
-    trayFrameWidthDbl = std::max(0.0, trayFrameWidthDbl - showDesktopButtonActualWidth);
+  if (g_settings.userDefinedIgnoreShowDesktopButton) {
+    if (auto showDesktop = FindChildByName(systemTrayFrameGrid, L"ShowDesktopStack")) {
+      trayFrameWidthDbl = std::max(0.0, trayFrameWidthDbl - showDesktop.ActualWidth());
+    }
   }
   int trayGapPlusExtras = g_settings.userDefinedTrayTaskGap + widgetElementVisibleWidth + (widgetPresent ? -6 + g_settings.userDefinedTrayTaskGap : 0);
   const double trayFrameWidthSafeDbl = std::max(0.0, trayFrameWidthDbl + static_cast<double>(trayGapPlusExtras));
@@ -11740,17 +12473,13 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   }
   const float targetContentWidth = static_cast<float>(childrenWidthTaskbar + trayFrameWidth);
   const float targetContentLeft = snapPx(static_cast<float>((rootWidth - targetContentWidth) / 2.0f));
-  const float targetTrayLogicalLeft = snapPx(targetContentLeft + static_cast<float>(childrenWidthTaskbar));
+  const float targetTrayLogicalLeft = snapPx(targetContentLeft + static_cast<float>(childrenWidthTaskbar) + (nestedTray ? trayGapPlusExtras : 0));
   float targetOffsetXTray = snapPx(targetTrayLogicalLeft - static_cast<float>(rootWidth - trayFrameWidth));
   // tray animations
   auto systemTrayFrameGridVisual = winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::GetElementVisual(systemTrayFrameGrid);
   if (!systemTrayFrameGridVisual) {
     Wh_Log(L"Error: !SystemTrayFrameGridVisual");
     return false;
-  }
-  auto originalOffset = systemTrayFrameGridVisual.Offset();
-  if (state.initOffsetX == -1) {
-    state.initOffsetX = originalOffset.x;
   }
   auto rootGridTaskBarVisual = winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::GetElementVisual(rootGridTaskBar);
   if (!rootGridTaskBarVisual) {
@@ -11857,10 +12586,144 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       (taskbarLayoutIsEdgeClamped ||
        isOverflowing ||
        (taskbarLayoutIsTrayConstrained && stableStartAnchorMatchesCurrentSample));
-  const double taskbarAnchorLeft = useStableStartButtonAnchor
+  // The nested tray changes how Windows centers the button group. Use its measured edge.
+  const double taskbarAnchorLeft = nestedTray ? taskbarLeftEdge : useStableStartButtonAnchor
       ? static_cast<double>(state.stableStartButtonAnchorLeft)
       : fallbackTaskbarAnchorLeft;
   float targetTaskRootOffsetX = snapPx(targetContentLeft - static_cast<float>(taskbarAnchorLeft));
+  if (state.translatedTray.get() != trayHost) state.RestoreTrayTranslation();
+  const bool orderBackground = nestedTray && !g_unloading &&
+      g_settings.userDefinedCustomizeTaskbarBackground &&
+      Media::VisualTreeHelper::GetParent(taskbarBackground) ==
+          Media::VisualTreeHelper::GetParent(taskbarFrameRepeater);
+  if (!orderBackground || state.loweredBackground.get() != taskbarBackground) {
+    state.RestoreBackgroundOrder();
+  }
+  if (orderBackground) {
+    const int32_t foreground = Controls::Canvas::GetZIndex(taskbarFrameRepeater);
+    const int32_t background = Controls::Canvas::GetZIndex(taskbarBackground);
+    if (background >= foreground && foreground > INT32_MIN) {
+      const auto local = taskbarBackground.ReadLocalValue(Controls::Canvas::ZIndexProperty());
+      if (local == DependencyProperty::UnsetValue() ||
+          local.try_as<winrt::Windows::Foundation::IReference<int32_t>>()) {
+        if (!state.loweredBackground.get() || background != state.appliedBackgroundZ) {
+          state.nativeBackgroundZ = background;
+          state.hadLocalBackgroundZ = local != DependencyProperty::UnsetValue();
+        }
+        state.loweredBackground = winrt::make_weak(taskbarBackground);
+        state.appliedBackgroundZ = foreground - 1;
+        Controls::Canvas::SetZIndex(taskbarBackground, state.appliedBackgroundZ);
+      }
+    }
+  }
+  if (nestedTray && !g_unloading) {
+    // Keep the native layout surface at the monitor width. The tray X
+    // calculation must never feed back into the width of the repeater.
+    float nativeLeft = 0;
+    float nativeTop = 0;
+    bool reachedRepeater = false;
+    DependencyObject node = systemTrayFrameGrid;
+    while (node && node != rootGridTaskBar) {
+      if (node == taskbarFrameRepeater) reachedRepeater = true;
+      if (auto part = node.try_as<FrameworkElement>()) {
+        const auto offset = part.ActualOffset();
+        nativeLeft += offset.x;
+        if (!reachedRepeater) nativeTop += offset.y;
+      }
+      node = Media::VisualTreeHelper::GetParent(node);
+    }
+    if (!node || !std::isfinite(nativeLeft)) return false;
+    auto value = trayHost.Translation();
+    const bool newHost = !state.translatedTray.get();
+    if (newHost || value.x != state.appliedTrayX) {
+      state.nativeTrayX = value.x;
+      state.translatedTray = winrt::make_weak(trayHost);
+    }
+    targetOffsetXTray = snapPx(targetTrayLogicalLeft - targetTaskRootOffsetX - nativeLeft);
+    WCHAR taskbarClass[48]{};
+    const bool mainTaskbar = GetClassNameW(g_applyStyleTaskbarWindowTai, taskbarClass,
+                                           ARRAYSIZE(taskbarClass)) &&
+                             wcscmp(taskbarClass, L"Shell_TrayWnd") == 0;
+    // The highlighted clock and volume glyphs are rendered at the native
+    // right-hand edge. Put the visible displacement on their StackPanel.
+    // Subtract that same amount from the outer host to preserve the total
+    // XAML displacement used for pointer input.
+    const float panelShift = snapPx(targetTrayLogicalLeft - nativeLeft);
+    const bool floatingDock = !g_settings.userDefinedFlatTaskbarBottomCorners &&
+                              !g_settings.userDefinedFullWidthTaskbarBackground;
+    const float inset = floatingDock
+        ? std::abs(static_cast<int>(g_settings.userDefinedTaskbarOffsetY)) : 0.0f;
+    const float fineY = snapPx(static_cast<float>(g_settings.trayContentOffsetY));
+    bool movedPanel = false;
+    const float nativeHostY = state.ownsTrayY && value.y == state.appliedTrayY
+        ? state.nativeTrayY : value.y;
+    float targetHostY = nativeHostY;
+    if (mainTaskbar) {
+      float panelY = fineY;
+      auto parent = Media::VisualTreeHelper::GetParent(systemTrayFrameGrid).try_as<FrameworkElement>();
+      auto anchor = startButtonElement && startButtonElement.ActualHeight() > 0
+                        ? startButtonElement : taskbarFrameRepeater;
+      auto button = FindChildByName(systemTrayFrameGrid, L"ControlCenterButton");
+      if (!button || button.ActualHeight() <= 0) button = systemTrayFrameGrid;
+      if (parent && anchor.ActualHeight() > 0 && button.ActualHeight() > 0) {
+        // Measure the task button in repeater coordinates. Measure
+        // the volume button inside the panel, excluding our RenderTransform.
+        // The resulting absolute shift is independent of the preceding pass.
+        const auto target = anchor.TransformToVisual(taskbarFrameRepeater).TransformPoint(
+            {0, static_cast<float>(anchor.ActualHeight() * 0.5)});
+        const auto buttonCenter = button.TransformToVisual(systemTrayFrameGrid).TransformPoint(
+            {0, static_cast<float>(button.ActualHeight() * 0.5)});
+        const float nativeCenter = nativeTop + nativeHostY + buttonCenter.Y;
+        if (reachedRepeater && std::isfinite(nativeCenter) && std::isfinite(target.Y)) {
+          // The detached primary tray paint surface omits the repeater inset.
+          // Transfer that inset to the panel while retaining the XAML hit position.
+          const float paintInset = snapPx(std::clamp(taskbarFrameRepeater.ActualOffset().y,
+                                                     0.0f, inset));
+          panelY = snapPx(target.Y - nativeCenter + g_settings.trayContentOffsetY) + paintInset;
+          targetHostY -= paintInset;
+        }
+      }
+      movedPanel = state.SetPanelShift(systemTrayFrameGrid, panelShift,
+                                       panelY, visualOffsetTolerance);
+      if (movedPanel) targetOffsetXTray -= state.trayRenderShift.X();
+    } else {
+      state.RestorePanelShift();
+    }
+    if (!movedPanel) targetHostY = nativeHostY;
+    state.nativeTrayY = nativeHostY;
+    state.appliedTrayY = targetHostY;
+    state.ownsTrayY = targetHostY != nativeHostY;
+    if (newHost || value.y != targetHostY ||
+        std::abs(value.x - targetOffsetXTray) > visualOffsetTolerance) {
+      value.y = targetHostY;
+      value.x = targetOffsetXTray;
+      state.appliedTrayX = value.x;
+      trayHost.Translation(value);
+    }
+    if (!movedPanel) {
+      const auto origin = systemTrayFrameGrid.TransformToVisual(rootGridTaskBar).TransformPoint({0, 0});
+      const double centerY = origin.Y + systemTrayFrameGrid.ActualHeight() * 0.5;
+      const double targetY = inset + g_settings.userDefinedTaskbarHeight * 0.5;
+      auto margin = trayHost.Margin();
+      if (!state.hasTrayMargin || margin.Top != state.writtenTrayMargin.Top ||
+          margin.Bottom != state.writtenTrayMargin.Bottom) {
+        state.initialTrayMargin = state.writtenTrayMargin = margin;
+        state.hasTrayMargin = true;
+      }
+      if (systemTrayFrameGrid.ActualHeight() > 0 && std::isfinite(centerY) &&
+          std::abs(targetY - centerY) > visualOffsetTolerance) {
+        const double limit = g_settings.userDefinedTaskbarHeight * 0.5;
+        const double shift = std::clamp<double>(snapPx(static_cast<float>(
+            margin.Top - state.initialTrayMargin.Top + targetY - centerY)), -limit, limit);
+        margin.Top = state.initialTrayMargin.Top + shift;
+        margin.Bottom = state.initialTrayMargin.Bottom - shift;
+        if (margin.Top != state.writtenTrayMargin.Top || margin.Bottom != state.writtenTrayMargin.Bottom) {
+          state.writtenTrayMargin = margin;
+          trayHost.Margin(margin);
+        }
+      }
+    }
+  }
   float centeredTaskbarRightEdge = targetTrayLogicalLeft;
   const float taskbarBackgroundPadding =
       static_cast<float>(g_settings.userDefinedTaskbarBackgroundHorizontalPadding);
@@ -11917,7 +12780,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   // edge. Placed before the "nothing changed" early-out below so it still runs
   // on cheap passes; UpdateTaskbarWindowRegion is a no-op when the window
   // already has the right region.
-  {
+  if (g_clipTaskbarWindowToDock) {
     HWND taskbarWindow = g_applyStyleTaskbarWindowTai
                              ? g_applyStyleTaskbarWindowTai
                              : FindTaskbarWindowForMonitorTai(monitorName);
@@ -11948,13 +12811,13 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     }
   }
   if (!forceStyleApply && !invalidateDimensionsThisPass && !g_unloading &&
-      std::abs(targetOffsetXTray - systemTrayFrameGridVisual.Offset().x) <= visualOffsetTolerance &&
+      (nestedTray || std::abs(targetOffsetXTray - systemTrayFrameGridVisual.Offset().x) <= visualOffsetTolerance) &&
       childrenWidthTaskbar == state.lastChildrenWidthTaskbar &&
       trayFrameWidth == state.lastTrayFrameWidth &&
       std::abs(targetTaskRootOffsetX - rootGridTaskBarVisual.Offset().x) <= visualOffsetTolerance &&
       std::abs(taskbarFrameRepeaterVisual.Offset().x) <= visualOffsetTolerance &&
       !taskbarIslandScaleTargetChanged) {
-    Wh_Log(L"taskbar root/tray offsets/scale are within tolerance %f; widths didn't change: %d, %d", visualOffsetTolerance, childrenWidthTaskbar, state.lastTrayFrameWidth);
+    // Geometry already applied.
     return true;
   }
   if (childrenWidthTaskbar < 1) {
@@ -12080,7 +12943,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
                                  0.001f,
                                  !g_unloading);
   SetVisualScaleCenterAndAnimate(systemTrayFrameGridVisual,
-                                 targetTaskbarIslandScale,
+                                 nestedTray ? 1.0f : targetTaskbarIslandScale,
                                  trayScaleCenterLocalX,
                                  trayScaleCenterLocalY,
                                  0.001f,
@@ -12112,7 +12975,9 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   }
   auto taskbarVisual = rootGridTaskBarVisual;
   auto trayVisualCompositor = systemTrayFrameGridVisual.Compositor();
-    if (trayVisualCompositor) {
+  if (nestedTray) {
+    state.hasLastTargetTrayOffsetX = false;
+  } else if (trayVisualCompositor) {
     if (!g_unloading) {
       const bool trayOffsetChanged =
           invalidateDimensionsThisPass ||
@@ -12206,14 +13071,21 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     Wh_Log(L"Error: clipHeight<=0");
     return false;
   }
-  ProcessStackPanelChildren(stackPanel, clipHeight);
-  ChangeControlCenterIconSize(systemTrayFrameGrid);
-  auto trayOverflowArrowNotifyIconStack = FindChildByName(systemTrayFrameGrid, L"NotifyIconStack");
-  if (trayOverflowArrowNotifyIconStack) {
-    SetDividerForElement(trayOverflowArrowNotifyIconStack, clipHeight, g_settings.userDefinedTrayAreaDivider, true);
-  } else {
-    SetDividerForElement(stackPanel, clipHeight, g_settings.userDefinedTrayAreaDivider, true);
+  auto divider = FindChildByName(systemTrayFrameGrid, L"NotifyIconStack");
+  FrameworkElement iconsPanel = nullptr;
+  if (g_settings.userDefinedStyleTrayArea || !divider) {
+    if (auto icons = FindChildByName(systemTrayFrameGrid, L"NotificationAreaIcons")) {
+      if (auto presenter = FindChildByClassName(icons, L"Windows.UI.Xaml.Controls.ItemsPresenter")) {
+        iconsPanel = FindChildByClassName(presenter, L"Windows.UI.Xaml.Controls.StackPanel");
+      }
+    }
   }
+  if (g_settings.userDefinedStyleTrayArea) {
+    if (iconsPanel) ProcessStackPanelChildren(iconsPanel, clipHeight);
+    ChangeControlCenterIconSize(systemTrayFrameGrid);
+  }
+  SetDividerForElement(divider ? divider : iconsPanel, clipHeight,
+                       g_settings.userDefinedTrayAreaDivider, true);
   //  if (widgetPresent && widgetElementInnerChild) {
   //    SetDividerForElement(widgetElementInnerChild, clipHeight, widgetPresent && g_settings.userDefinedTrayAreaDivider, true);
   //  }
@@ -12617,7 +13489,7 @@ BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int
   if (isTaskbar && !(uFlags & SWP_NOMOVE) &&
       processId == GetCurrentProcessId()) {
     const BOOL result = callOriginal();
-    if (result) {
+    if (result && g_clipTaskbarWindowToDock) {
       ApplyTaskbarRevealZoneAfterMoveTai(hWnd);
     }
     return result;
@@ -12731,7 +13603,9 @@ BOOL Wh_ModInit() {
   g_unloading = false;
   g_worker_threads_stopping = false;
   // Fork addition: see TaskbarRevealZoneTai.
-  if (moduleUser32) {
+  g_clipTaskbarWindowToDock = Wh_GetIntSetting(L"ClipTaskbarWindowToDock") != 0;
+  Wh_Log(L"[Tray26] windowRegion=%s", g_clipTaskbarWindowToDock ? L"dock" : L"native");
+  if (g_clipTaskbarWindowToDock && moduleUser32) {
     auto pSetWindowRgn =
         (SetWindowRgn_t)GetProcAddress(moduleUser32, "SetWindowRgn");
     if (!pSetWindowRgn ||
@@ -12740,6 +13614,7 @@ BOOL Wh_ModInit() {
       Wh_Log(L"Failed to hook SetWindowRgn");
     }
   }
+  iloMediaLayoutMessage = RegisterWindowMessageW(L"ILo.Media.LayoutChanged.v1");
   InitMinimizeAnimationCorrectionTai();
   ArmInitialExplorerStyleApplyDelay();
   if (!Wh_ModInitTBIconSize()) {
@@ -12779,6 +13654,7 @@ void Wh_ModBeforeUninit() {
   // Fork addition: see RunModuleHooksTai.
   JoinModuleHookWorkersTai();
   g_unloading = true;
+  IloShutdownZoom();
   CleanupDebounce();
   UninitMinimizeAnimationCorrectionTai();
   Wh_ModBeforeUninitTBIconSize();
@@ -12799,7 +13675,7 @@ void Wh_ModUninit() {
   // Fork addition: belt-and-braces. Do not rely on a final g_unloading
   // ApplyStyle pass reaching the region update -- it has several earlier
   // return paths.
-  ClearAllTaskbarWindowRegionsTai();
+  if (g_clipTaskbarWindowToDock) ClearAllTaskbarWindowRegionsTai();
   UninitMinimizeAnimationCorrectionTai();
   CleanupDebounce();
   Wh_ModUninitTBIconSize();
