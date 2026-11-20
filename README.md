@@ -1,8 +1,12 @@
 # ILô 1.4.2
 
+## Engish
+
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
-**Installation.** Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
+## Installation
+
+Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
 
 ## Français
 
