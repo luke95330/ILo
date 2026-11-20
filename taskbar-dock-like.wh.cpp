@@ -4,7 +4,8 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.4.2
+// @version         1.4.3
+// @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
 // @include         StartMenuExperienceHost.exe
