@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.4.1
+// @version         1.4.2
 // @author          Mighty-Luke
 // @include         explorer.exe
 // @include         StartMenuExperienceHost.exe
@@ -101,51 +101,67 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   [TranslucentTB team](https://github.com/translucenttb/translucenttb), whom
   the original TAI credits.
 ---
-# Options
-| Property | Name | Description | Accepted values |
-| --- | --- | --- | --- |
-| `TaskbarHeight` | Taskbar height | Set the height of the taskbar. Default is 24 | Non-negative integer |
-| `TaskbarIconSize` | Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22 | Non-negative integer |
-| `TaskbarButtonSize` | Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 20 | Non-negative integer |
-| `TaskbarOffsetY` | Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | Non-negative integer |
-| `TrayTaskGap` | Tray task gap | Adjust the space between the task area and the tray area. Default is 5 | Non-negative integer |
-| `TaskbarBackgroundHorizontalPadding` | Taskbar background horizontal padding | Set the horizontal padding on both sides of the taskbar background. Default is 2 | Non-negative integer |
-| `FullWidthTaskbarBackground` | Full-width taskbar background | When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off | Boolean (true/false) |
-| `IgnoreShowDesktopButton` | Ignore "Show Desktop" button | When enabled, the "Show Desktop" button is ignored in width calculations. Default is off | Boolean (true/false) |
-| `TaskbarCornerRadius` | Taskbar corner radius | Controls how rounded the taskbar corners appear. Default is 12 | Non-negative integer |
-| `TaskButtonCornerRadius` | Task button corner radius | Controls how rounded the corners of individual task buttons are. Default is 8 | Non-negative integer |
-| `FlatTaskbarBottomCorners` | Flat bottom corners | When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off | Boolean (true/false) |
-| `CustomizeTaskbarBackground` | Stylize the taskbar background | When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on | Boolean (true/false) |
-| `DisableCustomBlurBackground` | Disable custom blur background | When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off | Boolean (true/false) |
-| `TaskbarBackgroundOpacity` | Background opacity | Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100 | Non-negative integer |
-| `TaskbarBackgroundTint` | Background tint | Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45 | Non-negative integer |
-| `TaskbarBackgroundLuminosity` | Background luminosity | Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15 | Non-negative integer |
-| `TaskbarBackgroundBlurAmount` | Background blur amount | WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5 | Non-negative integer |
-| `TaskbarBackgroundTintColor` | Background tint color | WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode. | Text |
-| `TaskbarBackgroundTintSaturation` | Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500 | Non-negative integer |
-| `TaskbarBackgroundInversion` | Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | Non-negative integer |
-| `TaskbarBackgroundFallbackColor` | Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | Text |
-| `TaskbarBorderOpacity` | Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0 | Non-negative integer |
-| `TaskbarBorderColorHex` | Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | string hex color |
-| `TaskbarBorderThickness` | Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | unsigned int percentage |
-| `AppsDividerThickness` | Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | unsigned int percentage |
-| `AppsDividerVerticalScale` | Apps divider vertical scale (%) | Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40 | unsigned int percentage |
-| `AppsDividerAlignment` | Choose the side on which the app dividers should appear |  |  |
-| `DividedAppNames` | App names for divider placement | Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\+\+; Settings). Case-insensitive and supports regex. | string regex |
-| `TrayAreaDivider` | Tray area divider | When enabled, the tray area will be separated by a divider. Default is off | Boolean (true/false) |
-| `StyleTrayArea` | Modify the tray area appearance | When enabled, the options for tray icon size will take effect. Default is off | Boolean (true/false) |
-| `TrayIconSize` | Tray icon size | Set the width and height of tray icons. Minimum is 15. Default is 15 | Non-negative integer |
-| `TrayButtonSize` | Tray button size | Set the size (width and height) of tray buttons. Minimum is 20. Default is 30 | Non-negative integer |
-| `MoveFlyoutStartMenu` | Move Start Menu with Taskbar | When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on. | Boolean (true/false) |
-| `MoveFlyoutControlCenter` | Move Control Center with Taskbar | When enabled, the Control Center is moved to align with taskbar size and location. Default is on. | Boolean (true/false) |
-| `MoveFlyoutNotificationCenter` | Move Notification Center with Taskbar | When enabled, the Notification Center is moved to align with taskbar size and location. Default is on. | Boolean (true/false) |
-| `AlignFlyoutInner` | Align flyout windows to the inside of the taskbar | When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on. | Boolean (true/false) |
-| `NotificationCenterPrimaryOnly` | Notification Center on primary monitor only | When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on. | Boolean (true/false) |
-| `MoveFlyoutKeyboardLayout` | Move keyboard layout flyout with Taskbar | When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on. | Boolean (true/false) |
-| `MoveTrayContextMenus` | Move tray icon menus with Taskbar | When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on. | Boolean (true/false) |
-| `StartMenuOnActiveMonitor` | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | Boolean (true/false) |
-| `AutoHideShowUnderTaskbarOnly` | Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on. | Boolean (true/false) |
-| `LogFlyoutPlacement` | Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | Boolean (true/false) |
+## Settings reference (English)
+
+| Setting | Description | Default |
+| --- | --- | --- |
+| Taskbar height | Set the height of the taskbar. Default is 24 | `24` |
+| Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22 | `22` |
+| Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 20 | `20` |
+| Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | `8` |
+| Gap between apps and the notification area | Adjust the space between the task area and the tray area. Default is 5 | `5` |
+| Notification area vertical offset | Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0. | `0` |
+| Taskbar background horizontal padding | Set the horizontal padding on both sides of the taskbar background. Default is 2 | `2` |
+| Full-width taskbar background | When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off | `false` |
+| Ignore "Show Desktop" button | When enabled, the "Show Desktop" button is ignored in width calculations. Default is off | `false` |
+| Taskbar corner radius | Controls how rounded the taskbar corners appear. Default is 12 | `12` |
+| Task button corner radius | Controls how rounded the corners of individual task buttons are. Default is 8 | `8` |
+| Flat bottom corners | When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off | `false` |
+| Customize the dock background | When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on | `true` |
+| Use a solid dock background | When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off | `false` |
+| Background opacity | Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100 | `100` |
+| Background tint | Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45 | `45` |
+| Background luminosity | Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15 | `15` |
+| Background blur amount | WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5 | `5` |
+| Background tint color | WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode. | `{ThemeResource CardStrokeColorDefaultSolid}` |
+| Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500 | `100` |
+| Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | `10` |
+| Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | `{ThemeResource CardStrokeColorDefaultSolid}` |
+| Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0 | `0` |
+| Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | `#ffffff` |
+| Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | `8` |
+| Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | `8` |
+| Apps divider vertical scale (%) | Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40 | `40` |
+| App divider position | Choose which side of the app button displays its divider. Choices: Left side, Right side. | Empty |
+| App names for divider placement | Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\+\+; Settings). Case-insensitive and supports regex. | Empty |
+| Tray area divider | When enabled, the tray area will be separated by a divider. Default is off | `false` |
+| Customize notification area icons | When enabled, the options for tray icon size will take effect. Default is off | `false` |
+| Tray icon size | Set the width and height of tray icons. Minimum is 15. Default is 15 | `15` |
+| Tray button size | Set the size (width and height) of tray buttons. Minimum is 20. Default is 30 | `30` |
+| Move Start Menu with Taskbar | When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on. | `true` |
+| Move Control Center with Taskbar | When enabled, the Control Center is moved to align with taskbar size and location. Default is on. | `true` |
+| Move Notification Center with Taskbar | When enabled, the Notification Center is moved to align with taskbar size and location. Default is on. | `true` |
+| Align flyout windows to the inside of the taskbar | When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on. | `true` |
+| Notification Center on primary monitor only | When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on. | `true` |
+| Move keyboard layout flyout with Taskbar | When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on. | `true` |
+| Move tray icon menus with Taskbar | When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on. | `true` |
+| Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | `true` |
+| Restrict the taskbar window to the dock | Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option. | `false` |
+| Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on. | `true` |
+| Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
+| Magnify icons on hover | Magnify application icons when the mouse passes over them. | `false` |
+| Application zoom style | Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons. Choices: Zoom style, MacOS style. | `zoom` |
+| Hide icon backgrounds when hover zoom is enabled | Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds. | `true` |
+| Disable icon background zoom | Keep the visible application button background at its normal size and position. | `false` |
+| Maximum application zoom (%) | 110–250%. Available space in the button limits the effective zoom. | `180` |
+| Maximum notification area zoom (%) | 110–250%. Available space in the tray button limits the effective zoom. | `180` |
+| Neighbors on each side (MacOS) | 0, 1 or 2 neighboring icons on each side. | `1` |
+| Spread neighboring icons (MacOS) | Shift icons within their clickable buttons. | `true` |
+| Transition duration (ms) | 0–300 ms. Zero applies changes immediately. | `120` |
+| Magnify the Start button | Apply magnification to the Start glyph too. | `false` |
+| Exclude the entire notification area | When checked, all tray icons use their native size even when dock magnification is enabled. | `false` |
+| Exclude the hidden icons chevron | Keep the chevron at its native size when tray magnification is enabled. | `true` |
+| Exclude date and time | Keep the clock text at its native size when tray magnification is enabled. | `true` |
 */
 // ==/WindhawkModReadme==
 // ==WindhawkModSettings==
@@ -171,7 +187,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8
   $description:fr-FR: "Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."
 - TrayTaskGap: 5
-  $name: Tray task gap
+  $name: Gap between apps and the notification area
   $name:fr-FR: "Espacement avant la zone de notification"
   $description: Adjust the space between the task area and the tray area. Default is 5
   $description:fr-FR: "Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."
@@ -211,12 +227,12 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off
   $description:fr-FR: "Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut."
 - CustomizeTaskbarBackground: true
-  $name: Stylize the taskbar background
+  $name: Customize the dock background
   $name:fr-FR: "Personnaliser le fond du dock"
   $description: When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on
   $description:fr-FR: "Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut."
 - DisableCustomBlurBackground: false
-  $name: Disable custom blur background
+  $name: Use a solid dock background
   $name:fr-FR: "Utiliser un fond uni"
   $description: When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off
   $description:fr-FR: "Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut."
@@ -286,8 +302,9 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40
   $description:fr-FR: "Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40."
 - AppsDividerAlignment: ""
-  $name: Choose the side on which the app dividers should appear
+  $name: App divider position
   $name:fr-FR: "Position des séparateurs"
+  $description: Choose which side of the app button displays its divider.
   $description:fr-FR: "Choisis le côté du bouton où placer le séparateur."
   $options:
   - left: Left side
@@ -306,7 +323,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: When enabled, the tray area will be separated by a divider. Default is off
   $description:fr-FR: "Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut."
 - StyleTrayArea: false
-  $name: Modify the tray area appearance
+  $name: Customize notification area icons
   $name:fr-FR: "Personnaliser les icônes de notification"
   $description: When enabled, the options for tray icon size will take effect. Default is off
   $description:fr-FR: "Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."
@@ -427,7 +444,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: "0–300 ms. Zero applies changes immediately."
   $description:fr-FR: "De 0 à 300 ms. À 0, le zoom est instantané."
 - HoverZoomStart: false
-  $name: "Include Start"
+  $name: "Magnify the Start button"
   $name:fr-FR: "Inclure le bouton Démarrer"
   $description: "Apply magnification to the Start glyph too."
   $description:fr-FR: "Étend le zoom à l’icône du bouton Démarrer."
