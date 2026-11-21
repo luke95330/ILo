@@ -1,4 +1,4 @@
-# ILô 1.4.4
+# ILô 1.5
 
 ## English
 
@@ -6,7 +6,11 @@
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
-Add zoom options for programs and systray (MacOS Dock Style)
+### Settings panel
+
+Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across seven categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
+
+[View the settings panel](assets/ilo-settings.png) · [View the Start context menu](assets/ilo-start-menu.png) (French interface)
 
 The optional [ILô Media player](https://github.com/luke95330/ILo_Media) adds album art and playback controls to the dock.
 
@@ -20,7 +24,13 @@ Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.c
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 
-Offre des options de zoom pour les programmes et la zone de notification (Style MacOS)
+### Panneau de configuration
+
+Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les sept catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
+
+<a href="assets/ilo-start-menu.png"><img src="assets/ilo-start-menu.png" width="377" alt="Paramètres ILô dans le menu contextuel de Démarrer"></a>
+
+<a href="assets/ilo-settings.png"><img src="assets/ilo-settings.png" width="1000" alt="Panneau de configuration ILô ouvert sur Dock et disposition"></a>
 
 Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’afficher la pochette et les commandes de lecture dans le dock.
 
@@ -61,7 +71,7 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500 | `100` |
 | Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | `10` |
 | Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | `{ThemeResource CardStrokeColorDefaultSolid}` |
-| Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0 | `0` |
+| Border opacity | Set the opacity of the taskbar border. Range 0-100. Default is 0 | `0` |
 | Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | `#ffffff` |
 | Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | `8` |
 | Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | `8` |
@@ -96,5 +106,70 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Exclude the entire notification area | When checked, all tray icons use their native size even when dock magnification is enabled. | `false` |
 | Exclude the hidden icons chevron | Keep the chevron at its native size when tray magnification is enabled. | `true` |
 | Exclude date and time | Keep the clock text at its native size when tray magnification is enabled. | `true` |
+
+</details>
+
+<details>
+<summary>Référence des réglages en français</summary>
+
+| Réglage | Description | Valeur par défaut |
+| --- | --- | --- |
+| Hauteur de la barre des tâches | Règle la hauteur demandée pour la barre. Valeur par défaut : 24. | `24` |
+| Taille des icônes des applications | Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22. | `22` |
+| Taille des boutons des applications | Règle la largeur et la hauteur des boutons. Valeur par défaut : 20. | `20` |
+| Décalage vertical du dock | Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8. | `8` |
+| Espacement avant la zone de notification | Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5. | `5` |
+| Décalage vertical des icônes de notification | Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0. | `0` |
+| Marges latérales du fond | Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2. | `2` |
+| Fond sur toute la largeur | Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut. | `false` |
+| Exclure le bouton « Afficher le Bureau » | Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut. | `false` |
+| Arrondi du dock | Règle le rayon des coins du fond. Valeur par défaut : 12. | `12` |
+| Arrondi des boutons | Règle le rayon des coins des boutons d’application. Valeur par défaut : 8. | `8` |
+| Coins inférieurs droits | Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut. | `false` |
+| Personnaliser le fond du dock | Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut. | `true` |
+| Utiliser un fond uni | Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut. | `false` |
+| Opacité du fond | De 0 (transparent) à 100 (opaque). Valeur par défaut : 100. | `100` |
+| Intensité de la teinte | De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45. | `45` |
+| Luminosité du fond | De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15. | `15` |
+| Intensité du flou | Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5. | `5` |
+| Couleur de teinte | Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair. | `"{ThemeResource CardStrokeColorDefaultSolid}"` |
+| Saturation du fond | Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100. | `100` |
+| Inversion des couleurs du fond | Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10. | `10` |
+| Couleur de repli | Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. | `"{ThemeResource CardStrokeColorDefaultSolid}"` |
+| Opacité du contour | Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0. | `0` |
+| Couleur du contour et des séparateurs | Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff. | `"#ffffff"` |
+| Épaisseur du contour (%) | Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8. | `8` |
+| Épaisseur des séparateurs (%) | Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8. | `8` |
+| Hauteur des séparateurs (%) | Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40. | `40` |
+| Position des séparateurs | Choisis le côté du bouton où placer le séparateur. | `""` |
+| Applications avec séparateur | Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse. | `""` |
+| Séparateur de la zone de notification | Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut. | `false` |
+| Personnaliser les icônes de notification | Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut. | `false` |
+| Taille des icônes de notification | Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15. | `15` |
+| Taille des boutons de notification | Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30. | `30` |
+| Aligner Démarrer et Recherche | Aligne ces menus sur le dock. Activé par défaut. | `true` |
+| Aligner les paramètres rapides | Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut. | `true` |
+| Aligner le centre de notifications | Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut. | `true` |
+| Aligner les volets à l’intérieur du dock | Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut. | `true` |
+| Aligner les notifications sur l’écran principal uniquement | Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut. | `true` |
+| Aligner le sélecteur de clavier | Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut. | `true` |
+| Aligner les menus des icônes de notification | Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut. | `true` |
+| Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. | `true` |
+| Limiter la zone interactive au dock | Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification. | `false` |
+| Révéler la barre uniquement sous le dock | Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut. | `true` |
+| Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. | `false` |
+| Agrandissement des icônes au survol | Agrandit les icônes des applications au passage de la souris. | `false` |
+| Style de zoom des applications | Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines. | `zoom` |
+| Masquer le fond des icônes quand le zoom est activé | Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres. | `true` |
+| Désactiver le zoom du fond des icônes | Garde le fond visible des boutons d’application à sa taille et à sa position normales. | `false` |
+| Zoom maximal des applications (%) | De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif. | `180` |
+| Zoom maximal de la zone de notification (%) | De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif. | `180` |
+| Voisines de chaque côté (MacOS) | 0 pour l’icône seule, 1 ou 2 pour étendre l’effet aux voisines. | `1` |
+| Écarter les icônes voisines (MacOS) | Décale les icônes dans la limite de leur zone cliquable. | `true` |
+| Durée de transition (ms) | De 0 à 300 ms. À 0, le zoom est instantané. | `120` |
+| Inclure le bouton Démarrer | Étend le zoom à l’icône du bouton Démarrer. | `false` |
+| Exclure toute la zone de notification du zoom | Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire. | `false` |
+| Exclure le chevron des applications masquées | Conserve la taille habituelle de la flèche qui ouvre les icônes masquées. | `true` |
+| Exclure la date et l’heure | Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible. | `true` |
 
 </details>

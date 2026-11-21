@@ -4,6 +4,13 @@
 
 ## English
 
+### ILô 1.5
+
+- Open the built-in settings panel by right-clicking Start or an empty area of the taskbar. The panel and both menu entries use English or French according to the Windows display language.
+- Search 57 settings in seven categories, save a profile, or reset one category to its Windhawk values. Dependent controls explain which option enables them.
+- The panel has its own taskbar icon, uses the dock’s background settings and remembers its window size.
+- Corrected the spacing between applications and the notification area.
+
 ### ILô 1.4.4
 
 Fixed an overlap when ILô Media sits to the right of Start. The dock now accounts for the space reserved by the visible player when positioning the notification area and releases it when the player hides.
@@ -57,6 +64,13 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.5
+
+- Ouvrez le panneau intégré depuis le menu contextuel de Démarrer ou d’une zone vide de la barre des tâches. Le panneau et les deux entrées de menu suivent la langue d’affichage de Windows (français ou anglais).
+- Recherchez parmi 57 réglages répartis en sept catégories, enregistrez un profil ou réinitialisez une rubrique aux valeurs de Windhawk. Les commandes grisées indiquent quel réglage les active.
+- Le panneau dispose de sa propre icône dans la barre des tâches, reprend les réglages de fond du dock et mémorise la taille de sa fenêtre.
+- Correction de l’espacement entre les applications et la zone de notification.
 
 ### ILô 1.4.4
 

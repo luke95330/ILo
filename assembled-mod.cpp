@@ -4,14 +4,14 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.4.4
+// @version         1.5
 // @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
 // @include         StartMenuExperienceHost.exe
 // @include         ShellHost.exe
 // @include         ShellExperienceHost.exe
-// @compilerOptions -ldwmapi -lole32 -loleaut32 -lruntimeobject -lshcore -lcomctl32 -lgdi32 -lversion
+// @compilerOptions -ldwmapi -lole32 -loleaut32 -lruntimeobject -lshcore -lcomctl32 -lgdi32 -lversion -ladvapi32 -lshell32
 // @architecture    x86-64
 // ==/WindhawkMod==
 // This mod is based on code released under the GNU General Public License v3.0.
@@ -22,6 +22,8 @@
 # ILô
 
 ## Français
+
+Le clic droit sur Démarrer ou sur une zone vide de la barre donne accès à « Paramètres ILô… ». Le panneau est intégré au mod. Recherchez un réglage dans les sept catégories, modifiez sa valeur puis sélectionnez **Enregistrer**. Le panneau mémorise la taille de sa fenêtre.
 
 ILô centre les applications et la zone de notification dans un dock. La marge inférieure est réglée à 8 et le décalage des icônes de notification à 0. Le centrage provient de TAI Dock 1.0.3, validé sur Windows 11 build 26300.10075.
 
@@ -56,7 +58,7 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 | Saturation du fond | Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100. |
 | Inversion des couleurs du fond | Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10. |
 | Couleur de repli | Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. |
-| Opacité du contour et des séparateurs | Règle leur opacité de 0 à 100. Valeur par défaut : 0. |
+| Opacité du contour | Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0. |
 | Couleur du contour et des séparateurs | Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff. |
 | Épaisseur du contour (%) | Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8. |
 | Épaisseur des séparateurs (%) | Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8. |
@@ -84,6 +86,8 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 **Zoom au survol.** Activez « Agrandissement des icônes au survol » dans les paramètres. Le profil proposé utilise un zoom centré de 180 % et une transition de 120 ms. Le style MacOS étend l’effet aux voisines. Le zoom reste dans la zone cliquable du bouton.
 
 ## English
+
+Right-click Start or an empty area of the taskbar and choose **ILô settings…**. Search the seven categories, change a setting and select **Save**. The panel remembers its window size.
 
 Enable **Magnify icons on hover** to try magnification. The default profile uses 180% centered zoom and a 120 ms transition. Choose MacOS style for the neighboring-icon wave.
 
@@ -128,7 +132,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 | Background saturation | WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500 | `100` |
 | Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | `10` |
 | Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | `{ThemeResource CardStrokeColorDefaultSolid}` |
-| Border opacity | Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0 | `0` |
+| Border opacity | Set the opacity of the taskbar border. Range 0-100. Default is 0 | `0` |
 | Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | `#ffffff` |
 | Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | `8` |
 | Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | `8` |
@@ -279,9 +283,9 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description:fr-FR: "Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."
 - TaskbarBorderOpacity: 0
   $name: Border opacity
-  $name:fr-FR: "Opacité du contour et des séparateurs"
-  $description: Set the opacity of the taskbar border, as well as the app dividers. Range 0-100. Default is 0
-  $description:fr-FR: "Règle leur opacité de 0 à 100. Valeur par défaut : 0."
+  $name:fr-FR: "Opacité du contour"
+  $description: Set the opacity of the taskbar border. Range 0-100. Default is 0
+  $description:fr-FR: "Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."
 - TaskbarBorderColorHex: "#ffffff"
   $name: Border color (HEX)
   $name:fr-FR: "Couleur du contour et des séparateurs"
@@ -479,9 +483,22 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <thread>
+#include <map>
 #include <windhawk_utils.h>
 #undef GetCurrentTime
 #include <initguid.h>
+#include <shellscalingapi.h>
+#include <shellapi.h>
+#include <propsys.h>
+#include <propkey.h>
+#include <unknwn.h>
+#include <dwmapi.h>
+#include <winrt/Windows.Foundation.Collections.h>
+#include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <winrt/Windows.UI.Xaml.Markup.h>
+#include <winrt/Windows.UI.Xaml.Controls.Primitives.h>
+#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.Xaml.Automation.h>
 #include <winrt/Windows.UI.Xaml.Controls.h>
@@ -496,6 +513,582 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <algorithm>
+// Local panel preview. One atomic registry value stores only the edited keys.
+#include <vector>
+namespace IloPanel {
+constexpr wchar_t path[] = L"Software\\Mighty-Luke\\ILo\\PanelTest";
+std::mutex profileLock;
+std::unordered_map<std::wstring,std::wstring> profile;
+ULONGLONG nextRead = 0;
+void ReadLocked(bool force=false) {
+    auto now=GetTickCount64();
+    if (!force && now<nextRead) return;
+    nextRead=now+1000;
+    DWORD bytes=0;
+    auto rc=RegGetValueW(HKEY_CURRENT_USER,path,L"Settings",RRF_RT_REG_MULTI_SZ,nullptr,nullptr,&bytes);
+    if(rc==ERROR_FILE_NOT_FOUND || rc==ERROR_PATH_NOT_FOUND){profile.clear();return;}
+    if(rc!=ERROR_SUCCESS || bytes>131072) return;
+    std::vector<wchar_t> buf(bytes/sizeof(wchar_t)+2);
+    if(RegGetValueW(HKEY_CURRENT_USER,path,L"Settings",RRF_RT_REG_MULTI_SZ,nullptr,buf.data(),&bytes)!=ERROR_SUCCESS) return;
+    decltype(profile) parsed;
+    for(auto p=buf.data();*p;p+=wcslen(p)+1){
+        auto equal=wcschr(p,L'=');
+        if(equal && equal!=p) parsed.emplace(std::wstring(p,equal),equal+1);
+    }
+    profile.swap(parsed);
+}
+int Int(PCWSTR k){
+    {std::lock_guard guard(profileLock);ReadLocked();
+     auto it=profile.find(k);
+     if(it!=profile.end()){wchar_t* end=nullptr;errno=0;auto n=wcstol(it->second.c_str(),&end,10);
+        if(end!=it->second.c_str() && !*end && !errno && n!=INT_MIN) return n;}}
+    return Wh_GetIntSetting(k);
+}
+PCWSTR Str(PCWSTR k){
+    {std::lock_guard guard(profileLock);ReadLocked();auto it=profile.find(k);if(it!=profile.end())return _wcsdup(it->second.c_str());}
+    auto v=Wh_GetStringSetting(k);auto copy=v?_wcsdup(v):nullptr;if(v)Wh_FreeStringSetting(v);return copy;
+}
+void Free(PCWSTR p){free(const_cast<wchar_t*>(p));}
+constexpr wchar_t dockLayoutGlyph[]=L"\uE8A9";
+PCWSTR UiText(PCWSTR english, PCWSTR french) {
+    static const bool useFrench = PRIMARYLANGID(GetUserDefaultUILanguage()) == LANG_FRENCH;
+    return useFrench ? french : english;
+}
+UINT refresh,open;
+constexpr UINT command=0xD814;
+HWND Taskbar(HWND w){
+    if(!w)return nullptr;
+    auto root=GetAncestor(w,GA_ROOT);wchar_t cls[64]{};
+    GetClassNameW(root,cls,64);
+    return (!_wcsicmp(cls,L"Shell_TrayWnd") || !_wcsicmp(cls,L"Shell_SecondaryTrayWnd"))?root:nullptr;
+}
+struct ShellMenuLabels {
+    bool taskbar{}, devices{}, management{};
+    void Observe(std::wstring text) {
+        std::erase_if(text, [](wchar_t c){return c==L'&' || c==L'_';});
+        std::transform(text.begin(),text.end(),text.begin(),[](wchar_t c){return std::towlower(c);});
+        auto has=[&](PCWSTR word){return text.find(word)!=std::wstring::npos;};
+        taskbar |= has(L"paramètres de la barre des tâches") || has(L"taskbar settings");
+        devices |= has(L"gestionnaire de périphériques") || has(L"device manager");
+        management |= has(L"gestion des disques") || has(L"gestion du disque") || has(L"disk management") ||
+                      has(L"gestion de l’ordinateur") || has(L"gestion de l'ordinateur") || has(L"computer management");
+    }
+    bool WinX() const {return devices && management;}
+};
+bool Add(HMENU m, HWND w, UINT flags){
+    if(!m || GetMenuState(m,command,MF_BYCOMMAND)!=UINT(-1))return false;
+    ShellMenuLabels labels;
+    for(int i=0;i<GetMenuItemCount(m);++i){
+        wchar_t text[256]{};GetMenuStringW(m,i,text,256,MF_BYPOSITION);labels.Observe(text);
+    }
+    if(!(labels.taskbar && Taskbar(w)) && !(labels.WinX() && (Taskbar(w) || (flags&TPM_RETURNCMD))))return false;
+    return AppendMenuW(m,MF_STRING,command,IloPanel::UiText(L"ILô settings…", L"Paramètres ILô…"))!=FALSE;
+}
+// Modeless, native Win32 settings window. Only the panel thread owns its controls.
+namespace NativeSettings {
+enum class Kind { Toggle, Number, Text, Choice };
+struct Option {
+    PCWSTR key, label, group, help;
+    Kind kind;
+    std::vector<std::pair<PCWSTR, PCWSTR>> choices;
+};
+const Option options[] = {
+    {L"TaskbarHeight", IloPanel::UiText(L"Taskbar height", L"Hauteur de la barre des tâches"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the height of the taskbar. Default is 24", L"Règle la hauteur demandée pour la barre. Valeur par défaut : 24."), Kind::Number, {}},
+    {L"TaskbarIconSize", IloPanel::UiText(L"Taskbar icon size", L"Taille des icônes des applications"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22", L"Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22."), Kind::Number, {}},
+    {L"TaskbarButtonSize", IloPanel::UiText(L"Taskbar button size", L"Taille des boutons des applications"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the size (width and height) of taskbar buttons. Default is 20", L"Règle la largeur et la hauteur des boutons. Valeur par défaut : 20."), Kind::Number, {}},
+    {L"TaskbarOffsetY", IloPanel::UiText(L"Taskbar vertical offset", L"Décalage vertical du dock"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8", L"Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"TrayTaskGap", IloPanel::UiText(L"Gap between apps and the notification area", L"Espacement avant la zone de notification"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Adjust the space between the task area and the tray area. Default is 5", L"Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."), Kind::Number, {}},
+    {L"TaskbarBackgroundHorizontalPadding", IloPanel::UiText(L"Taskbar background horizontal padding", L"Marges latérales du fond"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the horizontal padding on both sides of the taskbar background. Default is 2", L"Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2."), Kind::Number, {}},
+    {L"FullWidthTaskbarBackground", IloPanel::UiText(L"Full-width taskbar background", L"Fond sur toute la largeur"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off", L"Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"IgnoreShowDesktopButton", IloPanel::UiText(L"Ignore \"Show Desktop\" button", L"Exclure le bouton « Afficher le Bureau »"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the \"Show Desktop\" button is ignored in width calculations. Default is off", L"Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TaskbarCornerRadius", IloPanel::UiText(L"Taskbar corner radius", L"Arrondi du dock"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Controls how rounded the taskbar corners appear. Default is 12", L"Règle le rayon des coins du fond. Valeur par défaut : 12."), Kind::Number, {}},
+    {L"TaskButtonCornerRadius", IloPanel::UiText(L"Task button corner radius", L"Arrondi des boutons"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Controls how rounded the corners of individual task buttons are. Default is 8", L"Règle le rayon des coins des boutons d’application. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"FlatTaskbarBottomCorners", IloPanel::UiText(L"Flat bottom corners", L"Coins inférieurs droits"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off", L"Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"CustomizeTaskbarBackground", IloPanel::UiText(L"Customize the dock background", L"Personnaliser le fond du dock"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on", L"Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut."), Kind::Toggle, {}},
+    {L"DisableCustomBlurBackground", IloPanel::UiText(L"Use a solid dock background", L"Utiliser un fond uni"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off", L"Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TaskbarBackgroundOpacity", IloPanel::UiText(L"Background opacity", L"Opacité du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100", L"De 0 (transparent) à 100 (opaque). Valeur par défaut : 100."), Kind::Number, {}},
+    {L"TaskbarBackgroundTint", IloPanel::UiText(L"Background tint", L"Intensité de la teinte"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45", L"De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45."), Kind::Number, {}},
+    {L"TaskbarBackgroundLuminosity", IloPanel::UiText(L"Background luminosity", L"Luminosité du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15", L"De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15."), Kind::Number, {}},
+    {L"TaskbarBackgroundBlurAmount", IloPanel::UiText(L"Background blur amount", L"Intensité du flou"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5", L"Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5."), Kind::Number, {}},
+    {L"TaskbarBackgroundTintColor", IloPanel::UiText(L"Background tint color", L"Couleur de teinte"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode.", L"Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair."), Kind::Text, {}},
+    {L"TaskbarBackgroundTintSaturation", IloPanel::UiText(L"Background saturation", L"Saturation du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500", L"Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100."), Kind::Number, {}},
+    {L"TaskbarBackgroundInversion", IloPanel::UiText(L"Background inversion", L"Inversion des couleurs du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10", L"Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10."), Kind::Number, {}},
+    {L"TaskbarBackgroundFallbackColor", IloPanel::UiText(L"Background fallback color", L"Couleur de repli"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}", L"Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."), Kind::Text, {}},
+    {L"TaskbarBorderOpacity", IloPanel::UiText(L"Border opacity", L"Opacité du contour"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the opacity of the taskbar border. Range 0-100. Default is 0", L"Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."), Kind::Number, {}},
+    {L"TaskbarBorderColorHex", IloPanel::UiText(L"Border color (HEX)", L"Couleur du contour et des séparateurs"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`", L"Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."), Kind::Text, {}},
+    {L"TaskbarBorderThickness", IloPanel::UiText(L"Taskbar border thickness scale (%)", L"Épaisseur du contour (%)"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the scale of the taskbar border. Range 0-100. Default is 8", L"Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"HoverZoomEnabled", IloPanel::UiText(L"Magnify icons on hover", L"Agrandissement des icônes au survol"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Magnify application icons when the mouse passes over them.", L"Agrandit les icônes des applications au passage de la souris."), Kind::Toggle, {}},
+    {L"HoverZoomStyle", IloPanel::UiText(L"Application zoom style", L"Style de zoom des applications"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons.", L"Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."), Kind::Choice, {{L"zoom",IloPanel::UiText(L"Zoom style", L"Style zoom")}, {L"macos",IloPanel::UiText(L"macOS style", L"Style MacOS")}}},
+    {L"HoverZoomHideBackground", IloPanel::UiText(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds.", L"Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."), Kind::Toggle, {}},
+    {L"HoverZoomDisableBackgroundZoom", IloPanel::UiText(L"Disable icon background zoom", L"Désactiver le zoom du fond des icônes"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the visible application button background at its normal size and position.", L"Garde le fond visible des boutons d’application à sa taille et à sa position normales."), Kind::Toggle, {}},
+    {L"HoverZoomPercent", IloPanel::UiText(L"Maximum application zoom (%)", L"Zoom maximal des applications (%)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"110–250%. Available space in the button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
+    {L"HoverZoomTrayPercent", IloPanel::UiText(L"Maximum notification area zoom (%)", L"Zoom maximal de la zone de notification (%)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"110–250%. Available space in the tray button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
+    {L"HoverZoomNeighbors", IloPanel::UiText(L"Neighbors on each side (MacOS)", L"Voisines de chaque côté (MacOS)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"0, 1 or 2 neighboring icons on each side.", L"0 pour l’icône seule, 1 ou 2 pour étendre l’effet aux voisines."), Kind::Number, {}},
+    {L"HoverZoomSpread", IloPanel::UiText(L"Spread neighboring icons (MacOS)", L"Écarter les icônes voisines (MacOS)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Shift icons within their clickable buttons.", L"Décale les icônes dans la limite de leur zone cliquable."), Kind::Toggle, {}},
+    {L"HoverZoomDuration", IloPanel::UiText(L"Transition duration (ms)", L"Durée de transition (ms)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"0–300 ms. Zero applies changes immediately.", L"De 0 à 300 ms. À 0, le zoom est instantané."), Kind::Number, {}},
+    {L"HoverZoomStart", IloPanel::UiText(L"Magnify the Start button", L"Inclure le bouton Démarrer"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Apply magnification to the Start glyph too.", L"Étend le zoom à l’icône du bouton Démarrer."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeTray", IloPanel::UiText(L"Exclude the entire notification area", L"Exclure toute la zone de notification du zoom"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"When checked, all tray icons use their native size even when dock magnification is enabled.", L"Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeChevron", IloPanel::UiText(L"Exclude the hidden icons chevron", L"Exclure le chevron des applications masquées"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the chevron at its native size when tray magnification is enabled.", L"Conserve la taille habituelle de la flèche qui ouvre les icônes masquées."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeClock", IloPanel::UiText(L"Exclude date and time", L"Exclure la date et l’heure"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the clock text at its native size when tray magnification is enabled.", L"Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible."), Kind::Toggle, {}},
+    {L"TrayContentOffsetY", IloPanel::UiText(L"Notification area vertical offset", L"Décalage vertical des icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.", L"Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."), Kind::Number, {}},
+    {L"StyleTrayArea", IloPanel::UiText(L"Customize notification area icons", L"Personnaliser les icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"When enabled, the options for tray icon size will take effect. Default is off", L"Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TrayIconSize", IloPanel::UiText(L"Tray icon size", L"Taille des icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Set the width and height of tray icons. Minimum is 15. Default is 15", L"Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."), Kind::Number, {}},
+    {L"TrayButtonSize", IloPanel::UiText(L"Tray button size", L"Taille des boutons de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Set the size (width and height) of tray buttons. Minimum is 20. Default is 30", L"Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."), Kind::Number, {}},
+    {L"AppsDividerAlignment", IloPanel::UiText(L"App divider position", L"Position des séparateurs"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Choose which side of the app button displays its divider.", L"Choisis le côté du bouton où placer le séparateur."), Kind::Choice, {{L"",IloPanel::UiText(L"Default", L"Par défaut")}, {L"left",IloPanel::UiText(L"Left", L"À gauche")}, {L"right",IloPanel::UiText(L"Right", L"À droite")}}},
+    {L"DividedAppNames", IloPanel::UiText(L"App names for divider placement", L"Applications avec séparateur"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\\+\\+; Settings). Case-insensitive and supports regex.", L"Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse."), Kind::Text, {}},
+    {L"AppsDividerThickness", IloPanel::UiText(L"Apps divider thickness scale (%)", L"Épaisseur des séparateurs (%)"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8", L"Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"AppsDividerVerticalScale", IloPanel::UiText(L"Apps divider vertical scale (%)", L"Hauteur des séparateurs (%)"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40", L"Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40."), Kind::Number, {}},
+    {L"TrayAreaDivider", IloPanel::UiText(L"Tray area divider", L"Séparateur de la zone de notification"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"When enabled, the tray area will be separated by a divider. Default is off", L"Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutStartMenu", IloPanel::UiText(L"Move Start Menu with Taskbar", L"Aligner Démarrer et Recherche"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on.", L"Aligne ces menus sur le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutControlCenter", IloPanel::UiText(L"Move Control Center with Taskbar", L"Aligner les paramètres rapides"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Control Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutNotificationCenter", IloPanel::UiText(L"Move Notification Center with Taskbar", L"Aligner le centre de notifications"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Notification Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"AlignFlyoutInner", IloPanel::UiText(L"Align flyout windows to the inside of the taskbar", L"Aligner les volets à l’intérieur du dock"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on.", L"Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut."), Kind::Toggle, {}},
+    {L"NotificationCenterPrimaryOnly", IloPanel::UiText(L"Notification Center on primary monitor only", L"Aligner les notifications sur l’écran principal uniquement"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on.", L"Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutKeyboardLayout", IloPanel::UiText(L"Move keyboard layout flyout with Taskbar", L"Aligner le sélecteur de clavier"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on.", L"Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveTrayContextMenus", IloPanel::UiText(L"Move tray icon menus with Taskbar", L"Aligner les menus des icônes de notification"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.", L"Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"StartMenuOnActiveMonitor", IloPanel::UiText(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
+    {L"ClipTaskbarWindowToDock", IloPanel::UiText(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.", L"Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
+    {L"AutoHideShowUnderTaskbarOnly", IloPanel::UiText(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"LogFlyoutPlacement", IloPanel::UiText(L"Log flyout placement to a file", L"Journaliser la position des volets"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
+};
+constexpr int count = ARRAYSIZE(options);
+constexpr wchar_t windowClass[] = L"MightyLuke.ILo.Settings.v1";
+HANDLE showEvent{}, quitEvent{};
+std::thread uiThread;
+extern HANDLE& RefreshSignal();
+std::mutex lifecycle;
+namespace X = winrt::Windows::UI::Xaml;
+namespace C = winrt::Windows::UI::Xaml::Controls;
+namespace H = winrt::Windows::UI::Xaml::Hosting;
+static constexpr PCWSTR xmlns = L" xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' xmlns:x='http://schemas.microsoft.com/winfx/2006/xaml'";
+static X::FrameworkElement Parse(std::wstring markup) {
+    markup.insert(markup.find_first_of(L" />"),xmlns);
+    return X::Markup::XamlReader::Load(markup).as<X::FrameworkElement>();
+}
+static void ApplyPanelSurface(X::FrameworkElement const& root);
+// Only the settings HWND receives this identity; Explorer hosts other windows.
+static HRESULT SetPanelAppId(HWND window, bool attach) {
+    winrt::com_ptr<IPropertyStore> properties;
+    HRESULT hr = SHGetPropertyStoreForWindow(window, IID_PPV_ARGS(properties.put()));
+    if (FAILED(hr)) return hr;
+    PROPVARIANT value{};
+    if (attach) {
+        value.vt = VT_LPWSTR;
+        value.pwszVal = const_cast<PWSTR>(L"MightyLuke.ILo.Settings");
+    }
+    hr = properties->SetValue(PKEY_AppUserModel_ID, value);
+    return FAILED(hr) ? hr : properties->Commit();
+}
+
+static bool OnIconTile(double x, double y, double left, double top,
+                       double right, double bottom, double radius) {
+    if (x < left || x > right || y < top || y > bottom) return false;
+    double dx=x-std::clamp(x,left+radius,right-radius);
+    double dy=y-std::clamp(y,top+radius,bottom-radius);
+    return dx*dx+dy*dy <= radius*radius;
+}
+
+static HICON MakePanelIcon(int size) {
+    if (size<1 || size>256) return nullptr;
+    BITMAPINFO info{};
+    info.bmiHeader={sizeof(BITMAPINFOHEADER),size,-size,1,32,BI_RGB};
+    void* bits=nullptr;
+    HBITMAP color=CreateDIBSection(nullptr,&info,DIB_RGB_COLORS,&bits,nullptr,0);
+    if(!color) return nullptr;
+    // Draw in a 48-unit square at sixteen samples per pixel. Keep a real AND
+    // mask for consumers that request a monochrome icon instead of BGRA.
+    const int stride=((size+15)/16)*2;
+    std::vector<BYTE> maskBits(stride*size,0);
+    for(int y=0;y<size;++y)for(int x=0;x<size;++x){
+        unsigned r=0,g=0,b=0,n=0;
+        for(int sy=0;sy<4;++sy)for(int sx=0;sx<4;++sx){
+            double u=(x+(sx+0.5)/4)*48/size,v=(y+(sy+0.5)/4)*48/size;
+            if(!OnIconTile(u,v,1,1,47,47,11))continue;
+            double t=(u+v)/96;
+            COLORREF ink=RGB(int(35+50*t),int(134-85*t),int(183+12*t));
+            if(OnIconTile(u,v,6,14,42,35,6))ink=RGB(28,38,78);
+            if(OnIconTile(u,v,10,19,17,28,2))ink=RGB(121,235,235);
+            if(OnIconTile(u,v,20,17,28,28,2))ink=RGB(255,255,255);
+            if(OnIconTile(u,v,31,19,38,28,2))ink=RGB(210,191,255);
+            if(OnIconTile(u,v,21,30,27,32,1))ink=RGB(255,255,255);
+            r+=GetRValue(ink);g+=GetGValue(ink);b+=GetBValue(ink);++n;
+        }
+        static_cast<DWORD*>(bits)[y*size+x]=((255*n/16)<<24)|((r/16)<<16)|((g/16)<<8)|(b/16);
+        if(!n)maskBits[y*stride+x/8]|=BYTE(0x80>>(x%8));
+    }
+    HBITMAP mask=CreateBitmap(size,size,1,1,maskBits.data());
+    HICON result=nullptr;
+    if(mask){ICONINFO ii{TRUE,0,0,mask,color};result=CreateIconIndirect(&ii);DeleteObject(mask);}
+    DeleteObject(color);
+    return result;
+}
+struct PanelIcons {
+    HICON small{}, large{};
+    void Set(HWND w,UINT dpi){
+        auto replace=[&](HICON& slot,WPARAM kind,int metric){
+            auto icon=MakePanelIcon(GetSystemMetricsForDpi(metric,dpi?dpi:96));
+            if(!icon)return;
+            SendMessageW(w,WM_SETICON,kind,reinterpret_cast<LPARAM>(icon));
+            if(slot)DestroyIcon(slot);
+            slot=icon;
+        };
+        replace(small,ICON_SMALL,SM_CXSMICON);
+        replace(large,ICON_BIG,SM_CXICON);
+    }
+    void Clear(HWND w){
+        for(auto kind:{ICON_SMALL,ICON_BIG})SendMessageW(w,WM_SETICON,kind,0);
+        if(small)DestroyIcon(small);if(large)DestroyIcon(large);
+        small=large=nullptr;
+    }
+};
+
+
+struct View {
+    PanelIcons icons;
+    HWND window{}, island{};
+    H::DesktopWindowXamlSource source{nullptr};
+    winrt::com_ptr<IDesktopWindowXamlSourceNative2> keyboard;
+    X::FrameworkElement root{nullptr};
+    C::ListView nav{nullptr}; C::TextBox search{nullptr};
+    C::TextBlock heading{nullptr},status{nullptr}; C::Button save{nullptr},reset{nullptr};
+    C::StackPanel pages{nullptr}; C::ScrollViewer scroll{nullptr};
+    std::vector<std::wstring> groups;
+    std::wstring group, query;
+    bool confirmDiscard=false;
+    struct Row {int index; C::Control editor; C::TextBlock hint;};
+    std::vector<Row> rows;
+std::map<std::wstring,std::wstring> baseline, values;
+    std::map<std::wstring,std::optional<std::wstring>> changes;
+    void Read() {
+        std::lock_guard guard(profileLock);
+        ReadLocked(true);
+        for (auto& o : options) {
+            std::wstring base;
+            if (o.kind==Kind::Text || o.kind==Kind::Choice) {
+                auto str=Wh_GetStringSetting(o.key);
+                if(str){base=str;Wh_FreeStringSetting(str);}
+            } else base=std::to_wstring(Wh_GetIntSetting(o.key));
+            baseline[o.key]=base;
+            auto it=profile.find(o.key);
+            values[o.key]=it==profile.end()?base:it->second;
+        }
+    }
+    PCWSTR Reason(PCWSTR key) {
+        std::wstring_view k(key);
+        if(k.starts_with(L"HoverZoom") && k!=L"HoverZoomEnabled" && values[L"HoverZoomEnabled"]!=L"1")
+            return IloPanel::UiText(L"Enable hover zoom to use this setting.", L"Active le zoom au survol pour utiliser ce réglage.");
+        if((k==L"HoverZoomNeighbors" || k==L"HoverZoomSpread") && values[L"HoverZoomStyle"]!=L"macos")
+            return IloPanel::UiText(L"Select macOS style to adjust neighboring icons.", L"Choisis le style macOS pour régler le mouvement des voisins.");
+        if(k==L"HoverZoomDisableBackgroundZoom" && values[L"HoverZoomHideBackground"]==L"1")
+            return IloPanel::UiText(L"Show icon backgrounds to adjust their animation.", L"Affiche le fond des icônes pour régler son animation.");
+        if((k==L"HoverZoomTrayPercent" || k==L"HoverZoomExcludeChevron" || k==L"HoverZoomExcludeClock") && values[L"HoverZoomExcludeTray"]==L"1")
+            return IloPanel::UiText(L"Include the notification area in hover zoom.", L"Inclus la zone de notification dans le zoom.");
+        if((k==L"TrayButtonSize" || k==L"TrayIconSize") && values[L"StyleTrayArea"]!=L"1")
+            return IloPanel::UiText(L"Enable notification area styling.", L"Active la personnalisation de la zone de notification.");
+        return nullptr;
+    }
+
+    void Theme() {
+        DWORD light=1, size=sizeof(light);
+        RegGetValueW(HKEY_CURRENT_USER,L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",L"AppsUseLightTheme",RRF_RT_REG_DWORD,nullptr,&light,&size);
+        BOOL dark=!light;DwmSetWindowAttribute(window,20,&dark,sizeof(dark));
+        MARGINS glass{-1};DwmExtendFrameIntoClientArea(window,&glass);
+        BOOL hostBrush=TRUE;DwmSetWindowAttribute(window,17,&hostBrush,sizeof(hostBrush));
+        DWORD backdrop=3;DwmSetWindowAttribute(window,38,&backdrop,sizeof(backdrop));
+        if(root){root.RequestedTheme(light?X::ElementTheme::Light:X::ElementTheme::Dark);ApplyPanelSurface(root);}
+    }
+    template<class T>T Named(PCWSTR name){return root.FindName(name).as<T>();}
+    void Create(){
+        Read();
+        source=H::DesktopWindowXamlSource();
+        auto native=source.as<IDesktopWindowXamlSourceNative>();
+        winrt::check_hresult(native->AttachToWindow(window));
+        winrt::check_hresult(native->get_WindowHandle(&island));
+        keyboard=source.try_as<IDesktopWindowXamlSourceNative2>();
+        root=Parse(LR"xml(<Grid>
+<Grid.Resources><ResourceDictionary><ResourceDictionary.ThemeDictionaries>
+<ResourceDictionary x:Key="Dark"><AcrylicBrush x:Key="PanelSurface" BackgroundSource="HostBackdrop" TintColor="#1C2631" TintOpacity="0.82" FallbackColor="#20262E"/></ResourceDictionary>
+<ResourceDictionary x:Key="Light"><AcrylicBrush x:Key="PanelSurface" BackgroundSource="HostBackdrop" TintColor="#F4F6F9" TintOpacity="0.86" FallbackColor="#F1F3F6"/></ResourceDictionary>
+<ResourceDictionary x:Key="HighContrast"><SolidColorBrush x:Key="PanelSurface" Color="{ThemeResource SystemColorWindowColor}"/></ResourceDictionary>
+</ResourceDictionary.ThemeDictionaries></ResourceDictionary></Grid.Resources>
+<Grid><Rectangle x:Name="DefaultSurface" Fill="{ThemeResource PanelSurface}" IsHitTestVisible="False"/><Rectangle x:Name="DockSurface" IsHitTestVisible="False"/><Grid>
+<Grid.ColumnDefinitions><ColumnDefinition Width="236"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+<Grid Padding="12,26,10,16">
+<Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+<StackPanel Orientation="Horizontal" Margin="12,0,0,24" VerticalAlignment="Center"><Border Background="{ThemeResource SystemControlHighlightAccentBrush}" Width="36" Height="36" CornerRadius="10"><FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE8A9;" FontSize="19" Foreground="White"/></Border><TextBlock Text="ILô" FontSize="26" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/></StackPanel>
+<ListView Grid.Row="1" x:Name="Navigation" SelectionMode="Single" IsItemClickEnabled="False" HorizontalContentAlignment="Stretch"/>
+<StackPanel Grid.Row="2" Margin="4,14,4,0" Spacing="8"><TextBlock x:Name="Status" FontSize="12" TextWrapping="Wrap"/><Button x:Name="Reset" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6"/><Button x:Name="Save" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6" Background="{ThemeResource SystemControlHighlightAccentBrush}" Foreground="White"/></StackPanel>
+</Grid>
+<Grid Grid.Column="1" Padding="26,25,22,16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+<Grid MaxWidth="620" HorizontalAlignment="Stretch" Margin="0,0,0,20"><TextBox x:Name="Search" Padding="38,8,12,8" CornerRadius="16"/><FontIcon Glyph="&#xE721;" FontFamily="Segoe Fluent Icons" FontSize="16" HorizontalAlignment="Left" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
+<TextBlock Grid.Row="1" x:Name="Heading" FontSize="29" FontWeight="SemiBold" Margin="2,0,0,16"/>
+<ScrollViewer Grid.Row="2" x:Name="Scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="Pages" Margin="0,0,6,12"/></ScrollViewer>
+</Grid></Grid></Grid></Grid>)xml");
+        Theme();
+        nav=Named<C::ListView>(L"Navigation"); search=Named<C::TextBox>(L"Search");
+        heading=Named<C::TextBlock>(L"Heading");pages=Named<C::StackPanel>(L"Pages");scroll=Named<C::ScrollViewer>(L"Scroll");
+        status=Named<C::TextBlock>(L"Status");save=Named<C::Button>(L"Save");reset=Named<C::Button>(L"Reset");
+        search.PlaceholderText(IloPanel::UiText(L"Search settings", L"Rechercher un réglage"));
+        reset.Content(winrt::box_value(winrt::hstring(IloPanel::UiText(L"Reset category", L"Réinitialiser la catégorie"))));
+        save.Content(winrt::box_value(winrt::hstring(IloPanel::UiText(L"Save", L"Enregistrer"))));
+        PCWSTR glyphs[]={dockLayoutGlyph,L"\uE790",L"\uE71E",L"\uEA8F",L"\uE7C4",L"\uE8BD",L"\uE713"};
+        for(auto& o:options)if(groups.empty() || groups.back()!=o.group){
+            auto item=Parse(L"<StackPanel Orientation='Horizontal' Margin='4,9' Spacing='12'><FontIcon x:Name='Icon' FontFamily='Segoe Fluent Icons' FontSize='17'/><TextBlock x:Name='Label' VerticalAlignment='Center' FontSize='14'/></StackPanel>");
+            item.FindName(L"Icon").as<C::FontIcon>().Glyph(glyphs[groups.size()]);
+            item.FindName(L"Label").as<C::TextBlock>().Text(o.group);
+            nav.Items().Append(item);groups.push_back(o.group);
+        }
+        nav.SelectedIndex(0);group=groups.front();
+        nav.SelectionChanged([this](auto&&,auto&&){int i=nav.SelectedIndex();if(i<0)return;group=groups[i];if(!search.Text().empty())search.Text(L"");else Draw();});
+        search.TextChanged([this](auto&&,auto&&){query=search.Text();Draw();});
+        save.Click([this](auto&&,auto&&){Save();});
+        reset.Click([this](auto&&,auto&&){for(auto& o:options)if(group==o.group){values[o.key]=baseline[o.key];changes[o.key]=std::nullopt;}confirmDiscard=false;status.Text(IloPanel::UiText(L"Reset pending", L"Réinitialisation en attente"));Draw();});
+        Draw();source.Content(root);
+        RECT r{};GetClientRect(window,&r);Layout(r.right,r.bottom);
+    }
+    void Layout(int w,int h){if(island)SetWindowPos(island,nullptr,0,0,w,h,SWP_NOACTIVATE|SWP_NOZORDER|SWP_SHOWWINDOW);}
+    static PCWSTR Section(int i){
+        if(i<3)return L"Dimensions";if(i<6)return IloPanel::UiText(L"Spacing", L"Espacements");if(i<11)return IloPanel::UiText(L"Dock shape", L"Forme du dock");
+        if(i<21)return IloPanel::UiText(L"Background", L"Arrière-plan");if(i<24)return IloPanel::UiText(L"Border", L"Bordure");if(i<28)return L"Style";
+        if(i<34)return L"Animation";if(i<37)return L"Exclusions";if(i<41)return IloPanel::UiText(L"Icons and alignment", L"Icônes et alignement");
+        if(i<46)return IloPanel::UiText(L"Dividers", L"Séparateurs");if(i<54)return L"Placement";if(i<56)return IloPanel::UiText(L"Interactive area", L"Zone interactive");return IloPanel::UiText(L"Diagnostics", L"Diagnostic");
+    }
+    static bool Matches(PCWSTR value, const std::wstring& term){
+        return FindNLSStringEx(LOCALE_NAME_USER_DEFAULT,FIND_FROMSTART|NORM_IGNORECASE|NORM_IGNORENONSPACE,value,-1,term.c_str(),-1,nullptr,nullptr,nullptr,0)>=0;
+    }
+    void Update(){
+        for(auto& row:rows){auto& o=options[row.index];auto reason=Reason(o.key);
+            row.editor.IsEnabled(!reason);bool reload=std::wstring_view(o.key)==L"ClipTaskbarWindowToDock";
+            row.hint.Text(reason?reason:reload?IloPanel::UiText(L"Reload ILô in Windhawk to apply this setting.", L"Nécessite de recharger ILô dans Windhawk."):L"");
+            row.hint.Visibility(reason||reload?X::Visibility::Visible:X::Visibility::Collapsed);}
+        save.IsEnabled(!changes.empty());reset.IsEnabled(query.empty());
+    }
+    void Change(int i,std::wstring value){
+        if(values[options[i].key]==value)return;
+        changes[options[i].key]=value;values[options[i].key]=std::move(value);confirmDiscard=false;
+        status.Text(IloPanel::UiText(L"Unsaved changes", L"Modifications en attente"));Update();
+    }
+    void Draw(){
+        rows.clear();pages.Children().Clear(); heading.Text(query.empty()?group:IloPanel::UiText(L"Search results", L"Résultats de recherche"));
+        std::wstring previous;C::StackPanel container{nullptr};
+        for(int i=0;i<count;++i){auto& o=options[i];
+            if(query.empty()?group!=o.group:!(Matches(o.label,query)||Matches(o.key,query)||Matches(o.help,query)))continue;
+            std::wstring section=query.empty()?Section(i):o.group;
+            if(previous!=section){
+                previous=section;
+                auto label=Parse(L"<TextBlock FontSize='16' FontWeight='SemiBold' Margin='3,14,0,9'/>").as<C::TextBlock>();
+                label.Text(section);pages.Children().Append(label);
+                auto card=Parse(L"<Border CornerRadius='10' BorderThickness='1' BorderBrush='{ThemeResource SystemControlForegroundBaseLowBrush}' Background='{ThemeResource SystemControlBackgroundListLowBrush}'><StackPanel x:Name='Rows'/></Border>");
+                container=card.FindName(L"Rows").as<C::StackPanel>();pages.Children().Append(card);
+            }
+            if(container.Children().Size()){
+                auto line=Parse(L"<Border Height='1' Margin='16,0' Background='{ThemeResource SystemControlBackgroundListLowBrush}'/>");container.Children().Append(line);
+            }
+            auto row=Parse(LR"xml(<Grid Padding="18,15" ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+<StackPanel Spacing="4" VerticalAlignment="Center"><TextBlock x:Name="Label" TextWrapping="Wrap" FontSize="15"/><TextBlock x:Name="Help" TextWrapping="Wrap" FontSize="13" Opacity="0.72"/><TextBlock x:Name="Hint" FontSize="12" TextWrapping="Wrap" Foreground="{ThemeResource SystemControlHighlightAltAccentBrush}"/></StackPanel></Grid>)xml").as<C::Grid>();
+            row.FindName(L"Label").as<C::TextBlock>().Text(o.label);std::wstring description=o.help;
+            if(auto cut=description.find(L"Valeur par défaut :");cut!=std::wstring::npos)description.erase(cut);
+            row.FindName(L"Help").as<C::TextBlock>().Text(description);
+            C::Control editor{nullptr};auto& v=values[o.key];
+            if(o.kind==Kind::Toggle){
+                C::ToggleSwitch t;t.MinWidth(48);t.OnContent(winrt::box_value(L""));t.OffContent(winrt::box_value(L""));t.IsOn(v==L"1");
+                t.Toggled([this,i](auto const& sender,auto&&){Change(i,sender.template as<C::ToggleSwitch>().IsOn()?L"1":L"0");});editor=t;
+            }else if(o.kind==Kind::Choice){
+                C::ComboBox c;c.MinWidth(140);for(auto& [key,label]:o.choices){c.Items().Append(winrt::box_value(winrt::hstring(label)));if(key==v)c.SelectedIndex(c.Items().Size()-1);}
+                c.SelectionChanged([this,i](auto const& sender,auto&&){auto n=sender.template as<C::ComboBox>().SelectedIndex();if(n>=0)Change(i,options[i].choices[n].first);});editor=c;
+            }else{
+                C::TextBox t;t.Width(o.kind==Kind::Number?76:176);t.MaxLength(512);t.Text(v);
+                t.TextChanged([this,i](auto const& sender,auto&&){Change(i,std::wstring(sender.template as<C::TextBox>().Text()));});editor=t;
+            }
+            editor.CornerRadius({5,5,5,5});editor.VerticalAlignment(X::VerticalAlignment::Center);
+            X::Automation::AutomationProperties::SetName(editor,o.label);
+            C::Grid::SetColumn(editor,1);row.Children().Append(editor);container.Children().Append(row);
+            rows.push_back({i,editor,row.FindName(L"Hint").as<C::TextBlock>()});
+        }
+        if(rows.empty()){C::TextBlock empty;empty.Text(IloPanel::UiText(L"No matching settings.", L"Aucun réglage trouvé."));pages.Children().Append(empty);}
+        Update();scroll.ChangeView(nullptr,winrt::box_value(0.).as<winrt::Windows::Foundation::IReference<double>>(),nullptr,true);
+    }
+void Save() {
+        for(auto& o:options)if(o.kind==Kind::Number && changes.contains(o.key)){
+            auto& v=values[o.key];wchar_t* end=nullptr;errno=0;auto n=wcstol(v.c_str(),&end,10);
+            if(end==v.c_str()||*end||errno||n==INT_MIN){
+                status.Text((std::wstring(IloPanel::UiText(L"Enter a whole number for ", L"Entier attendu : "))+o.label).c_str());return;
+            }
+        }
+        {
+            std::lock_guard guard(profileLock);ReadLocked(true);auto next=profile;
+            for(auto& [k,v]:changes){if(!v || *v==baseline[k])next.erase(k);else next[k]=*v;}
+            std::wstring data;for(auto& [k,v]:next){data+=k+L"="+v;data.push_back(0);}
+            if(data.empty())data.push_back(0);data.push_back(0);
+            if(RegSetKeyValueW(HKEY_CURRENT_USER,path,L"Settings",REG_MULTI_SZ,data.data(),static_cast<DWORD>(data.size()*sizeof(wchar_t)))!=ERROR_SUCCESS){
+                status.Text(IloPanel::UiText(L"Could not save the profile.", L"Échec de l’enregistrement du profil."));return;
+            }
+            profile.swap(next);
+        }
+        changes.clear();Read();Draw();
+        status.Text(SetEvent(RefreshSignal())?IloPanel::UiText(L"Settings saved", L"Réglages enregistrés"):IloPanel::UiText(L"Profile saved. Reload ILô.", L"Profil enregistré. Recharge ILô."));
+    }
+
+    void Close(){keyboard=nullptr;if(source){source.Content(nullptr);source.Close();source=nullptr;}island=nullptr;}
+};
+
+static void RememberSize(HWND);
+static LRESULT CALLBACK WindowProc(HWND w,UINT msg,WPARAM wp,LPARAM lp) noexcept {
+    auto view=reinterpret_cast<View*>(GetWindowLongPtrW(w,GWLP_USERDATA));
+    try {
+        if(msg==WM_NCCREATE){view=static_cast<View*>(reinterpret_cast<CREATESTRUCTW*>(lp)->lpCreateParams);
+            view->window=w;SetWindowLongPtrW(w,GWLP_USERDATA,reinterpret_cast<LONG_PTR>(view));}
+        if(!view)return DefWindowProcW(w,msg,wp,lp);
+        switch(msg){
+        case WM_CREATE:{
+            HRESULT identity=SetPanelAppId(w,true);
+            if(FAILED(identity))Wh_Log(L"[ILoPanel] AppUserModelID: %08X",identity);
+            view->icons.Set(w,GetDpiForWindow(w));view->Create();return 0;
+        }
+        case WM_GETMINMAXINFO:{auto m=reinterpret_cast<MINMAXINFO*>(lp);int dpi=GetDpiForWindow(w);
+            MONITORINFO mi{sizeof(mi)};GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&mi);
+            m->ptMinTrackSize={std::min<LONG>(mi.rcWork.right-mi.rcWork.left,MulDiv(740,dpi,96)),std::min<LONG>(mi.rcWork.bottom-mi.rcWork.top,MulDiv(480,dpi,96))};return 0;}
+        case WM_SIZE:view->Layout(LOWORD(lp),HIWORD(lp));return 0;
+        case WM_APP+170:case WM_SETTINGCHANGE:case WM_THEMECHANGED:if(view->root)view->Theme();break;
+        case WM_DPICHANGED:{view->icons.Set(w,LOWORD(wp));auto r=reinterpret_cast<RECT*>(lp);SetWindowPos(w,nullptr,r->left,r->top,r->right-r->left,r->bottom-r->top,SWP_NOZORDER|SWP_NOACTIVATE);return 0;}
+        case WM_DESTROY:if(view->root)RememberSize(w);view->Close();return 0;
+        case WM_CLOSE:
+            if(!view->changes.empty() && !view->confirmDiscard){view->confirmDiscard=true;view->status.Text(IloPanel::UiText(L"Close again to discard your changes.", L"Ferme à nouveau pour abandonner les modifications."));return 0;}
+            DestroyWindow(w);return 0;
+        case WM_NCDESTROY:view->icons.Clear(w);SetPanelAppId(w,false);view->window=nullptr;SetWindowLongPtrW(w,GWLP_USERDATA,0);break;
+        }
+    } catch(...){if(msg==WM_CREATE)return -1;Wh_Log(L"[ILoPanel] Erreur dans le panneau natif");}
+    return DefWindowProcW(w,msg,wp,lp);
+}
+struct SavedSize { LONG width{},height{},maximized{}; };
+static RECT PanelBounds(RECT work,UINT dpi,SavedSize saved) {
+    bool valid=saved.width>=360 && saved.width<=16000 && saved.height>=250 && saved.height<=16000;
+    LONG aw=work.right-work.left, ah=work.bottom-work.top;
+    LONG width=std::min<LONG>(valid?aw:MulDiv(aw,94,100),MulDiv(valid?saved.width:1320,dpi,96));
+    LONG height=std::min<LONG>(valid?ah:MulDiv(ah,94,100),MulDiv(valid?saved.height:850,dpi,96));
+    LONG x=work.left+(aw-width)/2,y=work.top+(ah-height)/2;
+    return {x,y,x+width,y+height};
+}
+static void RememberSize(HWND w) {
+    WINDOWPLACEMENT wp{sizeof(wp)};
+    if(!GetWindowPlacement(w,&wp))return;
+    UINT dpi=GetDpiForWindow(w);if(!dpi)return;
+    auto r=wp.rcNormalPosition;
+    SavedSize saved{MulDiv(r.right-r.left,96,dpi),MulDiv(r.bottom-r.top,96,dpi),
+        wp.showCmd==SW_SHOWMAXIMIZED || ((wp.flags&WPF_RESTORETOMAXIMIZED) && IsIconic(w))};
+    if(saved.width>0 && saved.height>0)
+        RegSetKeyValueW(HKEY_CURRENT_USER,path,L"PanelWindowSize",REG_BINARY,&saved,sizeof(saved));
+}
+static void Run() {
+    SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    HMODULE module{};GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+        reinterpret_cast<PCWSTR>(&WindowProc),&module);
+    WNDCLASSW wc{};wc.hInstance=module;wc.lpszClassName=windowClass;wc.lpfnWndProc=WindowProc;
+    wc.hCursor=LoadCursorW(nullptr,IDC_ARROW);wc.hbrBackground=static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
+    if(!RegisterClassW(&wc))return;
+    winrt::init_apartment(winrt::apartment_type::single_threaded);
+    H::WindowsXamlManager manager{nullptr};
+    View view;HANDLE events[]={quitEvent,showEvent};
+    for(;;){
+        DWORD wake=MsgWaitForMultipleObjectsEx(2,events,INFINITE,QS_ALLINPUT,MWMO_INPUTAVAILABLE);
+        if(wake==WAIT_OBJECT_0||wake==WAIT_FAILED)break;
+        if(wake==WAIT_OBJECT_0+1){
+            if(!view.window){
+                if(!manager)manager=H::WindowsXamlManager::InitializeForCurrentThread();
+                view=View{};
+                POINT point{};GetCursorPos(&point);auto monitor=MonitorFromPoint(point,MONITOR_DEFAULTTONEAREST);
+                MONITORINFO mi{sizeof(mi)};if(!GetMonitorInfoW(monitor,&mi))continue;
+                SavedSize saved{};DWORD bytes=sizeof(saved);
+                if(RegGetValueW(HKEY_CURRENT_USER,path,L"PanelWindowSize",RRF_RT_REG_BINARY,nullptr,&saved,&bytes)!=ERROR_SUCCESS || bytes!=sizeof(saved))saved={};
+                UINT dpi=96,dy=96;if(FAILED(GetDpiForMonitor(monitor,MDT_EFFECTIVE_DPI,&dpi,&dy)))dpi=96;
+                auto bounds=PanelBounds(mi.rcWork,dpi,saved);
+                CreateWindowExW(WS_EX_CONTROLPARENT|WS_EX_APPWINDOW,windowClass,IloPanel::UiText(L"ILô settings", L"Paramètres ILô"),WS_OVERLAPPEDWINDOW,
+                    bounds.left,bounds.top,bounds.right-bounds.left,bounds.bottom-bounds.top,nullptr,nullptr,module,&view);
+                if(view.window && saved.maximized==1)ShowWindow(view.window,SW_MAXIMIZE);
+            }
+            if(view.window){ShowWindow(view.window,IsIconic(view.window)?SW_RESTORE:SW_SHOW);SetForegroundWindow(view.window);}
+        }
+        MSG msg;while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){
+            BOOL consumed=FALSE;if(view.keyboard)view.keyboard->PreTranslateMessage(&msg,&consumed);if(consumed)continue;
+            TranslateMessage(&msg);DispatchMessageW(&msg);
+        }
+    }
+    if(view.window)DestroyWindow(view.window);
+    view=View{};
+    if(manager)manager.Close();manager=nullptr;
+    winrt::uninit_apartment();
+    UnregisterClassW(windowClass,module);
+}
+static void Start(){
+    std::lock_guard guard(lifecycle);
+    quitEvent=CreateEventW(nullptr,TRUE,FALSE,nullptr);showEvent=CreateEventW(nullptr,FALSE,FALSE,nullptr);
+    if(quitEvent&&showEvent)uiThread=std::thread([]{try{Run();}catch(...){Wh_Log(L"[ILoPanel] XAML indisponible : %08X",winrt::to_hresult());}});
+}
+static void Stop(){
+    if(quitEvent)SetEvent(quitEvent);
+    if(uiThread.joinable())uiThread.join();
+    std::lock_guard guard(lifecycle);
+    if(quitEvent)CloseHandle(quitEvent);if(showEvent)CloseHandle(showEvent);
+    quitEvent=showEvent=nullptr;
+}
+} // namespace NativeSettings
+
+
+void Launch(){std::lock_guard guard(NativeSettings::lifecycle);if(NativeSettings::showEvent)SetEvent(NativeSettings::showEvent);}
+decltype(&TrackPopupMenuEx) originalEx;
+decltype(&TrackPopupMenu) original;
+// Legacy Win32 popup path. Draw the same glyph as Dock et disposition.
+static HBITMAP MenuLayoutIcon(HWND owner) {
+    UINT dpi=owner?GetDpiForWindow(owner):96;
+    int size=std::clamp(MulDiv(18,dpi?dpi:96,96),16,72);
+    BITMAPINFO bi{};bi.bmiHeader={sizeof(BITMAPINFOHEADER),size,-size,1,32,BI_RGB};
+    void* bits=nullptr;HDC dc=CreateCompatibleDC(nullptr);
+    if(!dc)return nullptr;
+    HBITMAP image=CreateDIBSection(dc,&bi,DIB_RGB_COLORS,&bits,nullptr,0);
+    if(!image){DeleteDC(dc);return nullptr;}
+    auto old=SelectObject(dc,image);
+    HFONT font=CreateFontW(-size,0,0,0,FW_NORMAL,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
+        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,ANTIALIASED_QUALITY,DEFAULT_PITCH,L"Segoe Fluent Icons");
+    auto oldFont=font?SelectObject(dc,font):nullptr;
+    memset(bits,0,size*size*4);SetTextColor(dc,RGB(255,255,255));SetBkMode(dc,TRANSPARENT);
+    RECT r{0,0,size,size};DrawTextW(dc,dockLayoutGlyph,1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);GdiFlush();
+    COLORREF fg=GetSysColor(COLOR_MENUTEXT);
+    DWORD light=1,bytes=sizeof(light);
+    HIGHCONTRASTW hc{sizeof(hc)};SystemParametersInfoW(SPI_GETHIGHCONTRAST,sizeof(hc),&hc,0);
+    if(!(hc.dwFlags&HCF_HIGHCONTRASTON) && RegGetValueW(HKEY_CURRENT_USER,L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",L"AppsUseLightTheme",RRF_RT_REG_DWORD,nullptr,&light,&bytes)==ERROR_SUCCESS)
+        fg=light?RGB(24,24,24):RGB(244,244,244);
+    auto px=static_cast<DWORD*>(bits);
+    for(int i=0;i<size*size;i++){
+        DWORD a=px[i]&255;
+        px[i]=(a<<24)|((GetRValue(fg)*a/255)<<16)|((GetGValue(fg)*a/255)<<8)|(GetBValue(fg)*a/255);
+    }
+    if(font){SelectObject(dc,oldFont);DeleteObject(font);}
+    SelectObject(dc,old);DeleteDC(dc);return image;
+}
+
+template<class Show> BOOL ShowMenu(HMENU m,UINT f,HWND w,Show show){
+    bool added=Add(m,w,f);
+    HBITMAP icon=added?MenuLayoutIcon(w):nullptr;
+    if(icon){MENUITEMINFOW info{sizeof(info)};info.fMask=MIIM_BITMAP;info.hbmpItem=icon;SetMenuItemInfoW(m,command,FALSE,&info);}
+    auto result=show();
+    if(!added)return result;
+    RemoveMenu(m,command,MF_BYCOMMAND);if(icon)DeleteObject(icon);
+    if((f&TPM_RETURNCMD)&&result==command){Launch();return 0;}
+    return result;
+}
+BOOL WINAPI MenuEx(HMENU m,UINT f,int x,int y,HWND w,LPTPMPARAMS p){return ShowMenu(m,f,w,[&]{return originalEx(m,f,x,y,w,p);});}
+BOOL WINAPI Menu(HMENU m,UINT f,int x,int y,int r,HWND w,const RECT* rect){return ShowMenu(m,f,w,[&]{return original(m,f,x,y,r,w,rect);});}
+void Init(HMODULE u){
+    refresh=RegisterWindowMessageW(L"ILo.PanelTest.Refresh.v1");
+    open=RegisterWindowMessageW(L"ILo.PanelTest.Open.v1");
+    if(!u||!open)return;
+    WindhawkUtils::SetFunctionHook(reinterpret_cast<decltype(originalEx)>(GetProcAddress(u,"TrackPopupMenuEx")),MenuEx,&originalEx);
+    WindhawkUtils::SetFunctionHook(reinterpret_cast<decltype(original)>(GetProcAddress(u,"TrackPopupMenu")),Menu,&original);
+}
+} // namespace IloPanel
+
+
 using namespace winrt::Windows::UI::Xaml;
 struct {
     int taskbarHeight;
@@ -574,7 +1167,7 @@ int ClampInt(int value, int minValue, int maxValue) {
     return value < minValue ? minValue : (value > maxValue ? maxValue : value);
 }
 int ReadPositiveIntSettingOrDefault(const wchar_t* key, int defaultValue) {
-    int value = Wh_GetIntSetting(key);
+    int value = IloPanel::Int(key);
     return value > 0 ? value : defaultValue;
 }
 int GetMaxTaskbarIconSizeForLayout(int taskbarHeight, int taskbarButtonSize) {
@@ -582,12 +1175,7 @@ int GetMaxTaskbarIconSizeForLayout(int taskbarHeight, int taskbarButtonSize) {
     return std::max(kMinTaskbarIconSize, maxIconSize);
 }
 double* double_48_value_Original;
-typedef enum MONITOR_DPI_TYPE {
-    MDT_EFFECTIVE_DPI = 0,
-    MDT_ANGULAR_DPI = 1,
-    MDT_RAW_DPI = 2,
-    MDT_DEFAULT = MDT_EFFECTIVE_DPI
-} MONITOR_DPI_TYPE;
+
 #include <mutex>
 #include <regex>
 struct ModSettings {
@@ -690,7 +1278,7 @@ struct TaskbarState {
     trayRenderShift = nullptr;
   }
 
-  bool SetPanelShift(FrameworkElement const& panel, float dx, float dy, float tolerance) {
+  bool SetPanelShift(FrameworkElement const& panel, float dx, float dy) {
     if (renderPanel.get() != panel ||
         (trayRenderShift && panel.RenderTransform() != trayRenderShift)) {
       RestorePanelShift();
@@ -719,7 +1307,7 @@ struct TaskbarState {
       hadLocalRenderTransform = isLocal;
       trayRenderShift = shift;
       renderPanel = winrt::make_weak(panel);
-    } else if (std::abs(trayRenderShift.X() - dx) > tolerance) {
+    } else if (std::abs(trayRenderShift.X() - dx) > 0.001f) {
       trayRenderShift.X(dx);
     }
     if (std::abs(trayRenderShift.Y() - dy) > 0.001f) trayRenderShift.Y(dy);
@@ -3603,7 +4191,7 @@ TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam);
     return ret;
 }
 void LoadSettingsTBIconSize() {
-    const int sourcePercent = Wh_GetIntSetting(L"HoverZoomEnabled")
+    const int sourcePercent = IloPanel::Int(L"HoverZoomEnabled")
         ? ClampInt(ReadPositiveIntSettingOrDefault(L"HoverZoomPercent", 180), 110, 250)
         : 100;
     appIconSourcePercent.store(sourcePercent, std::memory_order_relaxed);
@@ -3611,10 +4199,10 @@ void LoadSettingsTBIconSize() {
         ReadPositiveIntSettingOrDefault(L"TaskbarHeight", kDefaultTaskbarHeight);
     int taskbarHeight = ClampInt(abs(requestedHeight), kMinTaskbarHeight, kMaxTaskbarHeight);
     const int taskbarOffsetY =
-        std::max(0, Wh_GetIntSetting(L"TaskbarOffsetY"));
+        std::max(0, IloPanel::Int(L"TaskbarOffsetY"));
     const int heightExpansion =
-        ((Wh_GetIntSetting(L"FlatTaskbarBottomCorners") ||
-          Wh_GetIntSetting(L"FullWidthTaskbarBackground"))
+        ((IloPanel::Int(L"FlatTaskbarBottomCorners") ||
+          IloPanel::Int(L"FullWidthTaskbarBackground"))
              ? 0
              : (taskbarOffsetY * 2));
     g_settings_tbiconsize.taskbarHeight = ClampInt(
@@ -5241,9 +5829,20 @@ void WINAPI CSecondaryTray__AutoHide_Hook(void* pThis, bool param1) {
 #endif
 static UINT g_shellHookMessageTai = 0;
 static bool TryCorrectShellHookMinRectMessageTai(UINT Msg, WPARAM wParam, LPARAM lParam);
+extern "C" void Wh_ModSettingsChanged();
 using TrayUI_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag);
 TrayUI_WndProc_t TrayUI_WndProc_Original;
 LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag) {
+  if (IloPanel::refresh && Msg==IloPanel::refresh) {
+    {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
+    Wh_ModSettingsChanged();
+    return 0;
+  }
+  if (IloPanel::open && (Msg==IloPanel::open ||
+      (Msg==WM_COMMAND && !lParam && wParam==IloPanel::command))) {
+    IloPanel::Launch();
+    return 0;
+  }
   RecordTaskbarInvocationMonitorTai(hWnd, Msg);
   LRESULT ret = TrayUI_WndProc_Original
       ? TrayUI_WndProc_Original(pThis, hWnd, Msg, wParam, lParam, flag)
@@ -5263,6 +5862,16 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
 using CSecondaryTray_v_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 CSecondaryTray_v_WndProc_t CSecondaryTray_v_WndProc_Original;
 LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {
+  if (IloPanel::refresh && Msg==IloPanel::refresh) {
+    {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
+    Wh_ModSettingsChanged();
+    return 0;
+  }
+  if (IloPanel::open && (Msg==IloPanel::open ||
+      (Msg==WM_COMMAND && !lParam && wParam==IloPanel::command))) {
+    IloPanel::Launch();
+    return 0;
+  }
   RecordTaskbarInvocationMonitorTai(hWnd, Msg);
   LRESULT ret = CSecondaryTray_v_WndProc_Original
       ? CSecondaryTray_v_WndProc_Original(pThis, hWnd, Msg, wParam, lParam)
@@ -6398,11 +7007,11 @@ void RestoreMenuPositions() {
 }
 void LoadSettingsStartButtonPosition() {
     g_settings_startbuttonposition.otherSystemButtonsOnTheLeft =
-        Wh_GetIntSetting(L"otherSystemButtonsOnTheLeft");
-    g_settings_startbuttonposition.startMenuOnTheLeft = Wh_GetIntSetting(L"MoveFlyoutStartMenu");
-g_settings_startbuttonposition.MoveFlyoutNotificationCenter = Wh_GetIntSetting(L"MoveFlyoutNotificationCenter");
+        IloPanel::Int(L"otherSystemButtonsOnTheLeft");
+    g_settings_startbuttonposition.startMenuOnTheLeft = IloPanel::Int(L"MoveFlyoutStartMenu");
+g_settings_startbuttonposition.MoveFlyoutNotificationCenter = IloPanel::Int(L"MoveFlyoutNotificationCenter");
     g_settings_startbuttonposition.searchMenuPositionInAllCases =
-        Wh_GetIntSetting(L"searchMenuPositionInAllCases");
+        IloPanel::Int(L"searchMenuPositionInAllCases");
 }
 BOOL Wh_ModInitStartButtonPosition() {
     LoadSettingsStartButtonPosition();
@@ -6783,8 +7392,8 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
                 std::optional<float> tintSaturation,
                 std::optional<float> inversionAmount,
                 std::optional<winrt::Windows::UI::Color> fallbackColor,
-                winrt::hstring fallbackThemeResourceKey)
-      : m_compositor(wuxh::ElementCompositionPreview::GetElementVisual(element).Compositor()),
+                winrt::hstring fallbackThemeResourceKey, bool hostBackdrop=false)
+      : m_hostBackdrop(hostBackdrop), m_compositor(wuxh::ElementCompositionPreview::GetElementVisual(element).Compositor()),
         m_blurAmount(blurAmount),
         m_tint(tint),
         m_tintOpacity(tintOpacity),
@@ -6995,7 +7604,14 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
     return m_compositor.CreateColorBrush(m_fallbackColor.value_or(m_tint));
   }
   wuc::CompositionBrush CreateEffectBrush() {
-    auto backdropBrush = m_compositor.CreateBackdropBrush();
+    if (!m_hostBackdrop) return CreateEffectBrushForSource(m_compositor.CreateBackdropBrush());
+    try {
+      return CreateEffectBrushForSource(m_compositor.CreateHostBackdropBrush());
+    } catch (const winrt::hresult_error&) {
+      return CreateFallbackBrush();
+    }
+  }
+  wuc::CompositionBrush CreateEffectBrushForSource(wuc::CompositionBrush const& backdropBrush) {
     constexpr float kLumaR = 0.2126f;
     constexpr float kLumaG = 0.7152f;
     constexpr float kLumaB = 0.0722f;
@@ -7058,6 +7674,7 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
     brush.SetSourceParameter(L"backdrop", backdropBrush);
     return brush;
   }
+  bool m_hostBackdrop{};
   wuc::Compositor m_compositor{nullptr};
   float m_blurAmount = 30.0f;
   winrt::Windows::UI::Color m_tint{};
@@ -7159,7 +7776,7 @@ void ClearWindhawkBlurFromBackgroundFill(FrameworkElement const& backgroundFillC
     Wh_Log(L"WindhawkBlur cleanup failed: %08X", winrt::to_hresult());
   }
 }
-bool ApplyWindhawkBlurToBackgroundFill(FrameworkElement const& backgroundFillChild) {
+bool ApplyWindhawkBlurToBackgroundFill(FrameworkElement const& backgroundFillChild, bool hostBackdrop=false) {
   if (!backgroundFillChild) return false;
   std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
   auto rectangle = backgroundFillChild.try_as<winrt::Windows::UI::Xaml::Shapes::Rectangle>();
@@ -7203,7 +7820,7 @@ bool ApplyWindhawkBlurToBackgroundFill(FrameworkElement const& backgroundFillChi
           std::optional<float>(saturation),
           inversion > 0.0f ? std::optional<float>(inversion) : std::nullopt,
           fallbackSetting.themeResourceKey.empty() ? std::optional<winrt::Windows::UI::Color>(fallbackSetting.color) : std::nullopt,
-          winrt::hstring(fallbackSetting.themeResourceKey));
+          winrt::hstring(fallbackSetting.themeResourceKey),hostBackdrop);
       rectangle.Fill(blurBrush);
     }
     return true;
@@ -7214,6 +7831,18 @@ bool ApplyWindhawkBlurToBackgroundFill(FrameworkElement const& backgroundFillChi
   }
   return false;
 }
+void IloPanel::NativeSettings::ApplyPanelSurface(X::FrameworkElement const& root) {
+  auto fallback=root.FindName(L"DefaultSurface").as<X::FrameworkElement>();
+  auto surface=root.FindName(L"DockSurface").as<X::FrameworkElement>();
+  HIGHCONTRASTW hc{sizeof(hc)};
+  SystemParametersInfoW(SPI_GETHIGHCONTRAST,sizeof(hc),&hc,0);
+  std::lock_guard guard(g_settingsMutex);
+  bool useDock=!(hc.dwFlags&HCF_HIGHCONTRASTON) && g_settings.userDefinedCustomizeTaskbarBackground &&
+               ApplyWindhawkBlurToBackgroundFill(surface,true);
+  surface.Visibility(useDock?X::Visibility::Visible:X::Visibility::Collapsed);
+  fallback.Visibility(useDock?X::Visibility::Collapsed:X::Visibility::Visible);
+}
+
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
@@ -8870,7 +9499,7 @@ void SetDividerForElement(FrameworkElement const& element, float const& panelHei
     shapeVisual.Offset({xOffset, yOffset, 0.0f});
     lineGeometry.Start({0.0f, 0.0f});
     lineGeometry.End({0.0f, scaledHeight});
-    winrt::Windows::UI::Color borderColor = {g_settings.userDefinedTaskbarBorderOpacity, static_cast<BYTE>(g_settings.borderColorR), static_cast<BYTE>(g_settings.borderColorG), static_cast<BYTE>(g_settings.borderColorB)};
+    winrt::Windows::UI::Color borderColor = {255, static_cast<BYTE>(g_settings.borderColorR), static_cast<BYTE>(g_settings.borderColorG), static_cast<BYTE>(g_settings.borderColorB)};
     auto strokeBrush = compositor.CreateColorBrush(borderColor);
     if (!strokeBrush) return;
     lineShape.StrokeBrush(strokeBrush);
@@ -8967,7 +9596,7 @@ void StyleNativeDividerElement(winrt::Windows::UI::Xaml::FrameworkElement const&
       visual.Scale({1.0f, g_unloading ? 1.0f : g_settings.userDefinedAppsDividerVerticalScale, 1.0f});
     }
   }
-  PCWSTR originalHex = Wh_GetStringSetting(L"TaskbarBorderColorHex");
+  PCWSTR originalHex = IloPanel::Str(L"TaskbarBorderColorHex");
   PCWSTR hex = originalHex;
   if (!hex || *hex == L'\0') {
     hex = L"#ffffff";
@@ -8976,7 +9605,7 @@ void StyleNativeDividerElement(winrt::Windows::UI::Xaml::FrameworkElement const&
   std::wstring fillBrush = L"<SolidColorBrush Color=\"#" + std::wstring(hex) + L"\"/>";
   SetElementPropertyFromString(element, L"Windows.UI.Xaml.Shapes.Rectangle", L"Fill", fillBrush.c_str(), true);
   if (originalHex) {
-    Wh_FreeStringSetting(originalHex);
+    IloPanel::Free(originalHex);
   }
 }
 void InvalidateTaskbarButtonLayoutElement(FrameworkElement const& element) {
@@ -10623,7 +11252,7 @@ void LogTaskbarGeometryProbe(PCWSTR reason,
 }
 void UpdateGlobalSettings() {
   std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
-  auto getInt = [&](PCWSTR key) { return Wh_GetIntSetting(key); };
+  auto getInt = [&](PCWSTR key) { return IloPanel::Int(key); };
   auto clamp = [](int v, int lo, int hi) { return v < lo ? lo : v > hi ? hi : v; };
   // Booleans
   g_settings.userDefinedFlatTaskbarBottomCorners = (getInt(L"FlatTaskbarBottomCorners") != 0);
@@ -10640,15 +11269,15 @@ void UpdateGlobalSettings() {
   // Fork addition: see OpenPopupLogFileTai.
   g_logFlyoutPlacementTai.store(getInt(L"LogFlyoutPlacement") != 0,
                                 std::memory_order_relaxed);
-  PCWSTR appsDividerAlignment = Wh_GetStringSetting(L"AppsDividerAlignment");
+  PCWSTR appsDividerAlignment = IloPanel::Str(L"AppsDividerAlignment");
   g_settings.userDefinedDividerLeftAligned =
       appsDividerAlignment && _wcsicmp(appsDividerAlignment, L"left") == 0;
   if (appsDividerAlignment) {
-    Wh_FreeStringSetting(appsDividerAlignment);
+    IloPanel::Free(appsDividerAlignment);
   }
-  PCWSTR zoomStyle = Wh_GetStringSetting(L"HoverZoomStyle");
+  PCWSTR zoomStyle = IloPanel::Str(L"HoverZoomStyle");
   g_settings.zoomMacStyle = zoomStyle && _wcsicmp(zoomStyle, L"macos") == 0;
-  if (zoomStyle) Wh_FreeStringSetting(zoomStyle);
+  if (zoomStyle) IloPanel::Free(zoomStyle);
   g_settings.zoomEnabled = getInt(L"HoverZoomEnabled") != 0;
   g_settings.zoomHideBackground = getInt(L"HoverZoomHideBackground") != 0;
   g_settings.zoomExcludeTray = getInt(L"HoverZoomExcludeTray") != 0;
@@ -10703,15 +11332,15 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedTaskbarBackgroundBlurAmount = clamp(abs(getInt(L"TaskbarBackgroundBlurAmount")), 0, 100);
   g_settings.userDefinedTaskbarBackgroundTintSaturation = clamp(abs(getInt(L"TaskbarBackgroundTintSaturation")), 0, 500);
   g_settings.userDefinedTaskbarBackgroundInversion = clamp(abs(getInt(L"TaskbarBackgroundInversion")), 0, 100);
-  PCWSTR bgTintColor = Wh_GetStringSetting(L"TaskbarBackgroundTintColor");
+  PCWSTR bgTintColor = IloPanel::Str(L"TaskbarBackgroundTintColor");
   g_settings.userDefinedTaskbarBackgroundTintColor = (bgTintColor && *bgTintColor) ? bgTintColor : L"{ThemeResource CardStrokeColorDefaultSolid}";
   if (bgTintColor) {
-    Wh_FreeStringSetting(bgTintColor);
+    IloPanel::Free(bgTintColor);
   }
-  PCWSTR bgFallbackColor = Wh_GetStringSetting(L"TaskbarBackgroundFallbackColor");
+  PCWSTR bgFallbackColor = IloPanel::Str(L"TaskbarBackgroundFallbackColor");
   g_settings.userDefinedTaskbarBackgroundFallbackColor = (bgFallbackColor && *bgFallbackColor) ? bgFallbackColor : L"{ThemeResource CardStrokeColorDefaultSolid}";
   if (bgFallbackColor) {
-    Wh_FreeStringSetting(bgFallbackColor);
+    IloPanel::Free(bgFallbackColor);
   }
   // Border opacity: 0–255
   int bOp = clamp(abs(getInt(L"TaskbarBorderOpacity")), 0, 100);
@@ -10721,7 +11350,7 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedAppsDividerThickness = g_unloading ? 0.0f : (clamp(abs(getInt(L"AppsDividerThickness")), 0, 100) * 0.1f);
   g_settings.userDefinedAppsDividerVerticalScale = g_unloading ? 0.0f : (clamp(abs(getInt(L"AppsDividerVerticalScale")), 0, 100) / 100.0f);
   // Border color
-  PCWSTR originalHex = Wh_GetStringSetting(L"TaskbarBorderColorHex");
+  PCWSTR originalHex = IloPanel::Str(L"TaskbarBorderColorHex");
   PCWSTR hex = originalHex;
   if (!hex || *hex == L'\0') {
     hex = L"#ffffff";
@@ -10735,13 +11364,13 @@ void UpdateGlobalSettings() {
   g_settings.borderColorG = g;
   g_settings.borderColorB = b;
   if (originalHex) {
-    Wh_FreeStringSetting(originalHex);
+    IloPanel::Free(originalHex);
   }
   // String list
-  PCWSTR dividerAppNames = Wh_GetStringSetting(L"DividedAppNames");
+  PCWSTR dividerAppNames = IloPanel::Str(L"DividedAppNames");
   CompileDividedAppPatternsTai(SplitAndTrim(dividerAppNames));
   if (dividerAppNames) {
-    Wh_FreeStringSetting(dividerAppNames);
+    IloPanel::Free(dividerAppNames);
   }
 }
 bool HasInvalidSettings() {
@@ -11625,7 +12254,7 @@ static bool MonitorHasTaskbarTai(HMONITOR monitor) {
 HRESULT WINAPI ImmersiveMonitorHelper_AdjustMonitorConnectedIfNeeded_Hook(
     void* pThis) {
   if (!g_unloading && ImmersiveMonitorHelper_ConnectToMonitor_Original &&
-      Wh_GetIntSetting(L"StartMenuOnActiveMonitor")) {
+      IloPanel::Int(L"StartMenuOnActiveMonitor")) {
     HMONITOR monitor = GetMonitorInUseTai();
     MONITORINFOEXW monitorInfo{};
     monitorInfo.cbSize = sizeof(monitorInfo);
@@ -11862,7 +12491,7 @@ static void MoveTrayContextMenuAnchorTai(winrt::Windows::Foundation::Point& posi
   if (g_unloading ||
       (taskbarLocation != kTaskbarLocationTopTai &&
        taskbarLocation != kTaskbarLocationBottomTai) ||
-      Wh_GetIntSetting(L"MoveTrayContextMenus") == 0) {
+      IloPanel::Int(L"MoveTrayContextMenus") == 0) {
     return;
   }
   ContextMenuTaskbarTai taskbar;
@@ -12151,6 +12780,116 @@ bool HookStartButtonContextMenuPositionTai(HMODULE taskbarViewModule) {
          hooked ? L"set" : L"unavailable");
   return hooked;
 }
+namespace IloXamlMenu {
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Windows::UI::Xaml::Controls::Primitives;
+using winrt::Windows::UI::Core::CoreDispatcher;
+struct Entry {
+    winrt::weak_ref<MenuFlyout> menu;
+    winrt::weak_ref<MenuFlyoutItem> item;
+    winrt::event_token click;
+    CoreDispatcher dispatcher;
+};
+std::mutex mutex;
+std::vector<Entry> entries;
+void Attach(MenuFlyout const& menu) {
+    auto items = menu.Items();
+    IloPanel::ShellMenuLabels labels;
+    for (auto const& candidate : items) {
+        if (auto row = candidate.try_as<MenuFlyoutItem>()) {
+            auto text = row.Text();
+            if (row.Name() == L"IloLocalPanelCommand") return;
+            labels.Observe(std::wstring(text));
+        }
+    }
+    if (!labels.taskbar && !labels.WinX()) return;
+    MenuFlyoutItem row;
+    row.Name(L"IloLocalPanelCommand");
+    row.Text(IloPanel::UiText(L"ILô settings…", L"Paramètres ILô…"));
+    FontIcon icon;
+    icon.FontFamily(winrt::Windows::UI::Xaml::Media::FontFamily(L"Segoe Fluent Icons"));
+    icon.Glyph(IloPanel::dockLayoutGlyph);
+    row.Icon(icon);
+    auto dispatcher = row.Dispatcher();
+    std::lock_guard lock(mutex);
+    if (g_unloading) return;
+    // Prune only references belonging to the current XAML apartment.
+    std::erase_if(entries, [&](Entry const& entry) {
+        return entry.dispatcher == dispatcher && !entry.item.get();
+    });
+    auto click = row.Click([](auto&&, auto&&) { IloPanel::Launch(); });
+    try {
+        entries.push_back({winrt::make_weak(menu), winrt::make_weak(row), click, dispatcher});
+        items.Append(row);
+    } catch (...) {
+        row.Click(click);
+        throw;
+    }
+    Wh_Log(L"[ILoPanel] XAML: commande ajoutée");
+}
+void Inspect(void* object) noexcept {
+    try {
+        winrt::Windows::Foundation::IUnknown instance;
+        winrt::copy_from_abi(instance, object);
+        if (auto menu = instance.try_as<MenuFlyout>()) Attach(menu);
+    } catch (...) { Wh_Log(L"[ILoPanel] Inspection du menu XAML impossible"); }
+}
+using Simple = HRESULT(WINAPI*)(void*, void*);
+using Options = HRESULT(WINAPI*)(void*, void*, void*);
+using AtPoint = HRESULT(WINAPI*)(void*, void*, winrt::Windows::Foundation::Point);
+Simple simpleOriginal;
+Options optionsOriginal;
+AtPoint pointOriginal;
+HRESULT WINAPI Show(void* self, void* target) {
+    Inspect(self); return simpleOriginal(self, target);
+}
+HRESULT WINAPI ShowOptions(void* self, void* target, void* options) {
+    Inspect(self); return optionsOriginal(self, target, options);
+}
+HRESULT WINAPI ShowPoint(void* self, void* target, winrt::Windows::Foundation::Point point) {
+    Inspect(self); return pointOriginal(self, target, point);
+}
+template<class Interface, class Hook>
+bool Install(MenuFlyout const& sample, unsigned slot, Hook hook, Hook* original) {
+    auto iface = sample.try_as<Interface>();
+    if (!iface) return false;
+    auto vtable = *reinterpret_cast<void***>(winrt::get_abi(iface));
+    return WindhawkUtils::SetFunctionHook(reinterpret_cast<Hook>(vtable[slot]),hook,original);
+}
+void Init() {
+    static std::once_flag once;
+    std::call_once(once, [] {
+        MenuFlyout sample;
+        // Published WinRT ABI: six IInspectable slots followed by interface methods.
+        bool simple = Install<IFlyoutBase>(sample, 6 + 8, Show, &simpleOriginal);
+        bool options = Install<IFlyoutBase5>(sample, 6 + 6, ShowOptions, &optionsOriginal);
+        bool point = Install<IMenuFlyout2>(sample, 6, ShowPoint, &pointOriginal);
+        if (simple || options || point) Wh_ApplyHookOperations();
+        Wh_Log(L"[ILoPanel] XAML ShowAt: %d/%d/%d", simple, options, point);
+    });
+}
+void Clear() {
+    std::vector<Entry> previous;
+    { std::lock_guard lock(mutex); previous.swap(entries); }
+    for (auto& entry : previous) {
+        try {
+            auto remove = [&entry] {
+                if (auto item = entry.item.get()) {
+                    item.Click(entry.click);
+                    if (auto menu = entry.menu.get()) {
+                        uint32_t index;
+                        if (menu.Items().IndexOf(item, index)) menu.Items().RemoveAt(index);
+                    }
+                }
+            };
+            if (entry.dispatcher.HasThreadAccess()) remove();
+            else entry.dispatcher.RunAsync(winrt::Windows::UI::Core::CoreDispatcherPriority::High,remove).get();
+        } catch (...) {}
+    }
+}
+} // namespace IloXamlMenu
+
 bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorName) {
   if (!xamlRootContent) {
     Wh_Log(L"xamlRootContent is null");
@@ -12173,6 +12912,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   }
   // Fork addition: see g_xamlRootMonitorNamesTai.
   RecordXamlRootMonitorTai(xamlRootContent, monitorName);
+  if (!g_unloading) IloXamlMenu::Init();
   g_scheduled_low_priority_update = false;
   bool forceStyleApply = false;
   int forceStyleApplyPasses = g_force_style_apply_passes.load();
@@ -12719,7 +13459,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
         }
       }
       movedPanel = state.SetPanelShift(systemTrayFrameGrid, panelShift,
-                                       panelY, visualOffsetTolerance);
+                                       panelY);
       if (movedPanel) targetOffsetXTray -= state.trayRenderShift.X();
     } else {
       state.RestorePanelShift();
@@ -12729,7 +13469,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     state.appliedTrayY = targetHostY;
     state.ownsTrayY = targetHostY != nativeHostY;
     if (newHost || value.y != targetHostY ||
-        std::abs(value.x - targetOffsetXTray) > visualOffsetTolerance) {
+        std::abs(value.x - targetOffsetXTray) > 0.001f) {
       value.y = targetHostY;
       value.x = targetOffsetXTray;
       state.appliedTrayX = value.x;
@@ -12759,7 +13499,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       }
     }
   }
-  float centeredTaskbarRightEdge = targetTrayLogicalLeft;
+  const float centeredTaskbarRightEdge = snapPx(targetContentLeft + static_cast<float>(childrenWidthTaskbar));
   const float taskbarBackgroundPadding =
       static_cast<float>(g_settings.userDefinedTaskbarBackgroundHorizontalPadding);
   float targetWidth = g_unloading
@@ -13422,6 +14162,10 @@ void Wh_ModSettingsChanged() {
   Wh_Log(L"Settings Changed");
   ResetGlobalVars();
   RefreshSettings();
+  if(HWND panel=FindWindowW(IloPanel::NativeSettings::windowClass,nullptr)){
+    DWORD pid{};GetWindowThreadProcessId(panel,&pid);
+    if(pid==GetCurrentProcessId())PostMessageW(panel,WM_APP+170,0,0);
+  }
   ApplySettings(FindCurrentProcessTaskbarWnd());
 }
 bool IsExplorer() {
@@ -13489,10 +14233,10 @@ BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int
   // Fork addition: see g_languageIndicatorCentersXDip.
   if (isInputSwitch && !(uFlags & SWP_NOMOVE) &&
       processId == GetCurrentProcessId() &&
-      Wh_GetIntSetting(L"MoveFlyoutKeyboardLayout") != 0) {
+      IloPanel::Int(L"MoveFlyoutKeyboardLayout") != 0) {
     X = PlaceInputSwitchFlyoutXTai(hWnd, X, Y, cx, cy, uFlags);
   }
-  if (isControlCenter && Wh_GetIntSetting(L"MoveFlyoutControlCenter") != 0 &&
+  if (isControlCenter && IloPanel::Int(L"MoveFlyoutControlCenter") != 0 &&
       _wcsicmp(GetProcessExeName(processId).c_str(), L"ShellHost.exe") == 0) {
     HMONITOR monitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST);
     if (!monitor) {
@@ -13514,7 +14258,7 @@ BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int
       }
       float dpiScale = static_cast<float>(monitorDpiX) / 96.0f;
       const int flyoutInnerPaddingPx = GetFlyoutInnerPaddingPx(dpiScale);
-      X = static_cast<int>(lastRecordedTrayRightMostEdgeForMonitor * dpiScale + flyoutInnerPaddingPx - (Wh_GetIntSetting(L"AlignFlyoutInner") ? cx : (cx / 2.0f)));
+      X = static_cast<int>(lastRecordedTrayRightMostEdgeForMonitor * dpiScale + flyoutInnerPaddingPx - (IloPanel::Int(L"AlignFlyoutInner") ? cx : (cx / 2.0f)));
       Wh_Log(L"[SetWindowPos] New X %d", X);
     } else {
       Wh_Log(L"[SetWindowPos] No reference state for monitor %s", monitorName.c_str());
@@ -13638,7 +14382,7 @@ BOOL Wh_ModInit() {
   g_unloading = false;
   g_worker_threads_stopping = false;
   // Fork addition: see TaskbarRevealZoneTai.
-  g_clipTaskbarWindowToDock = Wh_GetIntSetting(L"ClipTaskbarWindowToDock") != 0;
+  g_clipTaskbarWindowToDock = IloPanel::Int(L"ClipTaskbarWindowToDock") != 0;
   Wh_Log(L"[Tray26] windowRegion=%s", g_clipTaskbarWindowToDock ? L"dock" : L"native");
   if (g_clipTaskbarWindowToDock && moduleUser32) {
     auto pSetWindowRgn =
@@ -13649,6 +14393,7 @@ BOOL Wh_ModInit() {
       Wh_Log(L"Failed to hook SetWindowRgn");
     }
   }
+  IloPanel::Init(moduleUser32);
   iloMediaLayoutMessage = RegisterWindowMessageW(L"ILo.Media.LayoutChanged.v1");
   InitMinimizeAnimationCorrectionTai();
   ArmInitialExplorerStyleApplyDelay();
@@ -13666,6 +14411,31 @@ BOOL Wh_ModInit() {
   HookNotificationCenterViewPositionIfLoadedTai();
   return TRUE;
 }
+namespace IloPanel {
+HANDLE stopEvent{}, refreshEvent{};
+HANDLE& NativeSettings::RefreshSignal(){return refreshEvent;}
+std::thread refreshWorker;
+void StartRefreshWorker() {
+    stopEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+    refreshEvent = CreateEventW(nullptr, FALSE, FALSE, L"Local\\ILo.PanelTest.Refresh.v3");
+    if (!stopEvent || !refreshEvent) return;
+    refreshWorker = std::thread([] {
+        const HANDLE events[] = {stopEvent, refreshEvent};
+        while (WaitForMultipleObjects(2, events, FALSE, INFINITE) == WAIT_OBJECT_0 + 1) {
+            { std::lock_guard guard(profileLock); ReadLocked(true); }
+            Wh_ModSettingsChanged();
+            Wh_Log(L"[ILoPanel] Profil relu, TrayTaskGap=%d", Int(L"TrayTaskGap"));
+        }
+    });
+}
+void StopRefreshWorker() {
+    if (stopEvent) SetEvent(stopEvent);
+    if (refreshWorker.joinable()) refreshWorker.join();
+    if (refreshEvent) CloseHandle(refreshEvent);
+    if (stopEvent) CloseHandle(stopEvent);
+    stopEvent = refreshEvent = nullptr;
+}
+}
 void Wh_ModAfterInit() {
   if (g_PartialMode) {
     g_lastRecordedStartMenuWidth = Wh_GetIntValue(L"lastRecordedStartMenuWidth", g_lastRecordedStartMenuWidth);
@@ -13679,16 +14449,21 @@ void Wh_ModAfterInit() {
   ScheduleInitialExplorerStyleApply();
   // Fork addition: see CActionCenterExperienceManager_GetViewPosition_Hook.
   StartNotificationCenterHookWaitTai();
+  IloPanel::StartRefreshWorker();
+  IloPanel::NativeSettings::Start();
 }
 void Wh_ModBeforeUninit() {
   if (g_PartialMode) {
     return;
   }
   // Fork addition: see CActionCenterExperienceManager_GetViewPosition_Hook.
+  IloPanel::NativeSettings::Stop();
+  IloPanel::StopRefreshWorker();
   StopNotificationCenterHookWaitTai();
   // Fork addition: see RunModuleHooksTai.
   JoinModuleHookWorkersTai();
   g_unloading = true;
+  IloXamlMenu::Clear();
   IloShutdownZoom();
   CleanupDebounce();
   UninitMinimizeAnimationCorrectionTai();
