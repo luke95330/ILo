@@ -1,5 +1,7 @@
 # ILô 1.5
 
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5 — Windows 11 dock"></a></p>
+
 ## English
 
 [Dock changelog](CHANGELOG.md#english)
