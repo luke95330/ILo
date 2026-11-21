@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.5
+// @version         1.5.1
 // @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -502,6 +502,9 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.UI.Xaml.Automation.h>
 #include <winrt/Windows.UI.Xaml.Controls.h>
+#include <winrt/Windows.UI.Xaml.Automation.h>
+#include <winrt/Windows.UI.Input.h>
+#include <winrt/Windows.UI.Xaml.Input.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
 #include <atomic>
 #include <cmath>
@@ -799,6 +802,60 @@ std::map<std::wstring,std::wstring> baseline, values;
         if(root){root.RequestedTheme(light?X::ElementTheme::Light:X::ElementTheme::Dark);ApplyPanelSurface(root);}
     }
     template<class T>T Named(PCWSTR name){return root.FindName(name).as<T>();}
+    void CaptionLabel(C::Button const& button, PCWSTR label) {
+        winrt::Windows::UI::Xaml::Automation::AutomationProperties::SetName(button,label);
+        C::ToolTipService::SetToolTip(button,winrt::box_value(winrt::hstring(label)));
+    }
+    void UpdateMaximizeButton() {
+        if (!root) return;
+        auto button=Named<C::Button>(L"Maximize");
+        bool maximized=IsZoomed(window);
+        button.Content(winrt::box_value(winrt::hstring(maximized?L"\uE923":L"\uE922")));
+        CaptionLabel(button,maximized?UiText(L"Restore",L"Restaurer"):UiText(L"Maximize",L"Agrandir"));
+    }
+    void BindCaption() {
+        auto minimize=Named<C::Button>(L"Minimize");
+        auto maximize=Named<C::Button>(L"Maximize");
+        auto close=Named<C::Button>(L"ClosePanel");
+        CaptionLabel(minimize,UiText(L"Minimize",L"Réduire"));
+        CaptionLabel(close,UiText(L"Close",L"Fermer"));
+        UpdateMaximizeButton();
+        minimize.Click([this](auto&&,auto&&){PostMessageW(window,WM_SYSCOMMAND,SC_MINIMIZE,0);});
+        maximize.Click([this](auto&&,auto&&){PostMessageW(window,WM_SYSCOMMAND,IsZoomed(window)?SC_RESTORE:SC_MAXIMIZE,0);});
+        close.Click([this](auto&&,auto&&){PostMessageW(window,WM_CLOSE,0,0);});
+        auto drag=Named<C::Border>(L"DragSurface");
+        drag.DoubleTapped([this](auto&&,auto const& args){
+            args.Handled(true);
+            PostMessageW(window,WM_SYSCOMMAND,IsZoomed(window)?SC_RESTORE:SC_MAXIMIZE,0);
+        });
+        drag.PointerPressed([this](auto&&,auto const& args){
+            if(!args.GetCurrentPoint(nullptr).Properties().IsLeftButtonPressed()) return;
+            POINT pt{};GetCursorPos(&pt);
+            POINT client=pt;ScreenToClient(window,&client);
+            int grip=GetSystemMetricsForDpi(SM_CYSIZEFRAME,GetDpiForWindow(window));
+            if(!IsZoomed(window) && client.y>=0 && client.y<grip){
+                captionPress.x=LONG_MIN;
+                args.Handled(true);
+                ReleaseCapture();
+                PostMessageW(window,WM_NCLBUTTONDOWN,HTTOP,MAKELPARAM(pt.x,pt.y));
+                return;
+            }
+            captionPress=pt;
+        });
+        drag.PointerMoved([this](auto&&,auto const& args){
+            if(captionPress.x==LONG_MIN || !args.GetCurrentPoint(nullptr).Properties().IsLeftButtonPressed())return;
+            POINT pt{};GetCursorPos(&pt);
+            UINT dpi=GetDpiForWindow(window);
+            if(abs(pt.x-captionPress.x)<GetSystemMetricsForDpi(SM_CXDRAG,dpi) &&
+               abs(pt.y-captionPress.y)<GetSystemMetricsForDpi(SM_CYDRAG,dpi))return;
+            captionPress.x=LONG_MIN;
+            ReleaseCapture();
+            PostMessageW(window,WM_NCLBUTTONDOWN,HTCAPTION,MAKELPARAM(pt.x,pt.y));
+        });
+        drag.PointerReleased([this](auto&&,auto&&){captionPress.x=LONG_MIN;});
+        drag.PointerCanceled([this](auto&&,auto&&){captionPress.x=LONG_MIN;});
+    }
+    POINT captionPress{LONG_MIN,0};
     void Create(){
         Read();
         source=H::DesktopWindowXamlSource();
@@ -814,18 +871,27 @@ std::map<std::wstring,std::wstring> baseline, values;
 </ResourceDictionary.ThemeDictionaries></ResourceDictionary></Grid.Resources>
 <Grid><Rectangle x:Name="DefaultSurface" Fill="{ThemeResource PanelSurface}" IsHitTestVisible="False"/><Rectangle x:Name="DockSurface" IsHitTestVisible="False"/><Grid>
 <Grid.ColumnDefinitions><ColumnDefinition Width="236"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-<Grid Padding="12,26,10,16">
+<Grid Padding="12,46,10,16">
 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
 <StackPanel Orientation="Horizontal" Margin="12,0,0,24" VerticalAlignment="Center"><Border Background="{ThemeResource SystemControlHighlightAccentBrush}" Width="36" Height="36" CornerRadius="10"><FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE8A9;" FontSize="19" Foreground="White"/></Border><TextBlock Text="ILô" FontSize="26" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/></StackPanel>
 <ListView Grid.Row="1" x:Name="Navigation" SelectionMode="Single" IsItemClickEnabled="False" HorizontalContentAlignment="Stretch"/>
 <StackPanel Grid.Row="2" Margin="4,14,4,0" Spacing="8"><TextBlock x:Name="Status" FontSize="12" TextWrapping="Wrap"/><Button x:Name="Reset" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6"/><Button x:Name="Save" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6" Background="{ThemeResource SystemControlHighlightAccentBrush}" Foreground="White"/></StackPanel>
 </Grid>
 <Grid Grid.Column="1" Padding="26,25,22,16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-<Grid MaxWidth="620" HorizontalAlignment="Stretch" Margin="0,0,0,20"><TextBox x:Name="Search" Padding="38,8,12,8" CornerRadius="16"/><FontIcon Glyph="&#xE721;" FontFamily="Segoe Fluent Icons" FontSize="16" HorizontalAlignment="Left" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
+<Grid Height="52"/>
 <TextBlock Grid.Row="1" x:Name="Heading" FontSize="29" FontWeight="SemiBold" Margin="2,0,0,16"/>
 <ScrollViewer Grid.Row="2" x:Name="Scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="Pages" Margin="0,0,6,12"/></ScrollViewer>
-</Grid></Grid></Grid></Grid>)xml");
+</Grid></Grid>
+<Grid Height="44" VerticalAlignment="Top">
+<Grid.ColumnDefinitions><ColumnDefinition Width="236"/><ColumnDefinition Width="*"/><ColumnDefinition Width="138"/></Grid.ColumnDefinitions>
+<Border x:Name="DragSurface" Grid.ColumnSpan="3" Background="Transparent"/>
+<Grid MaxWidth="620" HorizontalAlignment="Stretch" Grid.Column="1" Margin="8,3" VerticalAlignment="Center"><TextBox x:Name="Search" Padding="38,8,12,8" CornerRadius="16"/><FontIcon Glyph="&#xE721;" FontFamily="Segoe Fluent Icons" FontSize="16" HorizontalAlignment="Left" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
+<StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" Height="32">
+<StackPanel.Resources><Style TargetType="Button"><Setter Property="Width" Value="46"/><Setter Property="Height" Value="32"/><Setter Property="Padding" Value="0"/><Setter Property="CornerRadius" Value="0"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Background" Value="Transparent"/><Setter Property="FontFamily" Value="Segoe MDL2 Assets"/><Setter Property="FontSize" Value="10"/></Style></StackPanel.Resources>
+<Button x:Name="Minimize" Content="&#xE921;"/><Button x:Name="Maximize" Content="&#xE922;"/><Button x:Name="ClosePanel" Content="&#xE8BB;"><Button.Resources><SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#C42B1C"/><SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/></Button.Resources></Button>
+</StackPanel></Grid></Grid></Grid>)xml");
         Theme();
+        BindCaption();
         nav=Named<C::ListView>(L"Navigation"); search=Named<C::TextBox>(L"Search");
         heading=Named<C::TextBlock>(L"Heading");pages=Named<C::StackPanel>(L"Pages");scroll=Named<C::ScrollViewer>(L"Scroll");
         status=Named<C::TextBlock>(L"Status");save=Named<C::Button>(L"Save");reset=Named<C::Button>(L"Reset");
@@ -946,10 +1012,23 @@ static LRESULT CALLBACK WindowProc(HWND w,UINT msg,WPARAM wp,LPARAM lp) noexcept
             if(FAILED(identity))Wh_Log(L"[ILoPanel] AppUserModelID: %08X",identity);
             view->icons.Set(w,GetDpiForWindow(w));view->Create();return 0;
         }
+        case WM_NCCALCSIZE: {
+            // Keep the native side and bottom borders and Windows' maximized work area.
+            // In restored mode leave just the outer pixel for the native top resize edge.
+            RECT* client = wp ? &reinterpret_cast<NCCALCSIZE_PARAMS*>(lp)->rgrc[0]
+                              : reinterpret_cast<RECT*>(lp);
+            LONG outerTop = client->top;
+            auto result = DefWindowProcW(w,msg,wp,lp);
+            if (!IsZoomed(w) && !IsIconic(w) && client->top > outerTop + 1) {
+                client->top = outerTop + 1;
+                return 0;
+            }
+            return result;
+        }
         case WM_GETMINMAXINFO:{auto m=reinterpret_cast<MINMAXINFO*>(lp);int dpi=GetDpiForWindow(w);
             MONITORINFO mi{sizeof(mi)};GetMonitorInfoW(MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST),&mi);
             m->ptMinTrackSize={std::min<LONG>(mi.rcWork.right-mi.rcWork.left,MulDiv(740,dpi,96)),std::min<LONG>(mi.rcWork.bottom-mi.rcWork.top,MulDiv(480,dpi,96))};return 0;}
-        case WM_SIZE:view->Layout(LOWORD(lp),HIWORD(lp));return 0;
+        case WM_SIZE:view->Layout(LOWORD(lp),HIWORD(lp));if(wp!=SIZE_MINIMIZED)view->UpdateMaximizeButton();return 0;
         case WM_APP+170:case WM_SETTINGCHANGE:case WM_THEMECHANGED:if(view->root)view->Theme();break;
         case WM_DPICHANGED:{view->icons.Set(w,LOWORD(wp));auto r=reinterpret_cast<RECT*>(lp);SetWindowPos(w,nullptr,r->left,r->top,r->right-r->left,r->bottom-r->top,SWP_NOZORDER|SWP_NOACTIVATE);return 0;}
         case WM_DESTROY:if(view->root)RememberSize(w);view->Close();return 0;
@@ -1003,7 +1082,7 @@ static void Run() {
                 if(RegGetValueW(HKEY_CURRENT_USER,path,L"PanelWindowSize",RRF_RT_REG_BINARY,nullptr,&saved,&bytes)!=ERROR_SUCCESS || bytes!=sizeof(saved))saved={};
                 UINT dpi=96,dy=96;if(FAILED(GetDpiForMonitor(monitor,MDT_EFFECTIVE_DPI,&dpi,&dy)))dpi=96;
                 auto bounds=PanelBounds(mi.rcWork,dpi,saved);
-                CreateWindowExW(WS_EX_CONTROLPARENT|WS_EX_APPWINDOW,windowClass,IloPanel::UiText(L"ILô settings", L"Paramètres ILô"),WS_OVERLAPPEDWINDOW,
+                CreateWindowExW(WS_EX_CONTROLPARENT|WS_EX_APPWINDOW,windowClass,IloPanel::UiText(L"ILô settings", L"Paramètres ILô"),WS_POPUP|WS_THICKFRAME|WS_SYSMENU|WS_MINIMIZEBOX|WS_MAXIMIZEBOX,
                     bounds.left,bounds.top,bounds.right-bounds.left,bounds.bottom-bounds.top,nullptr,nullptr,module,&view);
                 if(view.window && saved.maximized==1)ShowWindow(view.window,SW_MAXIMIZE);
             }

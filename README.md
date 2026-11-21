@@ -1,6 +1,6 @@
-# ILô 1.5
+# ILô 1.5.1
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5.1 — Windows 11 dock"></a></p>
 
 ## English
 
@@ -16,35 +16,15 @@ Right-click **Start** or an empty area of the taskbar and select **ILô settings
 
 The optional [ILô Media player](https://github.com/luke95330/ILo_Media) adds album art and playback controls to the dock.
 
-## Installation
+### Installation
 
 Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
 
-## Français
+### Sources
 
-[Historique des versions du dock](CHANGELOG.md#français)
+Edit [ilo.wh.cpp](ilo.wh.cpp), then run `python assemble-mod.py` to update the two historical distribution files. The `mod-parts` directory contains the source files from the original fork.
 
-Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
-
-### Panneau de configuration
-
-Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les sept catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
-
-<a href="assets/ilo-start-menu.png"><img src="assets/ilo-start-menu.png" width="377" alt="Paramètres ILô dans le menu contextuel de Démarrer"></a>
-
-<a href="assets/ilo-settings.png"><img src="assets/ilo-settings.png" width="1000" alt="Panneau de configuration ILô ouvert sur Dock et disposition"></a>
-
-Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’afficher la pochette et les commandes de lecture dans le dock.
-
-## Installation
-
-Désactivez l’ancien mod de dock. Dans Windhawk, créez un mod local, remplacez le contenu de l’éditeur par celui de [ilo.wh.cpp](ilo.wh.cpp), puis compilez. Les réglages du dock sont accessibles dans l’onglet **Paramètres**.
-
-## Sources
-
-Modifiez [ilo.wh.cpp](ilo.wh.cpp), puis lancez `python assemble-mod.py` pour actualiser les deux fichiers de distribution historiques. Le dossier `mod-parts` conserve les sources du fork d’origine.
-
-ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed), issu de [TAI de DarkionAvey](https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed). Le code du dock conserve les mentions de licence GPLv3.
+ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) of [DarkionAvey’s TAI](https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed). The dock source retains the GPLv3 license notices.
 
 <details>
 <summary>English settings reference</summary>
@@ -110,6 +90,32 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Exclude date and time | Keep the clock text at its native size when tray magnification is enabled. | `true` |
 
 </details>
+
+## Français
+
+[Historique des versions du dock](CHANGELOG.md#français)
+
+Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
+
+### Panneau de configuration
+
+Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les sept catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
+
+<a href="assets/ilo-start-menu.png"><img src="assets/ilo-start-menu.png" width="377" alt="Paramètres ILô dans le menu contextuel de Démarrer"></a>
+
+<a href="assets/ilo-settings.png"><img src="assets/ilo-settings.png" width="1000" alt="Panneau de configuration ILô ouvert sur Dock et disposition"></a>
+
+Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’afficher la pochette et les commandes de lecture dans le dock.
+
+### Installation
+
+Désactivez l’ancien mod de dock. Dans Windhawk, créez un mod local, remplacez le contenu de l’éditeur par celui de [ilo.wh.cpp](ilo.wh.cpp), puis compilez. Les réglages du dock sont accessibles dans l’onglet **Paramètres**.
+
+### Sources
+
+Modifiez [ilo.wh.cpp](ilo.wh.cpp), puis lancez `python assemble-mod.py` pour actualiser les deux fichiers de distribution historiques. Le dossier `mod-parts` conserve les sources du fork d’origine.
+
+ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed), issu de [TAI de DarkionAvey](https://github.com/DarkionAvey/windhawk-taskbar-centered-condensed). Le code du dock conserve les mentions de licence GPLv3.
 
 <details>
 <summary>Référence des réglages en français</summary>

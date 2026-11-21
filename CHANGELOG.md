@@ -4,6 +4,11 @@
 
 ## English
 
+### ILô 1.5.1
+
+- The settings panel now places Minimize, Maximize/Restore and Close beside the search box. Drag the empty header to move the window or double-click it to maximize or restore.
+- Fixed the colored strip along the top edge when the panel is restored. The upper edge still supports resizing.
+
 ### ILô 1.5
 
 - Open the built-in settings panel by right-clicking Start or an empty area of the taskbar. The panel and both menu entries use English or French according to the Windows display language.
@@ -64,6 +69,11 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.5.1
+
+- Le panneau de configuration intègre désormais les boutons Réduire, Agrandir/Restaurer et Fermer à côté du champ de recherche. Faites glisser une zone libre de l’en-tête pour déplacer la fenêtre, ou double-cliquez pour l’agrandir ou la restaurer.
+- Correction de la bande colorée en haut du panneau en mode fenêtre. Le bord supérieur permet toujours de redimensionner la fenêtre.
 
 ### ILô 1.5
 
