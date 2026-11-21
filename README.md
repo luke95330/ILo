@@ -1,6 +1,6 @@
-# ILô 1.5.1
+# ILô 1.5.2
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5.1 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5.2 — Windows 11 dock"></a></p>
 
 ## English
 
@@ -11,6 +11,8 @@ ILô turns the Windows 11 taskbar into a floating dock that centers your apps an
 ### Settings panel
 
 Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across seven categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
+
+Choose **English** or **Français** under **Interface language** at the bottom of the sidebar. The panel switches immediately and remembers your choice. The ILô command in the Start and taskbar context menus uses the same language the next time you open them. English is the default and fallback.
 
 [View the settings panel](assets/ilo-settings.png) · [View the Start context menu](assets/ilo-start-menu.png) (French interface)
 
@@ -100,6 +102,8 @@ Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applicat
 ### Panneau de configuration
 
 Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les sept catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
+
+Choisissez **English** ou **Français** dans le sélecteur **Interface language / Langue de l’interface**, en bas de la colonne de gauche. Le panneau change immédiatement de langue et mémorise votre choix. L’entrée ILô des menus contextuels de Démarrer et de la barre des tâches suit ce choix dès leur prochaine ouverture. L’anglais est la langue par défaut et de repli.
 
 <a href="assets/ilo-start-menu.png"><img src="assets/ilo-start-menu.png" width="377" alt="Paramètres ILô dans le menu contextuel de Démarrer"></a>
 

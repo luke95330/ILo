@@ -4,6 +4,11 @@
 
 ## English
 
+### ILô 1.5.2
+
+- Switch between English and French from the settings panel. Switching takes effect immediately and preserves the current search and unsaved edits.
+- The ILô settings command in the Start and taskbar context menus follows the selected language. ILô remembers the choice and uses English when the preference is missing or invalid.
+
 ### ILô 1.5.1
 
 - The settings panel now places Minimize, Maximize/Restore and Close beside the search box. Drag the empty header to move the window or double-click it to maximize or restore.
@@ -69,6 +74,11 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.5.2
+
+- Choisissez l’anglais ou le français depuis le panneau de configuration. Le changement est immédiat et conserve la recherche en cours ainsi que les réglages en attente d’enregistrement.
+- L’entrée Paramètres ILô des menus contextuels de Démarrer et de la barre des tâches suit la langue choisie. ILô mémorise ce choix et utilise l’anglais si la préférence est absente ou invalide.
 
 ### ILô 1.5.1
 

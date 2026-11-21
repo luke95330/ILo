@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.5.1
+// @version         1.5.2
 // @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -554,9 +554,13 @@ PCWSTR Str(PCWSTR k){
 }
 void Free(PCWSTR p){free(const_cast<wchar_t*>(p));}
 constexpr wchar_t dockLayoutGlyph[]=L"\uE8A9";
+bool ReadFrenchPreference() {
+    DWORD value=0, size=sizeof(value);
+    return RegGetValueW(HKEY_CURRENT_USER,path,L"InterfaceLanguage",RRF_RT_REG_DWORD,
+                        nullptr,&value,&size)==ERROR_SUCCESS && value==1;
+}
 PCWSTR UiText(PCWSTR english, PCWSTR french) {
-    static const bool useFrench = PRIMARYLANGID(GetUserDefaultUILanguage()) == LANG_FRENCH;
-    return useFrench ? french : english;
+    return ReadFrenchPreference() ? french : english;
 }
 UINT refresh,open;
 constexpr UINT command=0xD814;
@@ -596,66 +600,71 @@ struct Option {
     Kind kind;
     std::vector<std::pair<PCWSTR, PCWSTR>> choices;
 };
-const Option options[] = {
-    {L"TaskbarHeight", IloPanel::UiText(L"Taskbar height", L"Hauteur de la barre des tâches"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the height of the taskbar. Default is 24", L"Règle la hauteur demandée pour la barre. Valeur par défaut : 24."), Kind::Number, {}},
-    {L"TaskbarIconSize", IloPanel::UiText(L"Taskbar icon size", L"Taille des icônes des applications"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22", L"Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22."), Kind::Number, {}},
-    {L"TaskbarButtonSize", IloPanel::UiText(L"Taskbar button size", L"Taille des boutons des applications"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the size (width and height) of taskbar buttons. Default is 20", L"Règle la largeur et la hauteur des boutons. Valeur par défaut : 20."), Kind::Number, {}},
-    {L"TaskbarOffsetY", IloPanel::UiText(L"Taskbar vertical offset", L"Décalage vertical du dock"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8", L"Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."), Kind::Number, {}},
-    {L"TrayTaskGap", IloPanel::UiText(L"Gap between apps and the notification area", L"Espacement avant la zone de notification"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Adjust the space between the task area and the tray area. Default is 5", L"Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."), Kind::Number, {}},
-    {L"TaskbarBackgroundHorizontalPadding", IloPanel::UiText(L"Taskbar background horizontal padding", L"Marges latérales du fond"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Set the horizontal padding on both sides of the taskbar background. Default is 2", L"Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2."), Kind::Number, {}},
-    {L"FullWidthTaskbarBackground", IloPanel::UiText(L"Full-width taskbar background", L"Fond sur toute la largeur"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off", L"Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"IgnoreShowDesktopButton", IloPanel::UiText(L"Ignore \"Show Desktop\" button", L"Exclure le bouton « Afficher le Bureau »"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the \"Show Desktop\" button is ignored in width calculations. Default is off", L"Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"TaskbarCornerRadius", IloPanel::UiText(L"Taskbar corner radius", L"Arrondi du dock"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Controls how rounded the taskbar corners appear. Default is 12", L"Règle le rayon des coins du fond. Valeur par défaut : 12."), Kind::Number, {}},
-    {L"TaskButtonCornerRadius", IloPanel::UiText(L"Task button corner radius", L"Arrondi des boutons"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"Controls how rounded the corners of individual task buttons are. Default is 8", L"Règle le rayon des coins des boutons d’application. Valeur par défaut : 8."), Kind::Number, {}},
-    {L"FlatTaskbarBottomCorners", IloPanel::UiText(L"Flat bottom corners", L"Coins inférieurs droits"), IloPanel::UiText(L"Dock and layout", L"Dock et disposition"), IloPanel::UiText(L"When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off", L"Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"CustomizeTaskbarBackground", IloPanel::UiText(L"Customize the dock background", L"Personnaliser le fond du dock"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on", L"Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut."), Kind::Toggle, {}},
-    {L"DisableCustomBlurBackground", IloPanel::UiText(L"Use a solid dock background", L"Utiliser un fond uni"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off", L"Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"TaskbarBackgroundOpacity", IloPanel::UiText(L"Background opacity", L"Opacité du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100", L"De 0 (transparent) à 100 (opaque). Valeur par défaut : 100."), Kind::Number, {}},
-    {L"TaskbarBackgroundTint", IloPanel::UiText(L"Background tint", L"Intensité de la teinte"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45", L"De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45."), Kind::Number, {}},
-    {L"TaskbarBackgroundLuminosity", IloPanel::UiText(L"Background luminosity", L"Luminosité du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15", L"De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15."), Kind::Number, {}},
-    {L"TaskbarBackgroundBlurAmount", IloPanel::UiText(L"Background blur amount", L"Intensité du flou"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5", L"Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5."), Kind::Number, {}},
-    {L"TaskbarBackgroundTintColor", IloPanel::UiText(L"Background tint color", L"Couleur de teinte"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode.", L"Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair."), Kind::Text, {}},
-    {L"TaskbarBackgroundTintSaturation", IloPanel::UiText(L"Background saturation", L"Saturation du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500", L"Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100."), Kind::Number, {}},
-    {L"TaskbarBackgroundInversion", IloPanel::UiText(L"Background inversion", L"Inversion des couleurs du fond"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10", L"Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10."), Kind::Number, {}},
-    {L"TaskbarBackgroundFallbackColor", IloPanel::UiText(L"Background fallback color", L"Couleur de repli"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}", L"Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."), Kind::Text, {}},
-    {L"TaskbarBorderOpacity", IloPanel::UiText(L"Border opacity", L"Opacité du contour"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the opacity of the taskbar border. Range 0-100. Default is 0", L"Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."), Kind::Number, {}},
-    {L"TaskbarBorderColorHex", IloPanel::UiText(L"Border color (HEX)", L"Couleur du contour et des séparateurs"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`", L"Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."), Kind::Text, {}},
-    {L"TaskbarBorderThickness", IloPanel::UiText(L"Taskbar border thickness scale (%)", L"Épaisseur du contour (%)"), IloPanel::UiText(L"Background and border", L"Fond et bordure"), IloPanel::UiText(L"Set the scale of the taskbar border. Range 0-100. Default is 8", L"Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
-    {L"HoverZoomEnabled", IloPanel::UiText(L"Magnify icons on hover", L"Agrandissement des icônes au survol"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Magnify application icons when the mouse passes over them.", L"Agrandit les icônes des applications au passage de la souris."), Kind::Toggle, {}},
-    {L"HoverZoomStyle", IloPanel::UiText(L"Application zoom style", L"Style de zoom des applications"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons.", L"Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."), Kind::Choice, {{L"zoom",IloPanel::UiText(L"Zoom style", L"Style zoom")}, {L"macos",IloPanel::UiText(L"macOS style", L"Style MacOS")}}},
-    {L"HoverZoomHideBackground", IloPanel::UiText(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds.", L"Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."), Kind::Toggle, {}},
-    {L"HoverZoomDisableBackgroundZoom", IloPanel::UiText(L"Disable icon background zoom", L"Désactiver le zoom du fond des icônes"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the visible application button background at its normal size and position.", L"Garde le fond visible des boutons d’application à sa taille et à sa position normales."), Kind::Toggle, {}},
-    {L"HoverZoomPercent", IloPanel::UiText(L"Maximum application zoom (%)", L"Zoom maximal des applications (%)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"110–250%. Available space in the button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
-    {L"HoverZoomTrayPercent", IloPanel::UiText(L"Maximum notification area zoom (%)", L"Zoom maximal de la zone de notification (%)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"110–250%. Available space in the tray button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
-    {L"HoverZoomNeighbors", IloPanel::UiText(L"Neighbors on each side (MacOS)", L"Voisines de chaque côté (MacOS)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"0, 1 or 2 neighboring icons on each side.", L"0 pour l’icône seule, 1 ou 2 pour étendre l’effet aux voisines."), Kind::Number, {}},
-    {L"HoverZoomSpread", IloPanel::UiText(L"Spread neighboring icons (MacOS)", L"Écarter les icônes voisines (MacOS)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Shift icons within their clickable buttons.", L"Décale les icônes dans la limite de leur zone cliquable."), Kind::Toggle, {}},
-    {L"HoverZoomDuration", IloPanel::UiText(L"Transition duration (ms)", L"Durée de transition (ms)"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"0–300 ms. Zero applies changes immediately.", L"De 0 à 300 ms. À 0, le zoom est instantané."), Kind::Number, {}},
-    {L"HoverZoomStart", IloPanel::UiText(L"Magnify the Start button", L"Inclure le bouton Démarrer"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Apply magnification to the Start glyph too.", L"Étend le zoom à l’icône du bouton Démarrer."), Kind::Toggle, {}},
-    {L"HoverZoomExcludeTray", IloPanel::UiText(L"Exclude the entire notification area", L"Exclure toute la zone de notification du zoom"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"When checked, all tray icons use their native size even when dock magnification is enabled.", L"Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire."), Kind::Toggle, {}},
-    {L"HoverZoomExcludeChevron", IloPanel::UiText(L"Exclude the hidden icons chevron", L"Exclure le chevron des applications masquées"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the chevron at its native size when tray magnification is enabled.", L"Conserve la taille habituelle de la flèche qui ouvre les icônes masquées."), Kind::Toggle, {}},
-    {L"HoverZoomExcludeClock", IloPanel::UiText(L"Exclude date and time", L"Exclure la date et l’heure"), IloPanel::UiText(L"Hover zoom", L"Zoom au survol"), IloPanel::UiText(L"Keep the clock text at its native size when tray magnification is enabled.", L"Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible."), Kind::Toggle, {}},
-    {L"TrayContentOffsetY", IloPanel::UiText(L"Notification area vertical offset", L"Décalage vertical des icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.", L"Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."), Kind::Number, {}},
-    {L"StyleTrayArea", IloPanel::UiText(L"Customize notification area icons", L"Personnaliser les icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"When enabled, the options for tray icon size will take effect. Default is off", L"Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"TrayIconSize", IloPanel::UiText(L"Tray icon size", L"Taille des icônes de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Set the width and height of tray icons. Minimum is 15. Default is 15", L"Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."), Kind::Number, {}},
-    {L"TrayButtonSize", IloPanel::UiText(L"Tray button size", L"Taille des boutons de notification"), IloPanel::UiText(L"Notification area", L"Zone de notification"), IloPanel::UiText(L"Set the size (width and height) of tray buttons. Minimum is 20. Default is 30", L"Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."), Kind::Number, {}},
-    {L"AppsDividerAlignment", IloPanel::UiText(L"App divider position", L"Position des séparateurs"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Choose which side of the app button displays its divider.", L"Choisis le côté du bouton où placer le séparateur."), Kind::Choice, {{L"",IloPanel::UiText(L"Default", L"Par défaut")}, {L"left",IloPanel::UiText(L"Left", L"À gauche")}, {L"right",IloPanel::UiText(L"Right", L"À droite")}}},
-    {L"DividedAppNames", IloPanel::UiText(L"App names for divider placement", L"Applications avec séparateur"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\\+\\+; Settings). Case-insensitive and supports regex.", L"Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse."), Kind::Text, {}},
-    {L"AppsDividerThickness", IloPanel::UiText(L"Apps divider thickness scale (%)", L"Épaisseur des séparateurs (%)"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8", L"Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
-    {L"AppsDividerVerticalScale", IloPanel::UiText(L"Apps divider vertical scale (%)", L"Hauteur des séparateurs (%)"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40", L"Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40."), Kind::Number, {}},
-    {L"TrayAreaDivider", IloPanel::UiText(L"Tray area divider", L"Séparateur de la zone de notification"), IloPanel::UiText(L"Dividers", L"Séparateurs"), IloPanel::UiText(L"When enabled, the tray area will be separated by a divider. Default is off", L"Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"MoveFlyoutStartMenu", IloPanel::UiText(L"Move Start Menu with Taskbar", L"Aligner Démarrer et Recherche"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on.", L"Aligne ces menus sur le dock. Activé par défaut."), Kind::Toggle, {}},
-    {L"MoveFlyoutControlCenter", IloPanel::UiText(L"Move Control Center with Taskbar", L"Aligner les paramètres rapides"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Control Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
-    {L"MoveFlyoutNotificationCenter", IloPanel::UiText(L"Move Notification Center with Taskbar", L"Aligner le centre de notifications"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Notification Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
-    {L"AlignFlyoutInner", IloPanel::UiText(L"Align flyout windows to the inside of the taskbar", L"Aligner les volets à l’intérieur du dock"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on.", L"Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut."), Kind::Toggle, {}},
-    {L"NotificationCenterPrimaryOnly", IloPanel::UiText(L"Notification Center on primary monitor only", L"Aligner les notifications sur l’écran principal uniquement"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on.", L"Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut."), Kind::Toggle, {}},
-    {L"MoveFlyoutKeyboardLayout", IloPanel::UiText(L"Move keyboard layout flyout with Taskbar", L"Aligner le sélecteur de clavier"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on.", L"Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut."), Kind::Toggle, {}},
-    {L"MoveTrayContextMenus", IloPanel::UiText(L"Move tray icon menus with Taskbar", L"Aligner les menus des icônes de notification"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.", L"Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."), Kind::Toggle, {}},
-    {L"StartMenuOnActiveMonitor", IloPanel::UiText(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), IloPanel::UiText(L"Menus and flyouts", L"Menus et volets"), IloPanel::UiText(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
-    {L"ClipTaskbarWindowToDock", IloPanel::UiText(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.", L"Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
-    {L"AutoHideShowUnderTaskbarOnly", IloPanel::UiText(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
-    {L"LogFlyoutPlacement", IloPanel::UiText(L"Log flyout placement to a file", L"Journaliser la position des volets"), IloPanel::UiText(L"Advanced options", L"Options avancées"), IloPanel::UiText(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
+template<bool French>
+const auto& Catalog() {
+    constexpr auto label=[](PCWSTR english, PCWSTR french){return French?french:english;};
+    static const Option options[] = {
+    {L"TaskbarHeight", label(L"Taskbar height", L"Hauteur de la barre des tâches"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the height of the taskbar. Default is 24", L"Règle la hauteur demandée pour la barre. Valeur par défaut : 24."), Kind::Number, {}},
+    {L"TaskbarIconSize", label(L"Taskbar icon size", L"Taille des icônes des applications"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22", L"Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22."), Kind::Number, {}},
+    {L"TaskbarButtonSize", label(L"Taskbar button size", L"Taille des boutons des applications"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the size (width and height) of taskbar buttons. Default is 20", L"Règle la largeur et la hauteur des boutons. Valeur par défaut : 20."), Kind::Number, {}},
+    {L"TaskbarOffsetY", label(L"Taskbar vertical offset", L"Décalage vertical du dock"), label(L"Dock and layout", L"Dock et disposition"), label(L"Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8", L"Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"TrayTaskGap", label(L"Gap between apps and the notification area", L"Espacement avant la zone de notification"), label(L"Dock and layout", L"Dock et disposition"), label(L"Adjust the space between the task area and the tray area. Default is 5", L"Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."), Kind::Number, {}},
+    {L"TaskbarBackgroundHorizontalPadding", label(L"Taskbar background horizontal padding", L"Marges latérales du fond"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the horizontal padding on both sides of the taskbar background. Default is 2", L"Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2."), Kind::Number, {}},
+    {L"FullWidthTaskbarBackground", label(L"Full-width taskbar background", L"Fond sur toute la largeur"), label(L"Dock and layout", L"Dock et disposition"), label(L"When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off", L"Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"IgnoreShowDesktopButton", label(L"Ignore \"Show Desktop\" button", L"Exclure le bouton « Afficher le Bureau »"), label(L"Dock and layout", L"Dock et disposition"), label(L"When enabled, the \"Show Desktop\" button is ignored in width calculations. Default is off", L"Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TaskbarCornerRadius", label(L"Taskbar corner radius", L"Arrondi du dock"), label(L"Dock and layout", L"Dock et disposition"), label(L"Controls how rounded the taskbar corners appear. Default is 12", L"Règle le rayon des coins du fond. Valeur par défaut : 12."), Kind::Number, {}},
+    {L"TaskButtonCornerRadius", label(L"Task button corner radius", L"Arrondi des boutons"), label(L"Dock and layout", L"Dock et disposition"), label(L"Controls how rounded the corners of individual task buttons are. Default is 8", L"Règle le rayon des coins des boutons d’application. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"FlatTaskbarBottomCorners", label(L"Flat bottom corners", L"Coins inférieurs droits"), label(L"Dock and layout", L"Dock et disposition"), label(L"When enabled, the bottom corners of the taskbar will be squared and the taskbar will dock to the screen edge. This overrides the taskbar offset; this is always on with the full-width taskbar background option. Default is off", L"Aligne le dock sur le bord inférieur de l’écran, avec des coins inférieurs droits. Ce réglage prime sur le décalage vertical et s’applique aussi au fond pleine largeur. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"CustomizeTaskbarBackground", label(L"Customize the dock background", L"Personnaliser le fond du dock"), label(L"Background and border", L"Fond et bordure"), label(L"When enabled, this mod applies its taskbar background visuals. When disabled, this mod skips all taskbar background changes so other Windhawk mods can provide their own background. Default is on", L"Applique le fond du mod. Désactive cette option pour confier le fond à un autre mod. Activé par défaut."), Kind::Toggle, {}},
+    {L"DisableCustomBlurBackground", label(L"Use a solid dock background", L"Utiliser un fond uni"), label(L"Background and border", L"Fond et bordure"), label(L"When enabled, the WindhawkBlur brush is skipped and only the fallback color is used, producing a solid background. Background blur, tint, tint color, luminosity, saturation, and inversion settings are ignored. This also activates automatically when background tint is 100, background blur amount is 0, or background inversion is 100. Default is off", L"Utilise la couleur de repli. Les réglages du flou et de sa teinte sont alors ignorés. Le fond uni s’active aussi pour une teinte de 100, un flou de 0 ou une inversion de 100. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TaskbarBackgroundOpacity", label(L"Background opacity", L"Opacité du fond"), label(L"Background and border", L"Fond et bordure"), label(L"Adjust the opacity of the taskbar background. 0 = fully transparent, 100 = fully opaque. Default is 100", L"De 0 (transparent) à 100 (opaque). Valeur par défaut : 100."), Kind::Number, {}},
+    {L"TaskbarBackgroundTint", label(L"Background tint", L"Intensité de la teinte"), label(L"Background and border", L"Fond et bordure"), label(L"Modify the taskbar tint level. Higher values = more tint. Range 0-100. Default is 45", L"De 0 à 100. Une valeur élevée renforce la teinte. Valeur par défaut : 45."), Kind::Number, {}},
+    {L"TaskbarBackgroundLuminosity", label(L"Background luminosity", L"Luminosité du fond"), label(L"Background and border", L"Fond et bordure"), label(L"Adjust luminosity of the taskbar background. Higher values = more opaque, lower values = more glass-like. Range 0-100. Default is 15", L"De 0 à 100. Une valeur faible donne un effet de verre plus marqué. Valeur par défaut : 15."), Kind::Number, {}},
+    {L"TaskbarBackgroundBlurAmount", label(L"Background blur amount", L"Intensité du flou"), label(L"Background and border", L"Fond et bordure"), label(L"WindhawkBlur Gaussian blur amount. Higher values make the taskbar glass blur stronger. Must be non-negative. Default is 5", L"Règle le flou gaussien du fond. Une valeur positive plus élevée accentue le flou. Valeur par défaut : 5."), Kind::Number, {}},
+    {L"TaskbarBackgroundTintColor", label(L"Background tint color", L"Couleur de teinte"), label(L"Background and border", L"Fond et bordure"), label(L"WindhawkBlur tint color. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}. Use {ThemeResource SystemBaseHighColor} if you want white color when Windows is in dark mode, or black in light mode.", L"Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. La ressource SystemBaseHighColor donne du blanc en thème sombre et du noir en thème clair."), Kind::Text, {}},
+    {L"TaskbarBackgroundTintSaturation", label(L"Background saturation", L"Saturation du fond"), label(L"Background and border", L"Fond et bordure"), label(L"WindhawkBlur saturation applied before tint. 0 = grayscale, 100 = normal, 200-500 = boosted saturation. Must be non-negative. Default is 100. Max is 500", L"Applique la saturation avant la teinte : 0 pour les niveaux de gris, 100 pour la saturation normale, jusqu’à 500 pour l’intensifier. Valeur par défaut : 100."), Kind::Number, {}},
+    {L"TaskbarBackgroundInversion", label(L"Background inversion", L"Inversion des couleurs du fond"), label(L"Background and border", L"Fond et bordure"), label(L"Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10", L"Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10."), Kind::Number, {}},
+    {L"TaskbarBackgroundFallbackColor", label(L"Background fallback color", L"Couleur de repli"), label(L"Background and border", L"Fond et bordure"), label(L"Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}", L"Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."), Kind::Text, {}},
+    {L"TaskbarBorderOpacity", label(L"Border opacity", L"Opacité du contour"), label(L"Background and border", L"Fond et bordure"), label(L"Set the opacity of the taskbar border. Range 0-100. Default is 0", L"Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."), Kind::Number, {}},
+    {L"TaskbarBorderColorHex", label(L"Border color (HEX)", L"Couleur du contour et des séparateurs"), label(L"Background and border", L"Fond et bordure"), label(L"Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`", L"Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."), Kind::Text, {}},
+    {L"TaskbarBorderThickness", label(L"Taskbar border thickness scale (%)", L"Épaisseur du contour (%)"), label(L"Background and border", L"Fond et bordure"), label(L"Set the scale of the taskbar border. Range 0-100. Default is 8", L"Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"HoverZoomEnabled", label(L"Magnify icons on hover", L"Agrandissement des icônes au survol"), label(L"Hover zoom", L"Zoom au survol"), label(L"Magnify application icons when the mouse passes over them.", L"Agrandit les icônes des applications au passage de la souris."), Kind::Toggle, {}},
+    {L"HoverZoomStyle", label(L"Application zoom style", L"Style de zoom des applications"), label(L"Hover zoom", L"Zoom au survol"), label(L"Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons.", L"Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."), Kind::Choice, {{L"zoom",label(L"Zoom style", L"Style zoom")}, {L"macos",label(L"macOS style", L"Style MacOS")}}},
+    {L"HoverZoomHideBackground", label(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), label(L"Hover zoom", L"Zoom au survol"), label(L"Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds.", L"Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."), Kind::Toggle, {}},
+    {L"HoverZoomDisableBackgroundZoom", label(L"Disable icon background zoom", L"Désactiver le zoom du fond des icônes"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the visible application button background at its normal size and position.", L"Garde le fond visible des boutons d’application à sa taille et à sa position normales."), Kind::Toggle, {}},
+    {L"HoverZoomPercent", label(L"Maximum application zoom (%)", L"Zoom maximal des applications (%)"), label(L"Hover zoom", L"Zoom au survol"), label(L"110–250%. Available space in the button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
+    {L"HoverZoomTrayPercent", label(L"Maximum notification area zoom (%)", L"Zoom maximal de la zone de notification (%)"), label(L"Hover zoom", L"Zoom au survol"), label(L"110–250%. Available space in the tray button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
+    {L"HoverZoomNeighbors", label(L"Neighbors on each side (MacOS)", L"Voisines de chaque côté (MacOS)"), label(L"Hover zoom", L"Zoom au survol"), label(L"0, 1 or 2 neighboring icons on each side.", L"0 pour l’icône seule, 1 ou 2 pour étendre l’effet aux voisines."), Kind::Number, {}},
+    {L"HoverZoomSpread", label(L"Spread neighboring icons (MacOS)", L"Écarter les icônes voisines (MacOS)"), label(L"Hover zoom", L"Zoom au survol"), label(L"Shift icons within their clickable buttons.", L"Décale les icônes dans la limite de leur zone cliquable."), Kind::Toggle, {}},
+    {L"HoverZoomDuration", label(L"Transition duration (ms)", L"Durée de transition (ms)"), label(L"Hover zoom", L"Zoom au survol"), label(L"0–300 ms. Zero applies changes immediately.", L"De 0 à 300 ms. À 0, le zoom est instantané."), Kind::Number, {}},
+    {L"HoverZoomStart", label(L"Magnify the Start button", L"Inclure le bouton Démarrer"), label(L"Hover zoom", L"Zoom au survol"), label(L"Apply magnification to the Start glyph too.", L"Étend le zoom à l’icône du bouton Démarrer."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeTray", label(L"Exclude the entire notification area", L"Exclure toute la zone de notification du zoom"), label(L"Hover zoom", L"Zoom au survol"), label(L"When checked, all tray icons use their native size even when dock magnification is enabled.", L"Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeChevron", label(L"Exclude the hidden icons chevron", L"Exclure le chevron des applications masquées"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the chevron at its native size when tray magnification is enabled.", L"Conserve la taille habituelle de la flèche qui ouvre les icônes masquées."), Kind::Toggle, {}},
+    {L"HoverZoomExcludeClock", label(L"Exclude date and time", L"Exclure la date et l’heure"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the clock text at its native size when tray magnification is enabled.", L"Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible."), Kind::Toggle, {}},
+    {L"TrayContentOffsetY", label(L"Notification area vertical offset", L"Décalage vertical des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.", L"Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."), Kind::Number, {}},
+    {L"StyleTrayArea", label(L"Customize notification area icons", L"Personnaliser les icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"When enabled, the options for tray icon size will take effect. Default is off", L"Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"TrayIconSize", label(L"Tray icon size", L"Taille des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Set the width and height of tray icons. Minimum is 15. Default is 15", L"Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."), Kind::Number, {}},
+    {L"TrayButtonSize", label(L"Tray button size", L"Taille des boutons de notification"), label(L"Notification area", L"Zone de notification"), label(L"Set the size (width and height) of tray buttons. Minimum is 20. Default is 30", L"Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."), Kind::Number, {}},
+    {L"AppsDividerAlignment", label(L"App divider position", L"Position des séparateurs"), label(L"Dividers", L"Séparateurs"), label(L"Choose which side of the app button displays its divider.", L"Choisis le côté du bouton où placer le séparateur."), Kind::Choice, {{L"",label(L"Default", L"Par défaut")}, {L"left",label(L"Left", L"À gauche")}, {L"right",label(L"Right", L"À droite")}}},
+    {L"DividedAppNames", label(L"App names for divider placement", L"Applications avec séparateur"), label(L"Dividers", L"Séparateurs"), label(L"Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\\+\\+; Settings). Case-insensitive and supports regex.", L"Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse."), Kind::Text, {}},
+    {L"AppsDividerThickness", label(L"Apps divider thickness scale (%)", L"Épaisseur des séparateurs (%)"), label(L"Dividers", L"Séparateurs"), label(L"Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8", L"Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"AppsDividerVerticalScale", label(L"Apps divider vertical scale (%)", L"Hauteur des séparateurs (%)"), label(L"Dividers", L"Séparateurs"), label(L"Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40", L"Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40."), Kind::Number, {}},
+    {L"TrayAreaDivider", label(L"Tray area divider", L"Séparateur de la zone de notification"), label(L"Dividers", L"Séparateurs"), label(L"When enabled, the tray area will be separated by a divider. Default is off", L"Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutStartMenu", label(L"Move Start Menu with Taskbar", L"Aligner Démarrer et Recherche"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on.", L"Aligne ces menus sur le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutControlCenter", label(L"Move Control Center with Taskbar", L"Aligner les paramètres rapides"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Control Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutNotificationCenter", label(L"Move Notification Center with Taskbar", L"Aligner le centre de notifications"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Notification Center is moved to align with taskbar size and location. Default is on.", L"Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"AlignFlyoutInner", label(L"Align flyout windows to the inside of the taskbar", L"Aligner les volets à l’intérieur du dock"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the flyout windows will be aligned within the bounds of the taskbar. When off, they will be 50% inside the taskbar bounds. Default is on.", L"Aligne les volets sur le bord intérieur du dock. Si cette option est désactivée, ils chevauchent sa limite à mi-largeur. Activé par défaut."), Kind::Toggle, {}},
+    {L"NotificationCenterPrimaryOnly", label(L"Notification Center on primary monitor only", L"Aligner les notifications sur l’écran principal uniquement"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Notification Center (the clock/calendar popup) is only repositioned when opened on the primary monitor. On secondary monitors it appears at Windows' native default position. Only affects the Notification Center - Start Menu, Search and Control Center are unaffected. Default is on.", L"Sur les autres écrans, le calendrier et les notifications gardent leur position Windows. Ce choix concerne uniquement ces deux volets. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveFlyoutKeyboardLayout", label(L"Move keyboard layout flyout with Taskbar", L"Aligner le sélecteur de clavier"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on.", L"Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut."), Kind::Toggle, {}},
+    {L"MoveTrayContextMenus", label(L"Move tray icon menus with Taskbar", L"Aligner les menus des icônes de notification"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.", L"Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"StartMenuOnActiveMonitor", label(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
+    {L"ClipTaskbarWindowToDock", label(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), label(L"Advanced options", L"Options avancées"), label(L"Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.", L"Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
+    {L"AutoHideShowUnderTaskbarOnly", label(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), label(L"Advanced options", L"Options avancées"), label(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"LogFlyoutPlacement", label(L"Log flyout placement to a file", L"Journaliser la position des volets"), label(L"Advanced options", L"Options avancées"), label(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
 };
-constexpr int count = ARRAYSIZE(options);
+    return options;
+}
+
 constexpr wchar_t windowClass[] = L"MightyLuke.ILo.Settings.v1";
 HANDLE showEvent{}, quitEvent{};
 std::thread uiThread;
@@ -748,6 +757,10 @@ struct PanelIcons {
 
 
 struct View {
+    bool french=ReadFrenchPreference();
+    PCWSTR UiText(PCWSTR en,PCWSTR fr) const {return french?fr:en;}
+    const auto& Options() const {return french?Catalog<true>():Catalog<false>();}
+
     PanelIcons icons;
     HWND window{}, island{};
     H::DesktopWindowXamlSource source{nullptr};
@@ -766,7 +779,7 @@ std::map<std::wstring,std::wstring> baseline, values;
     void Read() {
         std::lock_guard guard(profileLock);
         ReadLocked(true);
-        for (auto& o : options) {
+        for (auto& o : Options()) {
             std::wstring base;
             if (o.kind==Kind::Text || o.kind==Kind::Choice) {
                 auto str=Wh_GetStringSetting(o.key);
@@ -780,15 +793,15 @@ std::map<std::wstring,std::wstring> baseline, values;
     PCWSTR Reason(PCWSTR key) {
         std::wstring_view k(key);
         if(k.starts_with(L"HoverZoom") && k!=L"HoverZoomEnabled" && values[L"HoverZoomEnabled"]!=L"1")
-            return IloPanel::UiText(L"Enable hover zoom to use this setting.", L"Active le zoom au survol pour utiliser ce réglage.");
+            return UiText(L"Enable hover zoom to use this setting.", L"Active le zoom au survol pour utiliser ce réglage.");
         if((k==L"HoverZoomNeighbors" || k==L"HoverZoomSpread") && values[L"HoverZoomStyle"]!=L"macos")
-            return IloPanel::UiText(L"Select macOS style to adjust neighboring icons.", L"Choisis le style macOS pour régler le mouvement des voisins.");
+            return UiText(L"Select macOS style to adjust neighboring icons.", L"Choisis le style macOS pour régler le mouvement des voisins.");
         if(k==L"HoverZoomDisableBackgroundZoom" && values[L"HoverZoomHideBackground"]==L"1")
-            return IloPanel::UiText(L"Show icon backgrounds to adjust their animation.", L"Affiche le fond des icônes pour régler son animation.");
+            return UiText(L"Show icon backgrounds to adjust their animation.", L"Affiche le fond des icônes pour régler son animation.");
         if((k==L"HoverZoomTrayPercent" || k==L"HoverZoomExcludeChevron" || k==L"HoverZoomExcludeClock") && values[L"HoverZoomExcludeTray"]==L"1")
-            return IloPanel::UiText(L"Include the notification area in hover zoom.", L"Inclus la zone de notification dans le zoom.");
+            return UiText(L"Include the notification area in hover zoom.", L"Inclus la zone de notification dans le zoom.");
         if((k==L"TrayButtonSize" || k==L"TrayIconSize") && values[L"StyleTrayArea"]!=L"1")
-            return IloPanel::UiText(L"Enable notification area styling.", L"Active la personnalisation de la zone de notification.");
+            return UiText(L"Enable notification area styling.", L"Active la personnalisation de la zone de notification.");
         return nullptr;
     }
 
@@ -812,6 +825,20 @@ std::map<std::wstring,std::wstring> baseline, values;
         bool maximized=IsZoomed(window);
         button.Content(winrt::box_value(winrt::hstring(maximized?L"\uE923":L"\uE922")));
         CaptionLabel(button,maximized?UiText(L"Restore",L"Restaurer"):UiText(L"Maximize",L"Agrandir"));
+    }
+    void SetLanguageLabels() {
+        root.Language(french?L"fr-FR":L"en-US");
+        SetWindowTextW(window,UiText(L"ILô settings",L"Paramètres ILô"));
+        auto picker=Named<C::ComboBox>(L"LanguagePicker");
+        auto label=UiText(L"Interface language",L"Langue de l’interface");
+        picker.Header(winrt::box_value(winrt::hstring(label)));
+        X::Automation::AutomationProperties::SetName(picker,label);
+        CaptionLabel(Named<C::Button>(L"Minimize"),UiText(L"Minimize",L"Réduire"));
+        CaptionLabel(Named<C::Button>(L"ClosePanel"),UiText(L"Close",L"Fermer"));
+        UpdateMaximizeButton();
+        search.PlaceholderText(UiText(L"Search settings", L"Rechercher un réglage"));
+        reset.Content(winrt::box_value(winrt::hstring(UiText(L"Reset category", L"Réinitialiser la catégorie"))));
+        save.Content(winrt::box_value(winrt::hstring(UiText(L"Save", L"Enregistrer"))));
     }
     void BindCaption() {
         auto minimize=Named<C::Button>(L"Minimize");
@@ -875,7 +902,7 @@ std::map<std::wstring,std::wstring> baseline, values;
 <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
 <StackPanel Orientation="Horizontal" Margin="12,0,0,24" VerticalAlignment="Center"><Border Background="{ThemeResource SystemControlHighlightAccentBrush}" Width="36" Height="36" CornerRadius="10"><FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE8A9;" FontSize="19" Foreground="White"/></Border><TextBlock Text="ILô" FontSize="26" FontWeight="SemiBold" Margin="12,0,0,0" VerticalAlignment="Center"/></StackPanel>
 <ListView Grid.Row="1" x:Name="Navigation" SelectionMode="Single" IsItemClickEnabled="False" HorizontalContentAlignment="Stretch"/>
-<StackPanel Grid.Row="2" Margin="4,14,4,0" Spacing="8"><TextBlock x:Name="Status" FontSize="12" TextWrapping="Wrap"/><Button x:Name="Reset" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6"/><Button x:Name="Save" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6" Background="{ThemeResource SystemControlHighlightAccentBrush}" Foreground="White"/></StackPanel>
+<StackPanel Grid.Row="2" Margin="4,14,4,0" Spacing="8"><ComboBox x:Name="LanguagePicker" HorizontalAlignment="Stretch"><ComboBoxItem Content="English"/><ComboBoxItem Content="Français"/></ComboBox><TextBlock x:Name="Status" FontSize="12" TextWrapping="Wrap"/><Button x:Name="Reset" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6"/><Button x:Name="Save" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="6" Background="{ThemeResource SystemControlHighlightAccentBrush}" Foreground="White"/></StackPanel>
 </Grid>
 <Grid Grid.Column="1" Padding="26,25,22,16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
 <Grid Height="52"/>
@@ -895,50 +922,74 @@ std::map<std::wstring,std::wstring> baseline, values;
         nav=Named<C::ListView>(L"Navigation"); search=Named<C::TextBox>(L"Search");
         heading=Named<C::TextBlock>(L"Heading");pages=Named<C::StackPanel>(L"Pages");scroll=Named<C::ScrollViewer>(L"Scroll");
         status=Named<C::TextBlock>(L"Status");save=Named<C::Button>(L"Save");reset=Named<C::Button>(L"Reset");
-        search.PlaceholderText(IloPanel::UiText(L"Search settings", L"Rechercher un réglage"));
-        reset.Content(winrt::box_value(winrt::hstring(IloPanel::UiText(L"Reset category", L"Réinitialiser la catégorie"))));
-        save.Content(winrt::box_value(winrt::hstring(IloPanel::UiText(L"Save", L"Enregistrer"))));
         PCWSTR glyphs[]={dockLayoutGlyph,L"\uE790",L"\uE71E",L"\uEA8F",L"\uE7C4",L"\uE8BD",L"\uE713"};
-        for(auto& o:options)if(groups.empty() || groups.back()!=o.group){
+        for(auto& o:Options())if(groups.empty() || groups.back()!=o.group){
             auto item=Parse(L"<StackPanel Orientation='Horizontal' Margin='4,9' Spacing='12'><FontIcon x:Name='Icon' FontFamily='Segoe Fluent Icons' FontSize='17'/><TextBlock x:Name='Label' VerticalAlignment='Center' FontSize='14'/></StackPanel>");
             item.FindName(L"Icon").as<C::FontIcon>().Glyph(glyphs[groups.size()]);
             item.FindName(L"Label").as<C::TextBlock>().Text(o.group);
             nav.Items().Append(item);groups.push_back(o.group);
         }
         nav.SelectedIndex(0);group=groups.front();
+        auto picker=Named<C::ComboBox>(L"LanguagePicker");
+        picker.SelectedIndex(french?1:0);
+        SetLanguageLabels();
+        picker.SelectionChanged([this,pickerWeak=winrt::make_weak(picker)](auto&&,auto&&){
+            auto box=pickerWeak.get();
+            if(!box || box.SelectedIndex()<0)return;
+            bool selected=box.SelectedIndex()==1;
+            if(selected==french)return;
+            DWORD value=selected?1:0;
+            if(RegSetKeyValueW(HKEY_CURRENT_USER,path,L"InterfaceLanguage",REG_DWORD,&value,sizeof(value))!=ERROR_SUCCESS){
+                box.SelectedIndex(french?1:0);
+                status.Text(UiText(L"Could not save the language.",L"Impossible d’enregistrer la langue."));
+                return;
+            }
+            french=selected;
+            SetLanguageLabels();
+            size_t i=0;groups.clear();
+            for(auto const& option:Options()){
+                if(!groups.empty() && groups.back()==option.group)continue;
+                groups.emplace_back(option.group);
+                nav.Items().GetAt(i++).as<C::StackPanel>().FindName(L"Label").as<C::TextBlock>().Text(option.group);
+            }
+            group=groups.at(nav.SelectedIndex());
+            confirmDiscard=false;
+            status.Text(changes.empty()?L"":UiText(L"Unsaved changes",L"Modifications en attente"));
+            Draw();
+        });
         nav.SelectionChanged([this](auto&&,auto&&){int i=nav.SelectedIndex();if(i<0)return;group=groups[i];if(!search.Text().empty())search.Text(L"");else Draw();});
         search.TextChanged([this](auto&&,auto&&){query=search.Text();Draw();});
         save.Click([this](auto&&,auto&&){Save();});
-        reset.Click([this](auto&&,auto&&){for(auto& o:options)if(group==o.group){values[o.key]=baseline[o.key];changes[o.key]=std::nullopt;}confirmDiscard=false;status.Text(IloPanel::UiText(L"Reset pending", L"Réinitialisation en attente"));Draw();});
+        reset.Click([this](auto&&,auto&&){for(auto& o:Options())if(group==o.group){values[o.key]=baseline[o.key];changes[o.key]=std::nullopt;}confirmDiscard=false;status.Text(UiText(L"Reset pending", L"Réinitialisation en attente"));Draw();});
         Draw();source.Content(root);
         RECT r{};GetClientRect(window,&r);Layout(r.right,r.bottom);
     }
     void Layout(int w,int h){if(island)SetWindowPos(island,nullptr,0,0,w,h,SWP_NOACTIVATE|SWP_NOZORDER|SWP_SHOWWINDOW);}
-    static PCWSTR Section(int i){
-        if(i<3)return L"Dimensions";if(i<6)return IloPanel::UiText(L"Spacing", L"Espacements");if(i<11)return IloPanel::UiText(L"Dock shape", L"Forme du dock");
-        if(i<21)return IloPanel::UiText(L"Background", L"Arrière-plan");if(i<24)return IloPanel::UiText(L"Border", L"Bordure");if(i<28)return L"Style";
-        if(i<34)return L"Animation";if(i<37)return L"Exclusions";if(i<41)return IloPanel::UiText(L"Icons and alignment", L"Icônes et alignement");
-        if(i<46)return IloPanel::UiText(L"Dividers", L"Séparateurs");if(i<54)return L"Placement";if(i<56)return IloPanel::UiText(L"Interactive area", L"Zone interactive");return IloPanel::UiText(L"Diagnostics", L"Diagnostic");
+    PCWSTR Section(int i){
+        if(i<3)return L"Dimensions";if(i<6)return UiText(L"Spacing", L"Espacements");if(i<11)return UiText(L"Dock shape", L"Forme du dock");
+        if(i<21)return UiText(L"Background", L"Arrière-plan");if(i<24)return UiText(L"Border", L"Bordure");if(i<28)return L"Style";
+        if(i<34)return L"Animation";if(i<37)return L"Exclusions";if(i<41)return UiText(L"Icons and alignment", L"Icônes et alignement");
+        if(i<46)return UiText(L"Dividers", L"Séparateurs");if(i<54)return L"Placement";if(i<56)return UiText(L"Interactive area", L"Zone interactive");return UiText(L"Diagnostics", L"Diagnostic");
     }
     static bool Matches(PCWSTR value, const std::wstring& term){
         return FindNLSStringEx(LOCALE_NAME_USER_DEFAULT,FIND_FROMSTART|NORM_IGNORECASE|NORM_IGNORENONSPACE,value,-1,term.c_str(),-1,nullptr,nullptr,nullptr,0)>=0;
     }
     void Update(){
-        for(auto& row:rows){auto& o=options[row.index];auto reason=Reason(o.key);
+        for(auto& row:rows){auto& o=Options()[row.index];auto reason=Reason(o.key);
             row.editor.IsEnabled(!reason);bool reload=std::wstring_view(o.key)==L"ClipTaskbarWindowToDock";
-            row.hint.Text(reason?reason:reload?IloPanel::UiText(L"Reload ILô in Windhawk to apply this setting.", L"Nécessite de recharger ILô dans Windhawk."):L"");
+            row.hint.Text(reason?reason:reload?UiText(L"Reload ILô in Windhawk to apply this setting.", L"Nécessite de recharger ILô dans Windhawk."):L"");
             row.hint.Visibility(reason||reload?X::Visibility::Visible:X::Visibility::Collapsed);}
         save.IsEnabled(!changes.empty());reset.IsEnabled(query.empty());
     }
     void Change(int i,std::wstring value){
-        if(values[options[i].key]==value)return;
-        changes[options[i].key]=value;values[options[i].key]=std::move(value);confirmDiscard=false;
-        status.Text(IloPanel::UiText(L"Unsaved changes", L"Modifications en attente"));Update();
+        if(values[Options()[i].key]==value)return;
+        changes[Options()[i].key]=value;values[Options()[i].key]=std::move(value);confirmDiscard=false;
+        status.Text(UiText(L"Unsaved changes", L"Modifications en attente"));Update();
     }
     void Draw(){
-        rows.clear();pages.Children().Clear(); heading.Text(query.empty()?group:IloPanel::UiText(L"Search results", L"Résultats de recherche"));
+        rows.clear();pages.Children().Clear(); heading.Text(query.empty()?group:UiText(L"Search results", L"Résultats de recherche"));
         std::wstring previous;C::StackPanel container{nullptr};
-        for(int i=0;i<count;++i){auto& o=options[i];
+        for(int i=0;i<static_cast<int>(std::size(Options()));++i){auto& o=Options()[i];
             if(query.empty()?group!=o.group:!(Matches(o.label,query)||Matches(o.key,query)||Matches(o.help,query)))continue;
             std::wstring section=query.empty()?Section(i):o.group;
             if(previous!=section){
@@ -962,7 +1013,7 @@ std::map<std::wstring,std::wstring> baseline, values;
                 t.Toggled([this,i](auto const& sender,auto&&){Change(i,sender.template as<C::ToggleSwitch>().IsOn()?L"1":L"0");});editor=t;
             }else if(o.kind==Kind::Choice){
                 C::ComboBox c;c.MinWidth(140);for(auto& [key,label]:o.choices){c.Items().Append(winrt::box_value(winrt::hstring(label)));if(key==v)c.SelectedIndex(c.Items().Size()-1);}
-                c.SelectionChanged([this,i](auto const& sender,auto&&){auto n=sender.template as<C::ComboBox>().SelectedIndex();if(n>=0)Change(i,options[i].choices[n].first);});editor=c;
+                c.SelectionChanged([this,i](auto const& sender,auto&&){auto n=sender.template as<C::ComboBox>().SelectedIndex();if(n>=0)Change(i,Options()[i].choices[n].first);});editor=c;
             }else{
                 C::TextBox t;t.Width(o.kind==Kind::Number?76:176);t.MaxLength(512);t.Text(v);
                 t.TextChanged([this,i](auto const& sender,auto&&){Change(i,std::wstring(sender.template as<C::TextBox>().Text()));});editor=t;
@@ -972,14 +1023,14 @@ std::map<std::wstring,std::wstring> baseline, values;
             C::Grid::SetColumn(editor,1);row.Children().Append(editor);container.Children().Append(row);
             rows.push_back({i,editor,row.FindName(L"Hint").as<C::TextBlock>()});
         }
-        if(rows.empty()){C::TextBlock empty;empty.Text(IloPanel::UiText(L"No matching settings.", L"Aucun réglage trouvé."));pages.Children().Append(empty);}
+        if(rows.empty()){C::TextBlock empty;empty.Text(UiText(L"No matching settings.", L"Aucun réglage trouvé."));pages.Children().Append(empty);}
         Update();scroll.ChangeView(nullptr,winrt::box_value(0.).as<winrt::Windows::Foundation::IReference<double>>(),nullptr,true);
     }
 void Save() {
-        for(auto& o:options)if(o.kind==Kind::Number && changes.contains(o.key)){
+        for(auto& o:Options())if(o.kind==Kind::Number && changes.contains(o.key)){
             auto& v=values[o.key];wchar_t* end=nullptr;errno=0;auto n=wcstol(v.c_str(),&end,10);
             if(end==v.c_str()||*end||errno||n==INT_MIN){
-                status.Text((std::wstring(IloPanel::UiText(L"Enter a whole number for ", L"Entier attendu : "))+o.label).c_str());return;
+                status.Text((std::wstring(UiText(L"Enter a whole number for ", L"Entier attendu : "))+o.label).c_str());return;
             }
         }
         {
@@ -988,12 +1039,12 @@ void Save() {
             std::wstring data;for(auto& [k,v]:next){data+=k+L"="+v;data.push_back(0);}
             if(data.empty())data.push_back(0);data.push_back(0);
             if(RegSetKeyValueW(HKEY_CURRENT_USER,path,L"Settings",REG_MULTI_SZ,data.data(),static_cast<DWORD>(data.size()*sizeof(wchar_t)))!=ERROR_SUCCESS){
-                status.Text(IloPanel::UiText(L"Could not save the profile.", L"Échec de l’enregistrement du profil."));return;
+                status.Text(UiText(L"Could not save the profile.", L"Échec de l’enregistrement du profil."));return;
             }
             profile.swap(next);
         }
         changes.clear();Read();Draw();
-        status.Text(SetEvent(RefreshSignal())?IloPanel::UiText(L"Settings saved", L"Réglages enregistrés"):IloPanel::UiText(L"Profile saved. Reload ILô.", L"Profil enregistré. Recharge ILô."));
+        status.Text(SetEvent(RefreshSignal())?UiText(L"Settings saved", L"Réglages enregistrés"):UiText(L"Profile saved. Reload ILô.", L"Profil enregistré. Recharge ILô."));
     }
 
     void Close(){keyboard=nullptr;if(source){source.Content(nullptr);source.Close();source=nullptr;}island=nullptr;}
@@ -12878,7 +12929,10 @@ void Attach(MenuFlyout const& menu) {
     for (auto const& candidate : items) {
         if (auto row = candidate.try_as<MenuFlyoutItem>()) {
             auto text = row.Text();
-            if (row.Name() == L"IloLocalPanelCommand") return;
+            if (row.Name() == L"IloLocalPanelCommand") {
+                row.Text(IloPanel::UiText(L"ILô settings…", L"Paramètres ILô…"));
+                return;
+            }
             labels.Observe(std::wstring(text));
         }
     }
