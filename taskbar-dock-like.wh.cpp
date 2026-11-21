@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.5.2
+// @version         1.5.3
 // @donateUrl       https://www.paypal.com/donate?token=wBw6HJmBmBmDx8N94-fUY-dgzwRXi3yUj8Y3HkeSs1X84e9Z6PxHm94yqJjrAE6i2exL--k3oZ1sgYL3&locale.x=US
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -1554,7 +1554,10 @@ struct TaskbarState {
   TaskbarChildStyleCache trayChildStyleCache;
   // Fork addition: COM identity of the taskbar XAML this state was built for.
   // See GetOrCreateTaskbarState.
-  uintptr_t xamlRootIdentity{0};
+  winrt::weak_ref<FrameworkElement> layoutRoot;
+  winrt::Windows::UI::Core::CoreDispatcher layoutDispatcher{nullptr};
+  DWORD ownerThread{};
+
 };
 struct TaskbarFlyoutStateSnapshot {
   float lastStartButtonXCalculated{0.0f};
@@ -1565,6 +1568,7 @@ struct TaskbarFlyoutStateSnapshot {
 };
 static std::mutex g_taskbarStatesMutex;
 static std::unordered_map<std::wstring, std::shared_ptr<TaskbarState>> g_taskbarStates;
+static std::unordered_map<uintptr_t,std::shared_ptr<TaskbarState>> statesByRoot;
 static std::atomic<uint64_t> g_dimensionInvalidationGeneration{1};
 static std::atomic<uint64_t> g_taskbarChildStyleGeneration{1};
 static std::atomic<uintptr_t> g_recentTaskbarInvocationMonitor{0};
@@ -1781,29 +1785,41 @@ void MoveFlyoutWindowTai(HWND window, int x, int y, int cx, int cy) {
   SendMessageTimeoutW(window, WM_NULL, 0, 0, SMTO_NORMAL | SMTO_ABORTIFHUNG,
                       kCatchUpTimeoutMs, nullptr);
 }
-// Fork addition: xamlRootIdentity is the COM identity of the taskbar XAML being
-// styled. States are filed by monitor name, but the taskbar behind a name can
-// change: a monitor plugged back in gets a new taskbar, often under its old
-// name, and moving the primary display moves the primary taskbar onto another
-// monitor's name. Its state held the old taskbar's animation targets, and
-// with the same size and scale, nothing marked them stale, so the new
-// taskbar's island could be left where Windows put it. A taskbar the state was
-// not built for gets a fresh one.
+// Display names can change before Explorer replaces the corresponding XAML tree.
 std::shared_ptr<TaskbarState> GetOrCreateTaskbarState(const std::wstring& monitorName,
-                                                      uintptr_t xamlRootIdentity) {
-  std::lock_guard<std::mutex> lock(g_taskbarStatesMutex);
-  auto& state = g_taskbarStates[monitorName];
-  if (!state || state->xamlRootIdentity != xamlRootIdentity) {
-    state = std::make_shared<TaskbarState>();
-    state->xamlRootIdentity = xamlRootIdentity;
+                                                     uintptr_t identity,
+                                                     FrameworkElement const& root) {
+  if (!identity) return {};
+  const DWORD thread = GetCurrentThreadId();
+  std::unique_lock<std::mutex> lock(g_taskbarStatesMutex);
+  auto it = statesByRoot.find(identity);
+  if (it == statesByRoot.end() || it->second->ownerThread != thread ||
+      it->second->layoutRoot.get() != root) {
+    std::erase_if(statesByRoot, [&](auto const& entry) {
+      return entry.second->ownerThread == thread && !entry.second->layoutRoot.get();
+    });
+    auto state = std::make_shared<TaskbarState>();
+    state->ownerThread = thread;
+    state->layoutRoot = winrt::make_weak(root);
+    state->layoutDispatcher = root.Dispatcher();
+    it = statesByRoot.insert_or_assign(identity, state).first;
+  }
+  auto state = it->second;
+  auto slot = g_taskbarStates.find(monitorName);
+  if (slot == g_taskbarStates.end() || slot->second != state) {
+    std::erase_if(g_taskbarStates,[&](auto const& entry){return entry.second == state;});
+    g_taskbarStates[monitorName] = state;
+    lock.unlock();
+    std::lock_guard<std::recursive_mutex> stateLock(state->mutex);
+    state->hasLastDisplayGeometrySignature = false;
   }
   return state;
 }
 std::vector<std::shared_ptr<TaskbarState>> GetTaskbarStatesSnapshot() {
   std::lock_guard<std::mutex> lock(g_taskbarStatesMutex);
   std::vector<std::shared_ptr<TaskbarState>> states;
-  states.reserve(g_taskbarStates.size());
-  for (const auto& [monitorName, state] : g_taskbarStates) {
+  states.reserve(statesByRoot.size());
+  for (const auto& [identity, state] : statesByRoot) {
     if (state) {
       states.push_back(state);
     }
@@ -1836,6 +1852,7 @@ bool TryGetTaskbarFlyoutStateSnapshot(
 void ClearTaskbarStates() {
   std::lock_guard<std::mutex> lock(g_taskbarStatesMutex);
   g_taskbarStates.clear();
+  statesByRoot.clear();
 }
 void RequestTaskbarDimensionInvalidation() {
   g_dimensionInvalidationGeneration.fetch_add(1, std::memory_order_acq_rel);
@@ -13032,7 +13049,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
   auto stateHandle = GetOrCreateTaskbarState(
       monitorName,
-      reinterpret_cast<uintptr_t>(GetComIdentityTai(xamlRootContent)));
+      reinterpret_cast<uintptr_t>(GetComIdentityTai(xamlRootContent)), xamlRootContent);
   if (!stateHandle) {
     Wh_Log(L"Failed to get taskbar state for monitor: %s", monitorName.c_str());
     return false;
@@ -14606,6 +14623,20 @@ void Wh_ModBeforeUninit() {
   HWND hTaskbarWnd = FindCurrentProcessTaskbarWnd();
   if (hTaskbarWnd) {
     ApplySettings(hTaskbarWnd);
+  }
+  for (auto state : GetTaskbarStatesSnapshot()) {
+    try {
+      auto restore = [state] {
+        std::lock_guard<std::recursive_mutex> lock(state->mutex);
+        state->RestoreTrayTranslation();
+        state->RestoreBackgroundOrder();
+      };
+      auto dispatcher = state->layoutDispatcher;
+      if (dispatcher && dispatcher.HasThreadAccess()) restore();
+      else if (dispatcher) dispatcher.RunAsync(winrt::Windows::UI::Core::CoreDispatcherPriority::Normal, restore).get();
+    } catch (winrt::hresult_error const& error) {
+      Wh_Log(L"Tray cleanup on closing dispatcher: %08X",error.code().value);
+    }
   }
 }
 void Wh_ModUninit() {

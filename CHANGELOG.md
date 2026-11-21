@@ -4,6 +4,10 @@
 
 ## English
 
+### ILô 1.5.3
+
+Fixed an issue after waking a PC with multiple HDMI displays. When displays reconnect in a different order, ILô now matches each taskbar to its XAML root so the notification area stays aligned with the application icons.
+
 ### ILô 1.5.2
 
 - Switch between English and French from the settings panel. Switching takes effect immediately and preserves the current search and unsaved edits.
@@ -74,6 +78,10 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.5.3
+
+Correction d’un problème de disposition à la sortie de veille sur les configurations à plusieurs écrans HDMI. Lorsque les écrans se reconnectent dans un ordre différent, ILô associe chaque barre des tâches à sa racine XAML pour que la zone de notification reste alignée avec les icônes des applications.
 
 ### ILô 1.5.2
 
