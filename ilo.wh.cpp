@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.5.3
+// @version         1.5.4
 // @donateUrl       https://paypal.me/MightyLuke
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -693,46 +693,52 @@ static HRESULT SetPanelAppId(HWND window, bool attach) {
     return FAILED(hr) ? hr : properties->Commit();
 }
 
-static bool OnIconTile(double x, double y, double left, double top,
-                       double right, double bottom, double radius) {
-    if (x < left || x > right || y < top || y > bottom) return false;
-    double dx=x-std::clamp(x,left+radius,right-radius);
-    double dy=y-std::clamp(y,top+radius,bottom-radius);
-    return dx*dx+dy*dy <= radius*radius;
-}
-
+// Reuse the exact Segoe Fluent Icons glyph used by the panel and context menu.
 static HICON MakePanelIcon(int size) {
-    if (size<1 || size>256) return nullptr;
+    if(size<1 || size>256)return nullptr;
+    const int scale=4, extent=size*scale;
     BITMAPINFO info{};
-    info.bmiHeader={sizeof(BITMAPINFOHEADER),size,-size,1,32,BI_RGB};
+    info.bmiHeader={sizeof(BITMAPINFOHEADER),extent,-extent,1,32,BI_RGB};
+    void* samples=nullptr;
+    HBITMAP raster=CreateDIBSection(nullptr,&info,DIB_RGB_COLORS,&samples,nullptr,0);
+    HDC dc=CreateCompatibleDC(nullptr);
+    HFONT font=CreateFontW(-extent,0,0,0,FW_NORMAL,FALSE,FALSE,FALSE,
+        DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,ANTIALIASED_QUALITY,
+        DEFAULT_PITCH,L"Segoe Fluent Icons");
+    if(!raster || !dc || !font){
+        if(font)DeleteObject(font);if(dc)DeleteDC(dc);if(raster)DeleteObject(raster);
+        return nullptr;
+    }
+    auto oldBitmap=SelectObject(dc,raster);auto oldFont=SelectObject(dc,font);
+    PatBlt(dc,0,0,extent,extent,BLACKNESS);
+    SetBkMode(dc,TRANSPARENT);SetTextColor(dc,RGB(255,255,255));
+    RECT bounds{0,0,extent,extent};
+    DrawTextW(dc,L"\xE8A9",1,&bounds,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
+    GdiFlush();
+    info.bmiHeader.biWidth=size;info.bmiHeader.biHeight=-size;
     void* bits=nullptr;
     HBITMAP color=CreateDIBSection(nullptr,&info,DIB_RGB_COLORS,&bits,nullptr,0);
-    if(!color) return nullptr;
-    // Draw in a 48-unit square at sixteen samples per pixel. Keep a real AND
-    // mask for consumers that request a monochrome icon instead of BGRA.
     const int stride=((size+15)/16)*2;
     std::vector<BYTE> maskBits(stride*size,0);
-    for(int y=0;y<size;++y)for(int x=0;x<size;++x){
-        unsigned r=0,g=0,b=0,n=0;
-        for(int sy=0;sy<4;++sy)for(int sx=0;sx<4;++sx){
-            double u=(x+(sx+0.5)/4)*48/size,v=(y+(sy+0.5)/4)*48/size;
-            if(!OnIconTile(u,v,1,1,47,47,11))continue;
-            double t=(u+v)/96;
-            COLORREF ink=RGB(int(35+50*t),int(134-85*t),int(183+12*t));
-            if(OnIconTile(u,v,6,14,42,35,6))ink=RGB(28,38,78);
-            if(OnIconTile(u,v,10,19,17,28,2))ink=RGB(121,235,235);
-            if(OnIconTile(u,v,20,17,28,28,2))ink=RGB(255,255,255);
-            if(OnIconTile(u,v,31,19,38,28,2))ink=RGB(210,191,255);
-            if(OnIconTile(u,v,21,30,27,32,1))ink=RGB(255,255,255);
-            r+=GetRValue(ink);g+=GetGValue(ink);b+=GetBValue(ink);++n;
+    if(color){
+        for(int y=0;y<size;++y)for(int x=0;x<size;++x){
+            unsigned coverage=0;
+            for(int sy=0;sy<scale;++sy)for(int sx=0;sx<scale;++sx)
+                coverage+=static_cast<DWORD*>(samples)[(y*scale+sy)*extent+x*scale+sx]&255;
+            unsigned alpha=coverage/(scale*scale);
+            // Premultiplied white; the glyph interior and background stay transparent.
+            static_cast<DWORD*>(bits)[y*size+x]=alpha*0x01010101u;
+            if(!alpha)maskBits[y*stride+x/8]|=BYTE(0x80>>(x%8));
         }
-        static_cast<DWORD*>(bits)[y*size+x]=((255*n/16)<<24)|((r/16)<<16)|((g/16)<<8)|(b/16);
-        if(!n)maskBits[y*stride+x/8]|=BYTE(0x80>>(x%8));
     }
-    HBITMAP mask=CreateBitmap(size,size,1,1,maskBits.data());
+    SelectObject(dc,oldFont);SelectObject(dc,oldBitmap);
+    DeleteObject(font);DeleteDC(dc);DeleteObject(raster);
     HICON result=nullptr;
-    if(mask){ICONINFO ii{TRUE,0,0,mask,color};result=CreateIconIndirect(&ii);DeleteObject(mask);}
-    DeleteObject(color);
+    if(color){
+        HBITMAP mask=CreateBitmap(size,size,1,1,maskBits.data());
+        if(mask){ICONINFO ii{TRUE,0,0,mask,color};result=CreateIconIndirect(&ii);DeleteObject(mask);}
+        DeleteObject(color);
+    }
     return result;
 }
 struct PanelIcons {
@@ -907,12 +913,12 @@ std::map<std::wstring,std::wstring> baseline, values;
 <Grid Grid.Column="1" Padding="26,25,22,16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
 <Grid Height="52"/>
 <TextBlock Grid.Row="1" x:Name="Heading" FontSize="29" FontWeight="SemiBold" Margin="2,0,0,16"/>
-<ScrollViewer Grid.Row="2" x:Name="Scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="Pages" Margin="0,0,6,12"/></ScrollViewer>
+<ScrollViewer Grid.Row="2" x:Name="Scroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"><StackPanel x:Name="Pages" Margin="0,0,24,12"/></ScrollViewer>
 </Grid></Grid>
-<Grid Height="44" VerticalAlignment="Top">
+<Grid Height="56" VerticalAlignment="Top">
 <Grid.ColumnDefinitions><ColumnDefinition Width="236"/><ColumnDefinition Width="*"/><ColumnDefinition Width="138"/></Grid.ColumnDefinitions>
 <Border x:Name="DragSurface" Grid.ColumnSpan="3" Background="Transparent"/>
-<Grid MaxWidth="620" HorizontalAlignment="Stretch" Grid.Column="1" Margin="8,3" VerticalAlignment="Center"><TextBox x:Name="Search" Padding="38,8,12,8" CornerRadius="16"/><FontIcon Glyph="&#xE721;" FontFamily="Segoe Fluent Icons" FontSize="16" HorizontalAlignment="Left" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
+<Grid MaxWidth="620" HorizontalAlignment="Stretch" Grid.Column="1" Margin="16,10,16,10" VerticalAlignment="Center"><TextBox x:Name="Search" Padding="38,8,12,8" CornerRadius="16"/><FontIcon Glyph="&#xE721;" FontFamily="Segoe Fluent Icons" FontSize="16" HorizontalAlignment="Left" Margin="13,0,0,0" IsHitTestVisible="False"/></Grid>
 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" Height="32">
 <StackPanel.Resources><Style TargetType="Button"><Setter Property="Width" Value="46"/><Setter Property="Height" Value="32"/><Setter Property="Padding" Value="0"/><Setter Property="CornerRadius" Value="0"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Background" Value="Transparent"/><Setter Property="FontFamily" Value="Segoe MDL2 Assets"/><Setter Property="FontSize" Value="10"/></Style></StackPanel.Resources>
 <Button x:Name="Minimize" Content="&#xE921;"/><Button x:Name="Maximize" Content="&#xE922;"/><Button x:Name="ClosePanel" Content="&#xE8BB;"><Button.Resources><SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#C42B1C"/><SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/></Button.Resources></Button>

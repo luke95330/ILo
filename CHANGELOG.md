@@ -4,6 +4,12 @@
 
 ## English
 
+### ILô 1.5.4
+
+- The settings window now uses the same four-square icon as the ILô context menu, drawn in white on a transparent background.
+- Added space around the search box and between the settings cards and the scrollbar.
+- Updated the Donate button to open Mighty-Luke’s PayPal.Me page.
+
 ### ILô 1.5.3
 
 Fixed an issue after waking a PC with multiple HDMI displays. When displays reconnect in a different order, ILô now matches each taskbar to its XAML root so the notification area stays aligned with the application icons.
@@ -78,6 +84,12 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.5.4
+
+- La fenêtre des paramètres reprend l’icône à quatre carrés du menu contextuel ILô, dessinée en blanc sur fond transparent.
+- Le champ de recherche est plus aéré et les cartes de réglages sont davantage espacées de la barre de défilement.
+- Le bouton de don ouvre désormais la page PayPal.Me de Mighty-Luke.
 
 ### ILô 1.5.3
 
