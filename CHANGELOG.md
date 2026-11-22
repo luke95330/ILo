@@ -4,6 +4,12 @@
 
 ## English
 
+### ILô 1.6.2
+
+- Fixed automatic dock reveal after minimizing the last window that triggered auto-hide, without requiring the pointer to reach the bottom edge.
+- Restored the configured reveal animation when Explorer moves the taskbar directly. The native reveal path is retried when the dock remains hidden.
+- Improved monitor selection for hidden taskbars on multi-monitor setups.
+
 ### ILô 1.6.1
 
 - Simplified auto-hide settings: custom reveal and hide delays are fixed at 5 ms. Animation durations remain adjustable and default to 200 ms.
@@ -97,6 +103,12 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.6.2
+
+- Correction de la réapparition automatique du dock après la réduction de la dernière fenêtre qui provoquait son masquage, sans déplacer le pointeur vers le bord inférieur.
+- Rétablissement de l’animation de révélation sélectionnée lorsque l’Explorateur déplace directement la barre. Une nouvelle demande de révélation est effectuée si le dock reste masqué.
+- Amélioration de l’identification de l’écran associé à une barre masquée sur les configurations multi-écrans.
 
 ### ILô 1.6.1
 

@@ -1,6 +1,6 @@
-# ILô 1.6.1
+# ILô 1.6.2
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6.1 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6.2 — Windows 11 dock"></a></p>
 
 ## English
 

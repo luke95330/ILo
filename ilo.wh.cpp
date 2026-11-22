@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.6.1
+// @version         1.6.2
 // @donateUrl       https://paypal.me/MightyLuke
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -6271,6 +6271,10 @@ State* Get(HWND w){auto holder=reinterpret_cast<std::shared_ptr<State>*>(GetProp
 bool Hidden(HWND w, const RECT& screen, RECT& r){
     return GetWindowRect(w,&r) && r.top>=screen.bottom-4;
 }
+bool NeedsReveal(HWND w, const RECT& screen) {
+    RECT r{};
+    return GetWindowRect(w,&r) && r.bottom > screen.bottom+4;
+}
 thread_local unsigned nativeMoveDepth{};
 struct OwnMove { OwnMove(){++nativeMoveDepth;} ~OwnMove(){--nativeMoveDepth;} };
 thread_local HWND paintedWindow{};
@@ -6305,6 +6309,12 @@ using RevealFn=void(WINAPI*)(void*,int,int);
 RevealFn revealPrimary{}, revealSecondary{};
 void* componentHostTable{};
 UINT requestReveal{};
+thread_local HWND automaticRevealBar{};
+struct AutomaticReveal {
+    HWND previous;
+    explicit AutomaticReveal(HWND w):previous(automaticRevealBar){automaticRevealBar=w;}
+    ~AutomaticReveal(){automaticRevealBar=previous;}
+};
 
 // TrayUI::WndProc and TrayUI::Unhide are methods on different base interfaces.
 // Resolve the live component-host subobject by its symbol, without assuming
@@ -6333,16 +6343,34 @@ bool HandleReveal(HWND w,void* tray,bool secondary){
     fn(object,0,0);
     return true;
 }
-void Reveal(HWND w,State&) {
+void AfterShellMove(HWND w,RECT from,RECT to);
+void Reveal(HWND w,State& s) {
     // Send on the owner thread so dispatch uses the current shell object,
     // including on the first transition or after a monitor was recreated.
-    if(!requestReveal || !SendMessageW(w,requestReveal,0,0))
-        PostMessageW(w,WM_TIMER,3,0);
+    AutomaticReveal reveal(w);
+    MONITORINFO mi{sizeof(mi)};
+    if(!GetMonitorInfoW(GetTaskbarMonitorTai(w),&mi))return;
+    RECT from{};
+    if(!GetWindowRect(w,&from))return;
+    const auto serial=s.serial;
+    const bool handled=requestReveal && SendMessageW(w,requestReveal,0,0);
+    auto state=Get(w);
+    // A resolved native method can still return without moving the bar.
+    // Let the shell's normal reveal timer handle that case.
+    if(state && state->pinned && !state->animating &&
+       (!handled || NeedsReveal(w,mi.rcMonitor)))
+        SendMessageW(w,WM_TIMER,3,0);
+    RECT to{};
+    // Some builds move the taskbar directly during Unhide. Apply the selected
+    // reveal transition if neither Slide nor the position hook animated it.
+    if(Get(w)==&s && !s.animating && s.serial==serial &&
+       GetWindowRect(w,&to))
+        AfterShellMove(w,from,to);
 }
 
 void Tick(HWND w,State& s,const Config& c) {
     MONITORINFO mi{sizeof(mi)};
-    HMONITOR monitor=MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST);
+    HMONITOR monitor=GetTaskbarMonitorTai(w);
     RECT bar{};
     if(!GetMonitorInfoW(monitor,&mi)||!GetWindowRect(w,&bar))return;
     auto now=GetTickCount64();
@@ -6370,12 +6398,16 @@ void Tick(HWND w,State& s,const Config& c) {
             s.pinned=pin;s.reportedReveal=false;
             if(pin)SetPropW(w,L"ILo.Hiding.Expanded.v2",reinterpret_cast<HANDLE>(1));
             else RemovePropW(w,L"ILo.Hiding.Expanded.v2");
-            if(pin){KillTimer(w,2);s.lastReveal=now;Reveal(w,s);}
+            if(pin){
+                KillTimer(w,2);
+                s.lastReveal=now;
+                if(NeedsReveal(w,mi.rcMonitor))Reveal(w,s);
+            }
             else SetTimer(w,2,c.instant?kDelayMs:100,nullptr);
         }
     }
     // Reconcile the policy with the visible rectangle after a missed native request.
-    if(s.pinned && !s.animating && now-s.lastReveal>=1200 && Hidden(w,mi.rcMonitor,bar)){
+    if(s.pinned && !s.animating && now-s.lastReveal>=350 && NeedsReveal(w,mi.rcMonitor)){
         s.lastReveal=now;Reveal(w,s);
     }
     if(c.edge && s.shellAutoHide && !s.pinned && !s.animating){
@@ -6609,8 +6641,7 @@ void AfterShellMove(HWND w,RECT from,RECT to) {
     if(!s || s->animating)return;
     const auto lifetime=s->shared_from_this();
     MONITORINFO mi{sizeof(mi)};
-    POINT anchor{from.left+(from.right-from.left)/2,std::min(from.top,to.top)};
-    if(!GetMonitorInfoW(MonitorFromPoint(anchor,MONITOR_DEFAULTTONEAREST),&mi))return;
+    if(!GetMonitorInfoW(GetTaskbarMonitorTai(w),&mi))return;
     const int height=to.bottom-to.top;
     const int shown=mi.rcMonitor.bottom-height;
     const bool show=from.top>=mi.rcMonitor.bottom-4 && std::abs(to.top-shown)<=4;
@@ -6625,7 +6656,7 @@ LRESULT CALLBACK Observe(HWND w,UINT msg,WPARAM wp,LPARAM lp,DWORD_PTR){
     if(msg==WM_NCDESTROY || msg==WM_DISPLAYCHANGE || msg==WM_DPICHANGED)
         SetSpan(w,0,0);
     if(msg==WM_NCDESTROY)RemovePropW(w,listenerKey);
-    if(!g_unloading && limitReveal.load() &&
+    if(!g_unloading && automaticRevealBar!=w && limitReveal.load() &&
        (msg==WM_NCHITTEST || (msg==WM_TIMER && wp==3))){
         POINT p{};
         if(msg==WM_NCHITTEST){
@@ -6673,7 +6704,8 @@ using ExpandedFn=bool(WINAPI*)(void*,HWND,bool);
 ExpandedFn nativeExpanded{};
 bool WINAPI Expanded(void* self,HWND w,bool expanded){
     // The window thread owns State. Other threads only read a window property.
-    if(enabled && !g_unloading && GetPropW(w,L"ILo.Hiding.Expanded.v2"))return true;
+    if(enabled && !g_unloading && automaticRevealBar!=w &&
+       GetPropW(w,L"ILo.Hiding.Expanded.v2"))return true;
     return nativeExpanded(self,w,expanded);
 }
 void Stop(){
@@ -6744,8 +6776,8 @@ extern "C" void Wh_ModSettingsChanged();
 using TrayUI_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag);
 TrayUI_WndProc_t TrayUI_WndProc_Original;
 LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag) {
-  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal){if(flag)*flag=true;return IloHiding::HandleReveal(hWnd,pThis,false);}
   IloHiding::Dispatch dispatch(hWnd);
+  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal){if(flag)*flag=true;return IloHiding::HandleReveal(hWnd,pThis,false);}
   if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
     {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
@@ -6777,8 +6809,8 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
 using CSecondaryTray_v_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 CSecondaryTray_v_WndProc_t CSecondaryTray_v_WndProc_Original;
 LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {
-  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal)return IloHiding::HandleReveal(hWnd,pThis,true);
   IloHiding::Dispatch dispatch(hWnd);
+  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal)return IloHiding::HandleReveal(hWnd,pThis,true);
   if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
     {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
