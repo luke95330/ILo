@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.6.2
+// @version         1.6.3
 // @donateUrl       https://paypal.me/MightyLuke
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -8796,6 +8796,273 @@ bool ApplyWindhawkBlurToBackgroundFill(FrameworkElement const& backgroundFillChi
   }
   return false;
 }
+// Shared dock-background rendering for the two native flyouts. Call while
+// holding g_settingsMutex; the taskbar's original rendering stays unchanged.
+namespace IloSurfaceStyle {
+bool Enabled() {
+  HIGHCONTRASTW hc{sizeof(hc)};
+  return !g_unloading && g_settings.userDefinedCustomizeTaskbarBackground &&
+      !(SystemParametersInfoW(SPI_GETHIGHCONTRAST, sizeof(hc), &hc, 0) && (hc.dwFlags & HCF_HIGHCONTRASTON));
+}
+uint64_t Generation() { return g_taskbarChildStyleGeneration.load(std::memory_order_acquire); }
+Media::Brush Create(UIElement const& surface) {
+  auto const& s = g_settings;
+  auto fallback = ParseWindhawkColorSetting(s.userDefinedTaskbarBackgroundFallbackColor,
+      winrt::Windows::UI::Color{255,32,32,32});
+  Media::Brush brush{nullptr};
+  if (ShouldUseSolidTaskbarBackgroundFill()) brush = CreateSolidBackgroundBrushFromSetting(fallback);
+  else {
+    auto tint = ParseWindhawkColorSetting(s.userDefinedTaskbarBackgroundTintColor,
+        winrt::Windows::UI::Color{0,255,255,255});
+    auto alpha = static_cast<uint8_t>(std::round(std::clamp(s.userDefinedTaskbarBackgroundTint / 100.0f, 0.0f, 1.0f) * 255));
+    tint.color.A = alpha;
+    float inversion = std::clamp(s.userDefinedTaskbarBackgroundInversion / 100.0f, 0.0f, 1.0f);
+    brush = winrt::make<XamlBlurBrush>(surface, static_cast<float>(s.userDefinedTaskbarBackgroundBlurAmount),
+        tint.color, std::optional<uint8_t>(alpha), winrt::hstring(tint.themeResourceKey),
+        std::optional<float>(std::clamp(s.userDefinedTaskbarBackgroundLuminosity / 100.0f, 0.0f, 1.0f)),
+        std::optional<float>(std::clamp(s.userDefinedTaskbarBackgroundTintSaturation / 100.0f, 0.0f, 5.0f)),
+        inversion > 0 ? std::optional<float>(inversion) : std::nullopt,
+        fallback.themeResourceKey.empty() ? std::optional<winrt::Windows::UI::Color>(fallback.color) : std::nullopt,
+        winrt::hstring(fallback.themeResourceKey), false);
+  }
+  brush.Opacity(std::clamp(s.userDefinedTaskbarBackgroundOpacity / 100.0f, 0.0f, 1.0f));
+  return brush;
+}
+}
+
+// Native hidden notification-icons flyout.
+namespace IloOverflowSurface {
+using Border = Controls::Border;
+struct Watch {
+  struct NativeLayer {
+    winrt::weak_ref<DependencyObject> element;
+    DependencyProperty property{nullptr};
+    Media::Brush original{nullptr};
+    Media::Brush replacement{nullptr};
+    bool local = false;
+  };
+  winrt::weak_ref<FrameworkElement> root;
+  winrt::Windows::UI::Core::CoreDispatcher dispatcher{nullptr};
+  DispatcherTimer timer{nullptr};
+  winrt::event_token tick{};
+  winrt::weak_ref<Border> target;
+  Media::Brush original{nullptr};
+  Media::Brush applied{nullptr};
+  bool originalLocal = false;
+  bool loggedFailure = false;
+  bool loggedMissing = false;
+  HWND visibleWindow = nullptr;
+  unsigned openingTicks = 0;
+  bool running = false;
+  std::vector<NativeLayer> nativeLayers;
+  uint64_t generation = 0;
+
+  void Restore() {
+    if (auto border = target.get()) {
+      if (border.Background() == applied) {
+        if (originalLocal) border.Background(original);
+        else border.ClearValue(Border::BackgroundProperty());
+      }
+    }
+    target = {};
+    original = nullptr;
+    applied = nullptr;
+    for (auto& layer : nativeLayers) {
+      try {
+        if (auto element = layer.element.get(); element &&
+            element.GetValue(layer.property).try_as<Media::Brush>() == layer.replacement) {
+          if (layer.local) element.SetValue(layer.property, layer.original);
+          else element.ClearValue(layer.property);
+        }
+      } catch (...) { Wh_Log(L"[OverflowSurface] Native layer restore failed"); }
+    }
+    nativeLayers.clear();
+    generation = 0;
+  }
+
+  // Leave layout, hit testing, corner radius and icon content untouched. Only
+  // suppress native acrylic backgrounds enclosing the exact flyout surface.
+  void SuppressNativeLayers(Border const& border, DependencyObject const& popupRoot) {
+    if (!popupRoot || border == popupRoot) return;
+    for (auto node = Media::VisualTreeHelper::GetParent(border); node;
+         node = Media::VisualTreeHelper::GetParent(node)) {
+      DependencyProperty prop{nullptr};
+      if (node.try_as<Border>()) prop = Border::BackgroundProperty();
+      else if (node.try_as<Controls::Panel>()) prop = Controls::Panel::BackgroundProperty();
+      if (prop) {
+        auto brush = node.GetValue(prop).try_as<Media::Brush>();
+        if (brush && std::wstring_view(winrt::get_class_name(brush)).find(L"AcrylicBrush") != std::wstring_view::npos) {
+          auto clear = Media::SolidColorBrush(winrt::Windows::UI::Color{0,0,0,0});
+          nativeLayers.push_back({winrt::make_weak(node), prop, brush, clear,
+              node.ReadLocalValue(prop) != DependencyProperty::UnsetValue()});
+          node.SetValue(prop, clear);
+          Wh_Log(L"[OverflowSurface] Suppressed enclosing native acrylic layer: %s", winrt::get_class_name(node).c_str());
+        }
+      }
+      if (node == popupRoot) break;
+    }
+  }
+
+  static Border Find(DependencyObject const& node, unsigned depth = 0) {
+    if (!node || depth > 32) return nullptr;
+    if (auto border = node.try_as<Border>(); border &&
+        border.Name() == L"OverflowFlyoutBackgroundBorder") return border;
+    int count = Media::VisualTreeHelper::GetChildrenCount(node);
+    for (int i = 0; i < count; ++i) {
+      if (auto found = Find(Media::VisualTreeHelper::GetChild(node, i), depth + 1)) return found;
+    }
+    return nullptr;
+  }
+
+  static HWND FindVisibleWindow() {
+    HWND result = nullptr;
+    EnumThreadWindows(GetCurrentThreadId(), [](HWND hwnd, LPARAM param) -> BOOL {
+      wchar_t name[64]{};
+      if (IsWindowVisible(hwnd) && GetClassNameW(hwnd, name, ARRAYSIZE(name)) &&
+          wcscmp(name, L"TopLevelWindowForOverflowXamlIsland") == 0) {
+        *reinterpret_cast<HWND*>(param) = hwnd;
+        return FALSE;
+      }
+      return TRUE;
+    }, reinterpret_cast<LPARAM>(&result));
+    return result;
+  }
+  void Pause() {
+    if (running) { timer.Stop(); running = false; }
+    visibleWindow = nullptr;
+    openingTicks = 0;
+    Restore();
+  }
+  void Resume() {
+    if (!running) { openingTicks = 0; loggedMissing = false; running = true; timer.Start(); }
+  }
+
+  void Update(bool preparing = false) {
+    auto content = root.get();
+    if (g_unloading || !content) { Pause(); return; }
+    // Do not poll the hidden island indefinitely. Measure rearms the timer
+    // on the next opening; allow time for the native window to become visible.
+    if (!preparing && visibleWindow && !IsWindowVisible(visibleWindow)) { Pause(); return; }
+    if (!preparing && !visibleWindow) {
+      visibleWindow = FindVisibleWindow();
+      if (!visibleWindow && ++openingTicks >= 8) { Pause(); return; }
+    }
+    std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
+    if (!IloSurfaceStyle::Enabled()) { Restore(); return; }
+    auto xamlRoot = content.XamlRoot();
+    if (!xamlRoot) { Restore(); return; }
+    auto currentGeneration = IloSurfaceStyle::Generation();
+    if (auto existing = target.get(); existing && existing.XamlRoot() == xamlRoot &&
+        existing.Background() == applied && generation == currentGeneration) return;
+    // This control belongs to the independent overflow island, not Shell_TrayWnd.
+    DependencyObject popupRoot = xamlRoot.Content();
+    if (!popupRoot) popupRoot = content;
+    Border border = Find(popupRoot);
+    if (!border) {
+      if (!loggedMissing) {
+        loggedMissing = true;
+        Wh_Log(L"[OverflowSurface] Target border not found in overflow island");
+      }
+      Restore(); return;
+    }
+    loggedMissing = false;
+    Restore();
+    auto brush = IloSurfaceStyle::Create(border);
+    original = border.Background();
+    originalLocal = border.ReadLocalValue(Border::BackgroundProperty()) != DependencyProperty::UnsetValue();
+    target = winrt::make_weak(border);
+    applied = brush;
+    SuppressNativeLayers(border, popupRoot);
+    border.Background(brush);
+    generation = currentGeneration;
+    Wh_Log(L"[OverflowSurface] Applied dock background to hidden icons flyout; enclosing layers=%u",
+        static_cast<unsigned>(nativeLayers.size()));
+  }
+};
+static std::mutex mutex;
+static std::vector<std::shared_ptr<Watch>> watches;
+
+std::shared_ptr<Watch> Start(FrameworkElement const& root) {
+  if (g_unloading) return {};
+  std::lock_guard lock(mutex);
+  if (g_unloading) return {};
+  auto dispatcher = root.Dispatcher();
+  std::erase_if(watches, [&](auto const& watch) {
+    if (watch->dispatcher != dispatcher || watch->root.get()) return false;
+    watch->Pause();
+    watch->timer.Tick(watch->tick);
+    return true;
+  });
+  for (auto const& watch : watches) {
+    if (watch->dispatcher == dispatcher && watch->root.get() == root) { watch->Resume(); return watch; }
+  }
+  auto watch = std::make_shared<Watch>();
+  watch->root = winrt::make_weak(root);
+  watch->dispatcher = dispatcher;
+  watch->timer = DispatcherTimer();
+  watch->timer.Interval(std::chrono::milliseconds(200));
+  auto weak = std::weak_ptr<Watch>(watch);
+  watch->tick = watch->timer.Tick([weak](auto const&, auto const&) noexcept {
+    if (auto w = weak.lock()) {
+      try { w->Update(); }
+      catch (...) {
+        if (!w->loggedFailure) {
+          w->loggedFailure = true;
+          Wh_Log(L"[OverflowSurface] Update failed: %08X", winrt::to_hresult());
+        }
+      }
+    }
+  });
+  watches.push_back(watch);
+  watch->Resume();
+  Wh_Log(L"[OverflowSurface] Watching NotificationAreaOverflow island");
+  return watch;
+}
+
+// The projected NotificationAreaOverflow control is passed to its Measure
+// consumer when Windows lays out the separate overflow island. This access
+// point is also documented in the GPL-3.0 system-tray-folders Windhawk mod
+// by Ris Peng; it avoids guessing the native island manager's object layout.
+using OverflowMeasure_t = void(WINAPI*)(void*, winrt::Windows::Foundation::Size const*);
+OverflowMeasure_t OverflowMeasure_Original;
+void WINAPI OverflowMeasure_Hook(void* instance, winrt::Windows::Foundation::Size const* size) {
+  OverflowMeasure_Original(instance, size);
+  static thread_local bool preparing = false;
+  if (g_unloading || !instance || preparing) return;
+  struct Guard {
+    bool& flag;
+    explicit Guard(bool& value) : flag(value) { flag = true; }
+    ~Guard() { flag = false; }
+  } guard(preparing);
+  try {
+    auto element = reinterpret_cast<winrt::Windows::Foundation::IInspectable const*>(instance)->try_as<FrameworkElement>();
+    if (element && winrt::get_class_name(element) == L"SystemTray.NotificationAreaOverflow") {
+      // Measure runs before the native show animation. Apply immediately,
+      // even if the overflow HWND is still hidden. The timer is only a fallback.
+      if (auto watch = Start(element)) watch->Update(true);
+    }
+  } catch (...) {
+    Wh_Log(L"[OverflowSurface] Unable to acquire overflow control: %08X", winrt::to_hresult());
+  }
+}
+
+void Stop() {
+  std::vector<std::shared_ptr<Watch>> snapshot;
+  { std::lock_guard lock(mutex); snapshot.swap(watches); }
+  for (auto const& watch : snapshot) {
+    try {
+      auto stop = [watch] {
+        watch->Pause();
+        watch->timer.Tick(watch->tick);
+        watch->timer = nullptr;
+      };
+      if (watch->dispatcher.HasThreadAccess()) stop();
+      else watch->dispatcher.RunAsync(winrt::Windows::UI::Core::CoreDispatcherPriority::Normal, stop).get();
+    } catch (...) { Wh_Log(L"[OverflowSurface] Dispatcher cleanup failed"); }
+  }
+}
+} // namespace IloOverflowSurface
+
 void IloPanel::NativeSettings::ApplyPanelSurface(X::FrameworkElement const& root) {
   auto fallback=root.FindName(L"DefaultSurface").as<X::FrameworkElement>();
   auto surface=root.FindName(L"DockSurface").as<X::FrameworkElement>();
@@ -13690,6 +13957,14 @@ void WINAPI ContextMenuPositionHelper_PositionContextMenuPopup_Hook(
 // Called from the taskbar-icon-size dependency's HookSystemTraySymbols, which
 // runs whenever SystemTray.dll is or becomes loaded.
 bool HookTrayContextMenuPositionTai(HMODULE systemTrayModule) {
+  WindhawkUtils::SYMBOL_HOOK overflowHooks[] = {
+      {{LR"(public: __cdecl winrt::impl::consume_Windows_UI_Xaml_IUIElement<struct winrt::SystemTray::NotificationAreaOverflow>::Measure(struct winrt::Windows::Foundation::Size const &)const )"},
+       &IloOverflowSurface::OverflowMeasure_Original,
+       IloOverflowSurface::OverflowMeasure_Hook, true},
+  };
+  HookSymbolsTai(systemTrayModule, overflowHooks, ARRAYSIZE(overflowHooks));
+  Wh_Log(L"[OverflowSurface] NotificationAreaOverflow measure hook %s",
+      IloOverflowSurface::OverflowMeasure_Original ? L"available" : L"unavailable");
   WindhawkUtils::SYMBOL_HOOK systemTrayHooks[] = {
       {{LR"(struct winrt::Windows::Foundation::Point __cdecl ContextMenuPositionHelper::GetShowPosition(enum winrt::WindowsUdk::UI::Shell::TaskbarLocation,double,struct winrt::Windows::UI::Xaml::Controls::Grid const &,double,double))"},
        &ContextMenuPositionHelper_GetShowPosition_Original,
@@ -13812,11 +14087,243 @@ using namespace winrt::Windows::UI::Xaml;
 using namespace winrt::Windows::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Xaml::Controls::Primitives;
 using winrt::Windows::UI::Core::CoreDispatcher;
+// Win+X owns a MenuFlyoutPresenter. Locate it from our own settings row so
+// no other context menu or window is affected.
+struct WinXSurface {
+    winrt::weak_ref<MenuFlyoutItem> row;
+    winrt::weak_ref<MenuFlyoutSubItem> submenuOwner;
+    std::vector<std::shared_ptr<WinXSurface>> submenus;
+    winrt::event_token submenuLoaded{};
+    winrt::weak_ref<FrameworkElement> target;
+    DependencyProperty property{nullptr};
+    Media::Brush original{nullptr}, applied{nullptr};
+    winrt::weak_ref<Grid> tintGrid;
+    winrt::weak_ref<Border> tintLayer;
+    bool originalLocal = false;
+    DispatcherTimer timer{nullptr};
+    winrt::event_token tick{}, opened{}, closed{};
+    uint64_t generation = 0;
+    bool loggedMissing = false;
+    bool loggedFailure = false;
+
+    void Restore() {
+        if (auto grid = tintGrid.get()) {
+            if (auto layer = tintLayer.get()) {
+                uint32_t index{};
+                if (grid.Children().IndexOf(layer, index)) grid.Children().RemoveAt(index);
+            }
+        }
+        tintLayer = {};
+        tintGrid = {};
+        if (auto element = target.get(); element && property &&
+            element.GetValue(property).try_as<Media::Brush>() == applied) {
+            if (originalLocal) element.SetValue(property, original);
+            else element.ClearValue(property);
+        }
+        target = {};
+        property = nullptr;
+        original = nullptr;
+        applied = nullptr;
+        generation = 0;
+    }
+    static bool IsAcrylic(Media::Brush const& brush) {
+        return brush && std::wstring_view(winrt::get_class_name(brush)).find(L"AcrylicBrush") != std::wstring_view::npos;
+    }
+    static Border FindNativeBorder(DependencyObject const& node, unsigned depth = 0) {
+        if (!node || depth > 12 || node.try_as<MenuFlyoutItemBase>()) return nullptr;
+        if (auto border = node.try_as<Border>(); border && IsAcrylic(border.Background())) return border;
+        int count = Media::VisualTreeHelper::GetChildrenCount(node);
+        for (int i = 0; i < count; ++i) {
+            if (auto found = FindNativeBorder(Media::VisualTreeHelper::GetChild(node, i), depth + 1)) return found;
+        }
+        return nullptr;
+    }
+    void Update() {
+        auto item = row.get();
+        if (g_unloading || !item) { Stop(); return; }
+        std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
+        if (!IloSurfaceStyle::Enabled()) {
+            Restore(); return;
+        }
+        auto currentGeneration = IloSurfaceStyle::Generation();
+        if (auto existing = target.get(); !submenuOwner.get() && existing && item && item.XamlRoot() &&
+            existing.XamlRoot() == item.XamlRoot() && property &&
+            existing.GetValue(property).try_as<Media::Brush>() == applied && generation == currentGeneration) return;
+        MenuFlyoutPresenter presenter{nullptr};
+        Grid contentGrid{nullptr};
+        if (item) {
+            for (auto parent = Media::VisualTreeHelper::GetParent(item); parent;
+                 parent = Media::VisualTreeHelper::GetParent(parent)) {
+                presenter = parent.try_as<MenuFlyoutPresenter>();
+                if (presenter) break;
+                if (auto grid = parent.try_as<Grid>()) contentGrid = grid;
+            }
+        }
+        if (!presenter) {
+            if (!loggedMissing) { loggedMissing = true; Wh_Log(L"[WinXSurface] Waiting for presenter"); }
+            Restore(); return;
+        }
+        // A submenu has its own presenter. Never accidentally style the
+        // parent's presenter while its child items are not yet displayed.
+        if (auto owner = submenuOwner.get()) {
+            MenuFlyoutPresenter parentPresenter{nullptr};
+            for (auto parent = Media::VisualTreeHelper::GetParent(owner); parent;
+                 parent = Media::VisualTreeHelper::GetParent(parent)) {
+                if ((parentPresenter = parent.try_as<MenuFlyoutPresenter>())) break;
+            }
+            if (!parentPresenter || presenter == parentPresenter || !item.XamlRoot()) { Restore(); return; }
+            if (auto existing = target.get(); existing && existing.XamlRoot() == item.XamlRoot() && property &&
+                existing.GetValue(property).try_as<Media::Brush>() == applied && generation == currentGeneration) return;
+        }
+        FrameworkElement surface = presenter;
+        auto prop = Control::BackgroundProperty();
+        // A template can use its own native acrylic border instead of the
+        // presenter's Background. Do not descend into individual menu rows.
+        if (auto current = target.get(); current && applied && property &&
+            current.XamlRoot() == presenter.XamlRoot() && current.GetValue(property).try_as<Media::Brush>() == applied) {
+            surface = current; prop = property;
+        } else if (!IsAcrylic(presenter.Background())) {
+            if (auto border = FindNativeBorder(presenter)) { surface = border; prop = Border::BackgroundProperty(); }
+        }
+        Restore();
+        // Keep the system's acrylic implementation for the interactive Win+X
+        // menu. A custom XamlCompositionBrushBase made its entries unclickable.
+        auto native = surface.GetValue(prop).try_as<Media::AcrylicBrush>();
+        if (!native) {
+            if (!loggedMissing) {
+                loggedMissing = true;
+                Wh_Log(L"[WinXSurface] Native AcrylicBrush unavailable; leaving menu unchanged");
+            }
+            return;
+        }
+        loggedMissing = false;
+        auto const& s = g_settings;
+        auto tint = ParseWindhawkColorSetting(s.userDefinedTaskbarBackgroundTintColor, native.TintColor());
+        auto fallback = ParseWindhawkColorSetting(s.userDefinedTaskbarBackgroundFallbackColor, native.FallbackColor());
+        auto tintColor = CreateSolidBackgroundBrushFromSetting(tint).as<Media::SolidColorBrush>().Color();
+        auto fallbackColor = CreateSolidBackgroundBrushFromSetting(fallback).as<Media::SolidColorBrush>().Color();
+        Media::AcrylicBrush acrylic;
+        acrylic.BackgroundSource(native.BackgroundSource());
+        acrylic.TintColor(tintColor);
+        acrylic.FallbackColor(fallbackColor);
+        const double tintOpacity = std::clamp(s.userDefinedTaskbarBackgroundTint / 100.0, 0.0, 1.0);
+        const bool solidMode = ShouldUseSolidTaskbarBackgroundFill() || native.AlwaysUseFallback();
+        const bool useTintLayer = contentGrid && !solidMode && tintOpacity > 0.0;
+        acrylic.TintOpacity(useTintLayer ? 0.0 : tintOpacity);
+        acrylic.TintLuminosityOpacity(winrt::box_value(std::clamp(s.userDefinedTaskbarBackgroundLuminosity / 100.0, 0.0, 1.0)).as<winrt::Windows::Foundation::IReference<double>>());
+        acrylic.AlwaysUseFallback(solidMode);
+        // Do not alter the native brush's opacity during this interaction test.
+        acrylic.Opacity(native.Opacity());
+        Media::Brush brush = acrylic;
+        original = surface.GetValue(prop).try_as<Media::Brush>();
+        originalLocal = surface.ReadLocalValue(prop) != DependencyProperty::UnsetValue();
+        target = winrt::make_weak(surface); property = prop; applied = brush;
+        surface.SetValue(prop, brush);
+        // Apply the dock tint as a separate non-interactive XAML layer behind
+        // the menu content; do not replace the native Acrylic compositor.
+        if (useTintLayer) {
+            Border layer;
+            layer.IsHitTestVisible(false);
+            layer.HorizontalAlignment(HorizontalAlignment::Stretch);
+            layer.VerticalAlignment(VerticalAlignment::Stretch);
+            if (auto border = surface.try_as<Border>()) layer.CornerRadius(border.CornerRadius());
+            else layer.CornerRadius(presenter.CornerRadius());
+            auto color = tint;
+            color.color.A = 255;
+            auto tintBrush = CreateSolidBackgroundBrushFromSetting(color);
+            tintBrush.Opacity(tintOpacity);
+            layer.Background(tintBrush);
+            Grid::SetRowSpan(layer, std::max(1, static_cast<int>(contentGrid.RowDefinitions().Size())));
+            Grid::SetColumnSpan(layer, std::max(1, static_cast<int>(contentGrid.ColumnDefinitions().Size())));
+            tintGrid = winrt::make_weak(contentGrid);
+            tintLayer = winrt::make_weak(layer);
+            contentGrid.Children().InsertAt(0, layer);
+            Wh_Log(L"[WinXSurface] Independent tint layer applied: %.2f", tintOpacity);
+        }
+        generation = currentGeneration;
+        Wh_Log(L"[WinXSurface] Applied dock background to %s; native brush=%s", winrt::get_class_name(surface).c_str(),
+            original ? winrt::get_class_name(original).c_str() : L"none");
+    }
+    void Stop() {
+        if (timer) { timer.Stop(); timer.Tick(tick); timer = nullptr; }
+        for (auto const& submenu : submenus) submenu->Stop();
+        Restore();
+        loggedMissing = false;
+        loggedFailure = false;
+    }
+    void UpdateAll() {
+        Update();
+        for (auto const& submenu : submenus) submenu->Update();
+    }
+    void Bind(MenuFlyout const& menu, MenuFlyoutItem const& item, std::shared_ptr<WinXSurface> const& self) {
+        row = winrt::make_weak(item);
+        std::weak_ptr<WinXSurface> weak(self);
+        // Bind only submenus belonging to this already-identified Win+X menu.
+        // Borrow a native row as an anchor; do not replace its command.
+        for (auto const& candidate : menu.Items()) {
+            auto owner = candidate.try_as<MenuFlyoutSubItem>();
+            if (!owner) continue;
+            for (auto const& child : owner.Items()) {
+                auto anchor = child.try_as<MenuFlyoutItem>();
+                if (!anchor) continue;
+                auto submenu = std::make_shared<WinXSurface>();
+                submenu->row = winrt::make_weak(anchor);
+                submenu->submenuOwner = winrt::make_weak(owner);
+                auto childWeak = std::weak_ptr<WinXSurface>(submenu);
+                submenu->submenuLoaded = anchor.Loaded([childWeak](auto const&, auto const&) noexcept {
+                    try { if (auto watch = childWeak.lock(); watch && !g_unloading) watch->Update(); }
+                    catch (...) { Wh_Log(L"[WinXSurface] Submenu load failed: %08X", winrt::to_hresult()); }
+                });
+                submenus.push_back(submenu);
+                break;
+            }
+        }
+        opened = menu.Opened([weak](auto const&, auto const&) noexcept {
+            try {
+                if (auto watch = weak.lock(); watch && !g_unloading) {
+                    watch->Stop();
+                    watch->timer = DispatcherTimer();
+                    watch->timer.Interval(std::chrono::milliseconds(200));
+                    watch->tick = watch->timer.Tick([weak](auto const&, auto const&) noexcept {
+                        if (auto w = weak.lock()) {
+                            try { w->UpdateAll(); }
+                            catch (...) {
+                                if (!w->loggedFailure) {
+                                    w->loggedFailure = true;
+                                    Wh_Log(L"[WinXSurface] Update failed: %08X", winrt::to_hresult());
+                                }
+                            }
+                        }
+                    });
+                    watch->timer.Start();
+                    watch->UpdateAll();
+                }
+            } catch (...) { Wh_Log(L"[WinXSurface] Open failed: %08X", winrt::to_hresult()); }
+        });
+        closed = menu.Closed([weak](auto const&, auto const&) noexcept {
+            try { if (auto watch = weak.lock()) watch->Stop(); } catch (...) {}
+        });
+    }
+    void Dispose() {
+        Stop();
+        for (auto const& submenu : submenus) {
+            if (auto anchor = submenu->row.get(); anchor && submenu->submenuLoaded.value)
+                anchor.Loaded(submenu->submenuLoaded);
+        }
+        submenus.clear();
+    }
+    void Unbind(MenuFlyout const& menu) {
+        if (opened.value) menu.Opened(opened);
+        if (closed.value) menu.Closed(closed);
+        Dispose();
+    }
+};
 struct Entry {
     winrt::weak_ref<MenuFlyout> menu;
     winrt::weak_ref<MenuFlyoutItem> item;
     winrt::event_token click;
     CoreDispatcher dispatcher;
+    std::shared_ptr<WinXSurface> surface;
 };
 std::mutex mutex;
 std::vector<Entry> entries;
@@ -13846,13 +14353,24 @@ void Attach(MenuFlyout const& menu) {
     if (g_unloading) return;
     // Prune only references belonging to the current XAML apartment.
     std::erase_if(entries, [&](Entry const& entry) {
-        return entry.dispatcher == dispatcher && !entry.item.get();
+        if (entry.dispatcher != dispatcher || entry.item.get()) return false;
+        if (entry.surface) {
+            if (auto menu = entry.menu.get()) entry.surface->Unbind(menu);
+            else entry.surface->Dispose();
+        }
+        return true;
     });
     auto click = row.Click([](auto&&, auto&&) { IloPanel::Launch(); });
+    std::shared_ptr<WinXSurface> surface;
     try {
-        entries.push_back({winrt::make_weak(menu), winrt::make_weak(row), click, dispatcher});
+        if (labels.WinX()) {
+            surface = std::make_shared<WinXSurface>();
+            surface->Bind(menu, row, surface);
+        }
+        entries.push_back({winrt::make_weak(menu), winrt::make_weak(row), click, dispatcher, surface});
         items.Append(row);
     } catch (...) {
+        if (surface) surface->Unbind(menu);
         row.Click(click);
         throw;
     }
@@ -13905,6 +14423,10 @@ void Clear() {
     for (auto& entry : previous) {
         try {
             auto remove = [&entry] {
+                if (entry.surface) {
+                    if (auto menu = entry.menu.get()) entry.surface->Unbind(menu);
+                    else entry.surface->Dispose();
+                }
                 if (auto item = entry.item.get()) {
                     item.Click(entry.click);
                     if (auto menu = entry.menu.get()) {
@@ -15527,6 +16049,7 @@ void Wh_ModBeforeUninit() {
   // Fork addition: see RunModuleHooksTai.
   JoinModuleHookWorkersTai();
   g_unloading = true;
+  IloOverflowSurface::Stop();
   IloXamlMenu::Clear();
   IloShutdownZoom();
   CleanupDebounce();

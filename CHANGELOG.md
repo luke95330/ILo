@@ -4,6 +4,13 @@
 
 ## English
 
+### ILô 1.6.3
+
+- The hidden notification icons flyout now inherits the dock's background settings, including blur, opacity, tint, luminosity, saturation and inversion. Its theme is applied before the opening animation to avoid a brief flash of the original background.
+- The Start button context menu (Win+X) and its power submenu use the dock's tint with a separate, non-interactive color layer while retaining native Windows Acrylic and clickable commands.
+- Shared background-rendering code, cached elements and reduced polling avoid unnecessary work when the flyouts are closed or their settings have not changed.
+- Known visual limitation: the power submenu may become darker after losing and regaining focus. Its commands remain native; the menu is otherwise themed.
+
 ### ILô 1.6.2
 
 - Fixed automatic dock reveal after minimizing the last window that triggered auto-hide, without requiring the pointer to reach the bottom edge.
@@ -103,6 +110,13 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.6.3
+
+- Le panneau des icônes masquées de la zone de notification reprend les réglages de fond du dock : flou, opacité, teinte, luminosité, saturation et inversion. Le thème est appliqué avant l'animation d'ouverture afin d'éviter un bref affichage du fond d'origine.
+- Le menu contextuel du bouton Démarrer (Win+X) et son sous-menu d'alimentation reprennent la teinte du dock grâce à une couche de couleur non interactive, tout en conservant l'Acrylic natif de Windows et les commandes cliquables.
+- La mutualisation du rendu, la mise en cache des éléments et la réduction des vérifications évitent les traitements inutiles lorsque les panneaux sont fermés ou que leurs réglages restent inchangés.
+- Limitation visuelle connue : le sous-menu d'alimentation peut s'assombrir après une perte puis une reprise de focus. Ses commandes restent natives ; le reste du menu conserve sa personnalisation.
 
 ### ILô 1.6.2
 
