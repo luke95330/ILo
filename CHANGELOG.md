@@ -4,6 +4,12 @@
 
 ## English
 
+### ILô 1.6.1
+
+- Simplified auto-hide settings: custom reveal and hide delays are fixed at 5 ms. Animation durations remain adjustable and default to 200 ms.
+- Fixed under-dock reveal so it follows the dock content on each monitor, independently of the interactive-area clipping setting and with a full-width background.
+- Fixed notification icons that could stay magnified after the pointer left the tray upwards. Pointer checks run only while a tray icon is zoomed or animating.
+
 ### ILô 1.6
 
 - Added an **Auto-hide** category between **Background and border** and **Hover zoom**. Windows behavior remains the default.
@@ -91,6 +97,12 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.6.1
+
+- Simplification du masquage : les délais personnalisés de révélation et de masquage sont fixés à 5 ms. Les durées d’animation restent réglables, à 200 ms par défaut.
+- Correction de la révélation uniquement sous le dock : la zone suit le contenu sur chaque écran, indépendamment du découpage de la zone interactive et avec un fond pleine largeur.
+- Correction des icônes de notification qui pouvaient rester agrandies après une sortie du pointeur par le haut. La vérification du pointeur intervient uniquement pendant le zoom ou son animation.
 
 ### ILô 1.6
 

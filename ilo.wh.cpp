@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.6
+// @version         1.6.1
 // @donateUrl       https://paypal.me/MightyLuke
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -77,8 +77,8 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 | Aligner le sélecteur de clavier | Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut. |
 | Aligner les menus des icônes de notification | Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut. |
 | Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. |
-| Limiter la zone interactive au dock | Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification. |
-| Révéler la barre uniquement sous le dock | Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut. |
+| Limiter la zone interactive au dock | Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification. |
+| Révéler la barre uniquement sous le dock | La barre masquée se révèle au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. Activé par défaut.
 | Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. |
 
 </details>
@@ -151,8 +151,8 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 | Move keyboard layout flyout with Taskbar | When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on. | `true` |
 | Move tray icon menus with Taskbar | When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on. | `true` |
 | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | `true` |
-| Restrict the taskbar window to the dock | Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option. | `false` |
-| Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on. | `true` |
+| Restrict the taskbar window to the dock | Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option. | `false` |
+| Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. This also applies with a full-width background. Default is on. | `true` |
 | Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
 | Magnify icons on hover | Magnify application icons when the mouse passes over them. | `false` |
 | Application zoom style | Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons. Choices: Zoom style, MacOS style. | `zoom` |
@@ -385,13 +385,13 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - ClipTaskbarWindowToDock: false
   $name: Restrict the taskbar window to the dock
   $name:fr-FR: "Limiter la zone interactive au dock"
-  $description: Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.
-  $description:fr-FR: "Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."
+  $description: Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option.
+  $description:fr-FR: "Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification."
 - AutoHideShowUnderTaskbarOnly: true
   $name: Show an auto-hidden taskbar only from under it
   $name:fr-FR: "Révéler la barre uniquement sous le dock"
-  $description: When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.
-  $description:fr-FR: "Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."
+  $description: When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. This also applies with a full-width background. Default is on.
+  $description:fr-FR: "La barre masquée se révèle au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. Activé par défaut."
 - LogFlyoutPlacement: false
   $name: Log flyout placement to a file
   $name:fr-FR: "Journaliser la position des volets"
@@ -430,18 +430,8 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - HideInstant: false
   $name: "Customize reveal and hide"
   $name:fr-FR: "Personnaliser la révélation et le masquage"
-  $description: "Adjust the native taskbar delays and transition."
-  $description:fr-FR: "Règle les délais et la transition du masquage automatique."
-- HideShowDelay: 1
-  $name: "Reveal delay (ms)"
-  $name:fr-FR: "Délai de révélation (ms)"
-  $description: "1–3000 ms. Windows timer resolution sets the minimum effective delay."
-  $description:fr-FR: "1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif."
-- HideLeaveDelay: 1
-  $name: "Hide delay (ms)"
-  $name:fr-FR: "Délai de masquage (ms)"
-  $description: "1–3000 ms after leaving the taskbar."
-  $description:fr-FR: "1 à 3 000 ms après avoir quitté la barre."
+  $description: "Choose the transition. Both delays are fixed at 5 ms."
+  $description:fr-FR: "Choisis la transition. Les deux délais sont fixés à 5 ms."
 - HideEdge: false
   $name: "Detect the bottom edge"
   $name:fr-FR: "Détecter le bord inférieur"
@@ -720,11 +710,9 @@ const auto& Catalog() {
     {L"HideForeground", label(L"Foreground window only", L"Fenêtre active uniquement"), label(L"Auto-hide", L"Masquage"), label(L"Evaluate only the active window.", L"Prend uniquement en compte la fenêtre active."), Kind::Toggle, {}},
     {L"HidePrimary", label(L"Primary monitor only", L"Écran principal uniquement"), label(L"Auto-hide", L"Masquage"), label(L"Use Windows visibility rules on other monitors.", L"Laisse Windows gérer la visibilité sur les autres écrans."), Kind::Toggle, {}},
     {L"HideExclude", label(L"Excluded applications", L"Applications exclues"), label(L"Auto-hide", L"Masquage"), label(L"Separate executable names, full paths or application IDs with semicolons.", L"Sépare les noms d’exécutables, chemins ou identifiants d’application par des points-virgules."), Kind::Text, {}},
-    {L"HideInstant", label(L"Customize reveal and hide", L"Personnaliser la révélation et le masquage"), label(L"Auto-hide", L"Masquage"), label(L"Adjust the native taskbar delays and transition.", L"Règle les délais et la transition du masquage automatique."), Kind::Toggle, {}},
-    {L"HideShowDelay", label(L"Reveal delay (ms)", L"Délai de révélation (ms)"), label(L"Auto-hide", L"Masquage"), label(L"1–3000 ms. Windows timer resolution sets the minimum effective delay.", L"1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif."), Kind::Number, {}},
-    {L"HideLeaveDelay", label(L"Hide delay (ms)", L"Délai de masquage (ms)"), label(L"Auto-hide", L"Masquage"), label(L"1–3000 ms after leaving the taskbar.", L"1 à 3 000 ms après avoir quitté la barre."), Kind::Number, {}},
+    {L"HideInstant", label(L"Customize reveal and hide", L"Personnaliser la révélation et le masquage"), label(L"Auto-hide", L"Masquage"), label(L"Choose the transition. Both delays are fixed at 5 ms.", L"Choisis la transition. Les deux délais sont fixés à 5 ms."), Kind::Toggle, {}},
     {L"HideEdge", label(L"Detect the bottom edge", L"Détecter le bord inférieur"), label(L"Auto-hide", L"Masquage"), label(L"Also check the pointer on empty or full-screen monitors.", L"Vérifie aussi le pointeur sur les écrans vides ou en plein écran."), Kind::Toggle, {}},
-    {L"AutoHideShowUnderTaskbarOnly", label(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), label(L"Auto-hide", L"Masquage"), label(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"AutoHideShowUnderTaskbarOnly", label(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), label(L"Auto-hide", L"Masquage"), label(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. This also applies with a full-width background. Default is on.", L"La barre masquée se révèle au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. Activé par défaut."), Kind::Toggle, {}},
     {L"HideEffect", label(L"Transition", L"Transition"), label(L"Auto-hide", L"Masquage"), label(L"Choose how the taskbar appears and disappears.", L"Choisis l’effet à l’apparition et à la disparition du dock."), Kind::Choice, {{L"native",label(L"Windows animation",L"Animation Windows")},{L"instant",label(L"Instant",L"Instantanée")},{L"slide",label(L"Slide",L"Glissement")},{L"spring",label(L"Elastic",L"Élastique")},{L"bounce",label(L"Bounce",L"Rebond")},{L"fade",label(L"Fade",L"Fondu")},{L"mix",label(L"Slide and fade",L"Glissement et fondu")},{L"over",label(L"Overshoot",L"Dépassement")}}},
     {L"HideShowMs", label(L"Reveal time (ms)", L"Durée de révélation (ms)"), label(L"Auto-hide", L"Masquage"), label(L"16–1000 ms for custom transitions.", L"16 à 1 000 ms pour les transitions personnalisées."), Kind::Number, {}},
     {L"HideHideMs", label(L"Hide time (ms)", L"Durée de masquage (ms)"), label(L"Auto-hide", L"Masquage"), label(L"16–1000 ms for custom transitions.", L"16 à 1 000 ms pour les transitions personnalisées."), Kind::Number, {}},
@@ -759,7 +747,7 @@ const auto& Catalog() {
     {L"MoveFlyoutKeyboardLayout", label(L"Move keyboard layout flyout with Taskbar", L"Aligner le sélecteur de clavier"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on.", L"Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut."), Kind::Toggle, {}},
     {L"MoveTrayContextMenus", label(L"Move tray icon menus with Taskbar", L"Aligner les menus des icônes de notification"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.", L"Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."), Kind::Toggle, {}},
     {L"StartMenuOnActiveMonitor", label(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
-    {L"ClipTaskbarWindowToDock", label(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), label(L"Advanced options", L"Options avancées"), label(L"Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.", L"Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
+    {L"ClipTaskbarWindowToDock", label(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), label(L"Advanced options", L"Options avancées"), label(L"Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option.", L"Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
     {L"LogFlyoutPlacement", label(L"Log flyout placement to a file", L"Journaliser la position des volets"), label(L"Advanced options", L"Options avancées"), label(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
 };
     return options;
@@ -1077,8 +1065,8 @@ std::map<std::wstring,std::wstring> baseline, values;
     }
     void Layout(int w,int h){if(island)SetWindowPos(island,nullptr,0,0,w,h,SWP_NOACTIVATE|SWP_NOZORDER|SWP_SHOWWINDOW);}
     PCWSTR Section(int i){
-        if(i>=24 && i<37) return i<28?UiText(L"Visibility",L"Visibilité"):i<33?UiText(L"Delays and reveal",L"Délais et révélation"):L"Animation";
-        if(i>=37) {i-=13;if(i>=55)++i;}
+        if(i>=24 && i<35) return i<28?UiText(L"Visibility",L"Visibilité"):i<31?UiText(L"Reveal",L"Révélation"):L"Animation";
+        if(i>=35) {i-=11;if(i>=55)++i;}
         if(i<3)return L"Dimensions";if(i<6)return UiText(L"Spacing", L"Espacements");if(i<11)return UiText(L"Dock shape", L"Forme du dock");
         if(i<21)return UiText(L"Background", L"Arrière-plan");if(i<24)return UiText(L"Border", L"Bordure");if(i<28)return L"Style";
         if(i<34)return L"Animation";if(i<37)return L"Exclusions";if(i<41)return UiText(L"Icons and alignment", L"Icônes et alignement");
@@ -6111,7 +6099,7 @@ struct Config {
     Mode mode = Mode::System;
     Effect effect = Effect::Instant;
     bool foreground{}, primary{}, instant{}, edge{};
-    int reveal{}, leave{}, showMs{}, hideMs{}, rate{};
+    int showMs{}, hideMs{}, rate{};
     std::vector<std::wstring> exclusions;
 };
 std::shared_ptr<const Config> current = std::make_shared<const Config>();
@@ -6122,6 +6110,24 @@ static std::wstring Setting(PCWSTR key) {
     std::wstring result = value ? value : L"";
     if (value) IloPanel::Free(value);
     return result;
+}
+constexpr UINT kDelayMs = 5;
+std::atomic<bool> limitReveal{};
+std::mutex spanMutex;
+std::unordered_map<HWND, std::pair<LONG, LONG>> spans;
+
+void SetSpan(HWND bar, LONG left, LONG right) {
+    if (!bar) return;
+    std::lock_guard lock(spanMutex);
+    if (right - left >= 10) spans[bar] = {left, right};
+    else spans.erase(bar);
+}
+bool AllowsPointer(HWND bar, LONG localX) {
+    if (!limitReveal.load()) return true;
+    std::lock_guard lock(spanMutex);
+    auto it = spans.find(bar);
+    return it == spans.end() ||
+           (localX >= it->second.first && localX < it->second.second);
 }
 void NotifyBars();
 void Read() {
@@ -6137,7 +6143,7 @@ void Read() {
     c->instant=IloPanel::Int(L"HideInstant")!=0;
     c->edge=c->instant && IloPanel::Int(L"HideEdge")!=0;
     auto number=[](PCWSTR key,int lo,int hi){return std::clamp(int(IloPanel::Int(key)),lo,hi);};
-    c->reveal=number(L"HideShowDelay",1,3000); c->leave=number(L"HideLeaveDelay",1,3000);
+    limitReveal.store(IloPanel::Int(L"AutoHideShowUnderTaskbarOnly") != 0);
     c->showMs=number(L"HideShowMs",16,1000); c->hideMs=number(L"HideHideMs",16,1000);
     c->rate=number(L"HideRate",15,120);
     auto list=Setting(L"HideExclude");
@@ -6153,7 +6159,7 @@ void Read() {
     enabled=c->mode!=Mode::System || c->instant;
     timing=c->instant;
     ++revision;
-    Wh_Log(L"[Masquage] mode=%s instant=%d effet=%s delais=%d/%d",m.c_str(),int(c->instant),e.c_str(),c->reveal,c->leave);
+    Wh_Log(L"[Masquage] mode=%s instant=%d effet=%s delais=%d/%d",m.c_str(),int(c->instant),e.c_str(),int(kDelayMs),int(kDelayMs));
     NotifyBars();
 }
 bool Bar(HWND w) {
@@ -6365,7 +6371,7 @@ void Tick(HWND w,State& s,const Config& c) {
             if(pin)SetPropW(w,L"ILo.Hiding.Expanded.v2",reinterpret_cast<HANDLE>(1));
             else RemovePropW(w,L"ILo.Hiding.Expanded.v2");
             if(pin){KillTimer(w,2);s.lastReveal=now;Reveal(w,s);}
-            else SetTimer(w,2,c.instant?c.leave:100,nullptr);
+            else SetTimer(w,2,c.instant?kDelayMs:100,nullptr);
         }
     }
     // Reconcile the policy with the visible rectangle after a missed native request.
@@ -6375,14 +6381,11 @@ void Tick(HWND w,State& s,const Config& c) {
     if(c.edge && s.shellAutoHide && !s.pinned && !s.animating){
         POINT p{};RECT actual{};
         bool edge=GetCursorPos(&p)&&PtInRect(&mi.rcMonitor,p)&&p.y>=mi.rcMonitor.bottom-1&&Hidden(w,mi.rcMonitor,actual);
-        if(edge){
-            HRGN region=CreateRectRgn(0,0,0,0);
-            if(region){if(GetWindowRgn(w,region)!=ERROR)edge=PtInRegion(region,p.x-actual.left,p.y-actual.top);DeleteObject(region);}
-        }
+        if(edge)edge=AllowsPointer(w,p.x-actual.left);
         if(!edge){s.edgeStart=0;s.edgeInside=false;}
         else if(!s.edgeInside){
             if(!s.edgeStart)s.edgeStart=now;
-            if(now-s.edgeStart>=static_cast<unsigned>(c.reveal)){PostMessageW(w,WM_TIMER,3,0);s.edgeInside=true;}
+            if(now-s.edgeStart>=kDelayMs){PostMessageW(w,WM_TIMER,3,0);s.edgeInside=true;}
         }
     }
 }
@@ -6458,8 +6461,7 @@ bool Message(HWND w,UINT msg,WPARAM id){
 decltype(&SetTimer) nativeTimer{};
 UINT_PTR WINAPI Timer(HWND w,UINT_PTR id,UINT delay,TIMERPROC cb){
     if(timing && !cb && (id==2||id==3) && Bar(w)){
-        auto c=std::atomic_load(&current);
-        delay=id==3?c->reveal:c->leave;
+        delay=kDelayMs;
     }
     return nativeTimer(w,id,delay,cb);
 }
@@ -6620,7 +6622,28 @@ void AfterShellMove(HWND w,RECT from,RECT to) {
 }
 LRESULT CALLBACK Observe(HWND w,UINT msg,WPARAM wp,LPARAM lp,DWORD_PTR){
     if(msg==WM_WINDOWPOSCHANGING && StagedReveal::active)StagedReveal::active->Filter(reinterpret_cast<WINDOWPOS*>(lp));
+    if(msg==WM_NCDESTROY || msg==WM_DISPLAYCHANGE || msg==WM_DPICHANGED)
+        SetSpan(w,0,0);
     if(msg==WM_NCDESTROY)RemovePropW(w,listenerKey);
+    if(!g_unloading && limitReveal.load() &&
+       (msg==WM_NCHITTEST || (msg==WM_TIMER && wp==3))){
+        POINT p{};
+        if(msg==WM_NCHITTEST){
+            p={static_cast<short>(LOWORD(lp)),static_cast<short>(HIWORD(lp))};
+        } else if(!GetCursorPos(&p))return DefSubclassProc(w,msg,wp,lp);
+        MONITORINFO monitor{sizeof(monitor)};
+        RECT bar{};
+        auto state=Get(w);
+        if((!state || (!state->pinned && !state->animating)) &&
+           GetMonitorInfoW(MonitorFromPoint(p,MONITOR_DEFAULTTONULL),&monitor) &&
+           p.y>=monitor.rcMonitor.bottom-4 && Hidden(w,monitor.rcMonitor,bar) &&
+           bar.top<=monitor.rcMonitor.bottom && p.x>=bar.left && p.x<bar.right &&
+           !AllowsPointer(w,p.x-bar.left)){
+            if(msg==WM_NCHITTEST)return HTTRANSPARENT;
+            KillTimer(w,3);
+            return 0;
+        }
+    }
     if(Message(w,msg,wp) || (msg==applyMessage && applyMessage))return 0;
     return DefSubclassProc(w,msg,wp,lp);
 }
@@ -10880,13 +10903,57 @@ struct IloHoverZoom {
   bool macStyle=false;
   bool animateBackground=true;
   std::optional<winrt::Windows::Foundation::Point> lastPoint;
+  HWND trayWindow{};
+  HWND trayIsland{};
+  bool watchingTray=false;
+
+  // Some notification icon templates do not deliver PointerExited when the
+  // pointer leaves the XAML island. Verify the physical pointer while an icon
+  // is enlarged, including after its animation has finished.
+  bool CursorOverZoomedTrayIcon() {
+    POINT cursor{};
+    RECT bar{};
+    if (!GetCursorPos(&cursor) || !IsWindowVisible(trayWindow) ||
+        !GetWindowRect(trayWindow, &bar) || !PtInRect(&bar, cursor))
+      return false;
+    if (GetAncestor(WindowFromPoint(cursor), GA_ROOT) != trayWindow)
+      return false;
+
+    // The island's client origin and XAML's rasterization scale describe the
+    // same coordinate space, including when a secondary bar moves.
+    if (!IsWindow(trayIsland))
+      trayIsland = FindWindowExW(trayWindow, nullptr,
+          L"Windows.UI.Composition.DesktopWindowContentBridge", nullptr);
+    POINT origin{};
+    if (!trayIsland || !ClientToScreen(trayIsland, &origin)) return true;
+    if (!IsWindowVisible(trayIsland)) return false;
+    try {
+      const float scale = GetRasterizationScale(panel);
+      const float x = (cursor.x - origin.x) / scale;
+      const float y = (cursor.y - origin.y) / scale;
+      for (auto const& item : icons) {
+        if (item.target.scale <= 1) continue;
+        const auto bounds = item.button.TransformToVisual(nullptr).TransformBounds(
+            {0, 0, static_cast<float>(item.button.ActualWidth()),
+             static_cast<float>(item.button.ActualHeight())});
+        if (x >= bounds.X && x < bounds.X + bounds.Width &&
+            y >= bounds.Y && y < bounds.Y + bounds.Height)
+          return true;
+      }
+    } catch (...) {
+      // A tray item can be detached while Windows rebuilds its visual tree.
+    }
+    return false;
+  }
 
   void Frame() {
     bool busy=false;
+    bool hover=false;
     auto now=Clock::now();
     for (auto& item : icons) {
       if (!item.transform) continue;
       if (item.icon.RenderTransform()!=item.transform) { item.Restore(); continue; }
+      hover |= trayMode && item.target.scale > 1;
       if (item.current.scale == item.target.scale && item.current.shift == item.target.shift &&
           item.current.shiftY == item.target.shiftY) {
         if (item.current.scale == 1 && item.current.shift == 0 && item.current.shiftY == 0) item.Restore();
@@ -10905,8 +10972,13 @@ struct IloHoverZoom {
       item.ApplyPose();
       if (t>=1 && item.current.scale==1 && item.current.shift==0) item.Restore();
     }
-    if (busy && !running) { timer.Start(); running=true; }
-    if (!busy && running) { timer.Stop(); running=false; }
+    watchingTray = hover;
+    const bool needsTimer = busy || watchingTray;
+    if (needsTimer) {
+      const auto interval = std::chrono::milliseconds(busy ? 16 : 50);
+      if (timer.Interval() != interval) timer.Interval(interval);
+      if (!running) { timer.Start(); running=true; }
+    } else if (running) { timer.Stop(); running=false; }
   }
   void Point(std::optional<winrt::Windows::Foundation::Point> pos) {
     // All positions here are DIPs in the repeater, including at fractional DPI.
@@ -11014,8 +11086,12 @@ struct IloHoverZoom {
     Frame();
   }
 
-  void SyncTray(FrameworkElement const& root) {
+  void SyncTray(FrameworkElement const& root, HWND window) {
     if (panel != root) { Clear(); Bind(root); }
+    if (trayWindow != window) {
+      trayWindow = window;
+      trayIsland = nullptr;
+    }
     trayMode = true;
     percent = g_settings.zoomTrayPercent;
     duration = g_settings.zoomDuration;
@@ -11057,7 +11133,13 @@ struct IloHoverZoom {
     timer=DispatcherTimer();
     timer.Interval(std::chrono::milliseconds(16));
     tick=timer.Tick([this](auto const&,auto const&) noexcept {
-      try { Frame(); } catch (...) { timer.Stop();running=false; }
+      try {
+        if (watchingTray && !CursorOverZoomedTrayIcon()) {
+          Point(std::nullopt);
+        } else {
+          Frame();
+        }
+      } catch (...) { timer.Stop();running=false; }
     });
     move=Input::PointerEventHandler([this](auto const&,Input::PointerRoutedEventArgs const& e) noexcept {
       try {
@@ -11089,6 +11171,7 @@ struct IloHoverZoom {
     }
     for (auto& item:icons) item.Release();
     icons.clear();running=false;panel=nullptr;move=nullptr;leave=nullptr;
+    watchingTray=false;trayWindow=nullptr;trayIsland=nullptr;
     moved=entered=exited=canceled=unloaded={};
     lastPoint.reset();
   }
@@ -11144,7 +11227,8 @@ struct IloZoomBinding {
 };
 static std::vector<IloZoomBinding> iloZoomBindings;
 static void IloSyncZoom(std::wstring const& monitor,FrameworkElement const& panel,
-                        ChildrenLayoutMeasurementTai const& children, bool tray = false) {
+                        ChildrenLayoutMeasurementTai const& children, bool tray = false,
+                        HWND trayWindow = nullptr) {
   const bool enabled = g_settings.zoomEnabled && (!tray || !g_settings.zoomExcludeTray) && !g_unloading;
   std::shared_ptr<IloHoverZoom> zoom;
   {
@@ -11164,7 +11248,7 @@ static void IloSyncZoom(std::wstring const& monitor,FrameworkElement const& pane
     }
   }
   if (!enabled || g_unloading) zoom->Clear();
-  else if (tray) zoom->SyncTray(panel);
+  else if (tray) zoom->SyncTray(panel, trayWindow);
   else zoom->Sync(panel,children);
 }
 static void IloShutdownZoom() {
@@ -13931,7 +14015,9 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   auto taskbarChildrenMeasurement =
       CaptureChildrenLayoutTai(taskbarFrameRepeater);
   IloSyncZoom(monitorName, taskbarFrameRepeater, taskbarChildrenMeasurement);
-  IloSyncZoom(monitorName, systemTrayFrameGrid, taskbarChildrenMeasurement, true);
+  IloSyncZoom(monitorName, systemTrayFrameGrid, taskbarChildrenMeasurement, true,
+              g_applyStyleTaskbarWindowTai ? g_applyStyleTaskbarWindowTai
+                                           : FindTaskbarWindowForMonitorTai(monitorName));
   bool widgetPresent = IsTaskbarWidgetsEnabled();
   auto widgetElement = widgetPresent
       ? FindCapturedChildByClassNameTai(
@@ -14470,33 +14556,38 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   // edge. Placed before the "nothing changed" early-out below so it still runs
   // on cheap passes; UpdateTaskbarWindowRegion is a no-op when the window
   // already has the right region.
-  if (g_clipTaskbarWindowToDock) {
+  if (g_clipTaskbarWindowToDock || IloHiding::limitReveal.load()) {
     HWND taskbarWindow = g_applyStyleTaskbarWindowTai
                              ? g_applyStyleTaskbarWindowTai
                              : FindTaskbarWindowForMonitorTai(monitorName);
-    const bool clearRegion =
-        g_unloading || g_settings.userDefinedFullWidthTaskbarBackground;
-    if (clearRegion) {
-      // Fork addition: see TaskbarRevealZoneTai.
-      RestoreTaskbarRevealZoneTai(taskbarWindow);
-      RECT current{};
-      if (taskbarWindow &&
-          GetWindowRgnBox(taskbarWindow, &current) >= SIMPLEREGION &&
-          EqualRect(&current, &state.lastRegionBox)) {
-        SetOwnTaskbarWindowRegionTai(taskbarWindow, nullptr);
-      }
-      SetRectEmpty(&state.lastRegionBox);
-    } else {
-      const float regionCorner =
-          g_settings.userDefinedTaskbarCornerRadius * targetTaskbarIslandScale;
-      const bool regionCornerChanged =
-          std::abs(state.lastRegionCorner - regionCorner) > 0.5f;
-      if (UpdateTaskbarWindowRegion(
-              taskbarWindow, scaledBackgroundLeftScreen,
-              scaledBackgroundRightScreen - scaledBackgroundLeftScreen,
-              regionCorner, rasterizationScale, regionCornerChanged,
-              &state.lastRegionBox)) {
-        state.lastRegionCorner = regionCorner;
+    IloHiding::SetSpan(taskbarWindow,
+        std::lround(scaledBackgroundLeftScreen * rasterizationScale) - 1,
+        std::lround(scaledBackgroundRightScreen * rasterizationScale) + 1);
+    if (g_clipTaskbarWindowToDock) {
+      const bool clearRegion =
+          g_unloading || g_settings.userDefinedFullWidthTaskbarBackground;
+      if (clearRegion) {
+        // Fork addition: see TaskbarRevealZoneTai.
+        RestoreTaskbarRevealZoneTai(taskbarWindow);
+        RECT current{};
+        if (taskbarWindow &&
+            GetWindowRgnBox(taskbarWindow, &current) >= SIMPLEREGION &&
+            EqualRect(&current, &state.lastRegionBox)) {
+          SetOwnTaskbarWindowRegionTai(taskbarWindow, nullptr);
+        }
+        SetRectEmpty(&state.lastRegionBox);
+      } else {
+        const float regionCorner =
+            g_settings.userDefinedTaskbarCornerRadius * targetTaskbarIslandScale;
+        const bool regionCornerChanged =
+            std::abs(state.lastRegionCorner - regionCorner) > 0.5f;
+        if (UpdateTaskbarWindowRegion(
+                taskbarWindow, scaledBackgroundLeftScreen,
+                scaledBackgroundRightScreen - scaledBackgroundLeftScreen,
+                regionCorner, rasterizationScale, regionCornerChanged,
+                &state.lastRegionBox)) {
+          state.lastRegionCorner = regionCorner;
+        }
       }
     }
   }

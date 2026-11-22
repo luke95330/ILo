@@ -1,6 +1,6 @@
-# ILô 1.6
+# ILô 1.6.1
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6.1 — Windows 11 dock"></a></p>
 
 ## English
 
@@ -74,16 +74,14 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Move keyboard layout flyout with Taskbar | When enabled, the keyboard layout flyout (opened by clicking the language indicator or pressing Win+Space) is centered above the language indicator on the taskbar instead of at the right edge of the screen. On a monitor whose taskbar has no language indicator it is centered above the tray instead. Default is on. | `true` |
 | Move tray icon menus with Taskbar | When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on. | `true` |
 | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | `true` |
-| Restrict the taskbar window to the dock | Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option. | `false` |
-| Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on. | `true` |
+| Restrict the taskbar window to the dock | Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option. | `false` |
+| Show an auto-hidden taskbar only from under it | Reveal at the bottom edge under the dock content, even with a full-width background. | `true` |
 | Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
 | Visibility | With Windows taskbar auto-hide enabled, choose when the dock may hide. | `windows` |
 | Foreground window only | Evaluate only the active window. | `false` |
 | Primary monitor only | Use Windows visibility rules on other monitors. | `false` |
 | Excluded applications | Separate executable names, full paths or application IDs with semicolons. | `""` |
-| Customize reveal and hide | Adjust the native taskbar delays and transition. | `false` |
-| Reveal delay (ms) | 1–3000 ms. Windows timer resolution sets the minimum effective delay. | `1` |
-| Hide delay (ms) | 1–3000 ms after leaving the taskbar. | `1` |
+| Customize reveal and hide | Choose the transition. Both delays are fixed at 5 ms. | `false` |
 | Detect the bottom edge | Also check the pointer on empty or full-screen monitors. | `false` |
 | Transition | Choose how the taskbar appears and disappears. | `instant` |
 | Reveal time (ms) | 16–1000 ms for custom transitions. | `200` |
@@ -179,16 +177,14 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Aligner le sélecteur de clavier | Centre le volet ouvert par l’indicateur de langue ou Win + Espace au-dessus de l’indicateur, ou de la zone de notification si l’indicateur est absent. Activé par défaut. | `true` |
 | Aligner les menus des icônes de notification | Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut. | `true` |
 | Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. | `true` |
-| Limiter la zone interactive au dock | Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification. | `false` |
-| Révéler la barre uniquement sous le dock | Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut. | `true` |
+| Limiter la zone interactive au dock | Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification. | `false` |
+| Révéler la barre uniquement sous le dock | Révèle la barre au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. | `true` |
 | Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. | `false` |
 | Visibilité | Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer. | `windows` |
 | Fenêtre active uniquement | Prend uniquement en compte la fenêtre active. | `false` |
 | Écran principal uniquement | Laisse Windows gérer la visibilité sur les autres écrans. | `false` |
 | Applications exclues | Sépare les noms d’exécutables, chemins ou identifiants d’application par des points-virgules. | `""` |
-| Personnaliser la révélation et le masquage | Règle les délais et la transition du masquage automatique. | `false` |
-| Délai de révélation (ms) | 1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif. | `1` |
-| Délai de masquage (ms) | 1 à 3 000 ms après avoir quitté la barre. | `1` |
+| Personnaliser la révélation et le masquage | Choisis la transition. Les deux délais sont fixés à 5 ms. | `false` |
 | Détecter le bord inférieur | Vérifie aussi le pointeur sur les écrans vides ou en plein écran. | `false` |
 | Transition | Choisis l’effet à l’apparition et à la disparition du dock. | `instant` |
 | Durée de révélation (ms) | 16 à 1 000 ms pour les transitions personnalisées. | `200` |
