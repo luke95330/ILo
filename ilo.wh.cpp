@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         1.5.4
+// @version         1.6
 // @donateUrl       https://paypal.me/MightyLuke
 // @author          Mighty-Luke
 // @include         explorer.exe
@@ -23,7 +23,7 @@
 
 ## Français
 
-Le clic droit sur Démarrer ou sur une zone vide de la barre donne accès à « Paramètres ILô… ». Le panneau est intégré au mod. Recherchez un réglage dans les sept catégories, modifiez sa valeur puis sélectionnez **Enregistrer**. Le panneau mémorise la taille de sa fenêtre.
+Le clic droit sur Démarrer ou sur une zone vide de la barre donne accès à « Paramètres ILô… ». Le panneau est intégré au mod. Recherchez un réglage dans les huit catégories, modifiez sa valeur puis sélectionnez **Enregistrer**. Le panneau mémorise la taille de sa fenêtre.
 
 ILô centre les applications et la zone de notification dans un dock. La marge inférieure est réglée à 8 et le décalage des icônes de notification à 0. Le centrage provient de TAI Dock 1.0.3, validé sur Windows 11 build 26300.10075.
 
@@ -87,7 +87,7 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 
 ## English
 
-Right-click Start or an empty area of the taskbar and choose **ILô settings…**. Search the seven categories, change a setting and select **Save**. The panel remembers its window size.
+Right-click Start or an empty area of the taskbar and choose **ILô settings…**. Search the eight categories, change a setting and select **Save**. The panel remembers its window size.
 
 Enable **Magnify icons on hover** to try magnification. The default profile uses 180% centered zoom and a 120 ms transition. Choose MacOS style for the neighboring-icon wave.
 
@@ -397,6 +397,94 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $name:fr-FR: "Journaliser la position des volets"
   $description: When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.
   $description:fr-FR: "Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."
+- HideMode: windows
+  $name: "Visibility"
+  $name:fr-FR: "Visibilité"
+  $description: "With Windows taskbar auto-hide enabled, choose when the dock may hide."
+  $description:fr-FR: "Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer."
+  $options:
+  - windows: "Windows default"
+  - max: "Maximized or full-screen window"
+  - overlap: "Maximized or overlapping window"
+  - never: "Always visible"
+  $options:fr-FR:
+  - windows: "Selon Windows"
+  - max: "Fenêtre agrandie ou plein écran"
+  - overlap: "Fenêtre agrandie ou en chevauchement"
+  - never: "Toujours visible"
+- HideForeground: false
+  $name: "Foreground window only"
+  $name:fr-FR: "Fenêtre active uniquement"
+  $description: "Evaluate only the active window."
+  $description:fr-FR: "Prend uniquement en compte la fenêtre active."
+- HidePrimary: false
+  $name: "Primary monitor only"
+  $name:fr-FR: "Écran principal uniquement"
+  $description: "Use Windows visibility rules on other monitors."
+  $description:fr-FR: "Laisse Windows gérer la visibilité sur les autres écrans."
+- HideExclude: ""
+  $name: "Excluded applications"
+  $name:fr-FR: "Applications exclues"
+  $description: "Separate executable names, full paths or application IDs with semicolons."
+  $description:fr-FR: "Sépare les noms d’exécutables, chemins ou identifiants d’application par des points-virgules."
+- HideInstant: false
+  $name: "Customize reveal and hide"
+  $name:fr-FR: "Personnaliser la révélation et le masquage"
+  $description: "Adjust the native taskbar delays and transition."
+  $description:fr-FR: "Règle les délais et la transition du masquage automatique."
+- HideShowDelay: 1
+  $name: "Reveal delay (ms)"
+  $name:fr-FR: "Délai de révélation (ms)"
+  $description: "1–3000 ms. Windows timer resolution sets the minimum effective delay."
+  $description:fr-FR: "1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif."
+- HideLeaveDelay: 1
+  $name: "Hide delay (ms)"
+  $name:fr-FR: "Délai de masquage (ms)"
+  $description: "1–3000 ms after leaving the taskbar."
+  $description:fr-FR: "1 à 3 000 ms après avoir quitté la barre."
+- HideEdge: false
+  $name: "Detect the bottom edge"
+  $name:fr-FR: "Détecter le bord inférieur"
+  $description: "Also check the pointer on empty or full-screen monitors."
+  $description:fr-FR: "Vérifie aussi le pointeur sur les écrans vides ou en plein écran."
+- HideEffect: instant
+  $name: "Transition"
+  $name:fr-FR: "Transition"
+  $description: "Choose how the taskbar appears and disappears."
+  $description:fr-FR: "Choisis l’effet à l’apparition et à la disparition du dock."
+  $options:
+  - native: "Windows animation"
+  - instant: "Instant"
+  - slide: "Slide"
+  - spring: "Elastic"
+  - bounce: "Bounce"
+  - fade: "Fade"
+  - mix: "Slide and fade"
+  - over: "Overshoot"
+  $options:fr-FR:
+  - native: "Animation Windows"
+  - instant: "Instantanée"
+  - slide: "Glissement"
+  - spring: "Élastique"
+  - bounce: "Rebond"
+  - fade: "Fondu"
+  - mix: "Glissement et fondu"
+  - over: "Dépassement"
+- HideShowMs: 200
+  $name: "Reveal time (ms)"
+  $name:fr-FR: "Durée de révélation (ms)"
+  $description: "16–1000 ms for custom transitions."
+  $description:fr-FR: "16 à 1 000 ms pour les transitions personnalisées."
+- HideHideMs: 200
+  $name: "Hide time (ms)"
+  $name:fr-FR: "Durée de masquage (ms)"
+  $description: "16–1000 ms for custom transitions."
+  $description:fr-FR: "16 à 1 000 ms pour les transitions personnalisées."
+- HideRate: 60
+  $name: "Frame rate (fps)"
+  $name:fr-FR: "Fréquence (images/s)"
+  $description: "Target 15–120 fps, subject to Windows timer resolution."
+  $description:fr-FR: "Cible de 15 à 120 images/s, selon la résolution du minuteur Windows."
 - HoverZoomEnabled: false
   $name: "Magnify icons on hover"
   $name:fr-FR: "Agrandissement des icônes au survol"
@@ -628,6 +716,19 @@ const auto& Catalog() {
     {L"TaskbarBorderOpacity", label(L"Border opacity", L"Opacité du contour"), label(L"Background and border", L"Fond et bordure"), label(L"Set the opacity of the taskbar border. Range 0-100. Default is 0", L"Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."), Kind::Number, {}},
     {L"TaskbarBorderColorHex", label(L"Border color (HEX)", L"Couleur du contour et des séparateurs"), label(L"Background and border", L"Fond et bordure"), label(L"Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`", L"Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."), Kind::Text, {}},
     {L"TaskbarBorderThickness", label(L"Taskbar border thickness scale (%)", L"Épaisseur du contour (%)"), label(L"Background and border", L"Fond et bordure"), label(L"Set the scale of the taskbar border. Range 0-100. Default is 8", L"Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"HideMode", label(L"Visibility", L"Visibilité"), label(L"Auto-hide", L"Masquage"), label(L"With Windows taskbar auto-hide enabled, choose when the dock may hide.", L"Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer."), Kind::Choice, {{L"windows",label(L"Windows default",L"Selon Windows")},{L"max",label(L"Maximized or full-screen window",L"Fenêtre agrandie ou plein écran")},{L"overlap",label(L"Maximized or overlapping window",L"Fenêtre agrandie ou en chevauchement")},{L"never",label(L"Always visible",L"Toujours visible")}}},
+    {L"HideForeground", label(L"Foreground window only", L"Fenêtre active uniquement"), label(L"Auto-hide", L"Masquage"), label(L"Evaluate only the active window.", L"Prend uniquement en compte la fenêtre active."), Kind::Toggle, {}},
+    {L"HidePrimary", label(L"Primary monitor only", L"Écran principal uniquement"), label(L"Auto-hide", L"Masquage"), label(L"Use Windows visibility rules on other monitors.", L"Laisse Windows gérer la visibilité sur les autres écrans."), Kind::Toggle, {}},
+    {L"HideExclude", label(L"Excluded applications", L"Applications exclues"), label(L"Auto-hide", L"Masquage"), label(L"Separate executable names, full paths or application IDs with semicolons.", L"Sépare les noms d’exécutables, chemins ou identifiants d’application par des points-virgules."), Kind::Text, {}},
+    {L"HideInstant", label(L"Customize reveal and hide", L"Personnaliser la révélation et le masquage"), label(L"Auto-hide", L"Masquage"), label(L"Adjust the native taskbar delays and transition.", L"Règle les délais et la transition du masquage automatique."), Kind::Toggle, {}},
+    {L"HideShowDelay", label(L"Reveal delay (ms)", L"Délai de révélation (ms)"), label(L"Auto-hide", L"Masquage"), label(L"1–3000 ms. Windows timer resolution sets the minimum effective delay.", L"1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif."), Kind::Number, {}},
+    {L"HideLeaveDelay", label(L"Hide delay (ms)", L"Délai de masquage (ms)"), label(L"Auto-hide", L"Masquage"), label(L"1–3000 ms after leaving the taskbar.", L"1 à 3 000 ms après avoir quitté la barre."), Kind::Number, {}},
+    {L"HideEdge", label(L"Detect the bottom edge", L"Détecter le bord inférieur"), label(L"Auto-hide", L"Masquage"), label(L"Also check the pointer on empty or full-screen monitors.", L"Vérifie aussi le pointeur sur les écrans vides ou en plein écran."), Kind::Toggle, {}},
+    {L"AutoHideShowUnderTaskbarOnly", label(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), label(L"Auto-hide", L"Masquage"), label(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
+    {L"HideEffect", label(L"Transition", L"Transition"), label(L"Auto-hide", L"Masquage"), label(L"Choose how the taskbar appears and disappears.", L"Choisis l’effet à l’apparition et à la disparition du dock."), Kind::Choice, {{L"native",label(L"Windows animation",L"Animation Windows")},{L"instant",label(L"Instant",L"Instantanée")},{L"slide",label(L"Slide",L"Glissement")},{L"spring",label(L"Elastic",L"Élastique")},{L"bounce",label(L"Bounce",L"Rebond")},{L"fade",label(L"Fade",L"Fondu")},{L"mix",label(L"Slide and fade",L"Glissement et fondu")},{L"over",label(L"Overshoot",L"Dépassement")}}},
+    {L"HideShowMs", label(L"Reveal time (ms)", L"Durée de révélation (ms)"), label(L"Auto-hide", L"Masquage"), label(L"16–1000 ms for custom transitions.", L"16 à 1 000 ms pour les transitions personnalisées."), Kind::Number, {}},
+    {L"HideHideMs", label(L"Hide time (ms)", L"Durée de masquage (ms)"), label(L"Auto-hide", L"Masquage"), label(L"16–1000 ms for custom transitions.", L"16 à 1 000 ms pour les transitions personnalisées."), Kind::Number, {}},
+    {L"HideRate", label(L"Frame rate (fps)", L"Fréquence (images/s)"), label(L"Auto-hide", L"Masquage"), label(L"Target 15–120 fps, subject to Windows timer resolution.", L"Cible de 15 à 120 images/s, selon la résolution du minuteur Windows."), Kind::Number, {}},
     {L"HoverZoomEnabled", label(L"Magnify icons on hover", L"Agrandissement des icônes au survol"), label(L"Hover zoom", L"Zoom au survol"), label(L"Magnify application icons when the mouse passes over them.", L"Agrandit les icônes des applications au passage de la souris."), Kind::Toggle, {}},
     {L"HoverZoomStyle", label(L"Application zoom style", L"Style de zoom des applications"), label(L"Hover zoom", L"Zoom au survol"), label(L"Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons.", L"Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."), Kind::Choice, {{L"zoom",label(L"Zoom style", L"Style zoom")}, {L"macos",label(L"macOS style", L"Style MacOS")}}},
     {L"HoverZoomHideBackground", label(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), label(L"Hover zoom", L"Zoom au survol"), label(L"Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds.", L"Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."), Kind::Toggle, {}},
@@ -659,7 +760,6 @@ const auto& Catalog() {
     {L"MoveTrayContextMenus", label(L"Move tray icon menus with Taskbar", L"Aligner les menus des icônes de notification"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the right-click menus of the clock and the system tray icons (network, volume, battery, language) open at the right end of the taskbar, lined up with the Notification Center, instead of at the right edge of the screen. Default is on.", L"Place les menus du clic droit de l’horloge, du réseau, du son, de la batterie et de la langue à l’extrémité du dock. Activé par défaut."), Kind::Toggle, {}},
     {L"StartMenuOnActiveMonitor", label(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
     {L"ClipTaskbarWindowToDock", label(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), label(L"Advanced options", L"Options avancées"), label(L"Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option.", L"Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
-    {L"AutoHideShowUnderTaskbarOnly", label(L"Show an auto-hidden taskbar only from under it", L"Révéler la barre uniquement sous le dock"), label(L"Advanced options", L"Options avancées"), label(L"When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on.", L"Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut."), Kind::Toggle, {}},
     {L"LogFlyoutPlacement", label(L"Log flyout placement to a file", L"Journaliser la position des volets"), label(L"Advanced options", L"Options avancées"), label(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
 };
     return options;
@@ -798,6 +898,11 @@ std::map<std::wstring,std::wstring> baseline, values;
     }
     PCWSTR Reason(PCWSTR key) {
         std::wstring_view k(key);
+        if ((k==L"HideForeground" || k==L"HideExclude") && values[L"HideMode"]!=L"max" && values[L"HideMode"]!=L"overlap")
+            return UiText(L"Select a window-based visibility rule.",L"Choisis une règle de visibilité selon les fenêtres.");
+        if(k==L"HidePrimary" && values[L"HideMode"]==L"windows")return UiText(L"Select an ILô visibility rule.",L"Choisis une règle de visibilité ILô.");
+        if(k.starts_with(L"Hide") && k!=L"HideMode" && k!=L"HideForeground" && k!=L"HideExclude" && k!=L"HidePrimary" && k!=L"HideInstant" && values[L"HideInstant"]!=L"1")return UiText(L"Enable custom reveal and hide.",L"Active la personnalisation de la révélation et du masquage.");
+        if((k==L"HideShowMs" || k==L"HideHideMs" || k==L"HideRate") && (values[L"HideEffect"]==L"instant" || values[L"HideEffect"]==L"native"))return UiText(L"Select a custom animation.",L"Choisis une animation personnalisée.");
         if(k.starts_with(L"HoverZoom") && k!=L"HoverZoomEnabled" && values[L"HoverZoomEnabled"]!=L"1")
             return UiText(L"Enable hover zoom to use this setting.", L"Active le zoom au survol pour utiliser ce réglage.");
         if((k==L"HoverZoomNeighbors" || k==L"HoverZoomSpread") && values[L"HoverZoomStyle"]!=L"macos")
@@ -928,7 +1033,7 @@ std::map<std::wstring,std::wstring> baseline, values;
         nav=Named<C::ListView>(L"Navigation"); search=Named<C::TextBox>(L"Search");
         heading=Named<C::TextBlock>(L"Heading");pages=Named<C::StackPanel>(L"Pages");scroll=Named<C::ScrollViewer>(L"Scroll");
         status=Named<C::TextBlock>(L"Status");save=Named<C::Button>(L"Save");reset=Named<C::Button>(L"Reset");
-        PCWSTR glyphs[]={dockLayoutGlyph,L"\uE790",L"\uE71E",L"\uEA8F",L"\uE7C4",L"\uE8BD",L"\uE713"};
+        PCWSTR glyphs[]={dockLayoutGlyph,L"\uE790",L"\uE890",L"\uE71E",L"\uEA8F",L"\uE7C4",L"\uE8BD",L"\uE713"};
         for(auto& o:Options())if(groups.empty() || groups.back()!=o.group){
             auto item=Parse(L"<StackPanel Orientation='Horizontal' Margin='4,9' Spacing='12'><FontIcon x:Name='Icon' FontFamily='Segoe Fluent Icons' FontSize='17'/><TextBlock x:Name='Label' VerticalAlignment='Center' FontSize='14'/></StackPanel>");
             item.FindName(L"Icon").as<C::FontIcon>().Glyph(glyphs[groups.size()]);
@@ -972,6 +1077,8 @@ std::map<std::wstring,std::wstring> baseline, values;
     }
     void Layout(int w,int h){if(island)SetWindowPos(island,nullptr,0,0,w,h,SWP_NOACTIVATE|SWP_NOZORDER|SWP_SHOWWINDOW);}
     PCWSTR Section(int i){
+        if(i>=24 && i<37) return i<28?UiText(L"Visibility",L"Visibilité"):i<33?UiText(L"Delays and reveal",L"Délais et révélation"):L"Animation";
+        if(i>=37) {i-=13;if(i>=55)++i;}
         if(i<3)return L"Dimensions";if(i<6)return UiText(L"Spacing", L"Espacements");if(i<11)return UiText(L"Dock shape", L"Forme du dock");
         if(i<21)return UiText(L"Background", L"Arrière-plan");if(i<24)return UiText(L"Border", L"Bordure");if(i<28)return L"Style";
         if(i<34)return L"Animation";if(i<37)return L"Exclusions";if(i<41)return UiText(L"Icons and alignment", L"Icônes et alignement");
@@ -1457,6 +1564,54 @@ struct TaskbarState {
   bool ownsTrayY = false;
   Thickness initialTrayMargin{}, writtenTrayMargin{};
   bool hasTrayMargin = false;
+  winrt::weak_ref<FrameworkElement> fullWidthHost;
+  Media::MatrixTransform fullWidthTransform{nullptr};
+  Media::Transform previousBackgroundTransform{nullptr};
+  bool hadBackgroundTransform = false;
+
+  void RestoreFullWidthHost() {
+    if (auto host = fullWidthHost.get(); host && fullWidthTransform &&
+        host.RenderTransform() == fullWidthTransform) {
+      if (hadBackgroundTransform) host.RenderTransform(previousBackgroundTransform);
+      else host.ClearValue(UIElement::RenderTransformProperty());
+    }
+    fullWidthHost = {};
+    fullWidthTransform = nullptr;
+    previousBackgroundTransform = nullptr;
+  }
+
+  bool PositionFullWidthHost(FrameworkElement const& host, double dx,
+                             double scale, double centerX, double centerY) {
+    if (fullWidthHost.get() != host ||
+        (fullWidthTransform && host.RenderTransform() != fullWidthTransform)) {
+      RestoreFullWidthHost();
+    }
+    if (!(scale > 0) || !std::isfinite(scale)) return false;
+    const auto origin = host.RenderTransformOrigin();
+    const double inv = 1.0 / scale;
+    Media::Matrix matrix{inv, 0, 0, inv,
+        (centerX - origin.X * host.ActualWidth()) * (1 - inv) - dx * inv,
+        (centerY - origin.Y * host.ActualHeight()) * (1 - inv)};
+    if (!fullWidthTransform) {
+      auto local = host.ReadLocalValue(UIElement::RenderTransformProperty());
+      auto previous = host.RenderTransform();
+      if ((local != DependencyProperty::UnsetValue() && !local.try_as<Media::Transform>()) ||
+          (previous && (previous.TransformPoint({0,0}) != winrt::Windows::Foundation::Point{0,0} ||
+                        previous.TransformPoint({1,0}) != winrt::Windows::Foundation::Point{1,0} ||
+                        previous.TransformPoint({0,1}) != winrt::Windows::Foundation::Point{0,1}))) return false;
+      Media::MatrixTransform transform;
+      transform.Matrix(matrix);
+      host.RenderTransform(transform);
+      fullWidthTransform = transform;
+      previousBackgroundTransform = previous;
+      hadBackgroundTransform = local != DependencyProperty::UnsetValue();
+      fullWidthHost = winrt::make_weak(host);
+    } else if (fullWidthTransform.Matrix() != matrix) {
+      fullWidthTransform.Matrix(matrix);
+    }
+    return true;
+  }
+
   winrt::weak_ref<FrameworkElement> loweredBackground;
   int32_t nativeBackgroundZ{};
   int32_t appliedBackgroundZ{};
@@ -5948,6 +6103,584 @@ void WINAPI ShowStartButtonContextMenuResumeCoro_Hook(void* coroFrame) {
     ShowStartButtonContextMenuResumeCoro_Original(coroFrame);
     g_inShowStartButtonContextMenu = prev;
 }
+bool IsExplorer();
+namespace IloHiding {
+enum class Mode { System, Maximized, Overlap, Never };
+enum class Effect { Native, Instant, Slide, Spring, Bounce, Fade, Mix, Overshoot };
+struct Config {
+    Mode mode = Mode::System;
+    Effect effect = Effect::Instant;
+    bool foreground{}, primary{}, instant{}, edge{};
+    int reveal{}, leave{}, showMs{}, hideMs{}, rate{};
+    std::vector<std::wstring> exclusions;
+};
+std::shared_ptr<const Config> current = std::make_shared<const Config>();
+std::atomic<bool> enabled{}, timing{};
+std::atomic<unsigned> revision{};
+static std::wstring Setting(PCWSTR key) {
+    auto value = IloPanel::Str(key);
+    std::wstring result = value ? value : L"";
+    if (value) IloPanel::Free(value);
+    return result;
+}
+void NotifyBars();
+void Read() {
+    auto c = std::make_shared<Config>();
+    auto m = Setting(L"HideMode"), e = Setting(L"HideEffect");
+    if(m==L"max") c->mode=Mode::Maximized;
+    if(m==L"overlap") c->mode=Mode::Overlap;
+    if(m==L"never") c->mode=Mode::Never;
+    const std::pair<PCWSTR,Effect> effects[]={{L"native",Effect::Native},{L"slide",Effect::Slide},{L"spring",Effect::Spring},{L"bounce",Effect::Bounce},{L"fade",Effect::Fade},{L"mix",Effect::Mix},{L"over",Effect::Overshoot}};
+    for(auto [key, effect]:effects) if(e==key)c->effect=effect;
+    c->foreground=IloPanel::Int(L"HideForeground")!=0;
+    c->primary=IloPanel::Int(L"HidePrimary")!=0;
+    c->instant=IloPanel::Int(L"HideInstant")!=0;
+    c->edge=c->instant && IloPanel::Int(L"HideEdge")!=0;
+    auto number=[](PCWSTR key,int lo,int hi){return std::clamp(int(IloPanel::Int(key)),lo,hi);};
+    c->reveal=number(L"HideShowDelay",1,3000); c->leave=number(L"HideLeaveDelay",1,3000);
+    c->showMs=number(L"HideShowMs",16,1000); c->hideMs=number(L"HideHideMs",16,1000);
+    c->rate=number(L"HideRate",15,120);
+    auto list=Setting(L"HideExclude");
+    for(size_t pos=0;pos<list.size();){
+        auto end=list.find(L';',pos);
+        auto name=list.substr(pos,end-pos);
+        auto first=name.find_first_not_of(L" \t");
+        if(first!=name.npos)c->exclusions.push_back(name.substr(first,name.find_last_not_of(L" \t")-first+1));
+        if(end==list.npos)break;
+        pos=end+1;
+    }
+    std::atomic_store(&current,std::shared_ptr<const Config>(c));
+    enabled=c->mode!=Mode::System || c->instant;
+    timing=c->instant;
+    ++revision;
+    Wh_Log(L"[Masquage] mode=%s instant=%d effet=%s delais=%d/%d",m.c_str(),int(c->instant),e.c_str(),c->reveal,c->leave);
+    NotifyBars();
+}
+bool Bar(HWND w) {
+    wchar_t cls[64]{};
+    return w && GetClassNameW(w,cls,64) &&
+        (!wcscmp(cls,L"Shell_TrayWnd") || !wcscmp(cls,L"Shell_SecondaryTrayWnd"));
+}
+bool Excluded(HWND w,const Config& c) {
+    if(c.exclusions.empty())return false;
+    auto match=[&](PCWSTR value){return std::any_of(c.exclusions.begin(),c.exclusions.end(),[&](const auto& x){return !_wcsicmp(value,x.c_str());});};
+    DWORD pid{}; GetWindowThreadProcessId(w,&pid);
+    HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
+    if(process){
+        wchar_t path[32768]; DWORD length=ARRAYSIZE(path);
+        bool found=false;
+        if(QueryFullProcessImageNameW(process,0,path,&length)){
+            auto base=wcsrchr(path,L'\\');
+            found=match(path) || (base && match(base+1));
+        }
+        wchar_t id[512]; UINT32 count=ARRAYSIZE(id);
+        using AppIdFn=LONG (WINAPI*)(HANDLE,UINT32*,PWSTR);
+        static const auto queryId=reinterpret_cast<AppIdFn>(GetProcAddress(GetModuleHandleW(L"kernel32.dll"),"GetApplicationUserModelId"));
+        if(!found && queryId && queryId(process,&count,id)==ERROR_SUCCESS)found=match(id);
+        CloseHandle(process);
+        if(found)return true;
+    }
+    if(std::none_of(c.exclusions.begin(),c.exclusions.end(),[](const auto& id){return id.find(L'!')!=id.npos;}))return false;
+    winrt::com_ptr<IPropertyStore> store;
+    if(SUCCEEDED(SHGetPropertyStoreForWindow(w,IID_PPV_ARGS(store.put())))){
+        PROPVARIANT id{};
+        bool found=SUCCEEDED(store->GetValue(PKEY_AppUserModel_ID,&id)) && id.vt==VT_LPWSTR && id.pwszVal && match(id.pwszVal);
+        PropVariantClear(&id);
+        return found;
+    }
+    return false;
+}
+struct Scan {
+    const Config& config; HMONITOR monitor; RECT screen, band; bool found{};
+};
+bool CoversTaskbar(const Scan& s,const RECT& r,bool maximized,HMONITOR windowMonitor) {
+    RECT intersection{};
+    const bool fullscreen=r.left<=s.screen.left && r.right>=s.screen.right && r.top<=s.screen.top && r.bottom>=s.screen.bottom;
+    return fullscreen || (maximized && windowMonitor==s.monitor) ||
+        (s.config.mode==Mode::Overlap && IntersectRect(&intersection,&r,&s.band));
+}
+BOOL CALLBACK Visit(HWND w, LPARAM data) {
+    auto& s=*reinterpret_cast<Scan*>(data);
+    if(!IsWindowVisible(w)||IsIconic(w)||Bar(w)||w==GetShellWindow()||
+       (GetWindowLongPtrW(w,GWL_EXSTYLE)&(WS_EX_TOOLWINDOW|WS_EX_NOACTIVATE))) return TRUE;
+    wchar_t cls[80]{}; GetClassNameW(w,cls,80);
+    if(!wcscmp(cls,L"WorkerW")||!wcscmp(cls,L"Progman")||!wcscmp(cls,L"#32768")||(!wcscmp(cls,L"Windows.UI.Core.CoreWindow") && GetWindow(w,GW_OWNER)))return TRUE;
+    DWORD cloaked{};
+    if(SUCCEEDED(DwmGetWindowAttribute(w,DWMWA_CLOAKED,&cloaked,sizeof(cloaked)))&&cloaked)return TRUE;
+    RECT r{};
+    if((FAILED(DwmGetWindowAttribute(w,DWMWA_EXTENDED_FRAME_BOUNDS,&r,sizeof(r))) || IsRectEmpty(&r)) && !GetWindowRect(w,&r))return TRUE;
+    bool covered=CoversTaskbar(s,r,IsZoomed(w),MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST));
+    if(!covered || Excluded(w,s.config))return TRUE;
+    s.found=true; return FALSE;
+}
+// This state belongs to the taskbar's window thread. No callbacks survive unload.
+struct State : std::enable_shared_from_this<State> {
+    unsigned version{};
+    bool reported{}, reportedSlide{}, refreshShellState{true}, shellAutoHide{}, pinned{}, edgeInside{}, layered{}, animating{}, show{}, alphaEffect{};
+    BYTE originalAlpha{255}; COLORREF color{}; DWORD alphaFlags{};
+    RECT from{}, to{};
+    Effect effect{};
+    bool reportedReveal{};
+    ULONGLONG start{}, nextScan{}, edgeStart{}, lastReveal{};
+    int duration{};
+    double startMs{};
+    HWND frameWindow{};
+    PTP_TIMER clock{};
+    std::atomic<bool> pendingFrame{};
+    uintptr_t serial{};
+    POINT lastPosition{};
+    bool positioned{};
+    RECT lastHidden{};
+    bool haveHidden{};
+    int lastAlpha{-1};
+};
+UINT paintMessage{};
+std::atomic<uintptr_t> nextSerial{};
+double TimeMs(){
+    LARGE_INTEGER ticks{};
+    static const double factor=[] { LARGE_INTEGER f{}; QueryPerformanceFrequency(&f);return 1000.0/f.QuadPart; }();
+    QueryPerformanceCounter(&ticks);
+    return ticks.QuadPart*factor;
+}
+void CALLBACK WakeFrame(PTP_CALLBACK_INSTANCE,void* context,PTP_TIMER){
+    auto& s=*static_cast<State*>(context);
+    if(!s.pendingFrame.exchange(true) && !PostMessageW(s.frameWindow,paintMessage,s.serial,0))
+        s.pendingFrame=false;
+}
+void StopClock(State& s){
+    if(s.clock){
+        SetThreadpoolTimer(s.clock,nullptr,0,0);
+        WaitForThreadpoolTimerCallbacks(s.clock,TRUE);
+        CloseThreadpoolTimer(s.clock);
+        s.clock=nullptr;
+    }
+    s.pendingFrame=false;
+}
+constexpr auto stateKey=L"ILo.Hiding.State.v1";
+constexpr UINT_PTR policyTimer=0x494c4f11, frameTimer=0x494c4f12;
+UINT resetMessage{}, applyMessage{};
+std::atomic<bool> listening{};
+constexpr auto listenerKey=L"ILo.Hiding.Listener.v2";
+State* Get(HWND w){auto holder=reinterpret_cast<std::shared_ptr<State>*>(GetPropW(w,stateKey));return holder?holder->get():nullptr;}
+bool Hidden(HWND w, const RECT& screen, RECT& r){
+    return GetWindowRect(w,&r) && r.top>=screen.bottom-4;
+}
+thread_local unsigned nativeMoveDepth{};
+struct OwnMove { OwnMove(){++nativeMoveDepth;} ~OwnMove(){--nativeMoveDepth;} };
+thread_local HWND paintedWindow{};
+struct FrameMove {
+    HWND previous;
+    explicit FrameMove(HWND w):previous(paintedWindow){paintedWindow=w;}
+    ~FrameMove(){paintedWindow=previous;}
+};
+void Finish(HWND w,State& s,bool position) {
+    OwnMove ownMove;
+    if(!s.animating)return;
+    s.animating=false;
+    StopClock(s);
+    KillTimer(w,frameTimer);
+    if(position)SetWindowPos(w,nullptr,s.to.left,s.to.top,0,0,SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOSIZE);
+    if(s.alphaEffect){
+        if(s.layered)SetWindowLongPtrW(w,GWL_EXSTYLE,GetWindowLongPtrW(w,GWL_EXSTYLE)&~WS_EX_LAYERED);
+        else SetLayeredWindowAttributes(w,s.color,s.originalAlpha,s.alphaFlags);
+    }
+    s.alphaEffect=s.layered=false;
+}
+void Clear(HWND w,bool resume){
+    auto s=Get(w); if(!s)return;
+    bool pinned=s->pinned;
+    RemovePropW(w,L"ILo.Hiding.Expanded.v2");
+    auto holder=std::unique_ptr<std::shared_ptr<State>>(reinterpret_cast<std::shared_ptr<State>*>(RemovePropW(w,stateKey)));
+    KillTimer(w,policyTimer);
+    Finish(w,*s,resume);
+    if(resume && pinned)SetTimer(w,2,50,nullptr);
+}
+using RevealFn=void(WINAPI*)(void*,int,int);
+RevealFn revealPrimary{}, revealSecondary{};
+void* componentHostTable{};
+UINT requestReveal{};
+
+// TrayUI::WndProc and TrayUI::Unhide are methods on different base interfaces.
+// Resolve the live component-host subobject by its symbol, without assuming
+// its displacement is the same on every Windows build.
+void* ComponentHost(void* tray) {
+    if(!tray || !componentHostTable)return nullptr;
+    auto address=reinterpret_cast<uintptr_t>(tray);
+    for(size_t slot=0;slot<16;++slot){
+        auto candidate=reinterpret_cast<void*>(address+slot*sizeof(void*));
+        void* table{};
+        if(!ReadProcessMemory(GetCurrentProcess(),candidate,&table,sizeof(table),nullptr))break;
+        if(table==componentHostTable)return candidate;
+    }
+    return nullptr;
+}
+bool HandleReveal(HWND w,void* tray,bool secondary){
+    auto state=Get(w);
+    if(!state || !state->pinned || g_unloading)return false;
+    auto object=secondary?tray:ComponentHost(tray);
+    auto fn=secondary?revealSecondary:revealPrimary;
+    if(!state->reportedReveal){
+        Wh_Log(L"[Masquage] demande de retour barre=%p secondaire=%d interface=%d fonction=%d",w,int(secondary),int(object!=nullptr),int(fn!=nullptr));
+        state->reportedReveal=true;
+    }
+    if(!object || !fn)return false;
+    fn(object,0,0);
+    return true;
+}
+void Reveal(HWND w,State&) {
+    // Send on the owner thread so dispatch uses the current shell object,
+    // including on the first transition or after a monitor was recreated.
+    if(!requestReveal || !SendMessageW(w,requestReveal,0,0))
+        PostMessageW(w,WM_TIMER,3,0);
+}
+
+void Tick(HWND w,State& s,const Config& c) {
+    MONITORINFO mi{sizeof(mi)};
+    HMONITOR monitor=MonitorFromWindow(w,MONITOR_DEFAULTTONEAREST);
+    RECT bar{};
+    if(!GetMonitorInfoW(monitor,&mi)||!GetWindowRect(w,&bar))return;
+    auto now=GetTickCount64();
+    if(now>=s.nextScan){
+        s.nextScan=now+350;
+        bool pin=false;
+        APPBARDATA data{sizeof(data)};
+        if(s.refreshShellState){s.refreshShellState=false;s.shellAutoHide=(SHAppBarMessage(ABM_GETSTATE,&data)&ABS_AUTOHIDE)!=0;}
+        const bool autoHide=s.shellAutoHide;
+        if(autoHide && c.mode!=Mode::System && (!c.primary || (mi.dwFlags&MONITORINFOF_PRIMARY))){
+            if(c.mode==Mode::Never)pin=true;
+            else{
+                auto band=mi.rcMonitor;band.top=band.bottom-(bar.bottom-bar.top);
+                Scan scan{c,monitor,mi.rcMonitor,band};
+                if(c.foreground){if(auto fg=GetForegroundWindow())Visit(fg,reinterpret_cast<LPARAM>(&scan));}
+                else EnumWindows(Visit,reinterpret_cast<LPARAM>(&scan));
+                pin=!scan.found;
+            }
+        }
+        if(!s.reported || pin!=s.pinned){
+            Wh_Log(L"[Masquage] barre=%p autoHideWindows=%d maintenirVisible=%d",w,int(autoHide),int(pin));
+            s.reported=true;
+        }
+        if(pin!=s.pinned){
+            s.pinned=pin;s.reportedReveal=false;
+            if(pin)SetPropW(w,L"ILo.Hiding.Expanded.v2",reinterpret_cast<HANDLE>(1));
+            else RemovePropW(w,L"ILo.Hiding.Expanded.v2");
+            if(pin){KillTimer(w,2);s.lastReveal=now;Reveal(w,s);}
+            else SetTimer(w,2,c.instant?c.leave:100,nullptr);
+        }
+    }
+    // Reconcile the policy with the visible rectangle after a missed native request.
+    if(s.pinned && !s.animating && now-s.lastReveal>=1200 && Hidden(w,mi.rcMonitor,bar)){
+        s.lastReveal=now;Reveal(w,s);
+    }
+    if(c.edge && s.shellAutoHide && !s.pinned && !s.animating){
+        POINT p{};RECT actual{};
+        bool edge=GetCursorPos(&p)&&PtInRect(&mi.rcMonitor,p)&&p.y>=mi.rcMonitor.bottom-1&&Hidden(w,mi.rcMonitor,actual);
+        if(edge){
+            HRGN region=CreateRectRgn(0,0,0,0);
+            if(region){if(GetWindowRgn(w,region)!=ERROR)edge=PtInRegion(region,p.x-actual.left,p.y-actual.top);DeleteObject(region);}
+        }
+        if(!edge){s.edgeStart=0;s.edgeInside=false;}
+        else if(!s.edgeInside){
+            if(!s.edgeStart)s.edgeStart=now;
+            if(now-s.edgeStart>=static_cast<unsigned>(c.reveal)){PostMessageW(w,WM_TIMER,3,0);s.edgeInside=true;}
+        }
+    }
+}
+void Frame(HWND w,State& s){
+    OwnMove ownMove;
+    double t=std::clamp((TimeMs()-s.startMs)/s.duration,0.,1.);
+    if(t>=1.){Finish(w,s,true);return;}
+    double left=1-t;
+    double progress=t*t*(3-2*t);
+    switch(s.effect){
+        case Effect::Spring:progress=1-std::exp(-5*t)*(std::cos(10*t)+0.5*std::sin(10*t));break;
+        case Effect::Bounce:{
+            // Parabolic arcs: land, rebound, then settle exactly on the edge.
+            constexpr double d=2.75;
+            double u=t;
+            if(u<1/d)progress=7.5625*u*u;
+            else if(u<2/d){u-=1.5/d;progress=7.5625*u*u+.75;}
+            else if(u<2.5/d){u-=2.25/d;progress=7.5625*u*u+.9375;}
+            else {u-=2.625/d;progress=7.5625*u*u+.984375;}
+            break;
+        }
+        case Effect::Overshoot:progress=1+left*left*(1.6-2.6*left);break;
+        default:break;
+    }
+    const auto blend=[&](LONG a,LONG b){return int(std::lround(a+(b-a)*progress));};
+    int x=blend(s.from.left,s.to.left),y=blend(s.from.top,s.to.top);
+    if(s.effect==Effect::Fade){auto visible=s.show?s.to:s.from;x=visible.left;y=visible.top;}
+    const int alpha=static_cast<int>(std::lround(s.originalAlpha*(s.show?t:left)));
+    if(s.alphaEffect && alpha!=s.lastAlpha){
+        s.lastAlpha=alpha;
+        SetLayeredWindowAttributes(w,s.color,static_cast<BYTE>(alpha),s.alphaFlags|LWA_ALPHA);
+    }
+    if(Get(w)==&s && s.animating && (!s.positioned || x!=s.lastPosition.x || y!=s.lastPosition.y)){
+        s.positioned=true;s.lastPosition={x,y};
+        FrameMove paint(w);
+        SetWindowPos(w,nullptr,x,y,0,0,SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOSIZE|SWP_NOSENDCHANGING);
+    }
+}
+bool Message(HWND w,UINT msg,WPARAM id){
+    if(!enabled && msg!=resetMessage && !Get(w))return false;
+    if(!Bar(w))return false;
+    State* s=Get(w);
+    if(msg==WM_NCDESTROY || (resetMessage && msg==resetMessage) || g_unloading || !enabled){
+        if(s)Clear(w,msg!=WM_NCDESTROY);
+        return resetMessage && msg==resetMessage;
+    }
+    if(!s){
+        auto fresh=std::make_unique<std::shared_ptr<State>>(std::make_shared<State>());
+        if(!SetPropW(w,stateKey,fresh.get()))return false;
+        s=fresh.release()->get();
+    }
+    const auto lifetime=s->shared_from_this();
+    auto generation=revision.load();
+    if(s->version!=generation){
+        auto c=std::atomic_load(&current);
+        s->reported=false;s->reportedSlide=false;s->version=generation;Finish(w,*s,true);s->refreshShellState=true;s->nextScan=0;s->edgeStart=0;s->edgeInside=false;
+        KillTimer(w,policyTimer);
+        if(c->mode==Mode::System && s->pinned){s->pinned=false;RemovePropW(w,L"ILo.Hiding.Expanded.v2");SetTimer(w,2,100,nullptr);}
+        if(c->edge||c->mode!=Mode::System)SetTimer(w,policyTimer,c->edge?32:350,nullptr);
+        s->version=generation;
+    }
+    if(msg==WM_SETTINGCHANGE || msg==WM_DISPLAYCHANGE || msg==WM_DPICHANGED || msg==WM_POWERBROADCAST){s->refreshShellState=true;s->nextScan=0;if(msg!=WM_SETTINGCHANGE){s->haveHidden=false;Finish(w,*s,false);}}
+    if(paintMessage && msg==paintMessage){
+        if(s->animating && id==s->serial){s->pendingFrame=false;Frame(w,*s);}
+        return true;
+    }
+    if(msg!=WM_TIMER)return false;
+    if(id==frameTimer){if(s->animating)Frame(w,*s);return true;}
+    if(id==policyTimer){Tick(w,*s,*std::atomic_load(&current));return true;}
+    if(id==2 && s->pinned){KillTimer(w,2);return true;}
+    return false;
+}
+decltype(&SetTimer) nativeTimer{};
+UINT_PTR WINAPI Timer(HWND w,UINT_PTR id,UINT delay,TIMERPROC cb){
+    if(timing && !cb && (id==2||id==3) && Bar(w)){
+        auto c=std::atomic_load(&current);
+        delay=id==3?c->reveal:c->leave;
+    }
+    return nativeTimer(w,id,delay,cb);
+}
+struct StagedReveal {
+    static inline thread_local StagedReveal* active{};
+    HWND bar;
+    RECT from,to;
+    bool held{};
+    StagedReveal* previous;
+    StagedReveal(HWND w,RECT a,RECT b):bar(w),from(a),to(b),previous(active){active=this;}
+    ~StagedReveal(){active=previous;}
+    void Filter(WINDOWPOS* pos){
+        if(pos && pos->hwnd==bar && !(pos->flags&SWP_NOMOVE) &&
+           pos->x==to.left && pos->y==to.top){
+            pos->x=from.left;pos->y=from.top;held=true;
+        }
+    }
+};
+using SlideFn=void(WINAPI*)(void*,HWND,const RECT*,HMONITOR,bool,bool);
+SlideFn nativeSlide{};
+void StartEffect(HWND,State*,RECT,RECT,bool,const Config*);
+void Begin(HWND w,State& s,RECT from,RECT to,bool show,const Config& c){
+    if(!g_unloading && timing && c.effect!=Effect::Native && c.effect!=Effect::Instant)
+        StartEffect(w,&s,from,to,show,&c);
+}
+// Absolute frame deadlines keep rendering time out of the next interval.
+void RunMotion(HWND w,State& s,const Config& c){
+    StopClock(s);
+    KillTimer(w,frameTimer);
+    HANDLE timer=CreateWaitableTimerExW(nullptr,nullptr,CREATE_WAITABLE_TIMER_HIGH_RESOLUTION,TIMER_ALL_ACCESS);
+    if(!timer)timer=CreateWaitableTimerW(nullptr,FALSE,nullptr);
+    const double period=1000./c.rate;
+    unsigned frames=0;
+    while(s.animating && timing && !g_unloading && Get(w)==&s){
+        const double elapsed=TimeMs()-s.startMs;
+        const double deadline=std::min(double(s.duration),(std::floor(elapsed/period)+1)*period);
+        const double wait=deadline-elapsed;
+        if(wait>0){
+            LARGE_INTEGER delay{};delay.QuadPart=-std::max<LONGLONG>(1,std::llround(wait*10000));
+            if(timer && SetWaitableTimer(timer,&delay,0,nullptr,nullptr,FALSE))WaitForSingleObject(timer,static_cast<DWORD>(std::ceil(wait))+20);
+            else Sleep(static_cast<DWORD>(std::ceil(wait)));
+        }
+        Frame(w,s);++frames;
+    }
+    if(timer)CloseHandle(timer);
+    Wh_Log(L"[Masquage] mouvement effet=%d retour=%d distance=%ld images=%u duree=%.1f ms",int(s.effect),int(s.show),s.to.top-s.from.top,frames,TimeMs()-s.startMs);
+}
+void WINAPI Slide(void* self,HWND w,const RECT* dest,HMONITOR monitor,bool show,bool animate){
+    auto s=Get(w);
+    if(!s || !dest || !timing || g_unloading || GetWindowThreadProcessId(w,nullptr)!=GetCurrentThreadId()){
+        nativeSlide(self,w,dest,monitor,show,animate);return;
+    }
+    const auto lifetime=s->shared_from_this();
+    auto c=std::atomic_load(&current);
+    if(!s->reportedSlide){s->reportedSlide=true;Wh_Log(L"[Masquage] transition native barre=%p apparition=%d animation=%d",w,int(show),int(animate));}
+    RECT from{};if(!GetWindowRect(w,&from)){nativeSlide(self,w,dest,monitor,show,animate);return;}
+    if(show && s->animating && s->show && s->to.left==dest->left && s->to.top==dest->top &&
+       s->effect==c->effect)return;
+    Finish(w,*s,false);
+    OwnMove ownMove;
+    if(c->effect==Effect::Native){nativeSlide(self,w,dest,monitor,show,animate);return;}
+    const RECT requested=*dest;
+    const bool motion=c->effect!=Effect::Instant && c->effect!=Effect::Fade;
+    if(!show && motion && requested.top>from.top && requested.left==from.left){
+        s->lastHidden=requested;s->haveHidden=true;
+    }
+    // On automatic reveal Explorer can already have placed the HWND at its
+    // visible endpoint. Recover the start from the last hide on this monitor.
+    if(show && motion && from.top==requested.top && from.left==requested.left){
+        MONITORINFO mi{sizeof(mi)};
+        if(GetMonitorInfoW(monitor,&mi) && std::abs(requested.bottom-mi.rcMonitor.bottom)<=4){
+            LONG hidden=mi.rcMonitor.bottom-2;
+            if(s->haveHidden && s->lastHidden.left==from.left &&
+               std::abs(s->lastHidden.top-mi.rcMonitor.bottom)<=4)hidden=s->lastHidden.top;
+            if(hidden>from.top)OffsetRect(&from,0,hidden-from.top);
+        }
+    }
+    if(!show && c->effect!=Effect::Instant &&
+       (requested.left!=from.left || requested.top!=from.top)){
+        // Explorer can collapse the XAML content as soon as the native hide returns.
+        // Paint the outgoing frames while the content is still available.
+        Begin(w,*s,from,requested,false,*c);
+        if(motion)RunMotion(w,*s,*c);
+        else {
+            KillTimer(w,frameTimer);
+            while(s->animating && timing && !g_unloading && Get(w)==s){
+                Frame(w,*s);
+                if(s->animating)Sleep(std::max(1,1000/c->rate));
+            }
+        }
+        if(Get(w)==s)Finish(w,*s,false);
+        nativeSlide(self,w,dest,monitor,false,false);
+        return;
+    }
+    // Keep the initial position through the shell's show call. It may set
+    // the final HWND position before XAML has drawn the first visible frame.
+    const bool stage=show && c->effect!=Effect::Instant &&
+        from.left==requested.left && from.top!=requested.top;
+    bool held=false;
+    if(stage){
+        StagedReveal move{w,from,requested};
+        nativeSlide(self,w,dest,monitor,show,false);
+        held=move.held;
+    }else nativeSlide(self,w,dest,monitor,show,false);
+    if(c->effect==Effect::Instant || s!=Get(w) || !timing || g_unloading)return;
+    RECT to{};
+    if(!GetWindowRect(w,&to))return;
+    if(held)to=requested;
+    if(from.left==to.left && from.top==to.top){
+        if(requested.left==from.left && requested.top==from.top)return;
+        to=requested;
+    }
+    Begin(w,*s,from,to,show,*c);
+    if(motion && s->animating)RunMotion(w,*s,*c);
+}
+void StartEffect(HWND w,State* s,RECT from,RECT to,bool show,const Config* c){
+    s->from=from;s->to=to;s->show=show;s->effect=c->effect;s->duration=show?c->showMs:c->hideMs;
+    s->positioned=false;s->lastAlpha=-1;s->serial=++nextSerial;s->frameWindow=w;
+    s->animating=true;s->start=GetTickCount64();s->originalAlpha=255;s->color=0;s->alphaFlags=0;
+    if(c->effect==Effect::Fade||c->effect==Effect::Mix){
+        auto style=GetWindowLongPtrW(w,GWL_EXSTYLE);
+        if(!(style&WS_EX_LAYERED)){
+            SetLastError(0);
+            s->layered=SetWindowLongPtrW(w,GWL_EXSTYLE,style|WS_EX_LAYERED)!=0 || GetLastError()==0;
+            s->alphaEffect=s->layered;
+        }else s->alphaEffect=GetLayeredWindowAttributes(w,&s->color,&s->originalAlpha,&s->alphaFlags)!=FALSE;
+        if(!(s->alphaFlags&LWA_ALPHA))s->originalAlpha=255;
+        if(!s->alphaEffect && s->effect==Effect::Fade)s->effect=Effect::Slide;
+    }
+    s->startMs=TimeMs();
+    const DWORD period=static_cast<DWORD>(std::lround(1000./c->rate));
+    if(show && paintMessage && (c->effect==Effect::Fade || !nativeMoveDepth))s->clock=CreateThreadpoolTimer(WakeFrame,s,nullptr);
+    if(s->clock){
+        LARGE_INTEGER relative{};relative.QuadPart=-10000LL*period;
+        FILETIME due{relative.LowPart,static_cast<DWORD>(relative.HighPart)};
+        SetThreadpoolTimer(s->clock,&due,period,0);
+    } else if(!SetTimer(w,frameTimer,period,nullptr)){Finish(w,*s,true);return;}
+    Frame(w,*s);
+}
+// Some taskbar builds complete the move without calling TrayUI::SlideWindow.
+void AfterShellMove(HWND w,RECT from,RECT to) {
+    if(nativeMoveDepth || !timing || g_unloading || from.left!=to.left ||
+       from.top==to.top || from.bottom-from.top!=to.bottom-to.top)return;
+    auto s=Get(w);
+    if(!s || s->animating)return;
+    const auto lifetime=s->shared_from_this();
+    MONITORINFO mi{sizeof(mi)};
+    POINT anchor{from.left+(from.right-from.left)/2,std::min(from.top,to.top)};
+    if(!GetMonitorInfoW(MonitorFromPoint(anchor,MONITOR_DEFAULTTONEAREST),&mi))return;
+    const int height=to.bottom-to.top;
+    const int shown=mi.rcMonitor.bottom-height;
+    const bool show=from.top>=mi.rcMonitor.bottom-4 && std::abs(to.top-shown)<=4;
+    const bool hide=to.top>=mi.rcMonitor.bottom-4 && std::abs(from.top-shown)<=4;
+    if(!show && !hide)return;
+    OwnMove ownMove;
+    auto c=std::atomic_load(&current);
+    Begin(w,*s,from,to,show,*c);
+}
+LRESULT CALLBACK Observe(HWND w,UINT msg,WPARAM wp,LPARAM lp,DWORD_PTR){
+    if(msg==WM_WINDOWPOSCHANGING && StagedReveal::active)StagedReveal::active->Filter(reinterpret_cast<WINDOWPOS*>(lp));
+    if(msg==WM_NCDESTROY)RemovePropW(w,listenerKey);
+    if(Message(w,msg,wp) || (msg==applyMessage && applyMessage))return 0;
+    return DefSubclassProc(w,msg,wp,lp);
+}
+void Attach(HWND w){
+    if(!listening || !Bar(w) || GetPropW(w,listenerKey))return;
+    DWORD pid{};
+    if(!GetWindowThreadProcessId(w,&pid) || pid!=GetCurrentProcessId())return;
+    if(WindhawkUtils::SetWindowSubclassFromAnyThread(w,Observe,0)){
+        Wh_Log(L"[Masquage] écoute de la barre %p",w);
+        SetPropW(w,listenerKey,reinterpret_cast<HANDLE>(1));
+        PostMessageW(w,applyMessage,0,0);
+    }
+}
+void NotifyBars(){
+    if(!listening)return;
+    EnumWindows([](HWND w,LPARAM)->BOOL {
+        DWORD pid{}; GetWindowThreadProcessId(w,&pid);
+        if(pid==GetCurrentProcessId() && Bar(w))PostMessageW(w,applyMessage,0,0);
+        return TRUE;
+    },0);
+}
+void Start(){
+    listening=true;
+    EnumWindows([](HWND w,LPARAM)->BOOL {Attach(w);return TRUE;},0);
+}
+using ExpandedFn=bool(WINAPI*)(void*,HWND,bool);
+ExpandedFn nativeExpanded{};
+bool WINAPI Expanded(void* self,HWND w,bool expanded){
+    // The window thread owns State. Other threads only read a window property.
+    if(enabled && !g_unloading && GetPropW(w,L"ILo.Hiding.Expanded.v2"))return true;
+    return nativeExpanded(self,w,expanded);
+}
+void Stop(){
+    listening=false;
+    enabled=false;timing=false;
+    EnumWindows([](HWND w,LPARAM)->BOOL {
+        DWORD pid{}; GetWindowThreadProcessId(w,&pid);
+        if(pid==GetCurrentProcessId() && Bar(w) && GetPropW(w,listenerKey)){
+            SendMessageW(w,resetMessage,0,0);
+            WindhawkUtils::RemoveWindowSubclassFromAnyThread(w,Observe);
+            RemovePropW(w,listenerKey);
+        }
+        return TRUE;
+    },0);
+}
+thread_local HWND dispatchBar{};
+struct Dispatch {
+    HWND previous;
+    explicit Dispatch(HWND w):previous(dispatchBar){dispatchBar=w;}
+    ~Dispatch(){dispatchBar=previous;}
+};
+bool KeepVisible(bool secondary){
+    if(!enabled || g_unloading)return false;
+    HWND w=secondary?dispatchBar:FindWindowW(L"Shell_TrayWnd",nullptr);
+    if(!w || GetWindowThreadProcessId(w,nullptr)!=GetCurrentThreadId())return false;
+    auto s=Get(w);
+    return s && s->pinned;
+}
+} // namespace IloHiding
+
 static UINT iloMediaLayoutMessage = 0;
 bool IsTaskbarGeometryMessage(UINT msg) {
   switch (msg) {
@@ -5964,6 +6697,7 @@ bool IsTaskbarGeometryMessage(UINT msg) {
 using TrayUI__Hide_t = void(WINAPI*)(void* pThis);
 TrayUI__Hide_t TrayUI__Hide_Original;
 void WINAPI TrayUI__Hide_Hook(void* pThis) {
+  if(IloHiding::KeepVisible(false))return;
   if (TrayUI__Hide_Original) {
     TrayUI__Hide_Original(pThis);
   }
@@ -5972,6 +6706,7 @@ void WINAPI TrayUI__Hide_Hook(void* pThis) {
 using CSecondaryTray__AutoHide_t = void(WINAPI*)(void* pThis, bool param1);
 CSecondaryTray__AutoHide_t CSecondaryTray__AutoHide_Original;
 void WINAPI CSecondaryTray__AutoHide_Hook(void* pThis, bool param1) {
+  if(IloHiding::KeepVisible(true))return;
   if (CSecondaryTray__AutoHide_Original) {
     CSecondaryTray__AutoHide_Original(pThis, param1);
   }
@@ -5986,6 +6721,9 @@ extern "C" void Wh_ModSettingsChanged();
 using TrayUI_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag);
 TrayUI_WndProc_t TrayUI_WndProc_Original;
 LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, bool* flag) {
+  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal){if(flag)*flag=true;return IloHiding::HandleReveal(hWnd,pThis,false);}
+  IloHiding::Dispatch dispatch(hWnd);
+  if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
     {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
     Wh_ModSettingsChanged();
@@ -6003,6 +6741,7 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
     if (TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam)) {
         return ret;
       }
+  if(IloHiding::nativeMoveDepth && (Msg==WM_WINDOWPOSCHANGED || Msg==WM_WINDOWPOSCHANGING || Msg==WM_MOVE))return ret;
   if (iloMediaLayoutMessage && Msg == iloMediaLayoutMessage) {
     ApplySettingsDebounced(1);
   } else if (IsTaskbarGeometryMessage(Msg)) {
@@ -6015,6 +6754,9 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
 using CSecondaryTray_v_WndProc_t = LRESULT(WINAPI*)(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 CSecondaryTray_v_WndProc_t CSecondaryTray_v_WndProc_Original;
 LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) {
+  if(IloHiding::requestReveal && Msg==IloHiding::requestReveal)return IloHiding::HandleReveal(hWnd,pThis,true);
+  IloHiding::Dispatch dispatch(hWnd);
+  if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
     {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
     Wh_ModSettingsChanged();
@@ -6032,6 +6774,7 @@ LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, W
        if (TryCorrectShellHookMinRectMessageTai(Msg, wParam, lParam)) {
     return ret;
   }
+  if(IloHiding::nativeMoveDepth && (Msg==WM_WINDOWPOSCHANGED || Msg==WM_WINDOWPOSCHANGING || Msg==WM_MOVE))return ret;
   if (iloMediaLayoutMessage && Msg == iloMediaLayoutMessage) {
     ApplySettingsDebounced(1);
   } else if (IsTaskbarGeometryMessage(Msg)) {
@@ -6283,6 +7026,19 @@ bool HookTaskbarDllSymbolsStartButtonPosition() {
         CTaskBand__ProcessWindowDestroyed_Hook,
     },
     {
+        {LR"(public: virtual void __cdecl TrayUI::SlideWindow(struct HWND__ *,struct tagRECT const *,struct HMONITOR__ *,bool,bool))"},
+        &IloHiding::nativeSlide,IloHiding::Slide,true,
+    },
+    {
+        {LR"(const TrayUI::`vftable'{for `ITrayComponentHost'})"},&IloHiding::componentHostTable,nullptr,true,
+    },
+    {
+        {LR"(public: virtual void __cdecl TrayUI::Unhide(enum TrayCommon::TrayUnhideFlags,enum TrayCommon::UnhideRequest))"},&IloHiding::revealPrimary,nullptr,true,
+    },
+    {
+        {LR"(private: void __cdecl CSecondaryTray::_Unhide(enum TrayCommon::TrayUnhideFlags,enum TrayCommon::UnhideRequest))"},&IloHiding::revealSecondary,nullptr,true,
+    },
+    {
         {LR"(public: void __cdecl TrayUI::_Hide(void))"},
         &TrayUI__Hide_Original,
         TrayUI__Hide_Hook,
@@ -6368,6 +7124,7 @@ void WINAPI Hook_StartItemPlateEntranceAnimation_call(const bool& b) {
 bool HookTaskbarViewDllSymbolsStartButtonPosition(HMODULE module) {
     // Taskbar.View.dll
     WindhawkUtils::SYMBOL_HOOK symbolHooks[] = {{{LR"(public: static void __cdecl TaskbarTelemetry::StartItemEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemEntranceAnimation, Hook_StartItemEntranceAnimation_call},
+    {{LR"(public: bool __cdecl winrt::Taskbar::implementation::ViewCoordinator::ShouldTaskbarBeExpanded(unsigned __int64,bool))"}, &IloHiding::nativeExpanded, IloHiding::Expanded, true},
     {{LR"(public: static void __cdecl TaskbarTelemetry::StartItemPlateEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemPlateEntranceAnimation, Hook_StartItemPlateEntranceAnimation_call},
         {
             {LR"(protected: virtual void __cdecl winrt::Taskbar::implementation::ExperienceToggleButton::UpdateButtonPadding(void))"},
@@ -11405,6 +12162,7 @@ void LogTaskbarGeometryProbe(PCWSTR reason,
 }
 void UpdateGlobalSettings() {
   std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
+  if (IsExplorer() && !g_unloading) IloHiding::Read();
   auto getInt = [&](PCWSTR key) { return IloPanel::Int(key); };
   auto clamp = [](int v, int lo, int hi) { return v < lo ? lo : v > hi ? hi : v; };
   // Booleans
@@ -13063,6 +13821,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   std::lock_guard<std::recursive_mutex> stateLock(stateHandle->mutex);
   auto& state = *stateHandle;
   if (g_unloading) {
+    state.RestoreFullWidthHost();
     state.RestoreTrayTranslation();
     state.RestoreBackgroundOrder();
   }
@@ -13741,7 +14500,17 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       }
     }
   }
+  bool alignedFullWidth = false;
+  if (!g_unloading && g_settings.userDefinedFullWidthTaskbarBackground) {
+    alignedFullWidth = state.PositionFullWidthHost(taskbarBackground, targetTaskRootOffsetX,
+        targetTaskbarIslandScale, snapPx(targetScaleCenterScreenX - targetTaskRootOffsetX),
+        snapPx(static_cast<float>(rootGridTaskBar.ActualHeight()) * 0.5f));
+  } else {
+    state.RestoreFullWidthHost();
+  }
   if (!forceStyleApply && !invalidateDimensionsThisPass && !g_unloading &&
+      (!alignedFullWidth || !g_settings.userDefinedCustomizeTaskbarBackground ||
+       std::abs(state.lastBackgroundShapeTargetWidth - rootWidth) <= visualOffsetTolerance) &&
       (nestedTray || std::abs(targetOffsetXTray - systemTrayFrameGridVisual.Offset().x) <= visualOffsetTolerance) &&
       childrenWidthTaskbar == state.lastChildrenWidthTaskbar &&
       trayFrameWidth == state.lastTrayFrameWidth &&
@@ -14086,7 +14855,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
         // Convert the desired screen-space island left into RootGrid-local
         // coordinates so the island background and task/tray content stay in
         // the same coordinate system.
-        const float offsetXRect = snapPx(targetBackgroundLeftScreen - targetTaskRootOffsetX);
+        const float offsetXRect = alignedFullWidth ? 0.0f : snapPx(targetBackgroundLeftScreen - targetTaskRootOffsetX);
         const float newOffsetYRect = snapPx(static_cast<float>(abs(userDefinedTaskbarOffsetY)) );
         const bool backgroundShapeTargetChanged =
             std::abs(state.lastBackgroundShapeTargetWidth - targetWidthRect) > visualOffsetTolerance ||
@@ -14234,8 +15003,8 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
                   {targetWidthRect, clipHeight});
               backgroundResources.borderVisual.Size({targetWidthRect, clipHeight});
               if(rootGridTaskBarVisual){
-              backgroundResources.clipGeometry.Offset({static_cast<float>(-rootGridTaskBarVisual.Offset().x), 0.0f});
-              backgroundResources.borderVisual.Offset({static_cast<float>(-rootGridTaskBarVisual.Offset().x), 0.0f, 0.0f});
+              backgroundResources.clipGeometry.Offset({alignedFullWidth ? 0.0f : -targetTaskRootOffsetX, 0.0f});
+              backgroundResources.borderVisual.Offset({alignedFullWidth ? 0.0f : -targetTaskRootOffsetX, 0.0f, 0.0f});
               }
               backgroundResources.borderGeometry.Size({
                   std::max(
@@ -14352,6 +15121,8 @@ std::wstring GetProcessExeName(DWORD processId) {
   return result;
 }
 BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags) {
+  if(IloHiding::paintedWindow && IloHiding::paintedWindow==hWnd && SetWindowPos_Original)
+      return SetWindowPos_Original(hWnd,hWndInsertAfter,X,Y,cx,cy,uFlags);
   auto callOriginal = [&]() -> BOOL {
     return SetWindowPos_Original
         ? SetWindowPos_Original(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags)
@@ -14377,7 +15148,7 @@ BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int
       !GetWindowThreadProcessId(hWnd, &processId)) {
     return callOriginal();
   }
-  Wh_Log(L"[SetWindowPos] PID: %lu | Class: %s | HWND: 0x%p | Pos: (%d,%d) Size: %dx%d Flags: 0x%08X",
+  if(!IloHiding::nativeMoveDepth) Wh_Log(L"[SetWindowPos] PID: %lu | Class: %s | HWND: 0x%p | Pos: (%d,%d) Size: %dx%d Flags: 0x%08X",
          processId,
          className,
          hWnd,
@@ -14423,7 +15194,12 @@ BOOL WINAPI SetWindowPos_Hook(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int
   // Fork addition: see TaskbarRevealZoneTai.
   if (isTaskbar && !(uFlags & SWP_NOMOVE) &&
       processId == GetCurrentProcessId()) {
+    RECT from{},to{};
+    bool observe=IloHiding::timing && !IloHiding::nativeMoveDepth &&
+        GetWindowThreadProcessId(hWnd,nullptr)==GetCurrentThreadId() &&
+        GetWindowRect(hWnd,&from) && (X!=from.left || Y!=from.top);
     const BOOL result = callOriginal();
+    if(result && observe && GetWindowRect(hWnd,&to))IloHiding::AfterShellMove(hWnd,from,to);
     if (result && g_clipTaskbarWindowToDock) {
       ApplyTaskbarRevealZoneAfterMoveTai(hWnd);
     }
@@ -14549,6 +15325,13 @@ BOOL Wh_ModInit() {
       Wh_Log(L"Failed to hook SetWindowRgn");
     }
   }
+  IloHiding::paintMessage=RegisterWindowMessageW(L"ILo.Hiding.Frame.v5");
+  IloHiding::requestReveal=RegisterWindowMessageW(L"ILo.Hiding.Unhide.v4");
+  IloHiding::resetMessage=RegisterWindowMessageW(L"ILo.Hiding.Reset.1");
+  IloHiding::applyMessage=RegisterWindowMessageW(L"ILo.Hiding.Apply.v2");
+  auto shellTimer=reinterpret_cast<decltype(&SetTimer)>(GetProcAddress(moduleUser32,"SetTimer"));
+  if(!shellTimer || !WindhawkUtils::SetFunctionHook(shellTimer,IloHiding::Timer,&IloHiding::nativeTimer))
+      Wh_Log(L"[Masquage] SetTimer indisponible");
   IloPanel::Init(moduleUser32);
   iloMediaLayoutMessage = RegisterWindowMessageW(L"ILo.Media.LayoutChanged.v1");
   InitMinimizeAnimationCorrectionTai();
@@ -14602,6 +15385,7 @@ void Wh_ModAfterInit() {
   LoadSettingsTBIconSize();
   LoadSettingsStartButtonPosition();
   UpdateGlobalSettings();
+  IloHiding::Start();
   ScheduleInitialExplorerStyleApply();
   // Fork addition: see CActionCenterExperienceManager_GetViewPosition_Hook.
   StartNotificationCenterHookWaitTai();
@@ -14615,6 +15399,7 @@ void Wh_ModBeforeUninit() {
   // Fork addition: see CActionCenterExperienceManager_GetViewPosition_Hook.
   IloPanel::NativeSettings::Stop();
   IloPanel::StopRefreshWorker();
+  IloHiding::Stop();
   StopNotificationCenterHookWaitTai();
   // Fork addition: see RunModuleHooksTai.
   JoinModuleHookWorkersTai();
@@ -14634,6 +15419,7 @@ void Wh_ModBeforeUninit() {
     try {
       auto restore = [state] {
         std::lock_guard<std::recursive_mutex> lock(state->mutex);
+        state->RestoreFullWidthHost();
         state->RestoreTrayTranslation();
         state->RestoreBackgroundOrder();
       };

@@ -4,6 +4,13 @@
 
 ## English
 
+### ILô 1.6
+
+- Added an **Auto-hide** category between **Background and border** and **Hover zoom**. Windows behavior remains the default.
+- The dock can stay visible or hide when a window is maximized, enters full screen, or overlaps the taskbar. It returns automatically when the hide rule no longer applies. You can limit the rule to the foreground window or the primary monitor and exclude individual applications.
+- Reveal and hide delays can be adjusted separately. Alongside the Windows animation, seven transitions are available: **Instant**, **Slide**, **Elastic**, **Bounce**, **Fade**, **Slide and fade**, and **Overshoot**. Custom animations have independent reveal and hide durations, both set to **200 ms by default**.
+- Fixed the **full-width taskbar background** so the background and its border reach both screen edges while the icons stay centered.
+
 ### ILô 1.5.4
 
 - The settings window now uses the same four-square icon as the ILô context menu, drawn in white on a transparent background.
@@ -84,6 +91,13 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 1.6
+
+- Ajout de la catégorie **Masquage** entre **Fond et bordure** et **Zoom au survol**. Le comportement de Windows reste sélectionné par défaut.
+- Le dock peut rester visible ou se masquer lorsqu’une fenêtre est agrandie, passe en plein écran ou chevauche la barre. Il réapparaît automatiquement dès que la règle de masquage cesse de s’appliquer. La règle peut se limiter à la fenêtre active ou à l’écran principal, et certaines applications peuvent être exclues.
+- Les délais de révélation et de masquage se règlent séparément. En plus de l’animation Windows, sept transitions sont disponibles : **Instantanée**, **Glissement**, **Élastique**, **Rebond**, **Fondu**, **Glissement et fondu** et **Dépassement**. Les durées des animations personnalisées sont indépendantes et valent **200 ms par défaut dans chaque sens**.
+- Correction du **fond sur toute la largeur** : le fond et sa bordure atteignent les deux bords de l’écran tandis que les icônes restent centrées.
 
 ### ILô 1.5.4
 

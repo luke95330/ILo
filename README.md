@@ -1,6 +1,6 @@
-# ILô 1.5.4
+# ILô 1.6
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.5.4 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6 — Windows 11 dock"></a></p>
 
 ## English
 
@@ -10,7 +10,7 @@ ILô turns the Windows 11 taskbar into a floating dock that centers your apps an
 
 ### Settings panel
 
-Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across seven categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
+Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across eight categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
 
 Choose **English** or **Français** under **Interface language** at the bottom of the sidebar. The panel switches immediately and remembers your choice. The ILô command in the Start and taskbar context menus uses the same language the next time you open them. English is the default and fallback.
 
@@ -77,6 +77,18 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Restrict the taskbar window to the dock | Off uses the Windows window region for input and auto-hide while keeping the dock background. Enable to clip to the dock and use the under-dock reveal setting. Disable and re-enable the mod after changing this option. | `false` |
 | Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. The rest of the edge is left to the windows behind it. Default is on. | `true` |
 | Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
+| Visibility | With Windows taskbar auto-hide enabled, choose when the dock may hide. | `windows` |
+| Foreground window only | Evaluate only the active window. | `false` |
+| Primary monitor only | Use Windows visibility rules on other monitors. | `false` |
+| Excluded applications | Separate executable names, full paths or application IDs with semicolons. | `""` |
+| Customize reveal and hide | Adjust the native taskbar delays and transition. | `false` |
+| Reveal delay (ms) | 1–3000 ms. Windows timer resolution sets the minimum effective delay. | `1` |
+| Hide delay (ms) | 1–3000 ms after leaving the taskbar. | `1` |
+| Detect the bottom edge | Also check the pointer on empty or full-screen monitors. | `false` |
+| Transition | Choose how the taskbar appears and disappears. | `instant` |
+| Reveal time (ms) | 16–1000 ms for custom transitions. | `200` |
+| Hide time (ms) | 16–1000 ms for custom transitions. | `200` |
+| Frame rate (fps) | Target 15–120 fps, subject to Windows timer resolution. | `60` |
 | Magnify icons on hover | Magnify application icons when the mouse passes over them. | `false` |
 | Application zoom style | Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons. Choices: Zoom style, MacOS style. | `zoom` |
 | Hide icon backgrounds when hover zoom is enabled | Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds. | `true` |
@@ -101,7 +113,7 @@ Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applicat
 
 ### Panneau de configuration
 
-Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les sept catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
+Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les huit catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
 
 Choisissez **English** ou **Français** dans le sélecteur **Interface language / Langue de l’interface**, en bas de la colonne de gauche. Le panneau change immédiatement de langue et mémorise votre choix. L’entrée ILô des menus contextuels de Démarrer et de la barre des tâches suit ce choix dès leur prochaine ouverture. L’anglais est la langue par défaut et de repli.
 
@@ -170,6 +182,18 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Limiter la zone interactive au dock | Active le découpage de la fenêtre et le réveil sous le dock. Par défaut, Windows gère la zone interactive. Désactive puis réactive le mod après toute modification. | `false` |
 | Révéler la barre uniquement sous le dock | Avec le découpage actif, la barre masquée réapparaît lorsque le pointeur atteint le bord de l’écran sous le dock. Activé par défaut. | `true` |
 | Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. | `false` |
+| Visibilité | Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer. | `windows` |
+| Fenêtre active uniquement | Prend uniquement en compte la fenêtre active. | `false` |
+| Écran principal uniquement | Laisse Windows gérer la visibilité sur les autres écrans. | `false` |
+| Applications exclues | Sépare les noms d’exécutables, chemins ou identifiants d’application par des points-virgules. | `""` |
+| Personnaliser la révélation et le masquage | Règle les délais et la transition du masquage automatique. | `false` |
+| Délai de révélation (ms) | 1 à 3 000 ms. La résolution du minuteur Windows détermine le délai minimal effectif. | `1` |
+| Délai de masquage (ms) | 1 à 3 000 ms après avoir quitté la barre. | `1` |
+| Détecter le bord inférieur | Vérifie aussi le pointeur sur les écrans vides ou en plein écran. | `false` |
+| Transition | Choisis l’effet à l’apparition et à la disparition du dock. | `instant` |
+| Durée de révélation (ms) | 16 à 1 000 ms pour les transitions personnalisées. | `200` |
+| Durée de masquage (ms) | 16 à 1 000 ms pour les transitions personnalisées. | `200` |
+| Fréquence (images/s) | Cible de 15 à 120 images/s, selon la résolution du minuteur Windows. | `60` |
 | Agrandissement des icônes au survol | Agrandit les icônes des applications au passage de la souris. | `false` |
 | Style de zoom des applications | Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines. | `zoom` |
 | Masquer le fond des icônes quand le zoom est activé | Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres. | `true` |
