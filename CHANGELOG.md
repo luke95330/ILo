@@ -4,6 +4,16 @@
 
 ## English
 
+### ILô 2.0.1
+
+- Custom two-line clock with editable templates, automatic or manual location, weather, additional time zone, and CPU, RAM, GPU, VRAM and battery variables.
+- Rich clock tooltip with current weather, three-day forecast, temperature chart and system information.
+- Independent context menus for the clock, sound, network and Win+X (including submenus), enabled by default, preserving native Windows labels and actions on recognized layouts.
+- Shared background rendering across the dock, menus, tooltips, hidden notification icons and window thumbnail frames.
+- Redesigned bilingual settings panel with illustrative previews, background presets, compact controls, sliders and color pickers.
+- New About page with GitHub and PayPal links, stable-release checks and SHA-256-verified source downloads for assisted installation in Windhawk.
+- Version 2.0.1 is the first public 2.x release and the update target for testing from the validated 2.0.0 build. Existing ILô profiles are preserved.
+
 ### ILô 1.6.3
 
 - The hidden notification icons flyout now inherits the dock's background settings, including blur, opacity, tint, luminosity, saturation and inversion. Its theme is applied before the opening animation to avoid a brief flash of the original background.
@@ -111,6 +121,16 @@ Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.
 
 ## Français
 
+### ILô 2.0.1
+
+- Horloge personnalisable sur deux lignes avec modèles éditables, localisation automatique ou manuelle, météo, fuseau supplémentaire et variables CPU, RAM, GPU, VRAM et batterie.
+- Info-bulle enrichie : météo actuelle, prévisions sur trois jours, courbes de températures et informations système.
+- Menus contextuels indépendants pour l'horloge, le son, le réseau et Win+X (sous-menus inclus), activés par défaut, avec les libellés et actions Windows d'origine sur les dispositions reconnues.
+- Rendu graphique commun au dock, aux menus, aux info-bulles, aux icônes masquées et aux cadres des miniatures.
+- Panneau de paramètres bilingue repensé : aperçus illustratifs, styles de fond, contrôles compacts, réglettes et sélecteurs de couleurs.
+- Nouvelle rubrique À propos avec liens GitHub et PayPal, recherche des versions stables et téléchargement de la source vérifiée par SHA-256 pour une installation assistée dans Windhawk.
+- La version 2.0.1 est la première publication publique de la série 2.x et permet de tester la mise à jour depuis la 2.0.0 validée. Les profils ILô existants sont conservés.
+
 ### ILô 1.6.3
 
 - Le panneau des icônes masquées de la zone de notification reprend les réglages de fond du dock : flou, opacité, teinte, luminosité, saturation et inversion. Le thème est appliqué avant l'animation d'ouverture afin d'éviter un bref affichage du fond d'origine.
@@ -215,3 +235,4 @@ Première version sous le nom **ILô**, par Mighty-Luke. Reprise du centrage de 
 ### Base de vitaliiorlov 1.5.278-vo
 
 Point de départ d’ILô. Cette version du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) reposait sur la barre flottante TAI de DarkionAvey. Elle gérait déjà la zone cliquable limitée au dock, le placement des notifications sur l’écran principal et la journalisation facultative de la position des volets. [Notes archivées du fork d’origine](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
+

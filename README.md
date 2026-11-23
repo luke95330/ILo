@@ -1,26 +1,41 @@
-# ILô 1.6.3
+# ILô 2.0.1
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 1.6.3 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 2.0.1 — Windows 11 dock"></a></p>
+
+<p align="center"><a href="assets/ilo-clock-tooltip.png"><img src="assets/ilo-clock-tooltip.png" width="900" alt="ILô clock, three-day weather forecast and system information"></a></p>
+<p align="center"><a href="assets/ilo-settings-2.png"><img src="assets/ilo-settings-2.png" width="1200" alt="ILô redesigned settings panel"></a></p>
 
 ## English
 
-[Dock changelog](CHANGELOG.md#english)
+[Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
+
+### What's new in ILô 2.0.1
+
+- Custom two-line clock with editable templates, automatic or manual location, weather, additional time zone, and CPU, RAM, GPU, VRAM and battery variables.
+- Rich clock tooltip with current weather, three-day forecast, temperature chart and system information.
+- Independent context menus for the clock, sound, network and Win+X (including submenus), enabled by default, preserving native Windows labels and actions on recognized layouts.
+- Shared background rendering across the dock, menus, tooltips, hidden notification icons and window thumbnail frames.
+- Redesigned bilingual settings panel with illustrative previews, background presets, compact controls, sliders and color pickers.
+- New About page with GitHub and PayPal links, stable-release checks and SHA-256-verified source downloads for assisted installation in Windhawk.
+- Version 2.0.1 is the first public 2.x release and the update target for testing from the validated 2.0.0 build. Existing ILô profiles are preserved.
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
 ### Settings panel
 
-Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across eight categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
+Right-click **Start** or an empty area of the taskbar and select **ILô settings…**. Search across nine settings categories or select one in the sidebar. Select **Save** to apply your changes. **Reset category** restores the selected category to its Windhawk settings. The panel uses the dock’s background settings and remembers its window size.
 
 Choose **English** or **Français** under **Interface language** at the bottom of the sidebar. The panel switches immediately and remembers your choice. The ILô command in the Start and taskbar context menus uses the same language the next time you open them. English is the default and fallback.
 
-[View the settings panel](assets/ilo-settings.png) · [View the Start context menu](assets/ilo-start-menu.png) (French interface)
+[View the settings panel](assets/ilo-settings-2.png) · [View the Start context menu](assets/ilo-start-menu.png) (French interface)
 
 The optional [ILô Media player](https://github.com/luke95330/ILo_Media) adds album art and playback controls to the dock.
 
 ### Installation
 
 Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
+
+To update an existing installation, use **About → Check for updates** to download and verify the new source. Paste the verified source into the existing ILô mod in Windhawk and compile; do not create a second ILô instance.
 
 ### Sources
 
@@ -105,25 +120,37 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 ## Français
 
-[Historique des versions du dock](CHANGELOG.md#français)
+[Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
+
+### Nouveautés d'ILô 2.0.1
+
+- Horloge personnalisable sur deux lignes avec modèles éditables, localisation automatique ou manuelle, météo, fuseau supplémentaire et variables CPU, RAM, GPU, VRAM et batterie.
+- Info-bulle enrichie : météo actuelle, prévisions sur trois jours, courbes de températures et informations système.
+- Menus contextuels indépendants pour l'horloge, le son, le réseau et Win+X (sous-menus inclus), activés par défaut, avec les libellés et actions Windows d'origine sur les dispositions reconnues.
+- Rendu graphique commun au dock, aux menus, aux info-bulles, aux icônes masquées et aux cadres des miniatures.
+- Panneau de paramètres bilingue repensé : aperçus illustratifs, styles de fond, contrôles compacts, réglettes et sélecteurs de couleurs.
+- Nouvelle rubrique À propos avec liens GitHub et PayPal, recherche des versions stables et téléchargement de la source vérifiée par SHA-256 pour une installation assistée dans Windhawk.
+- La version 2.0.1 est la première publication publique de la série 2.x et permet de tester la mise à jour depuis la 2.0.0 validée. Les profils ILô existants sont conservés.
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 
 ### Panneau de configuration
 
-Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les huit catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
+Faites un clic droit sur **Démarrer** ou sur une zone vide de la barre des tâches et choisissez **Paramètres ILô…**. Recherchez un réglage parmi les neuf catégories ou sélectionnez une rubrique dans la colonne de gauche. Cliquez sur **Enregistrer** pour appliquer vos modifications. **Réinitialiser la catégorie** reprend les valeurs définies dans Windhawk pour cette rubrique. Le panneau utilise les réglages de fond du dock et mémorise la taille de sa fenêtre.
 
 Choisissez **English** ou **Français** dans le sélecteur **Interface language / Langue de l’interface**, en bas de la colonne de gauche. Le panneau change immédiatement de langue et mémorise votre choix. L’entrée ILô des menus contextuels de Démarrer et de la barre des tâches suit ce choix dès leur prochaine ouverture. L’anglais est la langue par défaut et de repli.
 
 <a href="assets/ilo-start-menu.png"><img src="assets/ilo-start-menu.png" width="377" alt="Paramètres ILô dans le menu contextuel de Démarrer"></a>
 
-<a href="assets/ilo-settings.png"><img src="assets/ilo-settings.png" width="1000" alt="Panneau de configuration ILô ouvert sur Dock et disposition"></a>
+<a href="assets/ilo-settings-2.png"><img src="assets/ilo-settings-2.png" width="1000" alt="Panneau de configuration ILô ouvert sur Dock et disposition"></a>
 
 Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’afficher la pochette et les commandes de lecture dans le dock.
 
 ### Installation
 
 Désactivez l’ancien mod de dock. Dans Windhawk, créez un mod local, remplacez le contenu de l’éditeur par celui de [ilo.wh.cpp](ilo.wh.cpp), puis compilez. Les réglages du dock sont accessibles dans l’onglet **Paramètres**.
+
+Pour mettre à jour une installation existante, utilise **À propos → Rechercher des mises à jour** afin de télécharger et vérifier le nouveau fichier source. Colle cette source dans le mod ILô existant dans Windhawk puis compile ; ne crée pas une seconde instance d'ILô.
 
 ### Sources
 
@@ -205,3 +232,4 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Exclure la date et l’heure | Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible. | `true` |
 
 </details>
+
