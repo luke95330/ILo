@@ -4,6 +4,12 @@
 
 ## English
 
+### ILô 2.0.2
+
+- Improved assisted update installation: the **Copy source and open Windhawk** button copies the verified source and opens the installed Windhawk application.
+- Clear feedback immediately below the button, with instructions to update and compile the existing ILô mod and a fallback if Windhawk cannot be opened automatically.
+- Update controls now appear before the release notes. SHA-256 verification and existing ILô profiles are preserved.
+
 ### ILô 2.0.1
 
 - Custom two-line clock with editable templates, automatic or manual location, weather, additional time zone, and CPU, RAM, GPU, VRAM and battery variables.
@@ -120,6 +126,12 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 2.0.2
+
+- Installation assistée des mises à jour améliorée : le bouton **Copier le code et ouvrir Windhawk** copie la source vérifiée et ouvre l'application Windhawk installée.
+- Confirmation immédiatement sous le bouton, avec les instructions pour mettre à jour et compiler le mod ILô existant et une solution de repli si l'ouverture automatique échoue.
+- Les commandes de mise à jour apparaissent avant les notes de version. La vérification SHA-256 et les profils ILô existants sont conservés.
 
 ### ILô 2.0.1
 

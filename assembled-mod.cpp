@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         2.0.1
+// @version         2.0.2
 // @github          https://github.com/luke95330
 // @homepage        https://github.com/luke95330/ILo
 // @donateUrl       https://paypal.me/MightyLuke
@@ -87,7 +87,7 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 
 **Zoom au survol.** Activez « Agrandissement des icônes au survol » dans les paramètres. Le profil proposé utilise un zoom centré de 180 % et une transition de 120 ms. Le style MacOS étend l’effet aux voisines. Le zoom reste dans la zone cliquable du bouton.
 
-## Horloge personnalisée (2.0.1)
+## Horloge personnalisée (2.0.2)
 
 Dans **Horloge**, activez la personnalisation, choisissez un modèle modifiable puis composez les deux lignes avec les boutons d'insertion et l'aperçu. La localisation peut être manuelle, automatique (ville approximative déduite de l'adresse IP via wttr.in) ou désactivée. `%city%`, `%weather_icon%`, `%temperature%` et `%weather%` peuvent être utilisés séparément. Le service HTTPS n'est interrogé que si nécessaire pour les informations choisies ou par une détection explicitement demandée. Désactivez Taskbar Clock Customization avant de tester. Les dispositions non reconnues gardent l'horloge native.
 
@@ -917,7 +917,7 @@ constexpr PCWSTR donate=L"https://paypal.me/MightyLuke";
 #ifdef WH_MOD_VERSION
 constexpr PCWSTR version=WH_MOD_VERSION;
 #else
-constexpr PCWSTR version=L"2.0.1";
+constexpr PCWSTR version=L"2.0.2";
 #endif
 enum class Phase { Idle, Checking, Current, Available, Downloading, Ready, NoRelease, Error };
 enum class Failure { None, Network, Metadata, Asset, Integrity, Source, Cancelled };
@@ -2023,17 +2023,35 @@ std::map<std::wstring,std::wstring> baseline, values;
     void OpenAboutLink(PCWSTR link){
         if(reinterpret_cast<INT_PTR>(ShellExecuteW(window,L"open",link,nullptr,nullptr,SW_SHOWNORMAL))<=32){updateActionMessage=UiText(L"The link could not be opened.",L"Impossible d'ouvrir le lien.");UpdateAbout();}
     }
+    static bool OpenInstalledWindhawk(HWND owner){
+        constexpr PCWSTR key=L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Windhawk";
+        for(DWORD view:{DWORD(RRF_SUBKEY_WOW6432KEY),DWORD(RRF_SUBKEY_WOW6464KEY)}){
+            wchar_t folder[32768]{};DWORD bytes=sizeof(folder);
+            if(RegGetValueW(HKEY_LOCAL_MACHINE,key,L"InstallLocation",RRF_RT_REG_SZ|view,nullptr,folder,&bytes)!=ERROR_SUCCESS||!folder[0])continue;
+            std::wstring path=folder;
+            if(path.size()<3||path[1]!=L':'||(path[2]!=L'\\'&&path[2]!=L'/'))continue;
+            if(path.back()!=L'\\'&&path.back()!=L'/')path+=L'\\';
+            path+=L"windhawk.exe";
+            DWORD attrs=GetFileAttributesW(path.c_str());
+            if(attrs==INVALID_FILE_ATTRIBUTES||(attrs&FILE_ATTRIBUTE_DIRECTORY))continue;
+            if(reinterpret_cast<INT_PTR>(ShellExecuteW(owner,L"open",path.c_str(),nullptr,folder,SW_SHOWNORMAL))>32)return true;
+        }
+        return false;
+    }
     void PrepareUpdate(){
         auto r=updates.Snapshot();if(r.phase!=Updates::Phase::Ready||!r.source)return;
         if(!changes.empty()){updateActionMessage=UiText(L"Save your pending settings before installing the update.",L"Enregistre tes réglages en attente avant d'installer la mise à jour.");UpdateAbout();return;}
-        auto text=Updates::Utf8(*r.source);if(text.empty())return;
+        auto text=Updates::Utf8(*r.source);if(text.empty()){updateActionMessage=UiText(L"Unable to read the verified source. Download it again.",L"Impossible de lire la source vérifiée. Télécharge-la de nouveau.");UpdateAbout();return;}
         bool copied=false;
         if(auto memory=GlobalAlloc(GMEM_MOVEABLE,(text.size()+1)*sizeof(wchar_t))){
             if(auto data=static_cast<wchar_t*>(GlobalLock(memory))){std::copy(text.begin(),text.end(),data);data[text.size()]=L'\0';GlobalUnlock(memory);
                 if(OpenClipboard(window)){if(EmptyClipboard()&&SetClipboardData(CF_UNICODETEXT,memory)){copied=true;memory=nullptr;}CloseClipboard();}}
             if(memory)GlobalFree(memory);
         }
-        updateActionMessage=copied?UiText(L"Verified source copied. In Windhawk, edit the existing ILô mod, select all, paste the code and compile. Reopen ILô to verify the installed version.",L"Code vérifié copié. Dans Windhawk, modifie le mod ILô existant, sélectionne tout, colle le code puis compile. Rouvre ILô pour vérifier la nouvelle version."):UiText(L"Could not copy the source. Save the verified file instead.",L"Impossible de copier le code. Enregistre plutôt le fichier vérifié.");
+        if(copied){
+            updateActionMessage=UiText(L"✓ Verified source copied. In Windhawk, edit the existing ILô mod: Ctrl+A, Ctrl+V, then Compile. Do not create a second mod.",L"✓ Code vérifié copié. Dans Windhawk, modifie le mod ILô existant : Ctrl+A, Ctrl+V, puis Compiler. Ne crée pas de second mod.");
+            if(!OpenInstalledWindhawk(window))updateActionMessage+=UiText(L"\nWindhawk could not be opened automatically. Open it manually; the source is already on the clipboard.",L"\nWindhawk n'a pas pu être ouvert automatiquement. Ouvre-le manuellement ; le code est déjà dans le presse-papiers.");
+        }else updateActionMessage=UiText(L"Could not copy the source. Save the verified file or try again.",L"Impossible de copier le code. Enregistre le fichier vérifié ou réessaie.");
         UpdateAbout();
     }
     void SaveUpdateFile(){
@@ -2088,13 +2106,14 @@ std::map<std::wstring,std::wstring> baseline, values;
         auto header=Parse(LR"xml(<Grid ColumnSpacing="14"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><Border Width="52" Height="52" CornerRadius="26" Background="{ThemeResource SystemControlBackgroundListLowBrush}" VerticalAlignment="Top"><FontIcon x:Name="Icon" FontFamily="Segoe Fluent Icons" FontSize="26" Glyph="&#xE895;"/></Border><StackPanel Grid.Column="1" Spacing="5"><TextBlock x:Name="Title" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap"/><TextBlock x:Name="Detail" FontSize="13" TextWrapping="Wrap" Opacity="0.85"/><TextBlock x:Name="Checked" FontSize="12" Opacity="0.7"/></StackPanel></Grid>)xml");
         updateGlyph=header.FindName(L"Icon").as<C::FontIcon>();updateTitle=header.FindName(L"Title").as<C::TextBlock>();updateDetail=header.FindName(L"Detail").as<C::TextBlock>();updateChecked=header.FindName(L"Checked").as<C::TextBlock>();panel.Children().Append(header);
         updateProgress=C::ProgressBar();updateProgress.IsIndeterminate(false);panel.Children().Append(updateProgress);
-        updateNotes=ClockLabel(L"",13);panel.Children().Append(updateNotes);
+        updateNotes=ClockLabel(L"",13);
         updateCheck=ClockButton(UiText(L"Check for updates",L"Rechercher des mises à jour"));updateCheck.HorizontalAlignment(X::HorizontalAlignment::Left);updateCheck.Click([this](auto&&,auto&&){updateActionMessage.clear();updates.Start(false);UpdateAbout();});panel.Children().Append(updateCheck);
         updateDownload=ClockButton(UiText(L"Download and verify",L"Télécharger et vérifier"));updateDownload.HorizontalAlignment(X::HorizontalAlignment::Left);updateDownload.Click([this](auto&&,auto&&){updateActionMessage.clear();updates.Start(true);UpdateAbout();});panel.Children().Append(updateDownload);
-        updateInstall=ClockButton(UiText(L"Prepare installation in Windhawk",L"Préparer l'installation dans Windhawk"));updateInstall.HorizontalAlignment(X::HorizontalAlignment::Left);updateInstall.Click([this](auto&&,auto&&){PrepareUpdate();});panel.Children().Append(updateInstall);
+        updateInstall=ClockButton(UiText(L"Copy source and open Windhawk",L"Copier le code et ouvrir Windhawk"));updateInstall.HorizontalAlignment(X::HorizontalAlignment::Left);updateInstall.Click([this](auto&&,auto&&){PrepareUpdate();});panel.Children().Append(updateInstall);
+        updateInstallHint=ClockLabel(L"",13);panel.Children().Append(updateInstallHint);
         updateSaveFile=ClockButton(UiText(L"Save the verified source file",L"Enregistrer le fichier source vérifié"));updateSaveFile.HorizontalAlignment(X::HorizontalAlignment::Left);updateSaveFile.Click([this](auto&&,auto&&){SaveUpdateFile();});panel.Children().Append(updateSaveFile);
         updateReleasePage=ClockButton(UiText(L"View release history",L"Voir l'historique des versions"));updateReleasePage.HorizontalAlignment(X::HorizontalAlignment::Left);updateReleasePage.Click([this](auto&&,auto&&){auto r=updates.Snapshot();std::wstring url=Updates::releases;if(!r.release.tag.empty()&&Updates::Version(r.release.tag))url+=L"/tag/"+r.release.tag;OpenAboutLink(url.c_str());});panel.Children().Append(updateReleasePage);
-        updateInstallHint=ClockLabel(L"",13);panel.Children().Append(updateInstallHint);
+        panel.Children().Append(updateNotes);
         auto note=ClockLabel(UiText(L"The update is verified before use. Windhawk compiles the source; your ILô profile is preserved. No installation runs without your action.",L"La mise à jour est vérifiée avant utilisation. Windhawk compile le code source ; ton profil ILô est conservé. Aucune installation sans ton intervention."),12);note.Opacity(.72);panel.Children().Append(note);card.Children().Append(panel);
         UpdateAbout();
     }

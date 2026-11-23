@@ -1,6 +1,6 @@
-# ILô 2.0.1
+# ILô 2.0.2
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 2.0.1 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 2.0.2 — Windows 11 dock"></a></p>
 
 <p align="center"><a href="assets/ilo-clock-tooltip.png"><img src="assets/ilo-clock-tooltip.png" width="900" alt="ILô clock, three-day weather forecast and system information"></a></p>
 <p align="center"><a href="assets/ilo-settings-2.png"><img src="assets/ilo-settings-2.png" width="1200" alt="ILô redesigned settings panel"></a></p>
@@ -9,15 +9,11 @@
 
 [Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
 
-### What's new in ILô 2.0.1
+### What's new in ILô 2.0.2
 
-- Custom two-line clock with editable templates, automatic or manual location, weather, additional time zone, and CPU, RAM, GPU, VRAM and battery variables.
-- Rich clock tooltip with current weather, three-day forecast, temperature chart and system information.
-- Independent context menus for the clock, sound, network and Win+X (including submenus), enabled by default, preserving native Windows labels and actions on recognized layouts.
-- Shared background rendering across the dock, menus, tooltips, hidden notification icons and window thumbnail frames.
-- Redesigned bilingual settings panel with illustrative previews, background presets, compact controls, sliders and color pickers.
-- New About page with GitHub and PayPal links, stable-release checks and SHA-256-verified source downloads for assisted installation in Windhawk.
-- Version 2.0.1 is the first public 2.x release and the update target for testing from the validated 2.0.0 build. Existing ILô profiles are preserved.
+- Improved assisted update installation: the **Copy source and open Windhawk** button copies the verified source and opens the installed Windhawk application.
+- Clear feedback immediately below the button, with instructions to update and compile the existing ILô mod and a fallback if Windhawk cannot be opened automatically.
+- Update controls now appear before the release notes. SHA-256 verification and existing ILô profiles are preserved.
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
@@ -35,7 +31,7 @@ The optional [ILô Media player](https://github.com/luke95330/ILo_Media) adds al
 
 Disable your previous dock mod. In Windhawk, create a local mod, paste [ilo.wh.cpp](ilo.wh.cpp) into the editor, and compile it. Open the mod’s **Settings** tab to customize the dock.
 
-To update an existing installation, use **About → Check for updates** to download and verify the new source. Paste the verified source into the existing ILô mod in Windhawk and compile; do not create a second ILô instance.
+To update an existing installation, use **About → Check for updates → Download and verify**, then **Copy source and open Windhawk**. Edit the existing ILô mod, select all, paste the verified source and compile; do not create a second ILô instance.
 
 ### Sources
 
@@ -122,15 +118,11 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 [Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
 
-### Nouveautés d'ILô 2.0.1
+### Nouveautés d'ILô 2.0.2
 
-- Horloge personnalisable sur deux lignes avec modèles éditables, localisation automatique ou manuelle, météo, fuseau supplémentaire et variables CPU, RAM, GPU, VRAM et batterie.
-- Info-bulle enrichie : météo actuelle, prévisions sur trois jours, courbes de températures et informations système.
-- Menus contextuels indépendants pour l'horloge, le son, le réseau et Win+X (sous-menus inclus), activés par défaut, avec les libellés et actions Windows d'origine sur les dispositions reconnues.
-- Rendu graphique commun au dock, aux menus, aux info-bulles, aux icônes masquées et aux cadres des miniatures.
-- Panneau de paramètres bilingue repensé : aperçus illustratifs, styles de fond, contrôles compacts, réglettes et sélecteurs de couleurs.
-- Nouvelle rubrique À propos avec liens GitHub et PayPal, recherche des versions stables et téléchargement de la source vérifiée par SHA-256 pour une installation assistée dans Windhawk.
-- La version 2.0.1 est la première publication publique de la série 2.x et permet de tester la mise à jour depuis la 2.0.0 validée. Les profils ILô existants sont conservés.
+- Installation assistée des mises à jour améliorée : le bouton **Copier le code et ouvrir Windhawk** copie la source vérifiée et ouvre l'application Windhawk installée.
+- Confirmation immédiatement sous le bouton, avec les instructions pour mettre à jour et compiler le mod ILô existant et une solution de repli si l'ouverture automatique échoue.
+- Les commandes de mise à jour apparaissent avant les notes de version. La vérification SHA-256 et les profils ILô existants sont conservés.
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 
@@ -150,7 +142,7 @@ Le [lecteur ILô Media](https://github.com/luke95330/ILo_Media) permet d’affic
 
 Désactivez l’ancien mod de dock. Dans Windhawk, créez un mod local, remplacez le contenu de l’éditeur par celui de [ilo.wh.cpp](ilo.wh.cpp), puis compilez. Les réglages du dock sont accessibles dans l’onglet **Paramètres**.
 
-Pour mettre à jour une installation existante, utilise **À propos → Rechercher des mises à jour** afin de télécharger et vérifier le nouveau fichier source. Colle cette source dans le mod ILô existant dans Windhawk puis compile ; ne crée pas une seconde instance d'ILô.
+Pour mettre à jour une installation existante, utilise **À propos → Rechercher des mises à jour → Télécharger et vérifier**, puis **Copier le code et ouvrir Windhawk**. Modifie le mod ILô existant, sélectionne tout, colle la source vérifiée puis compile ; ne crée pas une seconde instance d'ILô.
 
 ### Sources
 
