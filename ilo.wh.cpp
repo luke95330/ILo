@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         2.1.0
+// @version         2.1.1
 // @github          https://github.com/luke95330
 // @homepage        https://github.com/luke95330/ILo
 // @donateUrl       https://paypal.me/MightyLuke
@@ -972,7 +972,7 @@ constexpr PCWSTR donate=L"https://paypal.me/MightyLuke";
 #ifdef WH_MOD_VERSION
 constexpr PCWSTR version=WH_MOD_VERSION;
 #else
-constexpr PCWSTR version=L"2.1.0";
+constexpr PCWSTR version=L"2.1.1";
 #endif
 enum class Phase { Idle, Checking, Current, Available, Downloading, Ready, NoRelease, Error };
 enum class Failure { None, Network, Metadata, Asset, Integrity, Source, Cancelled };
@@ -7220,7 +7220,6 @@ MsvcRectVector* WINAPI TaskbarFrame_ChildItemBounds_Hook(void* pThis) {
     }
     return bounds;
 }
-using ExperienceToggleButton_UpdateButtonPadding_t = void(WINAPI*)(void* pThis);
 // The start button context menu is centered over the start button or aligned to
 // its leading edge depending on the taskbar alignment (TaskbarFrame's
 // Alignment, where Left=0 and Center=1). Both the placement mode and the anchor
@@ -8355,14 +8354,12 @@ void WINAPI Hook_StartItemPlateEntranceAnimation_call(const bool& b) {
 }
 bool HookTaskbarViewDllSymbolsStartButtonPosition(HMODULE module) {
     // Taskbar.View.dll
+    // ExperienceToggleButton::UpdateButtonPadding is already registered by
+    // HookTaskbarViewDllSymbols (including the deferred module-load path).
+    // Registering the same detour twice makes Windhawk 2.0 reject the batch.
     WindhawkUtils::SYMBOL_HOOK symbolHooks[] = {{{LR"(public: static void __cdecl TaskbarTelemetry::StartItemEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemEntranceAnimation, Hook_StartItemEntranceAnimation_call},
     {{LR"(public: bool __cdecl winrt::Taskbar::implementation::ViewCoordinator::ShouldTaskbarBeExpanded(unsigned __int64,bool))"}, &IloHiding::nativeExpanded, IloHiding::Expanded, true},
     {{LR"(public: static void __cdecl TaskbarTelemetry::StartItemPlateEntranceAnimation<bool const &>(bool const &))"}, &orig_StartItemPlateEntranceAnimation, Hook_StartItemPlateEntranceAnimation_call},
-        {
-            {LR"(protected: virtual void __cdecl winrt::Taskbar::implementation::ExperienceToggleButton::UpdateButtonPadding(void))"},
-            &ExperienceToggleButton_UpdateButtonPadding_Original,
-            ExperienceToggleButton_UpdateButtonPadding_Hook,
-        },
         {
             {LR"(public: virtual int __cdecl winrt::impl::produce<struct winrt::Taskbar::implementation::TaskbarFrame,struct winrt::Taskbar::ITaskbarFrame>::get_Alignment(int *))"},
             &TaskbarFrame_get_Alignment_Original,

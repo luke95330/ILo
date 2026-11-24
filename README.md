@@ -1,4 +1,4 @@
-# ILô 2.1.0
+# ILô 2.1.1
 
 <p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô — Windows 11 dock"></a></p>
 
@@ -9,17 +9,12 @@
 
 [Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
 
-### What's new in ILô 2.1.0
+### What's new in ILô 2.1.1
 
-- **Notification area:** choose the position of the hidden-icons chevron (left or just before the clock). Icon button spacing now adjusts automatically to icon size, and native dimensions are restored when customization is disabled.
-- **Hover zoom:** macOS-style magnification now includes notification icons, with a continuous wave across the dock when the chevron is on the right or included on the left, provided the tray separator is disabled. The background-hiding option also applies to eligible tray icons.
-- **Windows accent color:** use the live Windows accent in every color picker (tint, fallback, outline/dividers and both clock lines). Thanks to [**cjbfrog**](https://github.com/cjbfrog) for the suggestion!
-- **Menus and tooltips:** sound and network context menus are centered above their icons; context menus have more space above the dock; rounded corners match the dock, including weather and generic tray tooltips. Fixed rectangular corner artifacts.
-- **Backup and restore:** export and import settings as validated `.ILo` files or reset all dock settings from Advanced options.
-- **Performance:** shared blur resources and cached composition effects, settings snapshots, reduced XAML tree searches and idle popup work, and smarter clock, weather and system-metric updates. GPU/VRAM counters run only when needed.
-- **Stability:** fixed Explorer crashes when hovering app thumbnails with intermediate outline opacity. Thanks to [**cjbfrog**](https://github.com/cjbfrog) for discovering and reporting this bug!
-- Improved dock realignment when applications close, startup restoration of visibility rules and hide/reveal animations, and graphics resource cleanup.
-- Removed obsolete flyout-position logging and the manual notification button-size setting. Existing profiles are preserved; earlier `.ILo` backups from the test versions are supported.
+- Fixed ILô failing to load in Windhawk 2.0.0 alpha 8 when Taskbar.View.dll was already loaded: the Start button padding hook was registered twice, causing Windhawk to reject initialization.
+- The hook is now shared by the icon-sizing and Start button positioning components. Existing settings and features are unchanged.
+
+See [ILô 2.1.0 and earlier changes](CHANGELOG.md#english) for the previous feature release.
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
@@ -123,17 +118,12 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 [Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
 
-### Nouveautés d'ILô 2.1.0
+### Nouveautés d'ILô 2.1.1
 
-- **Zone de notification :** position personnalisable du chevron des applications masquées (à gauche ou juste avant l’horloge). L’espacement des boutons s’adapte automatiquement à la taille des icônes, et les dimensions natives sont restaurées à la désactivation de la personnalisation.
-- **Zoom au survol :** extension de l’effet macOS au systray, avec continuité entre les applications et la zone de notification lorsque le chevron est à droite ou inclus dans le zoom à gauche, à condition que le séparateur soit désactivé. Le masquage des fonds s’applique également aux icônes de notification concernées.
-- **Couleur d’accentuation de Windows :** disponible dans tous les sélecteurs (teinte, repli, contour/séparateurs et deux lignes de l’horloge), avec mise à jour automatique. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour sa suggestion !
-- **Menus et infobulles :** centrage des menus contextuels du son et du réseau au-dessus de leurs icônes, espacement accru avec le dock, harmonisation des arrondis des menus et infobulles météo et de notification. Correction des artefacts rectangulaires dans les coins.
-- **Sauvegarde et restauration :** export et import des paramètres au format `.ILo` avec validation du fichier, et remise à zéro complète depuis les options avancées.
-- **Performances :** mutualisation du moteur de flou et mise en cache des effets de composition, des paramètres et des éléments XAML ; réduction du travail des volets inactifs et actualisation intelligente de l’horloge, de la météo et des statistiques. Les compteurs GPU/VRAM ne fonctionnent que lorsque nécessaire.
-- **Stabilité :** correction des plantages d’Explorer associés aux valeurs intermédiaires d’opacité du contour lors de l’affichage des miniatures. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour la découverte et le signalement de ce bug !
-- Amélioration du réalignement du dock à la fermeture d’une application, de la restauration des règles de visibilité et des animations de masquage au démarrage, ainsi que de la libération des ressources graphiques.
-- Suppression de la journalisation de la position des volets et du réglage manuel de la taille des boutons de notification. Les profils existants sont conservés ; les anciennes sauvegardes `.ILo` des versions de test restent compatibles.
+- Correction du chargement d’ILô dans Windhawk 2.0.0 alpha 8 lorsque Taskbar.View.dll était déjà chargé : le hook d’espacement du bouton Démarrer était enregistré deux fois, ce qui provoquait l’échec de l’initialisation.
+- Le hook est désormais partagé entre le dimensionnement des icônes et le positionnement du bouton Démarrer. Les paramètres et fonctionnalités existants sont conservés.
+
+Consultez [les nouveautés de la 2.1.0 et des versions précédentes](CHANGELOG.md#français).
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 

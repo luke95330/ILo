@@ -4,6 +4,11 @@
 
 ## English
 
+### ILô 2.1.1
+
+- Fixed ILô failing to load in Windhawk 2.0.0 alpha 8 when Taskbar.View.dll was already loaded: the Start button padding hook was registered twice, causing Windhawk to reject initialization.
+- The hook is now shared by the icon-sizing and Start button positioning components. Existing settings and features are unchanged.
+
 ### ILô 2.1.0
 
 - **Notification area:** choose the position of the hidden-icons chevron (left or just before the clock). Icon button spacing now adjusts automatically to icon size, and native dimensions are restored when customization is disabled.
@@ -138,6 +143,11 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 2.1.1
+
+- Correction du chargement d’ILô dans Windhawk 2.0.0 alpha 8 lorsque Taskbar.View.dll était déjà chargé : le hook d’espacement du bouton Démarrer était enregistré deux fois, ce qui provoquait l’échec de l’initialisation.
+- Le hook est désormais partagé entre le dimensionnement des icônes et le positionnement du bouton Démarrer. Les paramètres et fonctionnalités existants sont conservés.
 
 ### ILô 2.1.0
 
