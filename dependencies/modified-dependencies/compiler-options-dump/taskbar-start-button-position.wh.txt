@@ -1,1 +1,0 @@
--ldwmapi -lole32 -loleaut32 -lruntimeobject

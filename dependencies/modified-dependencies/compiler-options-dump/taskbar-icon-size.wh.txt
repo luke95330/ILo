@@ -1,1 +1,0 @@
--lole32 -loleaut32 -lruntimeobject -lshcore -lversion
