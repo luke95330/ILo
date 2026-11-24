@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Centered Windows 11 dock with a floating background and notification area.
 // @description:fr-FR Dock centré pour Windows 11 avec fond flottant et zone de notification.
-// @version         2.0.2
+// @version         2.1.0
 // @github          https://github.com/luke95330
 // @homepage        https://github.com/luke95330/ILo
 // @donateUrl       https://paypal.me/MightyLuke
@@ -26,6 +26,8 @@
 ## Français
 
 Le clic droit sur Démarrer ou sur une zone vide de la barre donne accès à « Paramètres ILô… ». Le panneau est intégré au mod. Recherchez un réglage dans les neuf catégories, modifiez sa valeur puis sélectionnez **Enregistrer**. Le panneau mémorise la taille de sa fenêtre.
+
+Dans **Options avancées → Sauvegarde, restauration et remise à zéro**, exporte les paramètres enregistrés du dock dans un fichier binaire `.ILo`, restaure un fichier vérifié ou rétablis les valeurs d'origine. L'import et la remise à zéro nécessitent une confirmation ; les paramètres Windows, la langue et la taille du panneau ne sont pas modifiés.
 
 ILô centre les applications et la zone de notification dans un dock. La marge inférieure est réglée à 8 et le décalage des icônes de notification à 0. Le centrage provient de TAI Dock 1.0.3, validé sur Windows 11 build 26300.10075.
 
@@ -70,7 +72,7 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 | Séparateur de la zone de notification | Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut. |
 | Personnaliser les icônes de notification | Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut. |
 | Taille des icônes de notification | Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15. |
-| Taille des boutons de notification | Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30. |
+| Espacement des boutons de notification | Calculé automatiquement en fonction de la taille des icônes. |
 | Aligner Démarrer et Recherche | Aligne ces menus sur le dock. Activé par défaut. |
 | Aligner les paramètres rapides | Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut. |
 | Aligner le centre de notifications | Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut. |
@@ -81,13 +83,12 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 | Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. |
 | Limiter la zone interactive au dock | Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification. |
 | Révéler la barre uniquement sous le dock | La barre masquée se révèle au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. Activé par défaut.
-| Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. |
 
 </details>
 
 **Zoom au survol.** Activez « Agrandissement des icônes au survol » dans les paramètres. Le profil proposé utilise un zoom centré de 180 % et une transition de 120 ms. Le style MacOS étend l’effet aux voisines. Le zoom reste dans la zone cliquable du bouton.
 
-## Horloge personnalisée (2.0.2)
+## Horloge personnalisée (2.1.0)
 
 Dans **Horloge**, activez la personnalisation, choisissez un modèle modifiable puis composez les deux lignes avec les boutons d'insertion et l'aperçu. La localisation peut être manuelle, automatique (ville approximative déduite de l'adresse IP via wttr.in) ou désactivée. `%city%`, `%weather_icon%`, `%temperature%` et `%weather%` peuvent être utilisés séparément. Le service HTTPS n'est interrogé que si nécessaire pour les informations choisies ou par une détection explicitement demandée. Désactivez Taskbar Clock Customization avant de tester. Les dispositions non reconnues gardent l'horloge native.
 
@@ -108,6 +109,8 @@ Les info-bulles XAML et les menus contextuels modernes de la barre des tâches r
 ## English
 
 Right-click Start or an empty area of the taskbar and choose **ILô settings…**. Search the nine categories, change a setting and select **Save**. The panel remembers its window size.
+
+Under **Advanced options → Backup, restore and reset**, export the saved dock settings to a binary `.ILo` file, restore a validated backup, or restore factory defaults. Import and reset require confirmation; Windows preferences, interface language and panel size are not changed.
 
 Enable **Magnify icons on hover** to try magnification. The default profile uses 180% centered zoom and a 120 ms transition. Choose MacOS style for the neighboring-icon wave.
 
@@ -162,7 +165,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 | Tray area divider | When enabled, the tray area will be separated by a divider. Default is off | `false` |
 | Customize notification area icons | When enabled, the options for tray icon size will take effect. Default is off | `false` |
 | Tray icon size | Set the width and height of tray icons. Minimum is 15. Default is 15 | `15` |
-| Tray button size | Set the size (width and height) of tray buttons. Minimum is 20. Default is 30 | `30` |
+| Tray button spacing | Automatically adjusted to the icon size. | Automatic |
 | Move Start Menu with Taskbar | When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on. | `true` |
 | Move Control Center with Taskbar | When enabled, the Control Center is moved to align with taskbar size and location. Default is on. | `true` |
 | Move Notification Center with Taskbar | When enabled, the Notification Center is moved to align with taskbar size and location. Default is on. | `true` |
@@ -173,7 +176,6 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | `true` |
 | Restrict the taskbar window to the dock | Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option. | `false` |
 | Show an auto-hidden taskbar only from under it | When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. This also applies with a full-width background. Default is on. | `true` |
-| Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
 | Magnify icons on hover | Magnify application icons when the mouse passes over them. | `false` |
 | Application zoom style | Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons. Choices: Zoom style, MacOS style. | `zoom` |
 | Hide icon backgrounds when hover zoom is enabled | Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds. | `true` |
@@ -216,6 +218,17 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $name:fr-FR: "Espacement avant la zone de notification"
   $description: Adjust the space between the task area and the tray area. Default is 5
   $description:fr-FR: "Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."
+- TrayChevronPosition: left
+  $name: Hidden icons chevron position
+  $name:fr-FR: "Position du chevron des applications masquées"
+  $description: Place the chevron before the visible notification icons or just before the clock.
+  $description:fr-FR: "Place le chevron avant les icônes visibles ou juste avant l'horloge."
+  $options:
+  - left: Left (Windows default)
+  - right: Right (before clock)
+  $options:fr-FR:
+  - left: À gauche (Windows)
+  - right: À droite (avant l'horloge)
 - TrayContentOffsetY: 0
   $name: Notification area vertical offset
   $name:fr-FR: "Décalage vertical des icônes de notification"
@@ -307,10 +320,10 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: Set the opacity of the taskbar border. Range 0-100. Default is 0
   $description:fr-FR: "Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."
 - TaskbarBorderColorHex: "#ffffff"
-  $name: Border color (HEX)
+  $name: Border color
   $name:fr-FR: "Couleur du contour et des séparateurs"
-  $description: Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`
-  $description:fr-FR: "Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."
+  $description: "Set the border and divider color using #RRGGBB or {ThemeResource SystemAccentColor}. Default is white."
+  $description:fr-FR: "Couleur du contour et des séparateurs : #RRGGBB ou {ThemeResource SystemAccentColor}. Blanc par défaut."
 - TaskbarBorderThickness: 8
   $name: Taskbar border thickness scale (%)
   $name:fr-FR: "Épaisseur du contour (%)"
@@ -355,13 +368,8 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - TrayIconSize: 15
   $name: Tray icon size
   $name:fr-FR: "Taille des icônes de notification"
-  $description: Set the width and height of tray icons. Minimum is 15. Default is 15
-  $description:fr-FR: "Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."
-- TrayButtonSize: 30
-  $name: Tray button size
-  $name:fr-FR: "Taille des boutons de notification"
-  $description: Set the size (width and height) of tray buttons. Minimum is 20. Default is 30
-  $description:fr-FR: "Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."
+  $description: The button width adjusts automatically. The icon is limited by the dock height. Default is 15.
+  $description:fr-FR: "La largeur des boutons s'ajuste automatiquement. La taille des icônes est limitée par la hauteur du dock. Valeur par défaut : 15."
 - ClockEnabled: false
   $name: "Customize clock"
   $name:fr-FR: "Horloge personnalisée"
@@ -454,13 +462,13 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - ClockTopColor: ""
   $name: "Top line color"
   $name:fr-FR: "Couleur de la ligne supérieure"
-  $description: "Empty = automatic theme color; #RRGGBB or #AARRGGBB."
-  $description:fr-FR: "Vide = couleur automatique ; #RRGGBB ou #AARRGGBB."
+  $description: "Empty = automatic theme color; #RRGGBB, #AARRGGBB or {ThemeResource SystemAccentColor}."
+  $description:fr-FR: "Vide = couleur automatique ; #RRGGBB, #AARRGGBB ou {ThemeResource SystemAccentColor}."
 - ClockBottomColor: ""
   $name: "Bottom line color"
   $name:fr-FR: "Couleur de la ligne inférieure"
-  $description: "Empty = automatic theme color; #RRGGBB or #AARRGGBB."
-  $description:fr-FR: "Vide = couleur automatique ; #RRGGBB ou #AARRGGBB."
+  $description: "Empty = automatic theme color; #RRGGBB, #AARRGGBB or {ThemeResource SystemAccentColor}."
+  $description:fr-FR: "Vide = couleur automatique ; #RRGGBB, #AARRGGBB ou {ThemeResource SystemAccentColor}."
 - ClockTopBold: false
   $name: "Bold top line"
   $name:fr-FR: "Ligne supérieure en gras"
@@ -608,11 +616,6 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $name:fr-FR: "Révéler la barre uniquement sous le dock"
   $description: When the taskbar hides automatically, it comes back only when the mouse reaches the screen edge under the taskbar, instead of anywhere along that edge. This also applies with a full-width background. Default is on.
   $description:fr-FR: "La barre masquée se révèle au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. Activé par défaut."
-- LogFlyoutPlacement: false
-  $name: Log flyout placement to a file
-  $name:fr-FR: "Journaliser la position des volets"
-  $description: When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.
-  $description:fr-FR: "Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."
 - HideMode: windows
   $name: "Visibility"
   $name:fr-FR: "Visibilité"
@@ -697,10 +700,10 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
   $description: "Magnify application icons when the mouse passes over them."
   $description:fr-FR: "Agrandit les icônes des applications au passage de la souris."
 - HoverZoomStyle: zoom
-  $name: "Application zoom style"
-  $name:fr-FR: "Style de zoom des applications"
-  $description: "Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons."
-  $description:fr-FR: "Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."
+  $name: "Hover zoom style"
+  $name:fr-FR: "Style de zoom au survol"
+  $description: "macOS animates neighboring app and tray icons. Without a tray divider, the wave crosses both areas when the chevron is on the right or is included on the left."
+  $description:fr-FR: "Le style macOS anime les icônes voisines des applications et du systray. Sans séparateur, l'effet est continu si le chevron est à droite ou s'il est inclus dans le zoom à gauche."
   $options:
   - zoom: Zoom style
   - macos: MacOS style
@@ -710,8 +713,8 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - HoverZoomHideBackground: true
   $name: "Hide icon backgrounds when hover zoom is enabled"
   $name:fr-FR: "Masquer le fond des icônes quand le zoom est activé"
-  $description: "Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds."
-  $description:fr-FR: "Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."
+  $description: "Hide the backgrounds of app and notification area buttons included in hover zoom, even at rest."
+  $description:fr-FR: "Masque le fond des boutons des applications et du systray inclus dans le zoom, même au repos."
 - HoverZoomDisableBackgroundZoom: false
   $name: "Disable icon background zoom"
   $name:fr-FR: "Désactiver le zoom du fond des icônes"
@@ -810,6 +813,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 #include <winrt/Windows.UI.Input.h>
 #include <winrt/Windows.UI.Xaml.Input.h>
 #include <winrt/Windows.UI.Xaml.Media.h>
+#include <winrt/Windows.UI.ViewManagement.h>
 #include <atomic>
 #include <cmath>
 #include <functional>
@@ -825,16 +829,62 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 #include <vector>
 namespace IloPanel {
 constexpr wchar_t path[] = L"Software\\Mighty-Luke\\ILo\\PanelTest";
+constexpr wchar_t accentResource[]=L"{ThemeResource SystemAccentColor}";
+static bool IsAccent(std::wstring_view value){return value==accentResource;}
+static std::atomic<uint32_t> accentRgb{};
+static std::atomic<bool> accentSelected{};
+static std::mutex accentWakeMutex;
+static HANDLE accentWakeEvent{};
+static uint32_t PackAccent(winrt::Windows::UI::Color c){return 0xff000000u|(uint32_t(c.R)<<16)|(uint32_t(c.G)<<8)|uint32_t(c.B);}
+static winrt::Windows::UI::Color AccentColor(){
+    auto packed=accentRgb.load();
+    if(!packed||!accentSelected.load())try{
+        using namespace winrt::Windows::UI::ViewManagement;
+        packed=PackAccent(UISettings().GetColorValue(UIColorType::Accent));accentRgb.store(packed);
+    }catch(...){}
+    if(!packed)packed=0xff0078d4u;
+    return {255,uint8_t(packed>>16),uint8_t(packed>>8),uint8_t(packed)};
+}
+static void SetAccentSelected(bool selected){
+    if(accentSelected.exchange(selected)==selected)return;
+    std::lock_guard lock(accentWakeMutex);if(accentWakeEvent)SetEvent(accentWakeEvent);
+}
 std::mutex profileLock;
 std::unordered_map<std::wstring,std::wstring> profile;
-ULONGLONG nextRead = 0;
+std::atomic<ULONGLONG> nextRead{0};
+uint64_t settingsRevision=1; // Protected by profileLock.
+struct WideHash {
+    using is_transparent=void;
+    size_t operator()(std::wstring_view value) const noexcept{return std::hash<std::wstring_view>{}(value);}
+};
+struct SettingsSnapshot {
+    uint64_t revision{};
+    std::unordered_map<std::wstring,int,WideHash,std::equal_to<>> numbers;
+    std::unordered_map<std::wstring,std::optional<std::wstring>,WideHash,std::equal_to<>> texts;
+    int Int(PCWSTR key) const {auto it=numbers.find(std::wstring_view(key));return it!=numbers.end()?it->second:Wh_GetIntSetting(key);}
+    PCWSTR Str(PCWSTR key) const {
+        auto it=texts.find(std::wstring_view(key));if(it!=texts.end())return it->second?_wcsdup(it->second->c_str()):nullptr;
+        auto raw=Wh_GetStringSetting(key);auto copy=raw?_wcsdup(raw):nullptr;if(raw)Wh_FreeStringSetting(raw);return copy;
+    }
+    std::wstring Text(PCWSTR key) const {
+        auto it=texts.find(std::wstring_view(key));if(it!=texts.end())return it->second.value_or(L"");
+        auto raw=Wh_GetStringSetting(key);std::wstring value=raw?raw:L"";if(raw)Wh_FreeStringSetting(raw);return value;
+    }
+};
+static std::shared_ptr<const SettingsSnapshot> publishedSettings;
+namespace NativeSettings {static std::shared_ptr<const SettingsSnapshot> BuildSnapshotLocked(uint64_t revision);}
+static void InvalidateSnapshotLocked(){++settingsRevision;std::atomic_store(&publishedSettings,std::shared_ptr<const SettingsSnapshot>{});}
+static std::optional<int> ParseProfileInteger(std::wstring const& value){
+    wchar_t* end=nullptr;errno=0;auto n=wcstol(value.c_str(),&end,10);
+    if(end!=value.c_str()&&!*end&&!errno&&n!=INT_MIN)return int(n);return {};
+}
 void ReadLocked(bool force=false) {
     auto now=GetTickCount64();
-    if (!force && now<nextRead) return;
-    nextRead=now+1000;
+    if (!force && now<nextRead.load()) return;
+    struct Deadline {ULONGLONG now;~Deadline(){nextRead.store(now+1000);}} deadline{now};
     DWORD bytes=0;
     auto rc=RegGetValueW(HKEY_CURRENT_USER,path,L"Settings",RRF_RT_REG_MULTI_SZ,nullptr,nullptr,&bytes);
-    if(rc==ERROR_FILE_NOT_FOUND || rc==ERROR_PATH_NOT_FOUND){profile.clear();return;}
+    if(rc==ERROR_FILE_NOT_FOUND || rc==ERROR_PATH_NOT_FOUND){if(!profile.empty()){profile.clear();InvalidateSnapshotLocked();}return;}
     if(rc!=ERROR_SUCCESS || bytes>131072) return;
     std::vector<wchar_t> buf(bytes/sizeof(wchar_t)+2);
     if(RegGetValueW(HKEY_CURRENT_USER,path,L"Settings",RRF_RT_REG_MULTI_SZ,nullptr,buf.data(),&bytes)!=ERROR_SUCCESS) return;
@@ -843,25 +893,30 @@ void ReadLocked(bool force=false) {
         auto equal=wcschr(p,L'=');
         if(equal && equal!=p) parsed.emplace(std::wstring(p,equal),equal+1);
     }
-    profile.swap(parsed);
+    if(parsed!=profile){profile.swap(parsed);InvalidateSnapshotLocked();}
 }
-int Int(PCWSTR k){
-    {std::lock_guard guard(profileLock);ReadLocked();
-     auto it=profile.find(k);
-     if(it!=profile.end()){wchar_t* end=nullptr;errno=0;auto n=wcstol(it->second.c_str(),&end,10);
-        if(end!=it->second.c_str() && !*end && !errno && n!=INT_MIN) return n;}}
-    return Wh_GetIntSetting(k);
+static std::shared_ptr<const SettingsSnapshot> Snapshot(){
+    auto current=std::atomic_load(&publishedSettings);
+    if(current&&GetTickCount64()<nextRead.load())return current;
+    std::lock_guard guard(profileLock);ReadLocked();current=std::atomic_load(&publishedSettings);
+    if(!current){current=NativeSettings::BuildSnapshotLocked(settingsRevision);std::atomic_store(&publishedSettings,current);}
+    return current;
 }
-PCWSTR Str(PCWSTR k){
-    {std::lock_guard guard(profileLock);ReadLocked();auto it=profile.find(k);if(it!=profile.end())return _wcsdup(it->second.c_str());}
-    auto v=Wh_GetStringSetting(k);auto copy=v?_wcsdup(v):nullptr;if(v)Wh_FreeStringSetting(v);return copy;
+static void InvalidateSettings(){
+    std::lock_guard guard(profileLock);ReadLocked(true);InvalidateSnapshotLocked();
 }
+int Int(PCWSTR k){return Snapshot()->Int(k);}
+PCWSTR Str(PCWSTR k){return Snapshot()->Str(k);}
 void Free(PCWSTR p){free(const_cast<wchar_t*>(p));}
 constexpr wchar_t dockLayoutGlyph[]=L"\uE8A9";
+static std::atomic<ULONGLONG> cachedLanguage{0};
+static void CacheLanguage(bool french){cachedLanguage.store(((GetTickCount64()+1000)<<1)|ULONGLONG(french));}
 bool ReadFrenchPreference() {
+    auto cached=cachedLanguage.load();if(GetTickCount64()<(cached>>1))return (cached&1)!=0;
     DWORD value=0, size=sizeof(value);
-    return RegGetValueW(HKEY_CURRENT_USER,path,L"InterfaceLanguage",RRF_RT_REG_DWORD,
+    bool french=RegGetValueW(HKEY_CURRENT_USER,path,L"InterfaceLanguage",RRF_RT_REG_DWORD,
                         nullptr,&value,&size)==ERROR_SUCCESS && value==1;
+    CacheLanguage(french);return french;
 }
 PCWSTR UiText(PCWSTR english, PCWSTR french) {
     return ReadFrenchPreference() ? french : english;
@@ -917,7 +972,7 @@ constexpr PCWSTR donate=L"https://paypal.me/MightyLuke";
 #ifdef WH_MOD_VERSION
 constexpr PCWSTR version=WH_MOD_VERSION;
 #else
-constexpr PCWSTR version=L"2.0.2";
+constexpr PCWSTR version=L"2.1.0";
 #endif
 enum class Phase { Idle, Checking, Current, Available, Downloading, Ready, NoRelease, Error };
 enum class Failure { None, Network, Metadata, Asset, Integrity, Source, Cancelled };
@@ -1050,7 +1105,7 @@ const auto& Catalog() {
     {L"TaskbarBackgroundInversion", label(L"Background inversion", L"Inversion des couleurs du fond"), label(L"Background and border", L"Fond et bordure"), label(L"Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10", L"Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10."), Kind::Number, {}},
     {L"TaskbarBackgroundFallbackColor", label(L"Background fallback color", L"Couleur de repli"), label(L"Background and border", L"Fond et bordure"), label(L"Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid}", L"Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}."), Kind::Text, {}},
     {L"TaskbarBorderOpacity", label(L"Border opacity", L"Opacité du contour"), label(L"Background and border", L"Fond et bordure"), label(L"Set the opacity of the taskbar border. Range 0-100. Default is 0", L"Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0."), Kind::Number, {}},
-    {L"TaskbarBorderColorHex", label(L"Border color (HEX)", L"Couleur du contour et des séparateurs"), label(L"Background and border", L"Fond et bordure"), label(L"Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff`", L"Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff."), Kind::Text, {}},
+    {L"TaskbarBorderColorHex", label(L"Border and divider color", L"Couleur du contour et des séparateurs"), label(L"Background and border", L"Fond et bordure"), label(L"Choose a custom color or the live Windows accent color. Default is white.", L"Choisis une couleur personnalisée ou l’accentuation de Windows. Blanc par défaut."), Kind::Text, {}},
     {L"TaskbarBorderThickness", label(L"Taskbar border thickness scale (%)", L"Épaisseur du contour (%)"), label(L"Background and border", L"Fond et bordure"), label(L"Set the scale of the taskbar border. Range 0-100. Default is 8", L"Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8."), Kind::Number, {}},
     {L"HideMode", label(L"Visibility", L"Visibilité"), label(L"Auto-hide", L"Masquage"), label(L"With Windows taskbar auto-hide enabled, choose when the dock may hide.", L"Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer."), Kind::Choice, {{L"windows",label(L"Windows default",L"Selon Windows")},{L"max",label(L"Maximized or full-screen window",L"Fenêtre agrandie ou plein écran")},{L"overlap",label(L"Maximized or overlapping window",L"Fenêtre agrandie ou en chevauchement")},{L"never",label(L"Always visible",L"Toujours visible")}}},
     {L"HideForeground", label(L"Foreground window only", L"Fenêtre active uniquement"), label(L"Auto-hide", L"Masquage"), label(L"Evaluate only the active window.", L"Prend uniquement en compte la fenêtre active."), Kind::Toggle, {}},
@@ -1064,8 +1119,8 @@ const auto& Catalog() {
     {L"HideHideMs", label(L"Hide time (ms)", L"Durée de masquage (ms)"), label(L"Auto-hide", L"Masquage"), label(L"16–1000 ms for custom transitions.", L"16 à 1 000 ms pour les transitions personnalisées."), Kind::Number, {}},
     {L"HideRate", label(L"Frame rate (fps)", L"Fréquence (images/s)"), label(L"Auto-hide", L"Masquage"), label(L"Target 15–120 fps, subject to Windows timer resolution.", L"Cible de 15 à 120 images/s, selon la résolution du minuteur Windows."), Kind::Number, {}},
     {L"HoverZoomEnabled", label(L"Magnify icons on hover", L"Agrandissement des icônes au survol"), label(L"Hover zoom", L"Zoom au survol"), label(L"Magnify application icons when the mouse passes over them.", L"Agrandit les icônes des applications au passage de la souris."), Kind::Toggle, {}},
-    {L"HoverZoomStyle", label(L"Application zoom style", L"Style de zoom des applications"), label(L"Hover zoom", L"Zoom au survol"), label(L"Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons.", L"Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines."), Kind::Choice, {{L"zoom",label(L"Zoom style", L"Style zoom")}, {L"macos",label(L"macOS style", L"Style MacOS")}}},
-    {L"HoverZoomHideBackground", label(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), label(L"Hover zoom", L"Zoom au survol"), label(L"Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds.", L"Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres."), Kind::Toggle, {}},
+    {L"HoverZoomStyle", label(L"Hover zoom style", L"Style de zoom au survol"), label(L"Hover zoom", L"Zoom au survol"), label(L"macOS animates neighboring app and tray icons. Without a tray divider, the wave crosses both areas when the chevron is on the right or is included on the left.", L"Le style macOS anime les icônes voisines des applications et du systray. Sans séparateur, l'effet est continu si le chevron est à droite ou s'il est inclus dans le zoom à gauche."), Kind::Choice, {{L"zoom",label(L"Zoom style", L"Style zoom")}, {L"macos",label(L"macOS style", L"Style macOS")}}},
+    {L"HoverZoomHideBackground", label(L"Hide icon backgrounds when hover zoom is enabled", L"Masquer le fond des icônes quand le zoom est activé"), label(L"Hover zoom", L"Zoom au survol"), label(L"Hide the backgrounds of app and notification area buttons included in hover zoom, even at rest.", L"Masque le fond des boutons des applications et du systray inclus dans le zoom, même au repos."), Kind::Toggle, {}},
     {L"HoverZoomDisableBackgroundZoom", label(L"Disable icon background zoom", L"Désactiver le zoom du fond des icônes"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the visible application button background at its normal size and position.", L"Garde le fond visible des boutons d’application à sa taille et à sa position normales."), Kind::Toggle, {}},
     {L"HoverZoomPercent", label(L"Maximum application zoom (%)", L"Zoom maximal des applications (%)"), label(L"Hover zoom", L"Zoom au survol"), label(L"110–250%. Available space in the button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
     {L"HoverZoomTrayPercent", label(L"Maximum notification area zoom (%)", L"Zoom maximal de la zone de notification (%)"), label(L"Hover zoom", L"Zoom au survol"), label(L"110–250%. Available space in the tray button limits the effective zoom.", L"De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif."), Kind::Number, {}},
@@ -1076,10 +1131,10 @@ const auto& Catalog() {
     {L"HoverZoomExcludeTray", label(L"Exclude the entire notification area", L"Exclure toute la zone de notification du zoom"), label(L"Hover zoom", L"Zoom au survol"), label(L"When checked, all tray icons use their native size even when dock magnification is enabled.", L"Cochez pour réserver le zoom aux applications et, selon votre réglage, à Démarrer. Cette exclusion est prioritaire."), Kind::Toggle, {}},
     {L"HoverZoomExcludeChevron", label(L"Exclude the hidden icons chevron", L"Exclure le chevron des applications masquées"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the chevron at its native size when tray magnification is enabled.", L"Conserve la taille habituelle de la flèche qui ouvre les icônes masquées."), Kind::Toggle, {}},
     {L"HoverZoomExcludeClock", label(L"Exclude date and time", L"Exclure la date et l’heure"), label(L"Hover zoom", L"Zoom au survol"), label(L"Keep the clock text at its native size when tray magnification is enabled.", L"Conserve la taille habituelle du bloc date et heure. Décochez pour agrandir ses deux lignes ensemble dans la place disponible."), Kind::Toggle, {}},
-    {L"TrayContentOffsetY", label(L"Notification area vertical offset", L"Décalage vertical des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.", L"Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."), Kind::Number, {}},
+    {L"TrayChevronPosition", label(L"Hidden icons chevron position", L"Position du chevron des applications masquées"), label(L"Notification area", L"Zone de notification"), label(L"Place the chevron before the visible notification icons or just before the clock.", L"Place le chevron avant les icônes visibles ou juste avant l'horloge."), Kind::Choice, {{L"left",label(L"Left (Windows default)", L"À gauche (Windows)")},{L"right",label(L"Right (before clock)", L"À droite (avant l'horloge)")}}},
+    {L"TrayContentOffsetY", label(L"Notification area vertical offset", L"Décalage vertical des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0.", L"Ajuste la hauteur des icônes et de l'horloge sur l'écran principal, de -12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0."), Kind::Number, {}},
     {L"StyleTrayArea", label(L"Customize notification area icons", L"Personnaliser les icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"When enabled, the options for tray icon size will take effect. Default is off", L"Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut."), Kind::Toggle, {}},
-    {L"TrayIconSize", label(L"Tray icon size", L"Taille des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Set the width and height of tray icons. Minimum is 15. Default is 15", L"Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15."), Kind::Number, {}},
-    {L"TrayButtonSize", label(L"Tray button size", L"Taille des boutons de notification"), label(L"Notification area", L"Zone de notification"), label(L"Set the size (width and height) of tray buttons. Minimum is 20. Default is 30", L"Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30."), Kind::Number, {}},
+    {L"TrayIconSize", label(L"Tray icon size", L"Taille des icônes de notification"), label(L"Notification area", L"Zone de notification"), label(L"Button spacing adjusts automatically to the icon size. Limited by the dock height.", L"L'espacement des boutons s'adapte automatiquement à la taille des icônes, limitée par la hauteur du dock."), Kind::Number, {}},
     {L"ClockEnabled", label(L"Customize clock", L"Personnaliser l'horloge"), label(L"Clock", L"Horloge"), label(L"Keep Windows clock when disabled.", L"Conserve l'horloge Windows si désactivé."), Kind::Toggle, {}},
     {L"ClockPreset", label(L"Clock template", L"Modèle d'horloge"), label(L"Clock", L"Horloge"), label(L"Choose a template as a starting point.", L"Choisis un modèle librement modifiable."), Kind::Choice, {{L"custom",label(L"Custom",L"Personnalisé")},{L"classic",label(L"Classic",L"Classique")},{L"long",label(L"Long date",L"Date longue")},{L"weather",label(L"Weather",L"Météo")},{L"local",label(L"Local clock",L"Horloge locale")},{L"monitor",label(L"System",L"Système")},{L"international",label(L"International",L"International")}}},
     {L"ClockTopLine", label(L"Top line", L"Ligne supérieure"), label(L"Clock", L"Horloge"), label(L"Insert elements or enter text.", L"Insère des éléments ou saisis du texte."), Kind::Text, {}},
@@ -1130,10 +1185,291 @@ const auto& Catalog() {
     {L"QuickContextMenuEnabled", label(L"ILo sound and network menus", L"Menus son et réseau ILô"), label(L"Menus and flyouts", L"Menus et volets"), label(L"Use independent ILo menus for the Quick Settings icons (sound, network and battery when present), keeping Windows actions. On by default.", L"Utilise les menus ILô pour les icônes de paramètres rapides (son, réseau et batterie si présente), avec les actions Windows. Activé par défaut."), Kind::Toggle, {}},
     {L"WinXContextMenuEnabled", label(L"ILo Win+X menu", L"Menu Win+X ILô"), label(L"Menus and flyouts", L"Menus et volets"), label(L"An independent Start context menu with native labels, commands and submenus. On by default.", L"Un menu indépendant pour le clic droit sur Démarrer, avec les libellés, commandes et sous-menus natifs. Activé par défaut."), Kind::Toggle, {}},
     {L"ClipTaskbarWindowToDock", label(L"Restrict the taskbar window to the dock", L"Limiter la zone interactive au dock"), label(L"Advanced options", L"Options avancées"), label(L"Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option.", L"Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification."), Kind::Toggle, {}},
-    {L"LogFlyoutPlacement", label(L"Log flyout placement to a file", L"Journaliser la position des volets"), label(L"Advanced options", L"Options avancées"), label(L"When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off.", L"Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut."), Kind::Toggle, {}},
 };
     return options;
 }
+static std::shared_ptr<const SettingsSnapshot> BuildSnapshotLocked(uint64_t revision){
+    auto result=std::make_shared<SettingsSnapshot>();result->revision=revision;
+    result->numbers.reserve(std::size(Catalog<false>()));result->texts.reserve(std::size(Catalog<false>()));
+    // Preserve overrides, including old Windhawk settings that are not
+    // displayed by the panel. Only absent values need a Windhawk API lookup.
+    for(auto const& [key,value]:profile){result->texts.emplace(key,value);if(auto n=ParseProfileInteger(value))result->numbers.emplace(key,*n);}
+    auto number=[&](PCWSTR key){if(!result->numbers.contains(std::wstring_view(key)))result->numbers.emplace(key,Wh_GetIntSetting(key));};
+    auto text=[&](PCWSTR key){if(!result->texts.contains(std::wstring_view(key))){auto raw=Wh_GetStringSetting(key);std::optional<std::wstring> value;if(raw){value=raw;Wh_FreeStringSetting(raw);}result->texts.emplace(key,std::move(value));}};
+    for(auto const& o:Catalog<false>())if(o.kind==Kind::Text||o.kind==Kind::Choice)text(o.key);else number(o.key);
+    number(L"otherSystemButtonsOnTheLeft");number(L"searchMenuPositionInAllCases");
+    return result;
+}
+// Versioned, bounded binary snapshot. A snapshot contains only ILô settings,
+// never executable code, Windows registry paths, or UI window state.
+namespace Backup {
+using Settings=std::map<std::wstring,std::wstring>;
+constexpr size_t maxFile=256*1024,maxRegistry=131072,maxText=4096;
+constexpr std::string_view magic{"ILOBACK\0",8};
+constexpr uint32_t schema=1;
+constexpr size_t digestSize=71,headerSize=8+4+4+digestSize;
+static Settings Factory(){
+    // Keep in sync with the WindhawkModSettings defaults, not with the user's
+    // current Windhawk preferences (those may themselves be customized).
+    return {
+        {L"TaskbarHeight",L"24"},
+        {L"TaskbarIconSize",L"22"},
+        {L"TaskbarButtonSize",L"20"},
+        {L"TaskbarOffsetY",L"8"},
+        {L"TrayTaskGap",L"5"},
+        {L"TrayChevronPosition",L"left"},
+        {L"TrayContentOffsetY",L"0"},
+        {L"TaskbarBackgroundHorizontalPadding",L"2"},
+        {L"FullWidthTaskbarBackground",L"0"},
+        {L"IgnoreShowDesktopButton",L"0"},
+        {L"TaskbarCornerRadius",L"12"},
+        {L"TaskButtonCornerRadius",L"8"},
+        {L"FlatTaskbarBottomCorners",L"0"},
+        {L"CustomizeTaskbarBackground",L"1"},
+        {L"DisableCustomBlurBackground",L"0"},
+        {L"TaskbarBackgroundOpacity",L"100"},
+        {L"TaskbarBackgroundTint",L"45"},
+        {L"TaskbarBackgroundLuminosity",L"15"},
+        {L"TaskbarBackgroundBlurAmount",L"5"},
+        {L"TaskbarBackgroundTintColor",L"{ThemeResource CardStrokeColorDefaultSolid}"},
+        {L"TaskbarBackgroundTintSaturation",L"100"},
+        {L"TaskbarBackgroundInversion",L"10"},
+        {L"TaskbarBackgroundFallbackColor",L"{ThemeResource CardStrokeColorDefaultSolid}"},
+        {L"TaskbarBorderOpacity",L"0"},
+        {L"TaskbarBorderColorHex",L"#ffffff"},
+        {L"TaskbarBorderThickness",L"8"},
+        {L"AppsDividerThickness",L"8"},
+        {L"AppsDividerVerticalScale",L"40"},
+        {L"AppsDividerAlignment",L""},
+        {L"DividedAppNames",L""},
+        {L"TrayAreaDivider",L"0"},
+        {L"StyleTrayArea",L"0"},
+        {L"TrayIconSize",L"15"},
+        {L"ClockEnabled",L"0"},
+        {L"ClockPreset",L"custom"},
+        {L"ClockTimeFormat",L"HH:mm"},
+        {L"ClockDateFormat",L"dd/MM/yyyy"},
+        {L"ClockWeekdayFormat",L"dddd"},
+        {L"ClockTopLine",L"%time%"},
+        {L"ClockBottomLine",L"%date%"},
+        {L"ClockAlignment",L"center"},
+        {L"ClockWidth",L"0"},
+        {L"ClockTopFont",L""},
+        {L"ClockBottomFont",L""},
+        {L"ClockTopSize",L"0"},
+        {L"ClockBottomSize",L"0"},
+        {L"ClockTopColor",L""},
+        {L"ClockBottomColor",L""},
+        {L"ClockTopBold",L"0"},
+        {L"ClockBottomBold",L"0"},
+        {L"ClockTimeZone",L"GMT Standard Time"},
+        {L"ClockLocationMode",L"manual"},
+        {L"ClockWeatherLocation",L""},
+        {L"ClockWeatherUnits",L"metric"},
+        {L"ClockWeatherMinutes",L"15"},
+        {L"ClockTooltipEnabled",L"0"},
+        {L"ClockTooltipDate",L"1"},
+        {L"ClockTooltipCity",L"1"},
+        {L"ClockTooltipForecast",L"1"},
+        {L"ClockTooltipGraph",L"1"},
+        {L"ClockTooltipCpu",L"1"},
+        {L"ClockTooltipRam",L"1"},
+        {L"ClockTooltipGpu",L"1"},
+        {L"ClockTooltipVram",L"1"},
+        {L"ClockTooltipBattery",L"0"},
+        {L"ClockTooltipExtra",L""},
+        {L"ClockContextMenuEnabled",L"1"},
+        {L"QuickContextMenuEnabled",L"1"},
+        {L"WinXContextMenuEnabled",L"1"},
+        {L"MoveFlyoutStartMenu",L"1"},
+        {L"MoveFlyoutControlCenter",L"1"},
+        {L"MoveFlyoutNotificationCenter",L"1"},
+        {L"AlignFlyoutInner",L"1"},
+        {L"NotificationCenterPrimaryOnly",L"1"},
+        {L"MoveFlyoutKeyboardLayout",L"1"},
+        {L"MoveTrayContextMenus",L"1"},
+        {L"StartMenuOnActiveMonitor",L"1"},
+        {L"ClipTaskbarWindowToDock",L"0"},
+        {L"AutoHideShowUnderTaskbarOnly",L"1"},
+        {L"HideMode",L"windows"},
+        {L"HideForeground",L"0"},
+        {L"HidePrimary",L"0"},
+        {L"HideExclude",L""},
+        {L"HideInstant",L"0"},
+        {L"HideEdge",L"0"},
+        {L"HideEffect",L"instant"},
+        {L"HideShowMs",L"200"},
+        {L"HideHideMs",L"200"},
+        {L"HideRate",L"60"},
+        {L"HoverZoomEnabled",L"0"},
+        {L"HoverZoomStyle",L"zoom"},
+        {L"HoverZoomHideBackground",L"1"},
+        {L"HoverZoomDisableBackgroundZoom",L"0"},
+        {L"HoverZoomPercent",L"180"},
+        {L"HoverZoomTrayPercent",L"180"},
+        {L"HoverZoomNeighbors",L"1"},
+        {L"HoverZoomSpread",L"1"},
+        {L"HoverZoomDuration",L"120"},
+        {L"HoverZoomStart",L"0"},
+        {L"HoverZoomExcludeTray",L"0"},
+        {L"HoverZoomExcludeChevron",L"1"},
+        {L"HoverZoomExcludeClock",L"1"},
+    };
+}
+static bool Utf16(std::wstring_view s){
+    for(size_t i=0;i<s.size();++i){
+        unsigned c=unsigned(s[i]);
+        if(!c||c==127||(c<32&&c!=9&&c!=10&&c!=13))return false;
+        if(c>=0xD800&&c<=0xDBFF){
+            if(++i>=s.size()||unsigned(s[i])<0xDC00||unsigned(s[i])>0xDFFF)return false;
+        }else if(c>=0xDC00&&c<=0xDFFF)return false;
+    }
+    return true;
+}
+static std::optional<int> Integer(std::wstring const& value){
+    if(value.empty()||value.size()>11)return {};
+    size_t pos=value[0]==L'-'||value[0]==L'+'?1:0;
+    if(pos==value.size())return {};
+    for(;pos<value.size();++pos)if(value[pos]<L'0'||value[pos]>L'9')return {};
+    wchar_t* end=nullptr;errno=0;auto n=wcstol(value.c_str(),&end,10);
+    if(errno||*end||n==INT_MIN)return {};return int(n);
+}
+static bool Number(std::wstring_view key,int n){
+    auto between=[&](int lo,int hi){return n>=lo&&n<=hi;};
+    if(key==L"TaskbarHeight")return between(1,200);
+    if(key==L"TaskbarIconSize"||key==L"TaskbarButtonSize"||key==L"TrayIconSize")return between(1,300);
+    if(key==L"TaskbarOffsetY")return between(-2,200);
+    if(key==L"TrayTaskGap"||key==L"TaskbarBackgroundHorizontalPadding")return between(0,300);
+    if(key==L"TrayContentOffsetY")return between(-12,12);
+    if(key==L"TaskbarCornerRadius"||key==L"TaskButtonCornerRadius")return between(0,100);
+    if(key==L"TaskbarBackgroundTintSaturation")return between(0,500);
+    if(key==L"TaskbarBackgroundOpacity"||key==L"TaskbarBackgroundTint"||key==L"TaskbarBackgroundLuminosity"||key==L"TaskbarBackgroundBlurAmount"||key==L"TaskbarBackgroundInversion"||key==L"TaskbarBorderOpacity"||key==L"TaskbarBorderThickness"||key==L"AppsDividerThickness"||key==L"AppsDividerVerticalScale")return between(0,100);
+    if(key==L"HoverZoomPercent"||key==L"HoverZoomTrayPercent")return between(110,250);
+    if(key==L"HoverZoomNeighbors")return between(0,2);
+    if(key==L"HoverZoomDuration")return between(0,300);
+    if(key==L"HideShowMs"||key==L"HideHideMs")return between(16,1000);
+    if(key==L"HideRate")return between(15,120);
+    if(key==L"ClockWidth")return n==0||between(40,400);
+    if(key==L"ClockTopSize"||key==L"ClockBottomSize")return n==0||between(8,36);
+    if(key==L"ClockWeatherMinutes")return between(5,120);
+    return false; // New numeric settings require explicit validation.
+}
+static bool Hex(std::wstring_view s,bool alpha,bool hashRequired){
+    bool hash=s.starts_with(L"#");if(hash)s.remove_prefix(1);
+    if(hashRequired&&!hash)return false;
+    if(s.size()!=6&&!(alpha&&s.size()==8))return false;
+    return std::all_of(s.begin(),s.end(),[](wchar_t c){return (c>=L'0'&&c<=L'9')||(c>=L'a'&&c<=L'f')||(c>=L'A'&&c<=L'F');});
+}
+static bool Text(std::wstring_view key,std::wstring_view v){
+    if(v.size()>maxText||!Utf16(v))return false;
+    if(key==L"TaskbarBackgroundTintColor"||key==L"TaskbarBackgroundFallbackColor"){
+        if(v.empty()||Hex(v,true,true))return true;
+        constexpr std::wstring_view prefix=L"{ThemeResource ";
+        if(!v.starts_with(prefix)||!v.ends_with(L"}"))return false;
+        v.remove_prefix(prefix.size());v.remove_suffix(1);
+        return !v.empty()&&v.size()<=128&&std::all_of(v.begin(),v.end(),[](wchar_t c){return (c>=L'A'&&c<=L'Z')||(c>=L'a'&&c<=L'z')||(c>=L'0'&&c<=L'9')||c==L'_'||c==L'.'||c==L'-';});
+    }
+    if(key==L"TaskbarBorderColorHex")return v.empty()||IsAccent(v)||Hex(v,false,false);
+    if(key==L"ClockTopColor"||key==L"ClockBottomColor")return v.empty()||IsAccent(v)||Hex(v,true,true);
+    if(key.starts_with(L"Clock"))return v.size()<=512;
+    return true;
+}
+static std::optional<std::wstring> RegistryData(Settings const& settings){
+    std::wstring data;
+    for(auto const& [key,value]:settings){
+        if(key.empty()||key.find(L'=')!=std::wstring::npos||!Utf16(key)||!Utf16(value))return {};
+        if((data.size()+key.size()+value.size()+3)*sizeof(wchar_t)>maxRegistry)return {};
+        data+=key;data+=L'=';data+=value;data.push_back(0);
+    }
+    if(data.empty())data.push_back(0);data.push_back(0);return data;
+}
+static bool ValidField(Option const& o,std::wstring const& v){
+    switch(o.kind){
+    case Kind::Toggle:return v==L"0"||v==L"1";
+    case Kind::Number:if(auto n=Integer(v))return Number(o.key,*n);return false;
+    case Kind::Choice:return std::any_of(o.choices.begin(),o.choices.end(),[&](auto const& choice){return v==choice.first;});
+    case Kind::Text:return Text(o.key,v);
+    }
+    return false;
+}
+static bool Validate(Settings const& values,std::wstring& bad){
+    auto const& options=Catalog<false>();
+    if(values.size()!=std::size(options))return false;
+    for(auto const& o:options){
+        auto it=values.find(o.key);if(it==values.end()){bad=o.key;return false;}
+        if(!ValidField(o,it->second)){bad=o.key;return false;}
+    }
+    return RegistryData(values).has_value();
+}
+static void Put32(std::string& out,uint32_t value){for(unsigned i=0;i<4;++i)out.push_back(char((value>>(8*i))&255));}
+static void PutString(std::string& out,std::wstring_view value){
+    Put32(out,uint32_t(value.size()));for(auto ch:value){out.push_back(char(unsigned(ch)&255));out.push_back(char((unsigned(ch)>>8)&255));}
+}
+struct Reader {
+    std::string_view bytes;size_t pos{};
+    bool U32(uint32_t& value){
+        if(pos>bytes.size()||bytes.size()-pos<4)return false;
+        value=0;for(unsigned i=0;i<4;++i)value|=uint32_t(static_cast<unsigned char>(bytes[pos++]))<<(8*i);
+        return true;
+    }
+    bool String(std::wstring& value,size_t limit){
+        uint32_t count{};if(!U32(count)||count>limit||count>(bytes.size()-pos)/2)return false;
+        value.clear();value.reserve(count);
+        for(uint32_t i=0;i<count;++i){auto lo=static_cast<unsigned char>(bytes[pos++]);auto hi=static_cast<unsigned char>(bytes[pos++]);value.push_back(wchar_t(unsigned(lo)|(unsigned(hi)<<8)));}
+        return Utf16(value);
+    }
+};
+static std::optional<std::string> Encode(Settings const& settings,std::wstring& bad){
+    if(!Validate(settings,bad))return {};
+    std::string payload;Put32(payload,uint32_t(settings.size()));
+    for(auto const& [key,value]:settings){PutString(payload,key);PutString(payload,value);}
+    if(payload.size()>maxFile-headerSize)return {};
+    auto digest=Updates::Sha256(payload);if(digest.size()!=digestSize)return {};
+    std::string file(magic);Put32(file,schema);Put32(file,uint32_t(payload.size()));file.append(digest.begin(),digest.end());file+=payload;return file;
+}
+static std::optional<Settings> Decode(std::string const& file,std::wstring& bad){
+    if(file.size()<headerSize||file.size()>maxFile||!std::string_view(file).starts_with(magic))return {};
+    Reader header{std::string_view(file),magic.size()};uint32_t version{},length{};
+    if(!header.U32(version)||version!=schema||!header.U32(length)||length!=file.size()-headerSize)return {};
+    auto payload=file.substr(headerSize);auto hash=Updates::Sha256(payload);
+    if(hash.size()!=digestSize||file.compare(header.pos,digestSize,std::string(hash.begin(),hash.end()))!=0)return {};
+    Reader r{payload};uint32_t count{};
+    if(!r.U32(count)||(count!=std::size(Catalog<false>())&&count!=std::size(Catalog<false>())+1))return {};
+    Settings settings;
+    for(uint32_t i=0;i<count;++i){std::wstring key,value;if(!r.String(key,96)||!r.String(value,maxText)||!settings.emplace(std::move(key),std::move(value)).second)return {};}
+    if(r.pos!=payload.size())return {};
+    // Older backups have no chevron preference; retain native placement.
+    // Retain compatibility with both pre-chevron and manually sized backups.
+    if(auto legacy=settings.find(L"TrayButtonSize");legacy!=settings.end()){
+      auto n=Integer(legacy->second);if(!n||*n<1||*n>300)return {};
+      settings.erase(legacy);settings.try_emplace(L"TrayChevronPosition",L"left");
+    }
+    if(!Validate(settings,bad))return {};
+    return settings;
+}
+struct Handle {HANDLE value{INVALID_HANDLE_VALUE};~Handle(){if(value!=INVALID_HANDLE_VALUE)CloseHandle(value);}void Close(){if(value!=INVALID_HANDLE_VALUE){CloseHandle(value);value=INVALID_HANDLE_VALUE;}}};
+static std::optional<std::string> LoadFile(std::wstring const& path){
+    Handle file{CreateFileW(path.c_str(),GENERIC_READ,FILE_SHARE_READ,nullptr,OPEN_EXISTING,FILE_FLAG_SEQUENTIAL_SCAN,nullptr)};
+    LARGE_INTEGER size{};if(file.value==INVALID_HANDLE_VALUE||GetFileType(file.value)!=FILE_TYPE_DISK||!GetFileSizeEx(file.value,&size)||size.QuadPart<LONGLONG(headerSize)||size.QuadPart>LONGLONG(maxFile))return {};
+    std::string data(size_t(size.QuadPart),'\0');DWORD read{};
+    if(!ReadFile(file.value,data.data(),DWORD(data.size()),&read,nullptr)||read!=data.size())return {};
+    return data;
+}
+static bool SaveFile(std::wstring const& path,std::string const& data){
+    Handle file{CreateFileW(path.c_str(),GENERIC_WRITE,0,nullptr,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,nullptr)};if(file.value==INVALID_HANDLE_VALUE)return false;
+    DWORD written{};bool ok=WriteFile(file.value,data.data(),DWORD(data.size()),&written,nullptr)&&written==data.size()&&FlushFileBuffers(file.value);
+    file.Close();if(!ok)DeleteFileW(path.c_str());return ok;
+}
+static bool Install(Settings const& values){
+    std::wstring bad;if(!Validate(values,bad))return false;
+    auto data=RegistryData(values);if(!data)return false;
+    std::unordered_map<std::wstring,std::wstring> next(values.begin(),values.end());
+    // One registry value: never commit a partially parsed or partially applied profile.
+    std::lock_guard guard(profileLock);
+    if(RegSetKeyValueW(HKEY_CURRENT_USER,IloPanel::path,L"Settings",REG_MULTI_SZ,data->data(),DWORD(data->size()*sizeof(wchar_t)))!=ERROR_SUCCESS)return false;
+    profile.swap(next);InvalidateSnapshotLocked();nextRead=GetTickCount64()+1000;return true;
+}
+} // namespace Backup
 
 constexpr wchar_t windowClass[] = L"MightyLuke.ILo.Settings.v1";
 HANDLE showEvent{}, quitEvent{};
@@ -1293,6 +1629,7 @@ struct View {
     C::FontIcon updateGlyph{nullptr};C::ProgressBar updateProgress{nullptr};
     C::Button updateCheck{nullptr},updateDownload{nullptr},updateInstall{nullptr},updateSaveFile{nullptr},updateReleasePage{nullptr};
     std::wstring updateActionMessage;
+    C::TextBlock backupStatus{nullptr};std::wstring backupMessage;
     PCWSTR AboutLabel() const{return UiText(L"About",L"À propos");}
     struct Row {int index; C::Control editor; C::TextBlock hint;};
     std::vector<Row> rows;
@@ -1308,8 +1645,9 @@ struct View {
 std::map<std::wstring,std::wstring> baseline, values;
     std::map<std::wstring,std::optional<std::wstring>> changes;
     void Read() {
-        std::lock_guard guard(profileLock);
-        ReadLocked(true);
+        // Do not hold the shared profile mutex during 102 Windhawk calls.
+        decltype(profile) saved;
+        {std::lock_guard guard(profileLock);ReadLocked(true);saved=profile;}
         for (auto& o : Options()) {
             std::wstring base;
             if (o.kind==Kind::Text || o.kind==Kind::Choice) {
@@ -1317,8 +1655,8 @@ std::map<std::wstring,std::wstring> baseline, values;
                 if(str){base=str;Wh_FreeStringSetting(str);}
             } else base=std::to_wstring(Wh_GetIntSetting(o.key));
             baseline[o.key]=base;
-            auto it=profile.find(o.key);
-            values[o.key]=it==profile.end()?base:it->second;
+            auto it=saved.find(o.key);
+            values[o.key]=it==saved.end()?base:it->second;
         }
     }
     PCWSTR Reason(PCWSTR key) {
@@ -1355,7 +1693,7 @@ std::map<std::wstring,std::wstring> baseline, values;
             return UiText(L"Switch to manual to choose a different city.",L"Choisis le mode manuel pour saisir une autre ville.");
         if((k==L"ClockWeatherLocation"||k==L"ClockWeatherUnits"||k==L"ClockWeatherMinutes")&&values[L"ClockLocationMode"]==L"off")
             return UiText(L"Enable location first.",L"Active d'abord la localisation.");
-        if((k==L"TrayButtonSize" || k==L"TrayIconSize") && values[L"StyleTrayArea"]!=L"1")
+        if(k==L"TrayIconSize" && values[L"StyleTrayArea"]!=L"1")
             return UiText(L"Enable notification area styling.", L"Active la personnalisation de la zone de notification.");
         return nullptr;
     }
@@ -1500,7 +1838,7 @@ std::map<std::wstring,std::wstring> baseline, values;
                 status.Text(UiText(L"Could not save the language.",L"Impossible d’enregistrer la langue."));
                 return;
             }
-            french=selected;
+            CacheLanguage(selected);french=selected;
             SetLanguageLabels();
             size_t i=0;groups.clear();
             for(auto const& option:Options()){
@@ -1655,6 +1993,7 @@ std::map<std::wstring,std::wstring> baseline, values;
         wrapper.Content(bar);return wrapper;
     }
     std::wstring FriendlyColor(std::wstring const& value,bool border) const {
+        if(IsAccent(value))return UiText(L"Windows accent",L"Accentuation Windows");
         if(value.empty()||value==L"{ThemeResource CardStrokeColorDefaultSolid}")return border?L"#FFFFFF":UiText(L"Windows theme",L"Thème Windows");
         if(value==L"{ThemeResource SystemBaseHighColor}")return UiText(L"Adaptive contrast",L"Contraste adaptatif");
         return value;
@@ -1665,8 +2004,9 @@ std::map<std::wstring,std::wstring> baseline, values;
         C::Flyout fly;C::StackPanel content;content.Spacing(9);C::ColorPicker picker;
         picker.IsAlphaEnabled(!border);picker.Color(ClockColor(value).value_or(winrt::Windows::UI::Color{255,255,255,255}));
         C::TextBox code;code.Header(winrt::box_value(winrt::hstring(UiText(L"Color code or theme resource",L"Code couleur ou ressource du thème"))));code.Text(value);code.MaxLength(512);
-        auto weakCode=winrt::make_weak(code);auto weakButton=winrt::make_weak(button);auto weakFly=winrt::make_weak(fly);
-        picker.ColorChanged([weakCode,border](auto const&,auto const& args){if(auto box=weakCode.get()){
+        auto weakCode=winrt::make_weak(code);auto weakButton=winrt::make_weak(button);auto weakFly=winrt::make_weak(fly);auto weakPicker=winrt::make_weak(picker);auto updating=std::make_shared<bool>(false);
+        picker.ColorChanged([weakCode,border,updating](auto const&,auto const& args){if(*updating)return;if(auto box=weakCode.get()){
+            if(IsAccent(std::wstring_view(box.Text()))&&args.NewColor()==AccentColor())return;
             auto c=args.NewColor();wchar_t hex[10]{};if(border)swprintf_s(hex,ARRAYSIZE(hex),L"#%02X%02X%02X",unsigned(c.R),unsigned(c.G),unsigned(c.B));else swprintf_s(hex,ARRAYSIZE(hex),L"#%02X%02X%02X%02X",unsigned(c.A),unsigned(c.R),unsigned(c.G),unsigned(c.B));box.Text(hex);
         }});
         content.Children().Append(picker);content.Children().Append(code);
@@ -1674,17 +2014,19 @@ std::map<std::wstring,std::wstring> baseline, values;
         auto preset=[&](PCWSTR label,PCWSTR color){auto b=ClockButton(label);b.HorizontalAlignment(X::HorizontalAlignment::Stretch);b.Click([weakCode,color](auto&&,auto&&){if(auto t=weakCode.get())t.Text(color);});choices.Children().Append(b);};
         if(!border){preset(UiText(L"Windows theme",L"Thème Windows"),L"{ThemeResource CardStrokeColorDefaultSolid}");preset(UiText(L"Adaptive light/dark contrast",L"Contraste clair/sombre adaptatif"),L"{ThemeResource SystemBaseHighColor}");}
         else preset(UiText(L"White (default)",L"Blanc (par défaut)"),L"#FFFFFF");
+        auto accent=ClockButton(UiText(L"Windows accent color",L"Couleur d’accentuation de Windows"));accent.HorizontalAlignment(X::HorizontalAlignment::Stretch);
+        accent.Click([weakCode,weakPicker,updating](auto&&,auto&&){*updating=true;if(auto p=weakPicker.get())p.Color(AccentColor());*updating=false;if(auto t=weakCode.get())t.Text(accentResource);});choices.Children().Append(accent);
         content.Children().Append(choices);
         auto apply=ClockButton(UiText(L"Apply color",L"Appliquer la couleur"));auto hint=ClockLabel(L"",12);auto weakHint=winrt::make_weak(hint);
         apply.Click([this,i,border,weakCode,weakButton,weakFly,weakHint](auto&&,auto&&){if(auto t=weakCode.get()){
             auto v=std::wstring(t.Text());bool resource=v.starts_with(L"{ThemeResource ")&&v.ends_with(L"}");
-            bool valid=border?(v.size()==7&&v.front()==L'#'&&ClockColor(v).has_value()):(v.empty()||resource||ClockColor(v).has_value());
+            bool valid=IsAccent(v)||(border?(v.size()==7&&v.front()==L'#'&&ClockColor(v).has_value()):(v.empty()||resource||ClockColor(v).has_value()));
             if(!valid){if(auto h=weakHint.get())h.Text(UiText(L"Enter a valid color code.",L"Saisis un code couleur valide."));return;}
             Change(i,v);if(auto b=weakButton.get())b.Content(winrt::box_value(winrt::hstring(FriendlyColor(v,border))));if(auto f=weakFly.get())f.Hide();
         }});content.Children().Append(hint);content.Children().Append(apply);fly.Content(content);button.Flyout(fly);return button;
     }
     C::Control ColorEditor(int i,std::wstring const& value){
-        auto button=ClockButton(value.empty()?UiText(L"Windows theme",L"Thème Windows"):value.c_str());
+        auto button=ClockButton(FriendlyColor(value,false).c_str());
         button.MinWidth(140);
         C::Flyout fly;C::StackPanel stack;stack.Spacing(8);
         C::ColorPicker picker;picker.Color(ClockColor(value).value_or(winrt::Windows::UI::Color{255,255,255,255}));
@@ -1705,7 +2047,9 @@ std::map<std::wstring,std::wstring> baseline, values;
             Change(i,L"");if(auto b=weakButton.get())b.Content(winrt::box_value(winrt::hstring(UiText(L"Windows theme",L"Thème Windows"))));
             if(auto f=weakFly.get())f.Hide();
         });
-        bar.Children().Append(apply);bar.Children().Append(resetColor);stack.Children().Append(bar);fly.Content(stack);button.Flyout(fly);return button;
+        auto accent=ClockButton(UiText(L"Windows accent color",L"Couleur d’accentuation de Windows"));accent.HorizontalAlignment(X::HorizontalAlignment::Stretch);
+        accent.Click([this,i,weakButton,weakFly](auto&&,auto&&){Change(i,accentResource);if(auto b=weakButton.get())b.Content(winrt::box_value(winrt::hstring(FriendlyColor(accentResource,false))));if(auto f=weakFly.get())f.Hide();});
+        stack.Children().Append(accent);bar.Children().Append(apply);bar.Children().Append(resetColor);stack.Children().Append(bar);fly.Content(stack);button.Flyout(fly);return button;
     }
     C::Control FontEditor(int i,std::wstring const& value){
         C::ComboBox box;box.Width(176);auto names=ClockFonts();
@@ -1976,6 +2320,78 @@ std::map<std::wstring,std::wstring> baseline, values;
             if(!p.solid){SetDraft(L"TaskbarBackgroundBlurAmount",std::to_wstring(p.blur));SetDraft(L"TaskbarBackgroundTint",std::to_wstring(p.tint));SetDraft(L"TaskbarBackgroundLuminosity",std::to_wstring(p.lum));SetDraft(L"TaskbarBackgroundTintSaturation",std::to_wstring(p.sat));SetDraft(L"TaskbarBackgroundInversion",std::to_wstring(p.inv));}Draw();
         });stack.Children().Append(b);}card.Children().Append(stack);
     }
+    void ReportBackup(std::wstring message){
+        backupMessage=std::move(message);status.Text(backupMessage);
+        if(backupStatus)backupStatus.Text(backupMessage);
+    }
+    std::wstring BackupValidationMessage(std::wstring const& key,bool exporting=false){
+        std::wstring message=exporting?UiText(L"The current settings cannot be exported safely. Correct the invalid setting and save again.",L"Les réglages actuels ne peuvent pas être exportés en toute sécurité. Corrige le réglage invalide puis enregistre à nouveau."):UiText(L"The backup is invalid, corrupted or incompatible. No settings were changed.",L"Le fichier est invalide, endommagé ou incompatible. Aucun réglage n'a été modifié.");
+        if(!key.empty())for(auto const& o:Options())if(key==o.key){message+=L"\n";message+=UiText(L"Invalid setting: ",L"Réglage invalide : ");message+=o.label;break;}
+        return message;
+    }
+    std::optional<std::wstring> BackupDialog(bool exporting){
+        std::vector<wchar_t> name(32768);
+        if(exporting){SYSTEMTIME now{};GetLocalTime(&now);swprintf_s(name.data(),name.size(),L"ILo-settings-%04u-%02u-%02u-%02u%02u%02u.ILo",unsigned(now.wYear),unsigned(now.wMonth),unsigned(now.wDay),unsigned(now.wHour),unsigned(now.wMinute),unsigned(now.wSecond));}
+        OPENFILENAMEW dialog{};dialog.lStructSize=sizeof(dialog);dialog.hwndOwner=window;dialog.lpstrFile=name.data();dialog.nMaxFile=DWORD(name.size());
+        dialog.lpstrFilter=french?L"Sauvegarde ILô (*.ILo)\0*.ILo\0\0":L"ILô settings backup (*.ILo)\0*.ILo\0\0";dialog.lpstrDefExt=L"ILo";
+        dialog.lpstrTitle=exporting?UiText(L"Export ILô settings",L"Exporter les paramètres ILô"):UiText(L"Import ILô settings",L"Importer les paramètres ILô");
+        dialog.Flags=OFN_EXPLORER|OFN_PATHMUSTEXIST|OFN_NOCHANGEDIR|OFN_DONTADDTORECENT|(exporting?0:OFN_FILEMUSTEXIST);
+        if(!(exporting?GetSaveFileNameW(&dialog):GetOpenFileNameW(&dialog))){if(CommDlgExtendedError())ReportBackup(UiText(L"Could not open the file dialog.",L"Impossible d'ouvrir la boîte de sélection de fichier."));return {};}
+        std::wstring file=name.data();if(file.size()<4||_wcsicmp(file.c_str()+file.size()-4,L".ILo")!=0){ReportBackup(UiText(L"Choose an .ILo backup file.",L"Choisis un fichier de sauvegarde .ILo."));return {};}
+        return file;
+    }
+    void ExportBackup(){
+        try{
+            if(!changes.empty()){ReportBackup(UiText(L"Save pending changes before exporting your settings.",L"Enregistre les modifications en attente avant d'exporter tes paramètres."));return;}
+            Read();std::wstring bad;auto data=Backup::Encode(values,bad);
+            if(!data){ReportBackup(BackupValidationMessage(bad,true));return;}
+            auto file=BackupDialog(true);if(!file)return;
+            ReportBackup(Backup::SaveFile(*file,*data)?std::wstring(UiText(L"Settings exported: ",L"Paramètres exportés : "))+*file:UiText(L"Could not export. Select a new filename or another folder; existing files are not overwritten.",L"Impossible d'exporter. Choisis un nouveau nom ou un autre dossier ; aucun fichier existant n'est écrasé."));
+        }catch(...){ReportBackup(UiText(L"Export failed. Your settings were not changed.",L"L'export a échoué. Tes paramètres n'ont pas été modifiés."));}
+    }
+    bool ConfirmBackupChange(bool resetting){
+        auto title=resetting?UiText(L"Reset ILô settings",L"Remettre à zéro les paramètres ILô"):UiText(L"Restore ILô settings",L"Restaurer les paramètres ILô");
+        std::wstring message=resetting?UiText(L"Restore all ILô dock settings to factory defaults? This also resets the clock, menus and visual effects. Export a backup first if you want to keep your current settings.",L"Restaurer tous les paramètres du dock ILô à leurs valeurs d'origine ? L'horloge, les menus et les effets visuels seront également réinitialisés. Exporte une sauvegarde au préalable si tu veux conserver tes réglages."):UiText(L"The backup is valid. Replace all current ILô dock settings with the settings from this file?",L"La sauvegarde est valide. Remplacer tous les paramètres actuels du dock ILô par ceux de ce fichier ?");
+        if(!changes.empty())message+=UiText(L"\n\nUnsaved changes will also be discarded.",L"\n\nLes modifications non enregistrées seront également abandonnées.");
+        return MessageBoxW(window,message.c_str(),title,MB_YESNO|MB_ICONWARNING|MB_DEFBUTTON2)==IDYES;
+    }
+    void ApplyBackup(Backup::Settings const& incoming,bool resetting){
+        if(!Backup::Install(incoming)){ReportBackup(UiText(L"Could not save the restored profile. Nothing was changed.",L"Impossible d'enregistrer le profil restauré. Aucun réglage n'a été modifié."));return;}
+        bool signaled=SetEvent(RefreshSignal())!=FALSE;
+        changes.clear();confirmDiscard=false;Read();Draw();
+        std::wstring message=resetting?UiText(L"ILô factory settings restored.",L"Paramètres d'origine d'ILô restaurés."):UiText(L"Settings restored successfully.",L"Paramètres restaurés avec succès.");
+        if(!signaled)message+=UiText(L" Reload ILô in Windhawk to apply them.",L" Recharge ILô dans Windhawk pour les appliquer.");
+        else message+=UiText(L" Reload ILô if the compatibility option has changed.",L" Recharge ILô si l'option de compatibilité a changé.");
+        ReportBackup(std::move(message));
+    }
+    void ImportBackup(){
+        try{
+            auto file=BackupDialog(false);if(!file)return;
+            std::wstring bad;auto bytes=Backup::LoadFile(*file);auto incoming=bytes?Backup::Decode(*bytes,bad):std::nullopt;
+            if(!incoming){ReportBackup(BackupValidationMessage(bad));return;}
+            if(ConfirmBackupChange(false))ApplyBackup(*incoming,false);
+        }catch(...){ReportBackup(UiText(L"Restore could not be completed. Check your current settings.",L"La restauration n'a pas pu être terminée. Vérifie tes réglages actuels."));}
+    }
+    void ResetDock(){
+        try{auto factory=Backup::Factory();std::wstring bad;
+            if(!Backup::Validate(factory,bad)){ReportBackup(BackupValidationMessage(bad));return;}
+            if(ConfirmBackupChange(true))ApplyBackup(factory,true);
+        }catch(...){ReportBackup(UiText(L"Reset could not be completed. Check your current settings.",L"La remise à zéro n'a pas pu être terminée. Vérifie tes réglages actuels."));}
+    }
+    void DrawBackupCard(){
+        auto card=StartCard(UiText(L"Backup, restore and reset",L"Sauvegarde, restauration et remise à zéro"));
+        C::StackPanel body;body.Margin({16,12,16,14});body.Spacing(10);
+        auto row=[&](PCWSTR title,PCWSTR detail,PCWSTR caption,auto action){
+            C::Grid line;line.ColumnSpacing(16);C::ColumnDefinition left,right;left.Width(X::GridLength{1,X::GridUnitType::Star});right.Width(X::GridLength{1,X::GridUnitType::Auto});line.ColumnDefinitions().Append(left);line.ColumnDefinitions().Append(right);
+            C::StackPanel labels;labels.Spacing(4);labels.VerticalAlignment(X::VerticalAlignment::Center);labels.Children().Append(ClockLabel(title,15));auto description=ClockLabel(detail,13);description.Opacity(.72);labels.Children().Append(description);line.Children().Append(labels);
+            auto button=ClockButton(caption);button.MinWidth(128);button.HorizontalAlignment(X::HorizontalAlignment::Right);button.VerticalAlignment(X::VerticalAlignment::Center);C::Grid::SetColumn(button,1);line.Children().Append(button);button.Click([action](auto&&,auto&&){action();});body.Children().Append(line);
+        };
+        auto divider=[&]{body.Children().Append(Parse(L"<Border Height='1' Background='{ThemeResource SystemControlForegroundBaseLowBrush}'/>"));};
+        row(UiText(L"Export your settings",L"Exporter les paramètres"),UiText(L"Save all current ILô dock settings in a portable binary .ILo file.",L"Enregistre tous les paramètres du dock ILô dans un fichier binaire .ILo portable."),UiText(L"Export",L"Exporter"),[this]{ExportBackup();});divider();
+        row(UiText(L"Restore from a backup",L"Restaurer une sauvegarde"),UiText(L"Validate and import a .ILo file. Your settings are replaced only after confirmation.",L"Vérifie et importe un fichier .ILo. Tes réglages ne sont remplacés qu'après confirmation."),UiText(L"Import",L"Importer"),[this]{ImportBackup();});divider();
+        row(UiText(L"Reset all dock settings",L"Remettre à zéro le dock"),UiText(L"Restore ILô's factory defaults, including the clock and appearance. Windows preferences are not affected.",L"Restaure les valeurs d'origine d'ILô, y compris l'horloge et l'apparence. Les paramètres Windows ne sont pas modifiés."),UiText(L"Reset",L"Remettre à zéro"),[this]{ResetDock();});
+        backupStatus=ClockLabel(backupMessage.c_str(),13);body.Children().Append(backupStatus);card.Children().Append(body);
+    }
     void DrawGeneral(){
         auto card=[&](PCWSTR en,PCWSTR fr,std::initializer_list<PCWSTR> keys){auto c=StartCard(UiText(en,fr));for(auto key:keys)AppendRow(c,OptionIndex(key));};
         auto is=[&](PCWSTR en,PCWSTR fr){return group==UiText(en,fr);};
@@ -1998,8 +2414,8 @@ std::map<std::wstring,std::wstring> baseline, values;
             card(L"Button appearance",L"Apparence des boutons",{L"HoverZoomHideBackground",L"HoverZoomDisableBackgroundZoom"});
             card(L"Notification area and Start",L"Zone de notification et Démarrer",{L"HoverZoomStart",L"HoverZoomExcludeTray",L"HoverZoomTrayPercent",L"HoverZoomExcludeChevron",L"HoverZoomExcludeClock"});
         }else if(is(L"Notification area",L"Zone de notification")){
-            card(L"Icon sizes",L"Dimensions des icônes",{L"StyleTrayArea",L"TrayIconSize",L"TrayButtonSize"});
-            card(L"Alignment",L"Alignement",{L"TrayContentOffsetY"});
+            card(L"Icon sizes",L"Dimensions des icônes",{L"StyleTrayArea",L"TrayIconSize"});
+            card(L"Alignment",L"Alignement",{L"TrayChevronPosition",L"TrayContentOffsetY"});
         }else if(is(L"Dividers",L"Séparateurs")){
             card(L"Choose where to display dividers",L"Choisir les séparateurs",{L"TrayAreaDivider",L"DividedAppNames",L"AppsDividerAlignment"});
             card(L"Appearance",L"Apparence",{L"AppsDividerThickness",L"AppsDividerVerticalScale"});
@@ -2011,7 +2427,7 @@ std::map<std::wstring,std::wstring> baseline, values;
             card(L"Open on the active screen",L"Ouverture sur l'écran actif",{L"StartMenuOnActiveMonitor",L"NotificationCenterPrimaryOnly"});
             card(L"Align flyouts with the dock",L"Aligner les volets sur le dock",{L"MoveFlyoutStartMenu",L"MoveFlyoutControlCenter",L"MoveFlyoutNotificationCenter",L"MoveFlyoutKeyboardLayout",L"MoveTrayContextMenus",L"AlignFlyoutInner"});
         }else if(is(L"Advanced options",L"Options avancées")){
-            card(L"Compatibility",L"Compatibilité",{L"ClipTaskbarWindowToDock"});card(L"Troubleshooting",L"Diagnostic",{L"LogFlyoutPlacement"});
+            card(L"Compatibility",L"Compatibilité",{L"ClipTaskbarWindowToDock"});DrawBackupCard();
         }
         // Future settings remain accessible even if a new catalog key has
         // not been assigned to a dedicated card yet.
@@ -2118,6 +2534,7 @@ std::map<std::wstring,std::wstring> baseline, values;
         UpdateAbout();
     }
     void Draw(){
+        backupStatus=nullptr;
         rows.clear();clockActions.clear();clockPreviewTop=nullptr;clockPreviewBottom=nullptr;clockPreviewHint=nullptr;clockCityStatus=nullptr;clockDetect=nullptr;clockTopEditor=nullptr;clockBottomEditor=nullptr;clockInsertTarget=nullptr;tooltipPreview=nullptr;
         dockPreviewPlate=nullptr;dockPreviewInfo=nullptr;dockPreviewIcons=nullptr;dockPreviewGlyphs.clear();
         updateTitle=nullptr;updateDetail=nullptr;updateChecked=nullptr;updateNotes=nullptr;updateInstallHint=nullptr;updateGlyph=nullptr;updateProgress=nullptr;updateCheck=nullptr;updateDownload=nullptr;updateInstall=nullptr;updateSaveFile=nullptr;updateReleasePage=nullptr;
@@ -2133,25 +2550,22 @@ std::map<std::wstring,std::wstring> baseline, values;
             if(previous!=section){previous=section;container=StartCard(section);}
             AppendRow(container,i);
         }
-        if(rows.empty()){C::TextBlock empty;empty.Text(UiText(L"No matching settings.", L"Aucun réglage trouvé."));pages.Children().Append(empty);}
+        if(!query.empty()&&(Matches(UiText(L"Backup, restore and reset",L"Sauvegarde, restauration et remise à zéro"),query)||Matches(UiText(L"Export your settings",L"Exporter les paramètres"),query)||Matches(UiText(L"Import a backup",L"Importer une sauvegarde"),query)||Matches(UiText(L"Reset all dock settings",L"Remettre à zéro le dock"),query)))DrawBackupCard();
+        if(rows.empty()&&!backupStatus){C::TextBlock empty;empty.Text(UiText(L"No matching settings.", L"Aucun réglage trouvé."));pages.Children().Append(empty);}
         Update();scroll.ChangeView(nullptr,winrt::box_value(0.).as<winrt::Windows::Foundation::IReference<double>>(),nullptr,true);
     }
 void Save() {
-        for(auto& o:Options())if(o.kind==Kind::Number && changes.contains(o.key)){
-            auto& v=values[o.key];wchar_t* end=nullptr;errno=0;auto n=wcstol(v.c_str(),&end,10);
-            if(end==v.c_str()||*end||errno||n==INT_MIN){
-                status.Text((std::wstring(UiText(L"Enter a whole number for ", L"Entier attendu : "))+o.label).c_str());return;
-            }
+        for(auto& o:Options())if(auto it=changes.find(o.key);it!=changes.end()&&it->second&&!Backup::ValidField(o,*it->second)){
+            status.Text((std::wstring(UiText(L"Invalid setting: ",L"Réglage invalide : "))+o.label).c_str());return;
         }
         {
             std::lock_guard guard(profileLock);ReadLocked(true);auto next=profile;
             for(auto& [k,v]:changes){if(!v || *v==baseline[k])next.erase(k);else next[k]=*v;}
-            std::wstring data;for(auto& [k,v]:next){data+=k+L"="+v;data.push_back(0);}
-            if(data.empty())data.push_back(0);data.push_back(0);
-            if(RegSetKeyValueW(HKEY_CURRENT_USER,path,L"Settings",REG_MULTI_SZ,data.data(),static_cast<DWORD>(data.size()*sizeof(wchar_t)))!=ERROR_SUCCESS){
+            auto data=Backup::RegistryData(Backup::Settings(next.begin(),next.end()));
+            if(!data||RegSetKeyValueW(HKEY_CURRENT_USER,path,L"Settings",REG_MULTI_SZ,data->data(),static_cast<DWORD>(data->size()*sizeof(wchar_t)))!=ERROR_SUCCESS){
                 status.Text(UiText(L"Could not save the profile.", L"Échec de l’enregistrement du profil."));return;
             }
-            profile.swap(next);
+            profile.swap(next);InvalidateSnapshotLocked();
         }
         changes.clear();Read();Draw();
         status.Text(SetEvent(RefreshSignal())?UiText(L"Settings saved", L"Réglages enregistrés"):UiText(L"Profile saved. Reload ILô.", L"Profil enregistré. Recharge ILô."));
@@ -2191,6 +2605,7 @@ static LRESULT CALLBACK WindowProc(HWND w,UINT msg,WPARAM wp,LPARAM lp) noexcept
             m->ptMinTrackSize={std::min<LONG>(mi.rcWork.right-mi.rcWork.left,MulDiv(740,dpi,96)),std::min<LONG>(mi.rcWork.bottom-mi.rcWork.top,MulDiv(480,dpi,96))};return 0;}
         case WM_SIZE:view->Layout(LOWORD(lp),HIWORD(lp));if(wp!=SIZE_MINIMIZED)view->UpdateMaximizeButton();return 0;
         case WM_TIMER:if(wp==0x711){view->UpdateClockPreview();view->UpdateAbout();return 0;}break;
+        case WM_APP+171:if(view->root){view->Theme();view->UpdateClockPreview(true);view->UpdateDockPreview();}return 0;
         case WM_APP+170:case WM_SETTINGCHANGE:case WM_THEMECHANGED:if(view->root)view->Theme();break;
         case WM_DPICHANGED:{view->icons.Set(w,LOWORD(wp));auto r=reinterpret_cast<RECT*>(lp);SetWindowPos(w,nullptr,r->left,r->top,r->right-r->left,r->bottom-r->top,SWP_NOZORDER|SWP_NOACTIVATE);return 0;}
         case WM_DESTROY:if(view->root)RememberSize(w);view->Close();return 0;
@@ -2459,11 +2874,13 @@ double* double_48_value_Original;
 
 #include <mutex>
 #include <regex>
+#include <winrt/Windows.UI.Xaml.Data.h>
 struct ModSettings {
   bool zoomDisableBackgroundZoom, zoomMacStyle, zoomExcludeTray, zoomExcludeChevron, zoomExcludeClock, zoomEnabled, zoomHideBackground, zoomSpread, zoomStart;
   int zoomTrayPercent, zoomPercent, zoomNeighbors, zoomDuration;
   int userDefinedTrayTaskGap;
   int trayContentOffsetY;
+  bool trayChevronRight{};
   int userDefinedTaskbarBackgroundHorizontalPadding;
   unsigned int userDefinedTaskbarOffsetY;
   unsigned int userDefinedTaskbarHeight;
@@ -2751,6 +3168,186 @@ struct TaskbarState {
   uint64_t lastDimensionInvalidationGeneration{0};
   TaskbarChildStyleCache taskbarChildStyleCache;
   TaskbarChildStyleCache trayChildStyleCache;
+  // Only template identities are cached. Actual widths, transforms and
+  // animation targets are still measured on every geometry pass.
+  struct Topology {
+    winrt::weak_ref<FrameworkElement> frame,rootGrid,repeater,tray,trayHost,trayGrid,background,fillParent,fill;
+    ULONGLONG discovered{};uint64_t generation{};bool nested{};
+  } topology;
+  ULONGLONG lastPopupRegistration{},lastClockSync{};
+  void* popupRootIdentity{};std::wstring popupMonitor;
+  winrt::weak_ref<FrameworkElement> clockGrid;
+  uint64_t lastClockGeneration{};
+  // Keep each template's original local value (or binding). Never restore a
+  // guessed Windows default or a value subsequently changed by the shell.
+  struct TraySizeProperty {
+    winrt::weak_ref<FrameworkElement> element;
+    DependencyProperty property{nullptr};
+    winrt::Windows::Foundation::IInspectable original{nullptr},applied{nullptr};
+    winrt::Windows::UI::Xaml::Data::BindingBase binding{nullptr};
+    bool seen{};
+  };
+  std::vector<TraySizeProperty> traySizeProperties;
+  winrt::weak_ref<FrameworkElement> traySizeRoot;
+  uint64_t traySizeGeneration{};
+  ULONGLONG traySizeLastSync{};
+  bool traySizeEnabled{},traySizeSyncing{},traySizeChanged{};
+  static bool EqualTrayValue(winrt::Windows::Foundation::IInspectable const& a,winrt::Windows::Foundation::IInspectable const& b){
+    if(a==b)return true;
+    if(auto x=a.try_as<winrt::Windows::Foundation::IReference<double>>()){
+      auto y=b.try_as<winrt::Windows::Foundation::IReference<double>>();return y&&x.Value()==y.Value();
+    }
+    if(auto x=a.try_as<winrt::Windows::Foundation::IReference<CornerRadius>>()){
+      auto y=b.try_as<winrt::Windows::Foundation::IReference<CornerRadius>>();if(!y)return false;
+      auto p=x.Value(),q=y.Value();return p.TopLeft==q.TopLeft&&p.TopRight==q.TopRight&&p.BottomRight==q.BottomRight&&p.BottomLeft==q.BottomLeft;
+    }
+    return false;
+  }
+  static bool RestoreTrayProperty(TraySizeProperty const& entry){
+    try{if(auto e=entry.element.get();e&&EqualTrayValue(e.ReadLocalValue(entry.property),entry.applied)&&!e.GetBindingExpression(entry.property)){
+      if(entry.binding)e.SetBinding(entry.property,entry.binding);
+      else if(entry.original==DependencyProperty::UnsetValue())e.ClearValue(entry.property);
+      else e.SetValue(entry.property,entry.original);
+      return true;
+    }}catch(...){}
+    return false;
+  }
+  bool RestoreTraySizes(){
+    bool changed=false;for(auto const& entry:traySizeProperties)changed|=RestoreTrayProperty(entry);
+    traySizeProperties.clear();traySizeRoot={};traySizeLastSync=0;traySizeEnabled=false;return changed;
+  }
+  template<typename T> void SetTraySize(FrameworkElement const& element,DependencyProperty const& property,T value){
+    if(!element)return;
+    auto applied=winrt::box_value(value),local=element.ReadLocalValue(property);
+    auto it=std::find_if(traySizeProperties.begin(),traySizeProperties.end(),[&](auto const& e){return e.element.get()==element&&e.property==property;});
+    auto binding=element.GetBindingExpression(property);
+    if(it!=traySizeProperties.end()&&EqualTrayValue(local,it->applied)&&!binding){
+      it->seen=true;if(EqualTrayValue(local,applied))return;
+      element.SetValue(property,applied);it->applied=applied;traySizeChanged=true;return;
+    }
+    winrt::Windows::UI::Xaml::Data::BindingBase originalBinding{nullptr};
+    if(binding){originalBinding=binding.ParentBinding();if(!originalBinding)return;}
+    else if(local!=DependencyProperty::UnsetValue()&&!local.try_as<winrt::Windows::Foundation::IReference<T>>())return;
+    if(EqualTrayValue(local,applied)&&!binding){if(it!=traySizeProperties.end())it->seen=true;return;}
+    TraySizeProperty entry{winrt::make_weak(element),property,local,applied,originalBinding,true};
+    if(it==traySizeProperties.end())traySizeProperties.push_back(entry);else *it=entry;
+    element.SetValue(property,applied);traySizeChanged=true;
+  }
+  struct TrayChevronShift {
+    winrt::weak_ref<FrameworkElement> element;
+    winrt::Windows::Foundation::IInspectable original{nullptr};
+    Media::TranslateTransform shift{nullptr};
+  };
+  winrt::weak_ref<FrameworkElement> chevronGrid,chevronParent,chevronSlot,clockSlot;
+  std::vector<TrayChevronShift> chevronShifts;
+  ULONGLONG chevronLastDiscovery{},chevronLastLog{};
+  bool chevronRightRequested{};
+  bool ChevronMoved() const {return !chevronShifts.empty();}
+  void RestoreChevronOrder() {
+    for(auto const& entry:chevronShifts)try {
+      if(auto element=entry.element.get();element&&element.RenderTransform()==entry.shift){
+        if(entry.original==DependencyProperty::UnsetValue())element.ClearValue(UIElement::RenderTransformProperty());
+        else element.SetValue(UIElement::RenderTransformProperty(),entry.original);
+      }
+    }catch(...){}
+    chevronShifts.clear();chevronGrid={};chevronParent={};chevronSlot={};clockSlot={};chevronLastDiscovery=0;
+  }
+  static FrameworkElement FindTrayAnchor(FrameworkElement const& root,bool clock,int depth){
+    if(!root||depth<=0||root.Visibility()!=Visibility::Visible)return nullptr;
+    auto name=root.Name();auto type=winrt::get_class_name(root);
+    if(clock?(name==L"TimeInnerTextBlock"||name==L"DateInnerTextBlock"):
+             (name==L"ChevronIcon"||type==L"SystemTray.ChevronIconView"))return root;
+    int count=Media::VisualTreeHelper::GetChildrenCount(root);
+    for(int i=0;i<count;++i)if(auto child=Media::VisualTreeHelper::GetChild(root,i).try_as<FrameworkElement>())
+      if(auto found=FindTrayAnchor(child,clock,depth-1))return found;
+    return nullptr;
+  }
+  static FrameworkElement ChevronParentOf(FrameworkElement const& element){return element?Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>():nullptr;}
+  static bool ChevronNativeTransform(FrameworkElement const& element){
+    auto property=UIElement::RenderTransformProperty();
+    if(element.GetBindingExpression(property))return false;
+    auto local=element.ReadLocalValue(property);
+    if(local&&local!=DependencyProperty::UnsetValue()&&!local.try_as<Media::Transform>())return false;
+    auto t=element.RenderTransform();if(!t)return true;
+    auto a=t.TransformPoint({0,0}),b=t.TransformPoint({1,0}),c=t.TransformPoint({0,1});
+    return std::abs(a.X)+std::abs(a.Y)+std::abs(b.X-1)+std::abs(b.Y)+std::abs(c.X)+std::abs(c.Y-1)<0.001;
+  }
+  void LogChevronLayout(FrameworkElement const& root,PCWSTR reason){
+    auto now=GetTickCount64();if(chevronLastLog&&now-chevronLastLog<3000)return;chevronLastLog=now;
+    Wh_Log(L"[ILoChevron] %s, root=%s",reason,winrt::get_class_name(root).c_str());
+    for(int i=0,n=Media::VisualTreeHelper::GetChildrenCount(root);i<n;++i){
+      if(auto e=Media::VisualTreeHelper::GetChild(root,i).try_as<FrameworkElement>())
+        Wh_Log(L"[ILoChevron] child %s (%s) x=%.1f width=%.1f column=%d",e.Name().c_str(),winrt::get_class_name(e).c_str(),e.ActualOffset().x,e.ActualWidth(),Controls::Grid::GetColumn(e));
+    }
+  }
+  // Use the arranged positions instead of assuming Grid columns match the
+  // visual order. XAML render transforms carry the native hit targets with
+  // their slots; no controls are recreated, reparented or removed.
+  void SyncChevronOrder(FrameworkElement const& root,bool right) {
+    chevronRightRequested=right;
+    if(!right||g_unloading){if(ChevronMoved()||chevronLastDiscovery)RestoreChevronOrder();return;}
+    auto now=GetTickCount64();auto parent=chevronParent.get(),chevron=chevronSlot.get(),clock=clockSlot.get();
+    if(chevronGrid.get()!=root||!parent||!chevron||!clock||ChevronParentOf(chevron)!=parent||ChevronParentOf(clock)!=parent){
+      if(chevronGrid.get()==root&&!parent&&chevronLastDiscovery&&now-chevronLastDiscovery<250)return;
+      RestoreChevronOrder();
+      parent=nullptr;chevron=nullptr;clock=nullptr;
+      chevronGrid=winrt::make_weak(root);
+      chevronLastDiscovery=now;
+      auto arrow=FindTrayAnchor(root,false,14),time=FindTrayAnchor(root,true,14);
+      if(!arrow||!time)for(int i=0,n=Media::VisualTreeHelper::GetChildrenCount(root);i<n;++i){
+        auto element=Media::VisualTreeHelper::GetChild(root,i).try_as<FrameworkElement>();if(!element||element.Visibility()!=Visibility::Visible)continue;
+        auto name=element.Name();
+        if(!arrow&&name==L"NotifyIconStack")arrow=element;
+        if(!time&&(name==L"NotificationCenterButton"||name==L"SecondaryClockStack")&&element.ActualWidth()>0)time=element;
+      }
+      // Walk from the chevron towards the root until the clock's branch
+      // shares a parent. This also supports nested horizontal panels.
+      for(auto branch=arrow;branch&&branch!=root;branch=ChevronParentOf(branch)){
+        auto candidate=ChevronParentOf(branch);if(!candidate)break;
+        for(auto other=time;other&&other!=candidate;other=ChevronParentOf(other)){
+          if(other!=branch&&ChevronParentOf(other)==candidate){parent=candidate;chevron=branch;clock=other;break;}
+        }
+        if(parent&&chevron&&clock)break;
+      }
+      if(!parent||!chevron||!clock){LogChevronLayout(root,L"Native chevron or clock slot not found");return;}
+      chevronParent=winrt::make_weak(parent);chevronSlot=winrt::make_weak(chevron);clockSlot=winrt::make_weak(clock);chevronLastDiscovery=now;
+    }
+    double left=chevron.ActualOffset().x,width=chevron.ActualWidth(),end=clock.ActualOffset().x;
+    if(!std::isfinite(left)||!std::isfinite(width)||!std::isfinite(end)||width<=0||end<=left+width+0.5||chevron.Visibility()!=Visibility::Visible){
+      if(ChevronMoved())RestoreChevronOrder();
+      if(width>0&&chevron.Visibility()==Visibility::Visible)LogChevronLayout(parent,L"Clock has not got a distinct arranged slot");
+      return;
+    }
+    struct Slot{FrameworkElement element;double x,w;};std::vector<Slot> slots;
+    for(int i=0,n=Media::VisualTreeHelper::GetChildrenCount(parent);i<n;++i){
+      auto element=Media::VisualTreeHelper::GetChild(parent,i).try_as<FrameworkElement>();
+      if(!element||element==chevron||element==clock||element.Visibility()!=Visibility::Visible)continue;
+      double x=element.ActualOffset().x,w=element.ActualWidth();
+      if(std::isfinite(x)&&std::isfinite(w)&&w>0.5&&x>=left+width-0.5&&x+w<=end+0.5)slots.push_back({element,x,w});
+    }
+    if(slots.empty()){if(ChevronMoved())RestoreChevronOrder();LogChevronLayout(parent,L"No visible slots between chevron and clock");return;}
+    std::sort(slots.begin(),slots.end(),[](auto const& a,auto const& b){return a.x<b.x;});
+    double last=slots.front().x;
+    for(auto const& slot:slots){if(slot.x<last-0.5){if(ChevronMoved())RestoreChevronOrder();LogChevronLayout(parent,L"Overlapping native slots");return;}last=slot.x+slot.w;}
+    const double shiftLeft=left-slots.front().x,shiftRight=last-left-width;
+    if(shiftRight<=0){if(ChevronMoved())RestoreChevronOrder();return;}
+    std::vector<std::pair<FrameworkElement,double>> plan;plan.reserve(slots.size()+1);
+    plan.emplace_back(chevron,shiftRight);for(auto const& slot:slots)plan.emplace_back(slot.element,shiftLeft);
+    bool same=chevronShifts.size()==plan.size();
+    if(same)for(size_t i=0;i<plan.size();++i){auto const& entry=chevronShifts[i];if(entry.element.get()!=plan[i].first||plan[i].first.RenderTransform()!=entry.shift){same=false;break;}}
+    if(same){for(size_t i=0;i<plan.size();++i)if(std::abs(chevronShifts[i].shift.X()-plan[i].second)>0.01)chevronShifts[i].shift.X(plan[i].second);return;}
+    RestoreChevronOrder();
+    for(auto const& [element,dx]:plan)if(!ChevronNativeTransform(element)){LogChevronLayout(parent,L"Native slot already owns an active transform");return;}
+    chevronGrid=winrt::make_weak(root);chevronParent=winrt::make_weak(parent);chevronSlot=winrt::make_weak(chevron);clockSlot=winrt::make_weak(clock);chevronLastDiscovery=now;
+    try{
+      for(auto const& [element,dx]:plan){
+        Media::TranslateTransform shift;shift.X(dx);
+        chevronShifts.push_back({winrt::make_weak(element),element.ReadLocalValue(UIElement::RenderTransformProperty()),shift});
+        element.RenderTransform(shift);
+      }
+      Wh_Log(L"[ILoChevron] Moved native chevron by %.1f DIP across %u slots",shiftRight,unsigned(slots.size()));
+    }catch(...){RestoreChevronOrder();}
+  }
   // Fork addition: COM identity of the taskbar XAML this state was built for.
   // See GetOrCreateTaskbarState.
   winrt::weak_ref<FrameworkElement> layoutRoot;
@@ -3144,200 +3741,6 @@ bool TryCalculateFlyoutYAboveTaskbar(const MONITORINFO& monitorInfo,
         y = monitorTop;
     }
     return true;
-}
-// ---------------------------------------------------------------------------
-// Fork addition: mirror flyout placement decisions to a file, so multi-monitor
-// and mixed-DPI issues can be diagnosed without DebugView attached. One line is
-// appended per flyout open to %TEMP%\windhawk_popup_log.txt. Failures are
-// silent by design -- diagnostics must never affect placement behaviour.
-//
-// Only while the LogFlyoutPlacement setting is on: the lines are written on
-// Explorer's UI threads, about one a frame while the Notification Center opens.
-// At 1 MB the file becomes windhawk_popup_log.old.txt, replacing the last one,
-// and a new file is started.
-std::atomic<bool> g_logFlyoutPlacementTai{false};
-// Held while a line is written, so two threads never rename the file at once.
-static std::mutex g_popupLogMutexTai;
-// The caller holds g_popupLogMutexTai.
-static FILE* OpenPopupLogFileTai() {
-  if (!g_logFlyoutPlacementTai.load(std::memory_order_relaxed)) {
-    return nullptr;
-  }
-  WCHAR logPath[MAX_PATH];
-  const DWORD tempLength = GetEnvironmentVariableW(L"TEMP", logPath, MAX_PATH);
-  if (!tempLength || tempLength >= MAX_PATH) {
-    return nullptr;
-  }
-  WCHAR oldLogPath[MAX_PATH];
-  if (wcscpy_s(oldLogPath, MAX_PATH, logPath) != 0 ||
-      wcscat_s(logPath, MAX_PATH, L"\\windhawk_popup_log.txt") != 0 ||
-      wcscat_s(oldLogPath, MAX_PATH, L"\\windhawk_popup_log.old.txt") != 0) {
-    return nullptr;
-  }
-  constexpr ULONGLONG kMaxLogBytes = 1024 * 1024;
-  WIN32_FILE_ATTRIBUTE_DATA attributes{};
-  if (GetFileAttributesExW(logPath, GetFileExInfoStandard, &attributes) &&
-      ((static_cast<ULONGLONG>(attributes.nFileSizeHigh) << 32) |
-       attributes.nFileSizeLow) >= kMaxLogBytes) {
-    MoveFileExW(logPath, oldLogPath, MOVEFILE_REPLACE_EXISTING);
-  }
-  FILE* f = nullptr;
-  if (_wfopen_s(&f, logPath, L"a, ccs=UTF-8") != 0) {
-    return nullptr;
-  }
-  return f;
-}
-// windowsRect is where Windows had the window before the mod moved it.
-void LogFlyoutPlacementToFileTai(PCWSTR stage,
-                                 PCWSTR monitorName,
-                                 int target,
-                                 UINT monitorDpiX,
-                                 UINT monitorDpiY,
-                                 UINT windowDpiX,
-                                 UINT windowDpiY,
-                                 RECT const& windowsRect,
-                                 int x,
-                                 int y,
-                                 int cx,
-                                 int cy,
-                                 float lastStartButtonXCalculated,
-                                 float lastRootWidth,
-                                 float lastTargetWidth) {
-  std::lock_guard<std::mutex> lock(g_popupLogMutexTai);
-  FILE* f = OpenPopupLogFileTai();
-  if (!f) {
-    return;
-  }
-  SYSTEMTIME st{};
-  GetLocalTime(&st);
-  POINT cursorPos{};
-  GetCursorPos(&cursorPos);
-  fwprintf(f,
-           L"%02d:%02d:%02d.%03d %s monitor=%s target=%d "
-           L"monitorDpi=%ux%u windowDpi=%ux%u "
-           L"windows=(x=%ld,y=%ld,cx=%ld,cy=%ld) "
-           L"setPos=(x=%d,y=%d,cx=%d,cy=%d) cursor=(%ld,%ld) "
-           L"tbState{startBtnX=%.2f rootW=%.2f targetW=%.2f}\n",
-           st.wHour, st.wMinute, st.wSecond, st.wMilliseconds, stage,
-           monitorName, target, monitorDpiX, monitorDpiY, windowDpiX,
-           windowDpiY, windowsRect.left, windowsRect.top,
-           windowsRect.right - windowsRect.left,
-           windowsRect.bottom - windowsRect.top, x, y, cx, cy, cursorPos.x,
-           cursorPos.y, lastStartButtonXCalculated, lastRootWidth,
-           lastTargetWidth);
-  fclose(f);
-}
-// Fork addition: the keyboard layout (input switcher) flyout is placed by
-// SetWindowPos_Hook rather than the DWM-cloak path above, so it gets its own
-// line. anchor is "language" (the indicator) or "tray" (the island's tray, on
-// taskbars without an indicator); originalX is where Windows put the flyout.
-void LogInputSwitchPlacementToFileTai(PCWSTR monitorName,
-                                      PCWSTR anchor,
-                                      float anchorCenterXDip,
-                                      UINT monitorDpi,
-                                      int originalX,
-                                      int x,
-                                      int y,
-                                      int cx,
-                                      int cy) {
-  std::lock_guard<std::mutex> lock(g_popupLogMutexTai);
-  FILE* f = OpenPopupLogFileTai();
-  if (!f) {
-    return;
-  }
-  SYSTEMTIME st{};
-  GetLocalTime(&st);
-  POINT cursorPos{};
-  GetCursorPos(&cursorPos);
-  fwprintf(f,
-           L"%02d:%02d:%02d.%03d InputSwitch monitor=%s monitorDpi=%u "
-           L"anchor=%s anchorX=%.2f originalX=%d "
-           L"setPos=(x=%d,y=%d,cx=%d,cy=%d) cursor=(%ld,%ld)\n",
-           st.wHour, st.wMinute, st.wSecond, st.wMilliseconds, monitorName,
-           monitorDpi, anchor, anchorCenterXDip, originalX, x, y, cx, cy,
-           cursorPos.x, cursorPos.y);
-  fclose(f);
-}
-// Fork addition: the Notification Center is also placed through Explorer's
-// GetViewPosition, the rect Explorer pushes to the flyout on every open, so
-// that gets its own line too. viewRect is the rect Windows computed; placedX is
-// where the hook moved its left edge. trayRight is the island tray's right edge
-// in monitor-relative DIPs.
-void LogNotificationCenterPlacementToFileTai(PCWSTR monitorName,
-                                             UINT monitorDpi,
-                                             int trayRightDip,
-                                             RECT const& viewRect,
-                                             int placedX) {
-  std::lock_guard<std::mutex> lock(g_popupLogMutexTai);
-  FILE* f = OpenPopupLogFileTai();
-  if (!f) {
-    return;
-  }
-  SYSTEMTIME st{};
-  GetLocalTime(&st);
-  POINT cursorPos{};
-  GetCursorPos(&cursorPos);
-  fwprintf(f,
-           L"%02d:%02d:%02d.%03d NotificationCenter monitor=%s monitorDpi=%u "
-           L"trayRight=%d viewRect=(x=%ld,y=%ld,cx=%ld,cy=%ld) placedX=%d "
-           L"cursor=(%ld,%ld)\n",
-           st.wHour, st.wMinute, st.wSecond, st.wMilliseconds, monitorName,
-           monitorDpi, trayRightDip, viewRect.left, viewRect.top,
-           viewRect.right - viewRect.left, viewRect.bottom - viewRect.top,
-           placedX, cursorPos.x, cursorPos.y);
-  fclose(f);
-}
-// Fork addition: the taskbar's right-click menus. menu is TrayContextMenu or
-// StartButtonContextMenu; edge is the island edge the menu is placed against
-// (the tray's right, the start button's left). Stage "anchor" is the point the
-// menu opens at: windows is Windows' point, placed the moved one. A tray menu
-// then gets "moved" or "kept" once it has opened: windows is the top-left
-// corner XAML gave it, placed where it ended up. All values are root-relative
-// DIPs, which on a horizontal taskbar are monitor-relative.
-void LogContextMenuPlacementToFileTai(PCWSTR menu,
-                                      PCWSTR stage,
-                                      PCWSTR monitorName,
-                                      int edgeDip,
-                                      float rootWidthDip,
-                                      float marginDip,
-                                      float menuWidthDip,
-                                      float menuHeightDip,
-                                      float windowsX,
-                                      float windowsY,
-                                      float placedX,
-                                      float placedY) {
-  std::lock_guard<std::mutex> lock(g_popupLogMutexTai);
-  FILE* f = OpenPopupLogFileTai();
-  if (!f) {
-    return;
-  }
-  SYSTEMTIME st{};
-  GetLocalTime(&st);
-  POINT cursorPos{};
-  GetCursorPos(&cursorPos);
-  fwprintf(f,
-           L"%02d:%02d:%02d.%03d %s %s monitor=%s edge=%d rootW=%.2f "
-           L"margin=%.2f menu=%.2fx%.2f windows=(%.2f,%.2f) "
-           L"placed=(%.2f,%.2f) cursor=(%ld,%ld)\n",
-           st.wHour, st.wMinute, st.wSecond, st.wMilliseconds, menu, stage,
-           monitorName, edgeDip, rootWidthDip, marginDip, menuWidthDip,
-           menuHeightDip, windowsX, windowsY, placedX, placedY, cursorPos.x,
-           cursorPos.y);
-  fclose(f);
-}
-// Fork addition: things the mod did to a taskbar window as a whole rather than
-// to a flyout: event names what happened, detail the specifics.
-void LogTaskbarEventToFileTai(PCWSTR event, PCWSTR detail) {
-  std::lock_guard<std::mutex> lock(g_popupLogMutexTai);
-  FILE* f = OpenPopupLogFileTai();
-  if (!f) {
-    return;
-  }
-  SYSTEMTIME st{};
-  GetLocalTime(&st);
-  fwprintf(f, L"%02d:%02d:%02d.%03d %s %s\n", st.wHour, st.wMinute,
-           st.wSecond, st.wMilliseconds, event, detail);
-  fclose(f);
 }
 // Fork addition: defined in win-dock-mod.cpp, called from the dependencies'
 // HookSystemTraySymbols and HookTaskbarViewDllSymbolsStartButtonPosition.
@@ -4988,11 +5391,11 @@ LONG GetMediumTaskbarButtonExtentOffset() {
                 }
             }
         }
+        Wh_Log(L"Error: mediumTaskbarButtonExtentOffset not found");
+        return 0;
 #else
 #error "Unsupported architecture"
 #endif
-        Wh_Log(L"Error: mediumTaskbarButtonExtentOffset not found");
-        return 0;
     }();
     return mediumTaskbarButtonExtentOffset;
 }
@@ -6497,69 +6900,6 @@ HWND g_searchMenuWnd, g_startMenuWnd;
 int g_searchMenuOriginalPos, g_startMenuOriginalWidth;
 bool g_searchMenuVertical;
 HMONITOR g_searchMenuMonitor;
-// Enumerates the realized children of an ItemsRepeater by index. Unlike walking
-// the visual tree (EnumChildElements), this excludes virtualized cache items,
-// which aren't part of the live layout. Returns the first child for which the
-// callback returns true, or nullptr.
-FrameworkElement EnumRepeaterChildElements(
-    FrameworkElement repeaterElement,
-    std::function<bool(FrameworkElement)> enumCallback) {
-    auto repeater =
-        repeaterElement
-            .try_as<winrt::Microsoft::UI::Xaml::Controls::ItemsRepeater>();
-    if (!repeater) {
-        Wh_Log(L"Not an ItemsRepeater");
-        return nullptr;
-    }
-    auto itemsSourceView = repeater.ItemsSourceView();
-    int count = itemsSourceView ? itemsSourceView.Count() : 0;
-    for (int index = 0; index < count; index++) {
-        auto element = repeater.TryGetElement(index);
-        if (!element) {
-            // Not realized (virtualized away).
-            continue;
-        }
-        auto child = element.try_as<FrameworkElement>();
-        if (!child) {
-            continue;
-        }
-        if (enumCallback(child)) {
-            return child;
-        }
-    }
-    return nullptr;
-}
-// Taskbar items are laid out left to right, or top to bottom on a vertical
-// taskbar, where "left" means the top. The helpers below work along that axis:
-// an item's extent is its size along it, and its leading and trailing margins
-// are the ones before and after it.
-// The taskbar frame's root grid has a visual state for the side the taskbar is
-// docked to. Builds without the vertical taskbar may not set a current state.
-bool IsVerticalTaskbar(FrameworkElement taskbarFrameRepeater) {
-    auto rootGrid = Media::VisualTreeHelper::GetParent(taskbarFrameRepeater)
-                        .try_as<FrameworkElement>();
-    if (!rootGrid) {
-        return false;
-    }
-    for (const auto& group :
-         VisualStateManager::GetVisualStateGroups(rootGrid)) {
-        if (group.Name() == L"DockingStates") {
-            auto currentState = group.CurrentState();
-            if (!currentState) {
-                return false;
-            }
-            auto name = currentState.Name();
-            return name == L"DockedLeft" || name == L"DockedRight";
-        }
-    }
-    return false;
-}
-double& LeadingMargin(Thickness& margin, bool vertical) {
-    return vertical ? margin.Top : margin.Left;
-}
-double& TrailingMargin(Thickness& margin, bool vertical) {
-    return vertical ? margin.Bottom : margin.Right;
-}
 // The taskbar system buttons that the mod can pin to the left.
 enum class SystemButton {
     None,
@@ -6568,25 +6908,6 @@ enum class SystemButton {
     Search,
     TaskView,
 };
-// Number of SystemButton values, for sizing arrays indexed by SystemButton.
-constexpr size_t kSystemButtonCount =
-    static_cast<size_t>(SystemButton::TaskView) + 1;
-// The left-to-right order of the pinned cluster: start, search, task view,
-// widgets. Returns -1 for items that aren't part of the cluster.
-int SystemButtonClusterRank(SystemButton button) {
-    switch (button) {
-        case SystemButton::None:
-            return -1;
-        case SystemButton::Start:
-            return 0;
-        case SystemButton::Search:
-            return 1;
-        case SystemButton::TaskView:
-            return 2;
-        case SystemButton::Widgets:
-            return 3;
-    }
-}
 SystemButton IdentifySystemButton(FrameworkElement element) {
     auto className = winrt::get_class_name(element);
     if (className == L"Taskbar.ExperienceToggleButton") {
@@ -6616,217 +6937,6 @@ bool IsPinnedClusterButton(SystemButton button) {
     }
     return g_settings_startbuttonposition.otherSystemButtonsOnTheLeft &&
            (button == SystemButton::Search || button == SystemButton::TaskView);
-}
-// The extent a cluster button takes up when it's not collapsed. The actual size
-// can't be used: it includes the collapse margin (-extent), so it never drops
-// below it and grows on every layout pass. The content child's DesiredSize
-// doesn't depend on the button's own margin.
-double GetClusterButtonExtent(FrameworkElement element, bool vertical) {
-    if (Media::VisualTreeHelper::GetChildrenCount(element) > 0) {
-        auto child = Media::VisualTreeHelper::GetChild(element, 0)
-                         .try_as<FrameworkElement>();
-        if (child) {
-            auto size = child.DesiredSize();
-            return vertical ? size.Height : size.Width;
-        }
-    }
-    return vertical ? element.ActualHeight() : element.ActualWidth();
-}
-// The offset at which a pinned cluster button goes: the summed extents of the
-// pinned buttons before it in cluster order (start at 0, then search, task
-// view, widgets), so it's independent of the order the layout arranges its
-// children in.
-double ComputePinnedSystemButtonOffset(FrameworkElement taskbarFrameRepeater,
-                                       SystemButton target,
-                                       bool vertical) {
-    int targetRank = SystemButtonClusterRank(target);
-    if (targetRank <= 0) {
-        return 0;
-    }
-    double offset = 0;
-    EnumRepeaterChildElements(
-        taskbarFrameRepeater,
-        [&offset, targetRank, vertical](FrameworkElement child) {
-            SystemButton button = IdentifySystemButton(child);
-            int childRank = SystemButtonClusterRank(button);
-            if (childRank >= 0 && childRank < targetRank &&
-                IsPinnedClusterButton(button)) {
-                offset += GetClusterButtonExtent(child, vertical);
-            }
-            return false;
-        });
-    return offset;
-}
-// Whether the widgets button is where Windows pins it when the taskbar items
-// are centered: at the leading edge, so that its offset is just its margin.
-bool IsWidgetsButtonPinned(FrameworkElement element) {
-    auto margin = element.Margin();
-    auto offset = element.ActualOffset();
-    return offset.x == margin.Left && offset.y == margin.Top;
-}
-// Last GetTickCount64() at which each pinned button was collapsed, to throttle
-// collapses (see UpdatePinnedSystemButtonMargin). Indexed by SystemButton.
-ULONGLONG g_lastButtonCollapseTick[kSystemButtonCount];
-// Keeps the pinned cluster (start, plus search and task view when the option is
-// on) from overlapping the centered group: a button collapses out of the layout
-// when there's room and expands to reserve its extent when crowded. Expansions
-// are throttled (see below) to avoid oscillation. Runs on the taskbar thread.
-void UpdatePinnedSystemButtonMargin(FrameworkElement element) {
-    SystemButton self = IdentifySystemButton(element);
-    if (g_unloading || !IsPinnedClusterButton(self)) {
-        // Unloading, or the option was turned off after this was scheduled;
-        // ApplyStyle restores the margins.
-        return;
-    }
-    auto taskbarFrameRepeater =
-        Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-    if (!taskbarFrameRepeater) {
-        return;
-    }
-    bool vertical = IsVerticalTaskbar(taskbarFrameRepeater);
-    // Measure the pinned set's total extent and the nearest centered item.
-    double pinnedExtent = 0;
-    double centeredStart = std::numeric_limits<double>::infinity();
-    EnumRepeaterChildElements(
-        taskbarFrameRepeater, [&](FrameworkElement child) {
-            SystemButton button = IdentifySystemButton(child);
-            if (IsPinnedClusterButton(button)) {
-                pinnedExtent += GetClusterButtonExtent(child, vertical);
-            } else if (button != SystemButton::Widgets) {
-                auto offset = child.ActualOffset();
-                float start = vertical ? offset.y : offset.x;
-                if (start >= 0 && start < centeredStart) {
-                    centeredStart = start;
-                }
-            }
-            return false;
-        });
-    Thickness margin = element.Margin();
-    double& trailingMargin = TrailingMargin(margin, vertical);
-    double extent = GetClusterButtonExtent(element, vertical);
-    double newTrailingMargin;
-    if (centeredStart < pinnedExtent) {
-        newTrailingMargin = 0;  // expand: reserve this button's extent
-    } else if (trailingMargin != 0 || centeredStart > pinnedExtent + extent) {
-        // collapse out of the group, once there's room for this button's
-        // extent to spare
-        newTrailingMargin = -extent;
-    } else {
-        return;  // already collapsed and not crowded
-    }
-    if (trailingMargin == newTrailingMargin) {
-        return;
-    }
-    if (newTrailingMargin < trailingMargin) {
-        // Collapsing gives up this button's reserved extent and shifts the
-        // centered group back, which can immediately make expanding look right
-        // again. Throttle collapses to at most once a second per button so it
-        // settles in the expanded (non-overlapping) state instead of
-        // oscillating.
-        ULONGLONG now = GetTickCount64();
-        ULONGLONG* lastCollapse =
-            &g_lastButtonCollapseTick[static_cast<int>(self)];
-        if (now - *lastCollapse < 1000) {
-            return;
-        }
-        *lastCollapse = now;
-    }
-    trailingMargin = newTrailingMargin;
-    element.Margin(margin);
-}
-// Collapses a pinned cluster button (the start button always, plus the search
-// and task view buttons when the option is on) out of the centered group;
-// Buttons outside the cluster are restored. Runs on the taskbar thread.
-void ApplyClusterButtonCollapse(FrameworkElement element) {
-    SystemButton systemButton = IdentifySystemButton(element);
-    if (systemButton != SystemButton::Start &&
-        systemButton != SystemButton::Search &&
-        systemButton != SystemButton::TaskView) {
-        return;
-    }
-    auto taskbarFrameRepeater =
-        Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-    if (!taskbarFrameRepeater) {
-        return;
-    }
-    bool vertical = IsVerticalTaskbar(taskbarFrameRepeater);
-    Thickness margin = element.Margin();
-    Thickness newMargin = margin;
-    // Restore only the collapse applied by the mod. Check both axes, since
-    // the taskbar orientation can change.
-    newMargin.Right = std::max(newMargin.Right, 0.0);
-    newMargin.Bottom = std::max(newMargin.Bottom, 0.0);
-    if (IsPinnedClusterButton(systemButton) && !g_unloading) {
-        TrailingMargin(newMargin, vertical) =
-            -GetClusterButtonExtent(element, vertical);
-    }
-    if (newMargin == margin) {
-        return;
-    }
-    Wh_Log(
-        L"Collapsing system button %d: margin.Right=%.1f, margin.Bottom=%.1f",
-        (int)systemButton, newMargin.Right, newMargin.Bottom);
-    element.Margin(newMargin);
-}
-// Pins the widgets button after the start button (or the whole cluster, when
-// the option is on) via its leading margin, or restores it while unloading.
-// Windows pins it at the leading edge where the start button goes, so it always
-// needs nudging. Runs on the taskbar thread.
-void ApplyWidgetMargin(FrameworkElement element) {
-    auto taskbarFrameRepeater =
-        Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-    if (!taskbarFrameRepeater) {
-        return;
-    }
-    bool vertical = IsVerticalTaskbar(taskbarFrameRepeater);
-    double leadingMargin = g_unloading ? 0
-                                       : ComputePinnedSystemButtonOffset(
-                                             taskbarFrameRepeater,
-                                             SystemButton::Widgets, vertical);
-    Thickness margin = element.Margin();
-    Thickness newMargin = margin;
-    // Clear the margin applied for the other taskbar orientation.
-    LeadingMargin(newMargin, !vertical) = 0;
-    LeadingMargin(newMargin, vertical) = leadingMargin;
-    if (newMargin != margin) {
-        element.Margin(newMargin);
-    }
-}
-// Runs one of the margin updaters on the taskbar thread, deferred off the
-// current layout pass (changing margins during arrange would re-enter layout).
-void ScheduleOnTaskbarThread(FrameworkElement element,
-                             void (*func)(FrameworkElement)) {
-    element.Dispatcher().TryRunAsync(
-        winrt::Windows::UI::Core::CoreDispatcherPriority::High,
-        [element, func]() { func(element); });
-}
-bool ApplyStyle(XamlRoot xamlRoot) {if(true)return false;
-    FrameworkElement xamlRootContent =
-        xamlRoot.Content().try_as<FrameworkElement>();
-    FrameworkElement taskbarFrameRepeater = nullptr;
-    FrameworkElement child = xamlRootContent;
-    if (child &&
-        (child = FindTaskFrameTai(child)) &&
-        (child = FindChildByName(child, L"RootGrid")) &&
-        (child = FindChildByName(child, L"TaskbarFrameRepeater"))) {
-        taskbarFrameRepeater = child;
-    }
-    if (!taskbarFrameRepeater) {
-        return false;
-    }
-    auto widgetElement = EnumRepeaterChildElements(
-        taskbarFrameRepeater, [](FrameworkElement child) {
-            return IdentifySystemButton(child) == SystemButton::Widgets &&
-                   IsWidgetsButtonPinned(child);
-        });
-    if (widgetElement) {
-        ApplyWidgetMargin(widgetElement);
-    }
-    EnumRepeaterChildElements(taskbarFrameRepeater, [](FrameworkElement child) {
-        ApplyClusterButtonCollapse(child);
-        return false;
-    });
-    return true;
 }
 void* CTaskBand_ITaskListWndSite_vftable;
 void* CSecondaryTaskBand_ITaskListWndSite_vftable;
@@ -7155,12 +7265,8 @@ struct Config {
 std::shared_ptr<const Config> current = std::make_shared<const Config>();
 std::atomic<bool> enabled{}, timing{};
 std::atomic<unsigned> revision{};
-static std::wstring Setting(PCWSTR key) {
-    auto value = IloPanel::Str(key);
-    std::wstring result = value ? value : L"";
-    if (value) IloPanel::Free(value);
-    return result;
-}
+std::atomic<bool> startupPending{};
+std::mutex startupReconcileMutex;
 constexpr UINT kDelayMs = 5;
 std::atomic<bool> limitReveal{};
 std::mutex spanMutex;
@@ -7182,21 +7288,22 @@ bool AllowsPointer(HWND bar, LONG localX) {
 void NotifyBars();
 void Read() {
     auto c = std::make_shared<Config>();
-    auto m = Setting(L"HideMode"), e = Setting(L"HideEffect");
+    auto snapshot=IloPanel::Snapshot();
+    auto m = snapshot->Text(L"HideMode"), e = snapshot->Text(L"HideEffect");
     if(m==L"max") c->mode=Mode::Maximized;
     if(m==L"overlap") c->mode=Mode::Overlap;
     if(m==L"never") c->mode=Mode::Never;
     const std::pair<PCWSTR,Effect> effects[]={{L"native",Effect::Native},{L"slide",Effect::Slide},{L"spring",Effect::Spring},{L"bounce",Effect::Bounce},{L"fade",Effect::Fade},{L"mix",Effect::Mix},{L"over",Effect::Overshoot}};
     for(auto [key, effect]:effects) if(e==key)c->effect=effect;
-    c->foreground=IloPanel::Int(L"HideForeground")!=0;
-    c->primary=IloPanel::Int(L"HidePrimary")!=0;
-    c->instant=IloPanel::Int(L"HideInstant")!=0;
-    c->edge=c->instant && IloPanel::Int(L"HideEdge")!=0;
-    auto number=[](PCWSTR key,int lo,int hi){return std::clamp(int(IloPanel::Int(key)),lo,hi);};
-    limitReveal.store(IloPanel::Int(L"AutoHideShowUnderTaskbarOnly") != 0);
+    c->foreground=snapshot->Int(L"HideForeground")!=0;
+    c->primary=snapshot->Int(L"HidePrimary")!=0;
+    c->instant=snapshot->Int(L"HideInstant")!=0;
+    c->edge=c->instant && snapshot->Int(L"HideEdge")!=0;
+    auto number=[&](PCWSTR key,int lo,int hi){return std::clamp(int(snapshot->Int(key)),lo,hi);};
+    limitReveal.store(snapshot->Int(L"AutoHideShowUnderTaskbarOnly") != 0);
     c->showMs=number(L"HideShowMs",16,1000); c->hideMs=number(L"HideHideMs",16,1000);
     c->rate=number(L"HideRate",15,120);
-    auto list=Setting(L"HideExclude");
+    auto list=snapshot->Text(L"HideExclude");
     for(size_t pos=0;pos<list.size();){
         auto end=list.find(L';',pos);
         auto name=list.substr(pos,end-pos);
@@ -7277,7 +7384,7 @@ struct State : std::enable_shared_from_this<State> {
     RECT from{}, to{};
     Effect effect{};
     bool reportedReveal{};
-    ULONGLONG start{}, nextScan{}, edgeStart{}, lastReveal{};
+    ULONGLONG start{}, nextScan{}, edgeStart{}, lastReveal{},shellStateRetryUntil{};
     int duration{};
     double startMs{};
     HWND frameWindow{};
@@ -7428,7 +7535,11 @@ void Tick(HWND w,State& s,const Config& c) {
         s.nextScan=now+350;
         bool pin=false;
         APPBARDATA data{sizeof(data)};
-        if(s.refreshShellState){s.refreshShellState=false;s.shellAutoHide=(SHAppBarMessage(ABM_GETSTATE,&data)&ABS_AUTOHIDE)!=0;}
+        // Explorer can report auto-hide as off before its taskbar has fully
+        // restored its startup state. Retry the negative result briefly.
+        if(s.refreshShellState||(!s.shellAutoHide&&now<s.shellStateRetryUntil)){
+            s.refreshShellState=false;s.shellAutoHide=(SHAppBarMessage(ABM_GETSTATE,&data)&ABS_AUTOHIDE)!=0;
+        }
         const bool autoHide=s.shellAutoHide;
         if(autoHide && c.mode!=Mode::System && (!c.primary || (mi.dwFlags&MONITORINFOF_PRIMARY))){
             if(c.mode==Mode::Never)pin=true;
@@ -7524,12 +7635,14 @@ bool Message(HWND w,UINT msg,WPARAM id){
     if(s->version!=generation){
         auto c=std::atomic_load(&current);
         s->reported=false;s->reportedSlide=false;s->version=generation;Finish(w,*s,true);s->refreshShellState=true;s->nextScan=0;s->edgeStart=0;s->edgeInside=false;
+        s->shellStateRetryUntil=GetTickCount64()+5000;
         KillTimer(w,policyTimer);
         if(c->mode==Mode::System && s->pinned){s->pinned=false;RemovePropW(w,L"ILo.Hiding.Expanded.v2");SetTimer(w,2,100,nullptr);}
         if(c->edge||c->mode!=Mode::System)SetTimer(w,policyTimer,c->edge?32:350,nullptr);
         s->version=generation;
     }
-    if(msg==WM_SETTINGCHANGE || msg==WM_DISPLAYCHANGE || msg==WM_DPICHANGED || msg==WM_POWERBROADCAST){s->refreshShellState=true;s->nextScan=0;if(msg!=WM_SETTINGCHANGE){s->haveHidden=false;Finish(w,*s,false);}}
+    if(msg==WM_SETTINGCHANGE || msg==WM_DISPLAYCHANGE || msg==WM_DPICHANGED || msg==WM_POWERBROADCAST){s->refreshShellState=true;s->shellStateRetryUntil=GetTickCount64()+5000;s->nextScan=0;if(msg!=WM_SETTINGCHANGE){s->haveHidden=false;Finish(w,*s,false);}}
+    if(msg==applyMessage&&applyMessage){Tick(w,*s,*std::atomic_load(&current));return true;}
     if(paintMessage && msg==paintMessage){
         if(s->animating && id==s->serial){s->pendingFrame=false;Frame(w,*s);}
         return true;
@@ -7748,7 +7861,20 @@ void NotifyBars(){
 }
 void Start(){
     listening=true;
+    startupPending=true;
     EnumWindows([](HWND w,LPARAM)->BOOL {Attach(w);return TRUE;},0);
+}
+// Re-read once after the delayed initial Explorer layout, just as saving a
+// setting refreshes the policy. Do not make visibility depend on hover or on
+// whether the first XAML style pass succeeds while the dock is hidden.
+void ReconcileStartup(){
+    if(!startupPending.exchange(false))return;
+    std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
+    std::lock_guard lifecycleLock(startupReconcileMutex);
+    if(!listening||g_unloading)return;
+    IloPanel::InvalidateSettings();
+    Read();
+    Wh_Log(L"[Masquage] Politique reinitialisee apres le chargement initial");
 }
 using ExpandedFn=bool(WINAPI*)(void*,HWND,bool);
 ExpandedFn nativeExpanded{};
@@ -7759,8 +7885,11 @@ bool WINAPI Expanded(void* self,HWND w,bool expanded){
     return nativeExpanded(self,w,expanded);
 }
 void Stop(){
-    listening=false;
-    enabled=false;timing=false;
+    {
+        std::lock_guard lifecycleLock(startupReconcileMutex);
+        listening=false;startupPending=false;
+        enabled=false;timing=false;
+    }
     EnumWindows([](HWND w,LPARAM)->BOOL {
         DWORD pid{}; GetWindowThreadProcessId(w,&pid);
         if(pid==GetCurrentProcessId() && Bar(w) && GetPropW(w,listenerKey)){
@@ -7830,7 +7959,6 @@ LRESULT WINAPI TrayUI_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, WPARAM wPar
   if(IloHiding::requestReveal && Msg==IloHiding::requestReveal){if(flag)*flag=true;return IloHiding::HandleReveal(hWnd,pThis,false);}
   if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
-    {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
     Wh_ModSettingsChanged();
     return 0;
   }
@@ -7863,7 +7991,6 @@ LRESULT WINAPI CSecondaryTray_v_WndProc_Hook(void* pThis, HWND hWnd, UINT Msg, W
   if(IloHiding::requestReveal && Msg==IloHiding::requestReveal)return IloHiding::HandleReveal(hWnd,pThis,true);
   if (Msg==WM_CREATE || Msg==IloHiding::applyMessage) IloHiding::Attach(hWnd);
   if (IloPanel::refresh && Msg==IloPanel::refresh) {
-    {std::lock_guard guard(IloPanel::profileLock);IloPanel::ReadLocked(true);}
     Wh_ModSettingsChanged();
     return 0;
   }
@@ -8639,16 +8766,6 @@ if (target == DwmTarget::StartMenu) {
   }
 }
 Wh_Log(L"Recalc: monitor=%s taskbarState.lastLeftMostEdgeTray: %f, lastStartButtonXCalculated: %f g_lastRootWidth %f cx: %d, x:%d;cy: %d; y: %d; target:%d g_lastTargetWidth: %f, absStartX: %f; absRootWidth: %f; absTargetWidth: %f", monitorName.c_str(), taskbarState.lastLeftMostEdgeTray, taskbarState.lastStartButtonXCalculated, taskbarState.lastRootWidth, cx, x, cy, y, target, taskbarState.lastTargetWidth, absStartX, absRootWidth, absTargetWidth);
-// Fork addition: mirror the final placement to the windhawk_popup_log.txt
-// file under %TEMP% (see LogFlyoutPlacementToFileTai). No backslash in this
-// comment on purpose: this file is injected via replace_regex, and re.sub
-// treats backslash escapes in the replacement string.
-LogFlyoutPlacementToFileTai(L"Recalc", monitorName.c_str(), static_cast<int>(target),
-                            monitorDpiX, monitorDpiY, windowDpiX, windowDpiY,
-                            targetRect, x, y, cx, cy,
-                            taskbarState.lastStartButtonXCalculated,
-                            taskbarState.lastRootWidth,
-                            taskbarState.lastTargetWidth);
 MoveFlyoutWindowTai(hwnd, x, y, cx, cy);
     return original();
 }
@@ -9133,11 +9250,6 @@ void Wh_ModBeforeUninitStartButtonPosition() {
         }
     }
 }
-void Wh_ModUninitStartButtonPosition() {if(true)return;
-    if (g_target == Target::Explorer) {
-        RestoreMenuPositions();
-    }
-}
 BOOL Wh_ModSettingsChangedStartButtonPosition() {
     if (g_target == Target::Explorer) {
         RestoreMenuPositions();
@@ -9396,6 +9508,144 @@ struct ColorMatrixEffect : winrt::implements<ColorMatrixEffect, wge::IGraphicsEf
   winrt::hstring Name() { return m_name; }
   void Name(winrt::hstring value) { m_name = std::move(value); }
 };
+// Share system notifications and compiled effect graphs between connected
+// brushes on the same UI dispatcher. XAML theme resources remain local to
+// their element, and each surface still has its own backdrop/brush instance.
+namespace IloBlurEnvironment {
+struct EffectKey {
+  float blur{};uint32_t tint{};
+  std::optional<float> luminosity,saturation,inversion;
+  bool operator==(EffectKey const&) const = default;
+};
+static bool ReadFallback(winrt::Windows::UI::ViewManagement::UISettings const& uiSettings) noexcept {
+  bool energySaverActive=false;
+  HKEY key{};
+  if(RegOpenKeyExW(HKEY_LOCAL_MACHINE,L"SYSTEM\\CurrentControlSet\\Control\\Power",0,KEY_QUERY_VALUE,&key)==ERROR_SUCCESS){
+    DWORD value=0,type=0,size=sizeof(value);
+    if(RegQueryValueExW(key,L"EnergySaverState",nullptr,&type,reinterpret_cast<LPBYTE>(&value),&size)==ERROR_SUCCESS&&type==REG_DWORD)energySaverActive=value==1;
+    RegCloseKey(key);
+  }
+  if(!energySaverActive){SYSTEM_POWER_STATUS power{};if(GetSystemPowerStatus(&power)&&power.SystemStatusFlag!=0)energySaverActive=true;}
+  bool advancedEffectsOff=false;
+  if(uiSettings)try{advancedEffectsOff=!uiSettings.AdvancedEffectsEnabled();}catch(...){}
+  return energySaverActive||advancedEffectsOff;
+}
+static bool ReadFallbackDirect() noexcept {
+  winrt::Windows::UI::ViewManagement::UISettings ui{nullptr};
+  try{ui=winrt::Windows::UI::ViewManagement::UISettings();}catch(...){}
+  return ReadFallback(ui);
+}
+struct Service : std::enable_shared_from_this<Service> {
+  using Queue=winrt::Windows::System::DispatcherQueue;
+  Queue dispatcher{nullptr};
+  winrt::Windows::UI::ViewManagement::UISettings uiSettings{nullptr};
+  winrt::event_token advancedToken{},energyToken{};
+  HKEY powerKey{};HANDLE notifyEvent{},waitHandle{};
+  std::atomic_bool stopped{false},queued{false};
+  bool fallback{},completeWatch{};
+  uint64_t nextListener{},useCounter{};
+  struct Listener{uint64_t id;std::function<void()> refresh;};
+  std::vector<Listener> listeners;
+  struct CacheEntry{wuc::Compositor compositor;EffectKey key;wuc::CompositionEffectFactory factory;uint64_t used;};
+  std::vector<CacheEntry> factories;
+  static constexpr size_t maxFactories=6;
+  explicit Service(Queue const& q):dispatcher(q){}
+  ~Service(){StopNotifications();}
+  void QueueRefresh() noexcept {
+    if(stopped.load()||g_unloading||!dispatcher||queued.exchange(true))return;
+    try{
+      auto weak=weak_from_this();
+      if(dispatcher.TryEnqueue([weak]{if(auto self=weak.lock())self->Refresh();}))return;
+    }catch(...){}
+    queued=false;
+  }
+  static void CALLBACK OnPowerRegistry(PVOID context,BOOLEAN){
+    auto* self=static_cast<Service*>(context);
+    if(self->stopped.load()||g_unloading)return;
+    if(self->powerKey&&self->notifyEvent)RegNotifyChangeKeyValue(self->powerKey,FALSE,REG_NOTIFY_CHANGE_LAST_SET,self->notifyEvent,TRUE);
+    self->QueueRefresh();
+  }
+  void Start(){
+    try{uiSettings=winrt::Windows::UI::ViewManagement::UISettings();}catch(...){}
+    auto weak=weak_from_this();
+    auto changed=[weak](auto&&,auto&&){if(auto s=weak.lock())s->QueueRefresh();};
+    if(uiSettings)try{advancedToken=uiSettings.AdvancedEffectsEnabledChanged(changed);}catch(...){Wh_Log(L"[BlurEnvironment] Transparency listener unavailable");}
+    try{energyToken=winrt::Windows::System::Power::PowerManager::EnergySaverStatusChanged(changed);}catch(...){Wh_Log(L"[BlurEnvironment] Energy saver listener unavailable");}
+    if(RegOpenKeyExW(HKEY_LOCAL_MACHINE,L"SYSTEM\\CurrentControlSet\\Control\\Power",0,KEY_NOTIFY,&powerKey)==ERROR_SUCCESS){
+      notifyEvent=CreateEventW(nullptr,FALSE,FALSE,nullptr);
+      if(notifyEvent&&RegNotifyChangeKeyValue(powerKey,FALSE,REG_NOTIFY_CHANGE_LAST_SET,notifyEvent,TRUE)==ERROR_SUCCESS){
+        if(!RegisterWaitForSingleObject(&waitHandle,notifyEvent,OnPowerRegistry,this,INFINITE,WT_EXECUTEINWAITTHREAD))waitHandle=nullptr;
+      }
+    }
+    // Read after registering notifications, so a transition during startup
+    // cannot leave the new observer with an outdated initial state.
+    completeWatch=bool(uiSettings)&&advancedToken.value&&(energyToken.value||waitHandle);
+    fallback=ReadFallback(uiSettings);
+    Wh_Log(L"[BlurEnvironment] Shared power/transparency observer started");
+  }
+  bool Fallback() const noexcept {
+    // If Windows refused a subscription, new brushes still perform the
+    // same direct check as before instead of trusting a stale snapshot.
+    if(completeWatch&&!stopped.load())return fallback;
+    return uiSettings?ReadFallback(uiSettings):ReadFallbackDirect();
+  }
+  // May be called at shutdown as well as from the last brush on this queue.
+  // Stop the external callbacks before closing their registry handles.
+  void StopNotifications() noexcept {
+    if(stopped.exchange(true))return;
+    if(waitHandle){UnregisterWaitEx(waitHandle,INVALID_HANDLE_VALUE);waitHandle=nullptr;}
+    if(notifyEvent){CloseHandle(notifyEvent);notifyEvent=nullptr;}
+    if(powerKey){RegCloseKey(powerKey);powerKey=nullptr;}
+    if(uiSettings&&advancedToken.value)try{uiSettings.AdvancedEffectsEnabledChanged(advancedToken);}catch(...){}
+    if(energyToken.value)try{winrt::Windows::System::Power::PowerManager::EnergySaverStatusChanged(energyToken);}catch(...){}
+    advancedToken={};energyToken={};
+  }
+  void Refresh() noexcept {
+    queued=false;
+    if(stopped.load()||g_unloading)return;
+    try{
+      auto next=ReadFallback(uiSettings);if(next==fallback)return;fallback=next;
+      // A listener may disconnect its brush while being refreshed.
+      auto snapshot=listeners;
+      for(auto const& item:snapshot){if(stopped.load()||g_unloading)break;try{item.refresh();}catch(...){}}
+      Wh_Log(L"[BlurEnvironment] Shared fallback state changed: %d",int(fallback));
+    }catch(...){}
+  }
+  uint64_t Add(std::function<void()> callback){auto id=++nextListener;listeners.push_back({id,std::move(callback)});return id;}
+  void Remove(uint64_t id) noexcept {
+    std::erase_if(listeners,[&](auto const& l){return l.id==id;});
+    if(listeners.empty()){StopNotifications();factories.clear();}
+  }
+  template<class Build> wuc::CompositionEffectFactory Factory(wuc::Compositor const& compositor,EffectKey const& key,Build build){
+    if(stopped.load())return build();
+    for(auto& entry:factories)if(entry.compositor==compositor&&entry.key==key){entry.used=++useCounter;return entry.factory;}
+    auto factory=build();if(!factory)return factory;
+    if(factories.size()>=maxFactories){auto oldest=std::min_element(factories.begin(),factories.end(),[](auto const& a,auto const& b){return a.used<b.used;});factories.erase(oldest);}
+    factories.push_back({compositor,key,factory,++useCounter});return factory;
+  }
+  void Forget(wuc::Compositor const& compositor,EffectKey const& key){std::erase_if(factories,[&](auto const& e){return e.compositor==compositor&&e.key==key;});}
+};
+struct Entry{DWORD thread;std::weak_ptr<Service> service;};
+static std::mutex servicesMutex;static std::vector<Entry> services;
+static std::shared_ptr<Service> Acquire(){
+  if(g_unloading)return {};
+  auto queue=Service::Queue::GetForCurrentThread();if(!queue)return {};
+  auto thread=GetCurrentThreadId();
+  {
+    std::lock_guard lock(servicesMutex);
+    std::erase_if(services,[](auto const& e){return e.service.expired();});
+    for(auto const& e:services)if(e.thread==thread)if(auto service=e.service.lock();service&&!service->stopped.load()&&service->dispatcher==queue)return service;
+  }
+  auto service=std::make_shared<Service>(queue);service->Start();
+  {std::lock_guard lock(servicesMutex);if(!g_unloading)services.push_back({thread,service});else{service->StopNotifications();return {};}}
+  return service;
+}
+static void Shutdown() noexcept {
+  std::vector<Entry> previous;{std::lock_guard lock(servicesMutex);previous.swap(services);}
+  for(auto const& entry:previous)if(auto service=entry.service.lock())service->StopNotifications();
+}
+} // namespace IloBlurEnvironment
+
 class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
  public:
   XamlBlurBrush(UIElement element,
@@ -9462,59 +9712,9 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
             });
       }
     }
-    if (m_fallbackColor || !m_fallbackThemeResourceKey.empty()) {
-      m_dispatcher = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
-      try {
-        m_uiSettings = winrt::Windows::UI::ViewManagement::UISettings();
-        auto dispatcher = m_dispatcher;
-        m_advancedEffectsEnabledChangedToken = m_uiSettings.AdvancedEffectsEnabledChanged(
-            [weakThis = get_weak(), dispatcher](auto&&, auto&&) {
-              if (g_unloading || !dispatcher) return;
-              dispatcher.TryEnqueue([weakThis] {
-                if (g_unloading) return;
-                if (auto self = weakThis.get()) self->RefreshBrush();
-              });
-            });
-        m_energySaverStatusChangedToken =
-            winrt::Windows::System::Power::PowerManager::EnergySaverStatusChanged(
-                [weakThis = get_weak(), dispatcher](auto&&, auto&&) {
-                  if (g_unloading || !dispatcher) return;
-                  dispatcher.TryEnqueue([weakThis] {
-                    if (g_unloading) return;
-                    if (auto self = weakThis.get()) self->RefreshBrush();
-                  });
-                });
-      } catch (...) {
-        Wh_Log(L"Failed to register WindhawkBlur fallback listeners: %08X", winrt::to_hresult());
-      }
-      LONG regStatus = RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"SYSTEM\\CurrentControlSet\\Control\\Power", 0, KEY_NOTIFY, &m_powerKey);
-      if (regStatus == ERROR_SUCCESS) {
-        m_regNotifyEvent = CreateEventW(nullptr, FALSE, FALSE, nullptr);
-        if (m_regNotifyEvent) {
-          regStatus = RegNotifyChangeKeyValue(m_powerKey, FALSE, REG_NOTIFY_CHANGE_LAST_SET, m_regNotifyEvent, TRUE);
-          if (regStatus == ERROR_SUCCESS) {
-            if (!RegisterWaitForSingleObject(&m_regWaitHandle, m_regNotifyEvent, OnEnergySaverRegistryChanged, this, INFINITE, WT_EXECUTEINWAITTHREAD)) {
-              Wh_Log(L"RegisterWaitForSingleObject failed: %lu", GetLastError());
-              m_regWaitHandle = nullptr;
-            }
-          }
-        }
-      }
-    }
   }
   ~XamlBlurBrush() {
-    if (m_regWaitHandle) {
-      UnregisterWaitEx(m_regWaitHandle, INVALID_HANDLE_VALUE);
-      m_regWaitHandle = nullptr;
-    }
-    if (m_regNotifyEvent) {
-      CloseHandle(m_regNotifyEvent);
-      m_regNotifyEvent = nullptr;
-    }
-    if (m_powerKey) {
-      RegCloseKey(m_powerKey);
-      m_powerKey = nullptr;
-    }
+    ReleaseEnvironment();
     if (m_proxyBrush && m_proxyBrushColorChangedToken) {
       try {
         m_proxyBrush.UnregisterPropertyChangedCallback(
@@ -9531,14 +9731,6 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
       } catch (...) {}
       m_fallbackProxyBrushColorChangedToken = 0;
     }
-    if (m_uiSettings && m_advancedEffectsEnabledChangedToken.value) {
-      try { m_uiSettings.AdvancedEffectsEnabledChanged(m_advancedEffectsEnabledChangedToken); } catch (...) {}
-      m_advancedEffectsEnabledChangedToken = {};
-    }
-    if (m_energySaverStatusChangedToken.value) {
-      try { winrt::Windows::System::Power::PowerManager::EnergySaverStatusChanged(m_energySaverStatusChangedToken); } catch (...) {}
-      m_energySaverStatusChangedToken = {};
-    }
     if (auto element = m_weakProxyElement.get()) {
       try {
         if (!m_proxyKey.empty()) element.Resources().Remove(winrt::box_value(m_proxyKey));
@@ -9548,35 +9740,35 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
     m_proxyBrush = nullptr;
     m_fallbackProxyBrush = nullptr;
     m_weakProxyElement = nullptr;
-    m_dispatcher = nullptr;
   }
   void OnConnected() {
     if (!CompositionBrush()) {
+      ConnectEnvironment();
       RefreshThemeTint();
       RefreshFallbackColor();
       CompositionBrush(ShouldUseFallback() ? CreateFallbackBrush() : CreateEffectBrush());
     }
   }
   void OnDisconnected() {
+    ReleaseEnvironment();
     if (const auto brush = CompositionBrush()) {
       brush.Close();
       CompositionBrush(nullptr);
     }
   }
  private:
-  static void CALLBACK OnEnergySaverRegistryChanged(PVOID context, BOOLEAN) {
-    auto* self = static_cast<XamlBlurBrush*>(context);
-    if (g_unloading) return;
-    if (self->m_powerKey && self->m_regNotifyEvent) {
-      RegNotifyChangeKeyValue(self->m_powerKey, FALSE, REG_NOTIFY_CHANGE_LAST_SET, self->m_regNotifyEvent, TRUE);
-    }
-    if (self->m_dispatcher) {
-      auto weakThis = self->get_weak();
-      self->m_dispatcher.TryEnqueue([weakThis] {
-        if (g_unloading) return;
-        if (auto self = weakThis.get()) self->RefreshBrush();
-      });
-    }
+  void ConnectEnvironment(){
+    if(m_environment||g_unloading)return;
+    try{
+      auto service=IloBlurEnvironment::Acquire();if(!service)return;
+      auto weakThis=get_weak();
+      auto id=service->Add([weakThis]{if(g_unloading)return;if(auto self=weakThis.get())if(self->m_fallbackColor||!self->m_fallbackThemeResourceKey.empty())self->RefreshBrush();});
+      m_environment=std::move(service);m_environmentListener=id;
+    }catch(...){Wh_Log(L"[BlurEnvironment] Shared observer unavailable; using direct fallback check");}
+  }
+  void ReleaseEnvironment() noexcept {
+    auto service=std::move(m_environment);auto id=m_environmentListener;m_environmentListener=0;
+    if(service&&id)service->Remove(id);
   }
   void RefreshThemeTint() {
     if (!m_proxyBrush) return;
@@ -9589,24 +9781,7 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
   }
   bool ShouldUseFallback() const {
     if (!m_fallbackColor && m_fallbackThemeResourceKey.empty()) return false;
-    bool energySaverActive = false;
-    HKEY key{};
-    if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"SYSTEM\\CurrentControlSet\\Control\\Power", 0, KEY_QUERY_VALUE, &key) == ERROR_SUCCESS) {
-      DWORD value = 0, type = 0, size = sizeof(value);
-      if (RegQueryValueExW(key, L"EnergySaverState", nullptr, &type, reinterpret_cast<LPBYTE>(&value), &size) == ERROR_SUCCESS && type == REG_DWORD) {
-        energySaverActive = (value == 1);
-      }
-      RegCloseKey(key);
-    }
-    if (!energySaverActive) {
-      SYSTEM_POWER_STATUS powerStatus{};
-      if (GetSystemPowerStatus(&powerStatus) && powerStatus.SystemStatusFlag != 0) energySaverActive = true;
-    }
-    bool advancedEffectsOff = false;
-    if (m_uiSettings) {
-      try { advancedEffectsOff = !m_uiSettings.AdvancedEffectsEnabled(); } catch (...) {}
-    }
-    return energySaverActive || advancedEffectsOff;
+    return m_environment?m_environment->Fallback():IloBlurEnvironment::ReadFallbackDirect();
   }
   void RefreshBrush() {
     if (const auto brush = CompositionBrush()) {
@@ -9627,6 +9802,19 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
     }
   }
   wuc::CompositionBrush CreateEffectBrushForSource(wuc::CompositionBrush const& backdropBrush) {
+    IloBlurEnvironment::EffectKey key{m_blurAmount,
+        (uint32_t(m_tint.A)<<24)|(uint32_t(m_tint.R)<<16)|(uint32_t(m_tint.G)<<8)|uint32_t(m_tint.B),
+        m_tintLuminosityOpacity,m_tintSaturation,m_inversionAmount};
+    auto bind=[&](wuc::CompositionEffectFactory const& factory){
+      auto brush=factory.CreateBrush();brush.SetSourceParameter(L"backdrop",backdropBrush);return brush;
+    };
+    if(m_environment){
+      try{return bind(m_environment->Factory(m_compositor,key,[this]{return BuildEffectFactory();}));}
+      catch(...){m_environment->Forget(m_compositor,key);Wh_Log(L"[BlurEnvironment] Cached effect unavailable; retrying without cache");}
+    }
+    return bind(BuildEffectFactory());
+  }
+  wuc::CompositionEffectFactory BuildEffectFactory() {
     constexpr float kLumaR = 0.2126f;
     constexpr float kLumaG = 0.7152f;
     constexpr float kLumaB = 0.0722f;
@@ -9684,10 +9872,7 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
     compositeEffect->Mode = D2D1_COMPOSITE_MODE_SOURCE_OVER;
     compositeEffect->Sources.push_back(topOfStack);
     compositeEffect->Sources.push_back(*floodEffect);
-    auto factory = m_compositor.CreateEffectFactory(*compositeEffect);
-    auto brush = factory.CreateBrush();
-    brush.SetSourceParameter(L"backdrop", backdropBrush);
-    return brush;
+    return m_compositor.CreateEffectFactory(*compositeEffect);
   }
   bool m_hostBackdrop{};
   wuc::Compositor m_compositor{nullptr};
@@ -9705,15 +9890,10 @@ class XamlBlurBrush : public Media::XamlCompositionBrushBaseT<XamlBlurBrush> {
   winrt::weak_ref<FrameworkElement> m_weakProxyElement;
   winrt::hstring m_proxyKey;
   winrt::hstring m_fallbackProxyKey;
-  winrt::Windows::UI::ViewManagement::UISettings m_uiSettings{nullptr};
   int64_t m_proxyBrushColorChangedToken{};
   int64_t m_fallbackProxyBrushColorChangedToken{};
-  winrt::event_token m_advancedEffectsEnabledChangedToken{};
-  winrt::event_token m_energySaverStatusChangedToken{};
-  winrt::Windows::System::DispatcherQueue m_dispatcher{nullptr};
-  HKEY m_powerKey{nullptr};
-  HANDLE m_regNotifyEvent{nullptr};
-  HANDLE m_regWaitHandle{nullptr};
+  std::shared_ptr<IloBlurEnvironment::Service> m_environment;
+  uint64_t m_environmentListener{};
 };
 std::wstring TrimWide(std::wstring value) {
   const auto start = value.find_first_not_of(L" \t\r\n");
@@ -9727,6 +9907,9 @@ struct ParsedWindhawkColorSetting {
 };
 ParsedWindhawkColorSetting ParseWindhawkColorSetting(std::wstring value, winrt::Windows::UI::Color fallbackColor) {
   value = TrimWide(std::move(value));
+  // Accent is a live choice, not a snapshot of the hexadecimal value at
+  // save time. Resolve it here for every surface, including non-XAML menus.
+  if(IloPanel::IsAccent(value))return {IloPanel::AccentColor(),L""};
   constexpr std::wstring_view prefix = L"{ThemeResource ";
   if (value.size() > prefix.size() + 1 && value.rfind(prefix, 0) == 0 && value.back() == L'}') {
     auto key = TrimWide(value.substr(prefix.size(), value.size() - prefix.size() - 1));
@@ -9804,6 +9987,7 @@ bool Enabled() {
 }
 uint64_t Generation() { return g_taskbarChildStyleGeneration.load(std::memory_order_acquire); }
 float Opacity() { return std::clamp(g_settings.userDefinedTaskbarBackgroundOpacity / 100.0f, 0.0f, 1.0f); }
+double PopupCornerRadius() { return std::clamp(double(g_settings.userDefinedTaskbarCornerRadius),0.0,24.0); }
 Media::Brush Create(UIElement const& surface, bool hostBackdrop=false, OpacityTarget opacityTarget=OpacityTarget::Brush) {
   auto const& s = g_settings;
   auto fallback = ParseWindhawkColorSetting(s.userDefinedTaskbarBackgroundFallbackColor,
@@ -9889,10 +10073,20 @@ struct Change {
   winrt::weak_ref<FrameworkElement> element;
   DependencyProperty property{nullptr};IInspectable original{nullptr},applied{nullptr};
   bool number{};
+  static std::optional<double> Number(IInspectable const& value){
+    if(auto v=value.try_as<winrt::Windows::Foundation::IReference<double>>())return v.Value();
+    if(auto v=value.try_as<winrt::Windows::Foundation::IReference<float>>())return double(v.Value());
+    return {};
+  }
   bool Current() const {
-    auto e=element.get();if(!e||!property)return false;
-    auto value=e.GetValue(property);
-    return number?winrt::unbox_value<double>(value)==winrt::unbox_value<double>(applied):value==applied;
+    auto e=element.get();if(!e||!property||e.GetBindingExpression(property))return false;
+    // The effective value may be animated by Explorer. Ownership is defined
+    // by the local value, which can also round a double through a float.
+    auto value=e.ReadLocalValue(property);
+    if(!number)return value==applied;
+    auto a=Number(value),b=Number(applied);
+    return a&&b&&std::isfinite(*a)&&std::isfinite(*b)&&
+      std::abs(*a-*b)<=4.0*std::numeric_limits<float>::epsilon()*std::max({1.0,std::abs(*a),std::abs(*b)});
   }
   void Restore() noexcept {
     try{if(auto e=element.get();e&&Current()){
@@ -9904,28 +10098,63 @@ struct Watch {
   winrt::weak_ref<FrameworkElement> background;
   CoreDispatcher dispatcher{nullptr};winrt::event_token layout{};
   winrt::weak_ref<Rectangle> rectangle;
+  winrt::weak_ref<FrameworkElement> outline;
+  winrt::weak_ref<Rectangle> attemptedRectangle;
+  uint64_t attemptGeneration{};ULONGLONG lastAttempt{};unsigned attempts{};
   std::vector<Change> changes;uint64_t generation{};bool busy{},loggedFailure{};
-  void Restore() noexcept {for(auto i=changes.rbegin();i!=changes.rend();++i)i->Restore();changes.clear();rectangle={};generation=0;}
+  void Restore() noexcept {
+    // Restoration itself may invalidate XAML layout; don't let a nested
+    // LayoutUpdated callback iterate or rebuild partially restored state.
+    struct Guard{bool& flag;bool previous;~Guard(){flag=previous;}} guard{busy,busy};busy=true;
+    std::vector<Change> previous;previous.swap(changes);rectangle={};outline={};generation=0;
+    for(auto i=previous.rbegin();i!=previous.rend();++i)i->Restore();
+  }
   void Dispose() noexcept {try{if(auto b=background.get();b&&layout.value)b.LayoutUpdated(layout);}catch(...){}Restore();}
   void Set(FrameworkElement const& e,DependencyProperty const& property,IInspectable const& value,bool number=false){
     if(!e||e.GetBindingExpression(property))return;
     auto old=e.ReadLocalValue(property);
     // Preserve local expressions which cannot be restored as ordinary values.
     if(old!=DependencyProperty::UnsetValue()){
-      if(number&&!old.try_as<winrt::Windows::Foundation::IReference<double>>())return;
+      if(number&&!Change::Number(old))return;
       if(!number&&old!=e.GetValue(property))return;
     }
     changes.push_back({winrt::make_weak(e),property,old,value,number});e.SetValue(property,value);
   }
+  void SyncOutline(FrameworkElement const& grid){
+    auto stroke=FindChildByName(grid,L"BackgroundStroke");
+    if(outline.get()==stroke)return;
+    const auto property=UIElement::OpacityProperty();
+    std::erase_if(changes,[&](auto& change){if(change.property!=property)return false;change.Restore();return true;});
+    outline=stroke?winrt::make_weak(stroke):winrt::weak_ref<FrameworkElement>{};
+    if(stroke){
+      // Match XAML's single-precision rendering value without changing the
+      // native stroke geometry or interfering with its opacity animations.
+      const auto opacity=double(float(std::clamp(g_settings.userDefinedTaskbarBorderOpacity/255.0,0.0,1.0)));
+      Set(stroke,property,winrt::box_value(opacity),true);
+    }
+  }
   void Update(){
     if(busy)return;struct Guard{bool& b;~Guard(){b=false;}} guard{busy};busy=true;
     auto b=background.get();std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
-    if(!b||!IloSurfaceStyle::Enabled()){Restore();return;}
+    if(!b||!IloSurfaceStyle::Enabled()){Restore();attemptedRectangle={};attemptGeneration=0;lastAttempt=0;attempts=0;return;}
     auto grid=FindChildByClassName(b,L"Windows.UI.Xaml.Controls.Grid");
     auto fill=grid?FindChildByName(grid,L"BackgroundFill").try_as<Rectangle>():nullptr;
     if(!fill||!fill.XamlRoot())return;
     auto gen=IloSurfaceStyle::Generation();
-    if(rectangle.get()==fill&&generation==gen&&!changes.empty()&&std::all_of(changes.begin(),changes.end(),[](auto const& c){return c.Current();}))return;
+    if(rectangle.get()==fill&&generation==gen&&!changes.empty()&&
+        std::any_of(changes.begin(),changes.end(),[](auto const& c){return !c.number&&c.Current();})){
+      // A numeric property may be animated or reassigned by the template.
+      // This must never cause our backdrop brush to be disconnected/rebuilt.
+      SyncOutline(grid);return;
+    }
+    const auto now=GetTickCount64();
+    if(attemptedRectangle.get()!=fill||attemptGeneration!=gen||now-lastAttempt>=1000){
+      attemptedRectangle=winrt::make_weak(fill);attemptGeneration=gen;attempts=0;lastAttempt=0;
+    }
+    // If a native template keeps replacing its brush, yield to it instead
+    // of creating a fresh compositor effect on every layout pass.
+    if(attempts>=3||(attempts&&now-lastAttempt<100))return;
+    ++attempts;lastAttempt=now;
     Restore();
     auto old=fill.ReadLocalValue(Shapes::Shape::FillProperty());
     if(fill.GetBindingExpression(Shapes::Shape::FillProperty())||(old!=DependencyProperty::UnsetValue()&&old!=fill.Fill())){
@@ -9938,7 +10167,7 @@ struct Watch {
     Set(fill,Rectangle::RadiusXProperty(),winrt::box_value(radius),true);
     Set(fill,Rectangle::RadiusYProperty(),winrt::box_value(radius),true);
     // Keep the native outline geometry; only its visibility follows the dock.
-    if(auto stroke=FindChildByName(grid,L"BackgroundStroke"))Set(stroke,UIElement::OpacityProperty(),winrt::box_value(std::clamp(g_settings.userDefinedTaskbarBorderOpacity/255.0,0.0,1.0)),true);
+    SyncOutline(grid);
     rectangle=winrt::make_weak(fill);generation=gen;
     Wh_Log(L"[ThumbnailSurface] Applied dock blur to native preview frame");
   }
@@ -10086,6 +10315,67 @@ static Media::Brush SafeMenuBrush(Media::Brush const& old){
   return acrylic;
 }
 struct Layer {
+  // Tooltips are styled in place, unlike ILô's independent context menus.
+  // Preserve their native template and restore just the values we own.
+  struct TooltipCorner {
+    winrt::weak_ref<FrameworkElement> element;
+    DependencyProperty property{nullptr};
+    winrt::Windows::Foundation::IInspectable original{nullptr};
+    double radius{};bool ownsRadius{};
+    winrt::Windows::UI::Composition::CompositionRoundedRectangleGeometry geometry{nullptr};
+    winrt::Windows::UI::Composition::CompositionGeometricClip clip{nullptr};
+    static bool Equal(CornerRadius const& v,double r){return v.TopLeft==r&&v.TopRight==r&&v.BottomRight==r&&v.BottomLeft==r;}
+    static CornerRadius Value(FrameworkElement const& e){
+      if(auto b=e.try_as<Border>())return b.CornerRadius();
+      if(auto c=e.try_as<Control>())return c.CornerRadius();
+      return {};
+    }
+    void Refresh() noexcept {
+      try{
+        auto e=element.get();if(!e||radius<=0)return;
+        float w=float(e.ActualWidth()),h=float(e.ActualHeight());
+        if(!std::isfinite(w)||!std::isfinite(h)||w<=0||h<=0)return;
+        auto visual=Hosting::ElementCompositionPreview::GetElementVisual(e);if(!visual)return;
+        auto current=visual.Clip();
+        // Never displace a clip owned by Windows or another mod.
+        if(clip&&current!=clip)return;
+        if(!clip&&current)return;
+        float r=std::min(float(radius),std::min(w,h)/2);
+        if(!clip){
+          auto compositor=visual.Compositor();geometry=compositor.CreateRoundedRectangleGeometry();
+          geometry.Size({w,h});geometry.CornerRadius({r,r});
+          clip=compositor.CreateGeometricClip(geometry);visual.Clip(clip);
+        }else{
+          auto size=geometry.Size(),corner=geometry.CornerRadius();
+          if(size.x!=w||size.y!=h)geometry.Size({w,h});
+          if(corner.x!=r||corner.y!=r)geometry.CornerRadius({r,r});
+        }
+      }catch(...){/* Native corner radius remains the fallback. */}
+    }
+    void Apply(FrameworkElement const& e,double r){
+      if(!e)return;element=winrt::make_weak(e);radius=r;
+      if(e.try_as<Border>())property=Border::CornerRadiusProperty();
+      else if(e.try_as<Control>())property=Control::CornerRadiusProperty();
+      if(property)try{
+        auto local=e.ReadLocalValue(property);
+        // A template binding follows the parent control's CornerRadius.
+        // Do not replace an expression belonging to the native template.
+        if(!e.GetBindingExpression(property)&&(local==DependencyProperty::UnsetValue()||local.try_as<winrt::Windows::Foundation::IReference<CornerRadius>>())){
+          original=local;e.SetValue(property,winrt::box_value(CornerRadius{r,r,r,r}));ownsRadius=true;
+        }
+      }catch(...){Wh_Log(L"[TooltipCorners] Native CornerRadius unavailable");}
+      Refresh();
+    }
+    void Restore() noexcept {
+      try{if(auto e=element.get();e){
+        if(clip){auto visual=Hosting::ElementCompositionPreview::GetElementVisual(e);if(visual&&visual.Clip()==clip)visual.Clip(nullptr);}
+        if(ownsRadius&&property&&Equal(Value(e),radius)){
+          if(original==DependencyProperty::UnsetValue())e.ClearValue(property);else e.SetValue(property,original);
+        }
+      }}catch(...){Wh_Log(L"[TooltipCorners] Restore failed");}
+      element={};property=nullptr;original=nullptr;geometry=nullptr;clip=nullptr;ownsRadius=false;
+    }
+  };
   struct NativeBackground {
     winrt::weak_ref<FrameworkElement> element;
     DependencyProperty property{nullptr};
@@ -10107,16 +10397,26 @@ struct Layer {
   winrt::weak_ref<Border> decoration;
   std::vector<NativeBackground> suppressed;
   bool decorated{};
-  bool IsCurrent(uint64_t gen) const {
+  std::vector<TooltipCorner> tooltipCorners;
+  void RoundTooltip(Control const& c,FrameworkElement const& painted){
+    if(!c.try_as<ToolTip>())return;
+    auto radius=IloSurfaceStyle::PopupCornerRadius();
+    tooltipCorners.reserve(2);
+    tooltipCorners.emplace_back();tooltipCorners.back().Apply(c,radius);
+    if(painted&&painted!=c){tooltipCorners.emplace_back();tooltipCorners.back().Apply(painted,radius);}
+  }
+  bool IsCurrent(uint64_t gen) {
     auto s=surface.get();if(!s||!property||generation!=gen||s.GetValue(property)!=applied)return false;
     if(auto b=decoration.get()){
       auto grid=decorationGrid.get();uint32_t index{};
       if(!grid||!grid.Children().IndexOf(b,index)||!b.Background())return false;
       for(auto const& bg:suppressed){auto e=bg.element.get();if(!e||e.GetValue(bg.property)!=bg.replacement)return false;}
     }else if(decorated)return false;
+    for(auto& corner:tooltipCorners)corner.Refresh();
     return true;
   }
   void Restore() noexcept {
+    for(auto& corner:tooltipCorners)corner.Restore();tooltipCorners.clear();
     try{if(auto s=surface.get();s&&property&&s.GetValue(property)==applied){
       if(original==DependencyProperty::UnsetValue())s.ClearValue(property);else s.SetValue(property,original);
     }}catch(...){Wh_Log(L"[PopupSurface] Restore failed: %08X",winrt::to_hresult());}
@@ -10245,6 +10545,7 @@ static bool ApplyLayer(Layer& layer,Control const& c){
   if(!brush)return false;
   layer={winrt::make_weak(c),winrt::make_weak(s),prop,local,brush,generation};
   try{s.SetValue(prop,brush);}catch(...){layer.Restore();return false;}
+  if(candidate.tooltip)try{layer.RoundTooltip(c,s);}catch(...){Wh_Log(L"[TooltipCorners] Unable to round tooltip; dock background retained");}
   Wh_Log(L"[PopupSurface] Styled %ls (%ls)",winrt::get_class_name(c).c_str(),candidate.tooltip?L"dock blur":L"native acrylic");
   return true;
 }
@@ -10258,20 +10559,53 @@ static bool IsDirectTrayPopup(Popup const& popup);
 struct Watch {
   winrt::weak_ref<FrameworkElement> root;
   winrt::Windows::UI::Core::CoreDispatcher dispatcher{nullptr};
-  DispatcherTimer timer{nullptr};winrt::event_token tick{},layout{};
-  std::vector<Layer> layers;bool busy{},logged{};
+  DispatcherTimer timer{nullptr};winrt::event_token tick{},layout{},entered{},moved{};
+  std::vector<Layer> layers;std::vector<void*> popupIdentities;
+  bool busy{},logged{},fastPolling{true};ULONGLONG lastInteraction{},lastLayoutScan{};
+  static constexpr auto activeInterval=std::chrono::milliseconds(150);
+  static constexpr auto idleInterval=std::chrono::milliseconds(600);
+  void PollFast(bool fast){if(timer&&fastPolling!=fast){fastPolling=fast;timer.Interval(fast?activeInterval:idleInterval);}}
+  void Wake(){lastInteraction=GetTickCount64();PollFast(true);}
   void Restore(){for(auto& layer:layers)layer.Restore();layers.clear();}
-  void Dispose(){try{if(auto r=root.get();r&&layout.value)r.LayoutUpdated(layout);layout={};}catch(...){Wh_Log(L"[PopupSurface] Layout event cleanup failed");}try{if(timer){timer.Stop();timer.Tick(tick);timer=nullptr;}}catch(...){Wh_Log(L"[PopupSurface] Timer cleanup failed");}Restore();}
-  void Update(bool menusOnly=false){
+  void Dispose(){
+    if(auto r=root.get()){
+      try{if(layout.value)r.LayoutUpdated(layout);}catch(...){Wh_Log(L"[PopupSurface] Layout event cleanup failed");}
+      try{if(entered.value)r.PointerEntered(entered);if(moved.value)r.PointerMoved(moved);}catch(...){Wh_Log(L"[PopupSurface] Pointer event cleanup failed");}
+    }
+    layout={};entered={};moved={};
+    try{if(timer){timer.Stop();timer.Tick(tick);timer=nullptr;}}catch(...){Wh_Log(L"[PopupSurface] Timer cleanup failed");}Restore();popupIdentities.clear();
+  }
+  void Update(bool menusOnly=false,bool urgent=false){
     if(busy)return;struct Guard{bool& b;~Guard(){b=false;}} guard{busy};busy=true;
-    auto r=root.get();if(!r||g_unloading){Restore();return;}
+    auto r=root.get();if(!r||g_unloading){if(timer)timer.Stop();Restore();popupIdentities.clear();return;}
+    auto xr=r.XamlRoot();if(!xr){Restore();popupIdentities.clear();PollFast(false);return;}
+    auto now=GetTickCount64();
+    auto popups=Media::VisualTreeHelper::GetOpenPopupsForXamlRoot(xr);
+    // Idle layouts need no settings lock, accessibility query or recursive
+    // visual-tree search. A pointer/menu interaction immediately rearms the
+    // 150 ms fallback; otherwise an inexpensive 600 ms probe remains for
+    // native surfaces that expose no opening notification.
+    auto count=popups.Size();
+    if(!count){
+      if(!layers.empty()){std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);Restore();}
+      popupIdentities.clear();lastLayoutScan=0;
+      PollFast(now-lastInteraction<1000);return;
+    }
+    PollFast(true);
+    bool changed=popupIdentities.size()!=count;
+    if(!changed)for(uint32_t i=0;i<count;++i)if(popupIdentities[i]!=winrt::get_abi(popups.GetAt(i))){changed=true;break;}
+    if(changed){popupIdentities.resize(count);for(uint32_t i=0;i<count;++i)popupIdentities[i]=winrt::get_abi(popups.GetAt(i));}
+    // New or replaced popups get a full pass immediately, including native
+    // tooltips and thumbnails. Existing menu layout callbacks are coalesced
+    // only once a surface is already styled; explicit opening remains urgent.
+    if(changed)menusOnly=false;
+    if(menusOnly&&!urgent&&!layers.empty()&&now-lastLayoutScan<32)return;
+    lastLayoutScan=now;
     std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
     if(!IloSurfaceStyle::Enabled()){Restore();return;}
-    auto xr=r.XamlRoot();if(!xr){Restore();return;}
     std::vector<Control> controls;
-    auto popups=Media::VisualTreeHelper::GetOpenPopupsForXamlRoot(xr);
     for(auto const& popup:popups){
-      if(popup.IsOpen()&&!IsDirectTrayPopup(popup)){FindPopups(popup.Child(),controls);IloThumbnailSurface::Scan(popup.Child());}
+      if(popup.IsOpen()&&!IsDirectTrayPopup(popup)){FindPopups(popup.Child(),controls);if(!menusOnly)IloThumbnailSurface::Scan(popup.Child());}
     }
     // Some Windows templates expose the content rather than the ToolTip
     // itself as Popup.Child. Check attached ToolTip instances in the root.
@@ -10304,19 +10638,21 @@ static void Sync(FrameworkElement const& root){
   auto xr=root.XamlRoot();
   for(auto const& w:watches)if(w->dispatcher==dispatcher){auto existing=w->root.get();if(existing&&(existing==root||(xr&&existing.XamlRoot()==xr)))return;}
   auto w=std::make_shared<Watch>();w->root=winrt::make_weak(root);w->dispatcher=dispatcher;
-  w->timer=DispatcherTimer();w->timer.Interval(std::chrono::milliseconds(150));
+  w->timer=DispatcherTimer();w->timer.Interval(Watch::activeInterval);w->lastInteraction=GetTickCount64();
   std::weak_ptr<Watch> weak=w;
   w->tick=w->timer.Tick([weak](auto const&,auto const&) noexcept {if(auto w=weak.lock())try{w->Update();}catch(...){if(!w->logged){w->logged=true;Wh_Log(L"[PopupSurface] Update failed: %08X",winrt::to_hresult());}w->Restore();}});
   // LayoutUpdated is raised before the frame is presented. Style menu
   // surfaces as soon as their template exists; the timer remains a fallback.
   w->layout=root.LayoutUpdated([weak](auto const&,auto const&) noexcept {if(auto w=weak.lock())try{w->Update(true);}catch(...){if(!w->logged){w->logged=true;Wh_Log(L"[PopupSurface] Menu layout update failed: %08X",winrt::to_hresult());}}});
+  auto wake=[weak](auto const&,auto const&) noexcept {if(auto w=weak.lock())try{w->Wake();}catch(...){}};
+  w->entered=root.PointerEntered(wake);w->moved=root.PointerMoved(wake);
   watches.push_back(w);w->timer.Start();
 }
 static void RefreshTarget(FrameworkElement const& target){
   if(g_unloading||!target||!target.Dispatcher().HasThreadAccess())return;
   auto xr=target.XamlRoot();if(!xr)return;
   std::vector<std::shared_ptr<Watch>> snapshot;{std::lock_guard lock(mutex);snapshot=watches;}
-  for(auto const& w:snapshot)if(w->dispatcher==target.Dispatcher())if(auto r=w->root.get();r&&r.XamlRoot()==xr)w->Update(true);
+  for(auto const& w:snapshot)if(w->dispatcher==target.Dispatcher())if(auto r=w->root.get();r&&r.XamlRoot()==xr){w->Wake();w->Update(true,true);}
 }
 static bool IsTaskbarTarget(FrameworkElement const& target){
   if(g_unloading||!target||!target.Dispatcher().HasThreadAccess())return false;
@@ -11950,6 +12286,9 @@ void QueueTaskbarAnimationFollowup(HWND hTaskbarWnd) {
         const int followupWindowMs =
             kTaskbarIslandAnimationDurationMs +
             (frameIntervalMs * kAnimationFollowupGraceFrames);
+        // Preserve the established number of layout samples: Explorer may
+        // not have removed a closing task button when its first layout pass
+        // runs. A wall-clock cutoff can miss the final native layout.
         int elapsedMs = 0;
         while (elapsedMs < followupWindowMs) {
           Sleep(static_cast<DWORD>(frameIntervalMs));
@@ -12109,6 +12448,7 @@ void DelayedApplyWorker() {
         ApplySettingsTBIconSize(g_settings_tbiconsize.taskbarHeight);
       }
       ApplySettings(hTaskbarWnd);
+      IloHiding::ReconcileStartup();
       if (!g_initial_style_apply_completed.load() && !g_unloading) {
         Wh_Log(L"Initial ApplyStyle did not complete; retrying delayed apply");
         g_delayed_apply_generation.fetch_add(1);
@@ -12333,14 +12673,14 @@ void SetDividerForElement(FrameworkElement const& element, float const& panelHei
   }
   winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::SetElementChildVisual(element, shapeVisual);
 }
-void ChangeControlCenterIconSize(FrameworkElement const& systemTrayFrameGrid) {
-  if (!g_settings.userDefinedStyleTrayArea) return;
+void ChangeControlCenterIconSize(FrameworkElement const& systemTrayFrameGrid,TaskbarState& state) {
   if (auto ControlCenterButton = FindChildByName(systemTrayFrameGrid, L"ControlCenterButton")) {
     if (auto innerGrid = FindChildByClassName(ControlCenterButton, L"Windows.UI.Xaml.Controls.Grid")) {
       if (auto ContentPresenter = FindChildByName(innerGrid, L"ContentPresenter")) {
         if (auto innerItemPresenter = FindChildByClassName(ContentPresenter, L"Windows.UI.Xaml.Controls.ItemsPresenter")) {
           if (auto innerStackPanel = FindChildByClassName(innerItemPresenter, L"Windows.UI.Xaml.Controls.StackPanel")) {
-            auto userDefinedTrayIconSizeStr = std::to_wstring(g_settings.userDefinedTrayIconSize);
+            const double iconSize=g_settings.userDefinedTrayIconSize;
+            const double buttonSize=g_settings.userDefinedTrayButtonSize;
             int childCount = Media::VisualTreeHelper::GetChildrenCount(innerStackPanel);
             for (int i = 0; i < childCount; ++i) {
               auto child = Media::VisualTreeHelper::GetChild(innerStackPanel, i).try_as<FrameworkElement>();
@@ -12355,19 +12695,22 @@ void ChangeControlCenterIconSize(FrameworkElement const& systemTrayFrameGrid) {
               if (!TextIconContent) continue;
               auto ContainerGridInner = FindChildByName(TextIconContent, L"ContainerGrid");
               if (!ContainerGridInner) continue;
+              state.SetTraySize(child,FrameworkElement::WidthProperty(),buttonSize);
+              state.SetTraySize(child,FrameworkElement::HeightProperty(),double(g_settings.userDefinedTaskbarHeight));
+              state.SetTraySize(SystemTrayIcon,FrameworkElement::MinWidthProperty(),iconSize);
               if (auto Layer = FindChildByName(ContainerGridInner, L"Underlay")) {
                 if (auto InnerTextBlock = FindChildByName(Layer, L"InnerTextBlock")) {
-                  SetElementPropertyFromString(InnerTextBlock, L"Windows.UI.Xaml.Controls.TextBlock", L"FontSize", userDefinedTrayIconSizeStr);
+                  state.SetTraySize(InnerTextBlock,Controls::TextBlock::FontSizeProperty(),iconSize);
                 }
               }
               if (auto Layer = FindChildByName(ContainerGridInner, L"Base")) {
                 if (auto InnerTextBlock = FindChildByName(Layer, L"InnerTextBlock")) {
-                  SetElementPropertyFromString(InnerTextBlock, L"Windows.UI.Xaml.Controls.TextBlock", L"FontSize", userDefinedTrayIconSizeStr);
+                  state.SetTraySize(InnerTextBlock,Controls::TextBlock::FontSizeProperty(),iconSize);
                 }
               }
               if (auto Layer = FindChildByName(ContainerGridInner, L"AccentOverlay")) {
                 if (auto InnerTextBlock = FindChildByName(Layer, L"InnerTextBlock")) {
-                  SetElementPropertyFromString(InnerTextBlock, L"Windows.UI.Xaml.Controls.TextBlock", L"FontSize", userDefinedTrayIconSizeStr);
+                  state.SetTraySize(InnerTextBlock,Controls::TextBlock::FontSizeProperty(),iconSize);
                 }
               }
             }
@@ -12377,9 +12720,7 @@ void ChangeControlCenterIconSize(FrameworkElement const& systemTrayFrameGrid) {
     }
   }
 }
-void ProcessStackPanelChildren(FrameworkElement const& stackPanel, float const& panelHeight) {
-  if (!g_settings.userDefinedStyleTrayArea) return;
-  auto userDefinedTaskButtonCornerRadius = std::to_wstring(g_settings.userDefinedTaskButtonCornerRadius);
+void ProcessStackPanelChildren(FrameworkElement const& stackPanel,TaskbarState& state) {
   int childCount = Media::VisualTreeHelper::GetChildrenCount(stackPanel);
   for (int i = 0; i < childCount; ++i) {
     auto child = Media::VisualTreeHelper::GetChild(stackPanel, i).try_as<FrameworkElement>();
@@ -12400,14 +12741,30 @@ void ProcessStackPanelChildren(FrameworkElement const& stackPanel, float const& 
     if (!image) continue;
     auto imageCtrl = image.try_as<winrt::Windows::UI::Xaml::Controls::Image>();
     if (!imageCtrl) continue;
-    if (g_settings.userDefinedStyleTrayArea) {
-      child.Width(g_settings.userDefinedTrayButtonSize);
-      child.Height(g_settings.userDefinedTaskbarHeight);
-      SetElementPropertyFromString(containerGrid, L"Windows.UI.Xaml.Controls.Grid", L"CornerRadius", userDefinedTaskButtonCornerRadius);
-      image.Width(g_settings.userDefinedTrayIconSize);
-      image.Height(g_settings.userDefinedTrayIconSize);
-    }
+    const double radius=g_settings.userDefinedTaskButtonCornerRadius;
+    state.SetTraySize(child,FrameworkElement::WidthProperty(),double(g_settings.userDefinedTrayButtonSize));
+    state.SetTraySize(child,FrameworkElement::HeightProperty(),double(g_settings.userDefinedTaskbarHeight));
+    state.SetTraySize(notifyItemIcon,FrameworkElement::MinWidthProperty(),double(g_settings.userDefinedTrayIconSize));
+    if(containerGrid.try_as<Controls::Grid>())state.SetTraySize(containerGrid,Controls::Grid::CornerRadiusProperty(),CornerRadius{radius,radius,radius,radius});
+    state.SetTraySize(image,FrameworkElement::WidthProperty(),double(g_settings.userDefinedTrayIconSize));
+    state.SetTraySize(image,FrameworkElement::HeightProperty(),double(g_settings.userDefinedTrayIconSize));
   }
+}
+static bool SyncTrayIconSizes(FrameworkElement const& root,TaskbarState& state,uint64_t generation,ULONGLONG now){
+  if(state.traySizeSyncing)return false;
+  struct Guard{bool& flag;~Guard(){flag=false;}} guard{state.traySizeSyncing};state.traySizeSyncing=true;
+  if(g_unloading||!g_settings.userDefinedStyleTrayArea)return state.RestoreTraySizes();
+  bool changed=false;
+  if(state.traySizeRoot.get()!=root)changed=state.RestoreTraySizes();
+  if(state.traySizeEnabled&&state.traySizeGeneration==generation&&state.traySizeLastSync&&now-state.traySizeLastSync<150)return changed;
+  state.traySizeRoot=winrt::make_weak(root);state.traySizeEnabled=true;state.traySizeGeneration=generation;state.traySizeLastSync=now;state.traySizeChanged=false;
+  for(auto& entry:state.traySizeProperties)entry.seen=false;
+  try{
+    if(auto icons=FindChildByName(root,L"NotificationAreaIcons"))if(auto presenter=FindChildByClassName(icons,L"Windows.UI.Xaml.Controls.ItemsPresenter"))if(auto panel=FindChildByClassName(presenter,L"Windows.UI.Xaml.Controls.StackPanel"))ProcessStackPanelChildren(panel,state);
+    ChangeControlCenterIconSize(root,state);
+  }catch(...){Wh_Log(L"[ILoTraySizes] Sync failed: %08X",winrt::to_hresult());return state.RestoreTraySizes()||changed;}
+  std::erase_if(state.traySizeProperties,[&](auto const& entry){if(entry.seen)return false;changed|=TaskbarState::RestoreTrayProperty(entry);return true;});
+  return changed||state.traySizeChanged;
 }
 void StyleNativeDividerElement(winrt::Windows::UI::Xaml::FrameworkElement const& element) {
   if (!element) return;
@@ -12421,16 +12778,10 @@ void StyleNativeDividerElement(winrt::Windows::UI::Xaml::FrameworkElement const&
       visual.Scale({1.0f, g_unloading ? 1.0f : g_settings.userDefinedAppsDividerVerticalScale, 1.0f});
     }
   }
-  PCWSTR originalHex = IloPanel::Str(L"TaskbarBorderColorHex");
-  PCWSTR hex = originalHex;
-  if (!hex || *hex == L'\0') {
-    hex = L"#ffffff";
-  }
-  if (*hex == L'#') ++hex;
-  std::wstring fillBrush = L"<SolidColorBrush Color=\"#" + std::wstring(hex) + L"\"/>";
-  SetElementPropertyFromString(element, L"Windows.UI.Xaml.Shapes.Rectangle", L"Fill", fillBrush.c_str(), true);
-  if (originalHex) {
-    IloPanel::Free(originalHex);
+  if(auto shape=element.try_as<winrt::Windows::UI::Xaml::Shapes::Rectangle>()){
+    winrt::Windows::UI::Color color{255,uint8_t(g_settings.borderColorR),uint8_t(g_settings.borderColorG),uint8_t(g_settings.borderColorB)};
+    auto solid=shape.Fill().try_as<Media::SolidColorBrush>();
+    if(!solid||solid.Color()!=color)shape.Fill(Media::SolidColorBrush(color));
   }
 }
 void InvalidateTaskbarButtonLayoutElement(FrameworkElement const& element) {
@@ -12611,6 +12962,7 @@ struct IloZoomTransform {
 
 struct IloZoomIcon : IloZoomTransform {
   FrameworkElement button{nullptr}, icon{nullptr};
+  bool trayIcon{};
   IloZoomTransform plate;
   bool plateHidden = false;
   winrt::Windows::Foundation::IInspectable savedOpacity{nullptr};
@@ -12762,17 +13114,12 @@ struct Config {
   bool operator==(Config const&) const = default;
 };
 
-static std::wstring ReadText(PCWSTR key) {
-  auto p = IloPanel::Str(key);
-  std::wstring s = p ? p : L"";
-  if (p) IloPanel::Free(p);
-  return s;
-}
-static Config ReadConfig() {
+static Config ReadConfig(IloPanel::SettingsSnapshot const& settings) {
   Config c;
-  c.enabled = !g_unloading && IloPanel::Int(L"ClockEnabled") != 0;
+  auto ReadText=[&](PCWSTR key){return settings.Text(key);};
+  c.enabled = !g_unloading && settings.Int(L"ClockEnabled") != 0;
   if (!c.enabled) return c;
-  if(IloPanel::Int(L"ClockTooltipEnabled"))c.tip=IloPanel::ReadTooltipOptions([](PCWSTR key){return std::wstring_view(key)==L"ClockTooltipExtra"?ReadText(key):std::to_wstring(IloPanel::Int(key));});
+  if(settings.Int(L"ClockTooltipEnabled"))c.tip=IloPanel::ReadTooltipOptions([&](PCWSTR key){return std::wstring_view(key)==L"ClockTooltipExtra"?ReadText(key):std::to_wstring(settings.Int(key));});
   c.preset = ReadText(L"ClockPreset");
   c.timeFormat = ReadText(L"ClockTimeFormat");
   c.dateFormat = ReadText(L"ClockDateFormat");
@@ -12789,15 +13136,15 @@ static Config ReadConfig() {
   c.weatherUnits = ReadText(L"ClockWeatherUnits");
   c.locationMode = ReadText(L"ClockLocationMode");
   if(c.locationMode.empty())c.locationMode=L"manual";
-  c.width = IloPanel::Int(L"ClockWidth");
+  c.width = settings.Int(L"ClockWidth");
   c.width = c.width > 0 ? std::clamp(c.width, 40, 400) : 0;
-  c.topSize = IloPanel::Int(L"ClockTopSize");
+  c.topSize = settings.Int(L"ClockTopSize");
   c.topSize = c.topSize > 0 ? std::clamp(c.topSize, 8, 36) : 0;
-  c.bottomSize = IloPanel::Int(L"ClockBottomSize");
+  c.bottomSize = settings.Int(L"ClockBottomSize");
   c.bottomSize = c.bottomSize > 0 ? std::clamp(c.bottomSize, 8, 36) : 0;
-  c.topBold = IloPanel::Int(L"ClockTopBold") != 0;
-  c.bottomBold = IloPanel::Int(L"ClockBottomBold") != 0;
-  c.weatherMinutes = std::clamp(IloPanel::Int(L"ClockWeatherMinutes"), 5, 120);
+  c.topBold = settings.Int(L"ClockTopBold") != 0;
+  c.bottomBold = settings.Int(L"ClockBottomBold") != 0;
+  c.weatherMinutes = std::clamp(settings.Int(L"ClockWeatherMinutes"), 5, 120);
   if (c.timeFormat.empty()) c.timeFormat = L"HH:mm";
   if (c.dateFormat.empty()) c.dateFormat = L"dd/MM/yyyy";
   if (c.weekdayFormat.empty()) c.weekdayFormat = L"dddd";
@@ -12817,8 +13164,13 @@ static Config ReadConfig() {
   return c;
 }
 
-static bool Uses(Config const& c, std::wstring_view p) {
-  return c.top.find(p) != std::wstring::npos || c.bottom.find(p) != std::wstring::npos || (c.tip.enabled&&c.tip.extra.find(p)!=std::wstring::npos);
+static bool UsesLines(Config const& c,std::wstring_view p){return c.top.find(p)!=std::wstring::npos||c.bottom.find(p)!=std::wstring::npos;}
+static bool Uses(Config const& c, std::wstring_view p) {return UsesLines(c,p)||(c.tip.enabled&&c.tip.extra.find(p)!=std::wstring::npos);}
+static bool UsesWeatherLines(Config const& c){return UsesLines(c,L"%weather%")||UsesLines(c,L"%weather_icon%")||UsesLines(c,L"%temperature%")||(c.locationMode==L"auto"&&UsesLines(c,L"%city%"));}
+static bool FastLines(Config const& c){
+  if(c.top.empty()||c.bottom.empty())return true; // May be showing a native fallback line.
+  if(UsesLines(c,L"%cpu%")||UsesLines(c,L"%ram%")||UsesLines(c,L"%gpu%")||UsesLines(c,L"%vram%")||UsesLines(c,L"%battery%"))return true;
+  return (UsesLines(c,L"%time%")||UsesLines(c,L"%time_tz1%"))&&c.timeFormat.find(L's')!=std::wstring::npos;
 }
 static bool UsesGpuLines(Config const& c){
   return c.top.find(L"%gpu%")!=std::wstring::npos||c.top.find(L"%vram%")!=std::wstring::npos||
@@ -12880,6 +13232,7 @@ struct Day {std::wstring date,icon;int low{},high{},rain{-1};bool operator==(Day
 struct Data {
   std::wstring city, icon, temperature;
   std::vector<Day> days;
+  bool operator==(Data const&) const = default;
   bool Valid() const { return !temperature.empty()||!days.empty(); }
   std::wstring Full() const {
     if(icon.empty()&&temperature.empty())return L"\u2014";
@@ -12911,6 +13264,9 @@ std::mutex mutex;
 std::condition_variable changed;
 Request current;
 Data cached, detected;
+static std::atomic<uint64_t> dataRevision{1};
+static uint64_t Revision(){return dataRevision.load();}
+static void PublishLocked(Data next){if(next!=cached){cached=std::move(next);dataRevision.fetch_add(1);}}
 bool detectPending{},detecting{},detectionFailed{};
 std::thread worker;
 bool stopping{};
@@ -13029,6 +13385,17 @@ static Data Fetch(Request const& r) {
   WinHttpSetTimeouts(session.h,3000,3000,3000,3000);
   HttpHandle connect(WinHttpConnect(session.h,L"wttr.in",INTERNET_DEFAULT_HTTPS_PORT,0));
   if(!connect.h)return {};
+  // The structured forecast also includes the current condition and place
+  // name. Use it once when forecasts are requested; keep the small text
+  // request as a fallback for unavailable or incomplete JSON.
+  Data structured;
+  if(r.forecast){
+    structured=ReadStructured(connect.h,city,true,r.units==L"imperial");
+    if(!structured.temperature.empty()&&!structured.icon.empty()&&structured.icon!=L"\u2014"&&!structured.days.empty()&&(!r.automatic||IsPlaceName(structured.city))){
+      if(!r.automatic)structured.city=IsPlaceName(r.city)?r.city:L"";
+      return structured;
+    }
+  }
   auto path=L"/"+city+L"?format=%25l%7C%25c%7C%25t&"+(r.units==L"imperial"?L"u":L"m");
   auto text=Trim(ReadResponse(connect.h,path,512));
   Data result;
@@ -13040,8 +13407,7 @@ static Data Fetch(Request const& r) {
     if(result.city.size()>180||result.temperature.size()>30)result={};
   }}
   if(!result.Valid()&&!r.forecast)return {};
-  Data structured;
-  if(r.forecast){structured=ReadStructured(connect.h,city,true,r.units==L"imperial");result.days=std::move(structured.days);if(result.temperature.empty()){result.temperature=structured.temperature;result.icon=structured.icon;}}
+  if(r.forecast){result.days=std::move(structured.days);if(result.temperature.empty()){result.temperature=structured.temperature;result.icon=structured.icon;}}
   if(!r.automatic)result.city=IsPlaceName(r.city)?r.city:L"";
   else if(!IsPlaceName(result.city)){
     // Reuse a successful lookup for an unchanged coordinate pair. Never
@@ -13069,7 +13435,7 @@ static void Loop() {
       lock.lock();detecting=false;detectionFailed=result.city.empty();
       if(!detectionFailed&&!stopping){
         detected=result;
-        if(current.automatic){cached.city=result.city;if(current.units!=L"imperial"){cached.icon=result.icon;cached.temperature=result.temperature;}}
+        if(current.automatic){auto next=cached;next.city=result.city;if(current.units!=L"imperial"){next.icon=result.icon;next.temperature=result.temperature;}PublishLocked(std::move(next));}
       }
       continue;
     }
@@ -13086,7 +13452,7 @@ static void Loop() {
     if(!stopping&&gen==generation){
       if(result.Valid()){
         if(r.automatic)detectionFailed=result.city.empty();
-        cached=std::move(result);
+        PublishLocked(std::move(result));
       }else if(r.automatic&&cached.city.empty())detectionFailed=true;
     }
     changed.wait_for(lock,std::chrono::minutes(r.minutes),[&]{return stopping||generation!=gen||detectPending;});
@@ -13100,7 +13466,7 @@ static void Set(Config const& c) {
     r={c.weatherCity,c.weatherUnits,c.weatherMinutes,true,false,c.tip.enabled&&c.tip.forecast};
   std::lock_guard lock(mutex);
   if(stopping||r==current)return;
-  if(r.city!=current.city||r.units!=current.units||r.automatic!=current.automatic||!r.active)cached={};
+  if(r.city!=current.city||r.units!=current.units||r.automatic!=current.automatic||!r.active)PublishLocked({});
   current=std::move(r); ++generation;
   if(current.active&&!worker.joinable())worker=std::thread(Loop);
   changed.notify_all();
@@ -13130,19 +13496,32 @@ static std::pair<std::wstring,int> Detection() {
   return {name,detectPending||detecting?1:detectionFailed?2:0};
 }
 static void Stop() {
-  {std::lock_guard lock(mutex);stopping=true;current={};cached={};detected={};detectPending=false;}
+  {std::lock_guard lock(mutex);stopping=true;current={};PublishLocked({});detected={};detectPending=false;}
   changed.notify_all();
   if(worker.joinable())worker.join();
 }
 } // namespace Weather
 
+// A single typed clock configuration per settings revision, shared by all
+// taskbar monitors. The weather request is reconsidered only on a revision.
+static std::shared_ptr<const Config> CurrentConfig(){
+  if(g_unloading)return std::make_shared<const Config>();
+  auto settings=IloPanel::Snapshot();static std::mutex mutex;static uint64_t revision{};static std::shared_ptr<const Config> cached;
+  std::lock_guard lock(mutex);
+  if(cached&&revision>settings->revision)return cached;
+  if(!cached||revision!=settings->revision){auto next=std::make_shared<const Config>(ReadConfig(*settings));Weather::Set(*next);cached=std::move(next);revision=settings->revision;}
+  return cached;
+}
+
 struct Metrics {
   ULONGLONG idle{}, kernel{}, user{};
   bool haveCpu{};
   std::wstring cpu=L"\u2014",ram=L"\u2014",battery=L"\u2014",gpu=L"\u2014",vram=L"\u2014";
-  void UpdateGpu(Config const& c);
-  void Update(Config const& c) {
-    if(Uses(c,L"%cpu%")) {
+  std::optional<MEMORYSTATUSEX> memory;
+  void UpdateGpu(Config const& c,bool linesOnly);
+  void Update(Config const& c,bool linesOnly=false) {
+    auto needed=[&](std::wstring_view token){return linesOnly?UsesLines(c,token):Uses(c,token);};
+    if(needed(L"%cpu%")) {
       FILETIME i{},k{},u{};
       if(GetSystemTimes(&i,&k,&u)) {
         auto ni=Ft(i), nk=Ft(k), nu=Ft(u);
@@ -13154,20 +13533,22 @@ struct Metrics {
         idle=ni;kernel=nk;user=nu;haveCpu=true;
       }
     } else {haveCpu=false;cpu=L"\u2014";}
-    if(Uses(c,L"%ram%")) {
+    memory.reset();
+    if(needed(L"%ram%")) {
       MEMORYSTATUSEX mem{sizeof(mem)};
-      if(GlobalMemoryStatusEx(&mem))ram=std::to_wstring(mem.dwMemoryLoad)+L"%";
+      if(GlobalMemoryStatusEx(&mem)){memory=mem;ram=std::to_wstring(mem.dwMemoryLoad)+L"%";}
     }
-    if(Uses(c,L"%battery%")) {
+    if(needed(L"%battery%")) {
       SYSTEM_POWER_STATUS power{};
       if(GetSystemPowerStatus(&power)&&power.BatteryLifePercent!=255)battery=std::to_wstring(power.BatteryLifePercent)+L"%";
       else battery=L"\u2014";
     }
-    UpdateGpu(c);
+    UpdateGpu(c,linesOnly);
   }
 };
 
 static std::optional<winrt::Windows::UI::Color> ParseColor(std::wstring const& s) {
+  if(IloPanel::IsAccent(s))return IloPanel::AccentColor();
   if((s.size()!=7&&s.size()!=9)||s[0]!=L'#')return {};
   for(size_t i=1;i<s.size();++i)if(!iswxdigit(s[i]))return {};
   auto v=wcstoul(s.c_str()+1,nullptr,16);
@@ -13216,6 +13597,7 @@ int clients{};bool stopping{};Sample cached;
 struct Query {
   PDH_HQUERY query{};PDH_HCOUNTER engines{},memory{};
   double capacity{-1};
+  std::vector<BYTE> storage;
   Query(){
     if(PdhOpenQueryW(nullptr,0,&query)==ERROR_SUCCESS){
       if(PdhAddEnglishCounterW(query,L"\\GPU Engine(*)\\Utilization Percentage",0,&engines)!=ERROR_SUCCESS)engines=nullptr;
@@ -13229,20 +13611,26 @@ struct Query {
     }
   }
   ~Query(){if(query)PdhCloseQuery(query);}
-  template<class F> static bool Values(PDH_HCOUNTER counter,F consume){
-    if(!counter)return false;DWORD bytes=0,count=0;
-    if(PdhGetFormattedCounterArrayW(counter,PDH_FMT_DOUBLE|PDH_FMT_NOCAP100,&bytes,&count,nullptr)!=static_cast<PDH_STATUS>(PDH_MORE_DATA)||!bytes||bytes>4*1024*1024)return false;
-    std::vector<BYTE> storage(bytes);auto items=reinterpret_cast<PDH_FMT_COUNTERVALUE_ITEM_W*>(storage.data());
-    if(PdhGetFormattedCounterArrayW(counter,PDH_FMT_DOUBLE|PDH_FMT_NOCAP100,&bytes,&count,items)!=ERROR_SUCCESS)return false;
+  template<class F> bool Values(PDH_HCOUNTER counter,F consume){
+    if(!counter)return false;DWORD bytes=DWORD(storage.size()),count=0;
+    auto items=storage.empty()?nullptr:reinterpret_cast<PDH_FMT_COUNTERVALUE_ITEM_W*>(storage.data());
+    auto status=PdhGetFormattedCounterArrayW(counter,PDH_FMT_DOUBLE|PDH_FMT_NOCAP100,&bytes,&count,items);
+    if(status==static_cast<PDH_STATUS>(PDH_MORE_DATA)){
+      if(!bytes||bytes>4*1024*1024)return false;
+      storage.resize(bytes);items=reinterpret_cast<PDH_FMT_COUNTERVALUE_ITEM_W*>(storage.data());
+      status=PdhGetFormattedCounterArrayW(counter,PDH_FMT_DOUBLE|PDH_FMT_NOCAP100,&bytes,&count,items);
+    }
+    if(status!=ERROR_SUCCESS||!items||count>storage.size()/sizeof(PDH_FMT_COUNTERVALUE_ITEM_W))return false;
     bool valid=false;for(DWORD i=0;i<count;++i){auto const& value=items[i].FmtValue;if((value.CStatus==PDH_CSTATUS_VALID_DATA||value.CStatus==PDH_CSTATUS_NEW_DATA)&&std::isfinite(value.doubleValue)&&value.doubleValue>=0&&items[i].szName){consume(items[i].szName,value.doubleValue);valid=true;}}return valid;
   }
   Sample Read(){
     Sample result;result.capacity=capacity;if(!query||PdhCollectQueryData(query)!=ERROR_SUCCESS)return result;
-    std::map<std::wstring,double> byEngine;
-    if(Values(engines,[&](PCWSTR name,double value){std::wstring key=name;auto at=key.find(L"_luid_");if(at!=std::wstring::npos)key.erase(0,at+1);byEngine[key]+=value;})){
+    // The string views are consumed before the shared PDH buffer is reused.
+    std::unordered_map<std::wstring_view,double> byEngine;
+    if(Values(engines,[&](PCWSTR name,double value){std::wstring_view key=name;auto at=key.find(L"_luid_");if(at!=std::wstring::npos)key.remove_prefix(at+1);byEngine[key]+=value;})){
       result.gpu=0;for(auto const& [key,value]:byEngine)result.gpu=std::max(result.gpu,std::clamp(value,0.0,100.0));
     }
-    double total=0;if(Values(memory,[&](PCWSTR,double value){total+=value;}))result.vram=total;
+    byEngine.clear();double total=0;if(Values(memory,[&](PCWSTR,double value){total+=value;}))result.vram=total;
     return result;
   }
 };
@@ -13266,9 +13654,10 @@ static Sample Get(){std::lock_guard lock(mutex);return cached;}
 static void Stop(){{std::lock_guard lock(mutex);stopping=true;clients=0;cached={};}changed.notify_all();if(worker.joinable())worker.join();}
 } // namespace GpuStats
 
-void Metrics::UpdateGpu(Config const& c){
+void Metrics::UpdateGpu(Config const& c,bool linesOnly){
   gpu=L"\u2014";vram=L"\u2014";
-  if(!Uses(c,L"%gpu%")&&!Uses(c,L"%vram%"))return;
+  auto needed=[&](std::wstring_view token){return linesOnly?UsesLines(c,token):Uses(c,token);};
+  if(!needed(L"%gpu%")&&!needed(L"%vram%"))return;
   auto sample=GpuStats::Get();
   if(sample.gpu>=0)gpu=std::to_wstring(int(std::lround(sample.gpu)))+L"%";
   if(sample.vram>=0&&sample.capacity>0)vram=std::to_wstring(int(std::lround(std::clamp(100.*sample.vram/sample.capacity,0.,100.))))+L"%";
@@ -13278,21 +13667,22 @@ struct CardSnapshot {std::wstring date,city,cpu,ram,gpu,vram,battery,extra;};
 static std::wstring MemoryNumber(double bytes,bool french){wchar_t value[64]{};swprintf_s(value,ARRAYSIZE(value),L"%.1f %ls",bytes/(1024.0*1024*1024),french?L"Gio":L"GiB");return value;}
 static CardSnapshot SampleCard(Config const& c,Weather::Data const& weather,Metrics& metrics,
                                std::optional<DYNAMIC_TIME_ZONE_INFORMATION> const& zone,bool french){
-  CardSnapshot s;auto sample=c;
+  CardSnapshot s;Config sample;sample.top=c.tip.extra;
   if(c.tip.cpu)sample.top+=L" %cpu%";if(c.tip.ram)sample.top+=L" %ram%";if(c.tip.battery)sample.top+=L" %battery%";
   metrics.Update(sample);
   SYSTEMTIME local{},utc{},remote{};GetLocalTime(&local);SYSTEMTIME* other=nullptr;
   if(zone){GetSystemTime(&utc);if(SystemTimeToTzSpecificLocalTimeEx(&*zone,&utc,&remote))other=&remote;}
-  s.date=DateText(local,L"dddd d MMMM yyyy")+L" · "+TimeText(local,c.timeFormat);
-  auto city=c.locationMode==L"auto"?Weather::ShortCity(weather.city):c.locationMode==L"manual"?Weather::ShortCity(c.weatherCity):L"";
-  s.city=city;if(!weather.temperature.empty())s.city+=(s.city.empty()?L"":L" · ")+weather.Full();
-  if(s.city.empty())s.city=french?L"Météo indisponible":L"Weather unavailable";
+  if(c.tip.date)s.date=DateText(local,L"dddd d MMMM yyyy")+L" · "+TimeText(local,c.timeFormat);
+  std::wstring city;
+  if(c.tip.city||!c.tip.extra.empty())city=c.locationMode==L"auto"?Weather::ShortCity(weather.city):c.locationMode==L"manual"?Weather::ShortCity(c.weatherCity):L"";
+  if(c.tip.city){s.city=city;if(!weather.temperature.empty())s.city+=(s.city.empty()?L"":L" · ")+weather.Full();
+    if(s.city.empty())s.city=french?L"Météo indisponible":L"Weather unavailable";}
   s.cpu=metrics.cpu;s.battery=metrics.battery;
-  MEMORYSTATUSEX mem{sizeof(mem)};
-  if(c.tip.ram&&GlobalMemoryStatusEx(&mem))s.ram=MemoryNumber(double(mem.ullTotalPhys-mem.ullAvailPhys),french)+L" / "+MemoryNumber(double(mem.ullTotalPhys),french)+L" · "+std::to_wstring(mem.dwMemoryLoad)+L"%";
-  auto gpu=GpuStats::Get();
-  if(gpu.gpu>=0)s.gpu=std::to_wstring(int(std::lround(gpu.gpu)))+L"%";
-  if(gpu.vram>=0){s.vram=MemoryNumber(gpu.vram,french);if(gpu.capacity>0)s.vram+=L" / "+MemoryNumber(gpu.capacity,french);}
+  if(c.tip.ram&&metrics.memory){auto const& mem=*metrics.memory;s.ram=MemoryNumber(double(mem.ullTotalPhys-mem.ullAvailPhys),french)+L" / "+MemoryNumber(double(mem.ullTotalPhys),french)+L" · "+std::to_wstring(mem.dwMemoryLoad)+L"%";}
+  if(c.tip.gpu||c.tip.vram){auto gpu=GpuStats::Get();
+    if(gpu.gpu>=0)s.gpu=std::to_wstring(int(std::lround(gpu.gpu)))+L"%";
+    if(gpu.vram>=0){s.vram=MemoryNumber(gpu.vram,french);if(gpu.capacity>0)s.vram+=L" / "+MemoryNumber(gpu.capacity,french);}
+  }
   if(!c.tip.extra.empty())s.extra=FormatLine(c.tip.extra,c,local,other,metrics,weather,city);
   return s;
 }
@@ -13505,14 +13895,16 @@ struct TooltipController {
   FrameworkElement owner{nullptr};Controls::ToolTip tip{nullptr};
   winrt::Windows::Foundation::IInspectable original{nullptr};Data::BindingBase binding{nullptr};
   winrt::event_token opened{},closed{};bool hookedOpen{},hookedClose{},owns{},gpuActive{};
+  DispatcherTimer refreshTimer{nullptr};winrt::event_token refreshTick{};
   Config config;Metrics metrics;std::optional<DYNAMIC_TIME_ZONE_INFORMATION> zone;
-  CardView card;std::vector<Weather::Day> displayedDays;
+  CardView card;std::vector<Weather::Day> displayedDays;bool displayedFrench{};unsigned displayedDate{};
   IloPopupSurface::Layer theme;
   std::shared_ptr<int> alive;
   bool Owned() const {return owner&&tip&&(Controls::ToolTipService::GetToolTip(owner)==tip||owner.ReadLocalValue(Controls::ToolTipService::ToolTipProperty())==tip);}
   void StopCounters(){if(gpuActive){GpuStats::Release();gpuActive=false;}}
   void Restore() noexcept {
     alive.reset(); // Even if XAML cannot revoke an event, its callbacks become inert.
+    try{if(refreshTimer){refreshTimer.Stop();if(refreshTick.value)refreshTimer.Tick(refreshTick);refreshTimer=nullptr;}}catch(...){Wh_Log(L"[ILoClock] Tooltip timer cleanup failed");}refreshTick={};
     theme.Restore();
     StopCounters();
     try {if(tip){if(hookedOpen)tip.Opened(opened);if(hookedClose)tip.Closed(closed);tip.IsOpen(false);}}catch(...){Wh_Log(L"[ILoClock] Tooltip event cleanup failed");}
@@ -13539,9 +13931,12 @@ struct TooltipController {
   }
   void Render(bool rebuild=false){
     if(!tip)return;
-    auto weather=Weather::Get();bool french=IloPanel::ReadFrenchPreference();
-    if(rebuild||!card.root||displayedDays!=weather.days){
-      card=BuildCard(config.tip,weather,config.weatherUnits==L"imperial",french);displayedDays=weather.days;
+    auto const& extra=config.tip.extra;
+    bool needsWeather=config.tip.city||config.tip.forecast||extra.find(L"%weather%")!=std::wstring::npos||extra.find(L"%weather_icon%")!=std::wstring::npos||extra.find(L"%temperature%")!=std::wstring::npos||(config.locationMode==L"auto"&&extra.find(L"%city%")!=std::wstring::npos);
+    auto weather=needsWeather?Weather::Get():Weather::Data{};bool french=IloPanel::ReadFrenchPreference();
+    SYSTEMTIME now{};GetLocalTime(&now);unsigned date=unsigned(now.wYear)*10000+unsigned(now.wMonth)*100+now.wDay;
+    if(rebuild||!card.root||displayedDays!=weather.days||displayedFrench!=french||(config.tip.forecast&&displayedDate!=date)){
+      card=BuildCard(config.tip,weather,config.weatherUnits==L"imperial",french);displayedDays=weather.days;displayedFrench=french;displayedDate=date;
       card.Update(SampleCard(config,weather,metrics,zone,french));tip.Content(card.root);
     }else card.Update(SampleCard(config,weather,metrics,zone,french));
   }
@@ -13549,7 +13944,7 @@ struct TooltipController {
     if(!tip)return;
     try {if(tip.IsOpen()&&Owned()){
       Render();Theme();
-    }else {theme.Restore();if(gpuActive)StopCounters();}}
+    }else {if(refreshTimer)refreshTimer.Stop();theme.Restore();if(gpuActive)StopCounters();}}
     catch(...){Wh_Log(L"[ILoClock] Tooltip refresh failed: %08X",winrt::to_hresult());Restore();}
   }
   void Theme(){
@@ -13568,11 +13963,13 @@ struct TooltipController {
       else if(original!=DependencyProperty::UnsetValue()&&original!=existing){Wh_Log(L"[ILoClock] Tooltip uses an unsupported template expression; leaving native tooltip");Restore();return;}
       config=c;zone=tz;tip=Controls::ToolTip();tip.Name(L"IloCustomClockToolTip");tip.MaxWidth(480);Render(true);
       alive=std::make_shared<int>(0);std::weak_ptr<int> weak=alive;
+      refreshTimer=DispatcherTimer();refreshTimer.Interval(std::chrono::seconds(1));
+      refreshTick=refreshTimer.Tick([this,weak](auto const&,auto const&) noexcept {if(weak.lock())Tick();});
       opened=tip.Opened([this,weak](auto const&,auto const&) noexcept {if(!weak.lock())return;try{
         if((config.tip.gpu||config.tip.vram||config.tip.extra.find(L"%gpu%")!=std::wstring::npos||config.tip.extra.find(L"%vram%")!=std::wstring::npos)&&!gpuActive)gpuActive=GpuStats::Acquire();
-        metrics={};Render(true);Theme();
+        metrics={};Render();Theme();if(refreshTimer)refreshTimer.Start();
       }catch(...){Wh_Log(L"[ILoClock] Tooltip open failed");StopCounters();}});hookedOpen=true;
-      closed=tip.Closed([this,weak](auto const&,auto const&) noexcept {if(weak.lock()){theme.Restore();StopCounters();}});hookedClose=true;
+      closed=tip.Closed([this,weak](auto const&,auto const&) noexcept {if(weak.lock()){try{if(refreshTimer)refreshTimer.Stop();}catch(...){}theme.Restore();StopCounters();}});hookedClose=true;
       owns=true;Controls::ToolTipService::SetToolTip(owner,tip);
       if(!Owned()){Wh_Log(L"[ILoClock] Tooltip attachment not accepted");Restore();return;}
       Wh_Log(L"[ILoClock] Custom tooltip attached to %ls (%ls)",owner.Name().c_str(),winrt::get_class_name(owner).c_str());
@@ -13592,6 +13989,9 @@ struct Watch {
   std::optional<DYNAMIC_TIME_ZONE_INFORMATION> zone;
   std::wstring lastStatus, lastLayout;
   bool combined{},pending{},working{},gpuActive{};
+  bool fastLines{true},weatherLines{};
+  ULONGLONG pendingStarted{},lastLayoutCheck{};
+  uint64_t lastMinute{},lastWeatherRevision{};
   struct WorkGuard { bool& flag; ~WorkGuard(){flag=false;} };
   void Status(PCWSTR status) {
     if(lastStatus==status)return;
@@ -13618,6 +14018,26 @@ struct Watch {
   bool Attached() const {
     return OverlaysPresent()&&top.Attached()&&bottom.Attached();
   }
+  static uint64_t MinuteKey(SYSTEMTIME const& st){return (uint64_t(st.wYear)<<32)|(uint64_t(st.wMonth)<<24)|(uint64_t(st.wDay)<<16)|(uint64_t(st.wHour)<<8)|st.wMinute;}
+  void ScheduleNext(){
+    if(!timer)return;
+    SYSTEMTIME now{};GetLocalTime(&now);
+    // Align minute-only clocks to the next wall-clock minute. Weather-only
+    // lines use a short, cheap revision probe so fresh data appears promptly.
+    int delay=fastLines?1000:std::max(50,60000-int(now.wSecond)*1000-int(now.wMilliseconds)+20);
+    if(!fastLines&&weatherLines)delay=std::min(delay,5000);
+    auto interval=std::chrono::milliseconds(delay);if(timer.Interval()!=interval)timer.Interval(interval);
+  }
+  void RefreshColors(){
+    auto sync=[](Line const& line,std::wstring const& color){
+      if(!line.custom||!line.native)return;
+      if(IloPanel::IsAccent(color)){
+        auto accent=IloPanel::AccentColor();auto solid=line.custom.Foreground().try_as<Media::SolidColorBrush>();
+        if(!solid||solid.Color()!=accent)line.custom.Foreground(Media::SolidColorBrush(accent));
+      }else if(!ParseColor(color).has_value()&&line.custom.Foreground()!=line.native.Foreground())line.custom.Foreground(line.native.Foreground());
+    };
+    sync(top,config.topColor);sync(bottom,config.bottomColor);
+  }
   void RenderLines() {
     SYSTEMTIME local{}, utc{}, other{};
     GetLocalTime(&local);
@@ -13626,8 +14046,8 @@ struct Watch {
       GetSystemTime(&utc);
       if(SystemTimeToTzSpecificLocalTimeEx(&*zone,&utc,&other))extra=&other;
     }
-    metrics.Update(config);
-    auto weather=Weather::Get();
+    metrics.Update(config,true);
+    auto weatherRevision=Weather::Revision();auto weather=weatherLines?Weather::Get():Weather::Data{};
     auto city=config.locationMode==L"auto"?Weather::ShortCity(weather.city):
         config.locationMode==L"manual"?Weather::ShortCity(config.weatherCity):L"";
     auto topText=FormatLine(config.top,config,local,extra,metrics,weather,city);
@@ -13637,6 +14057,8 @@ struct Watch {
     if(bottomText.empty())bottomText=std::wstring(bottom.native.Text());
     top.SetText(topText,!ParseColor(config.topColor).has_value());
     bottom.SetText(bottomText,!ParseColor(config.bottomColor).has_value());
+    RefreshColors();
+    lastMinute=MinuteKey(local);lastWeatherRevision=weatherRevision;
   }
   void Update() {
     if(working)return;
@@ -13645,10 +14067,13 @@ struct Watch {
     if(pending) {
       // The timer runs after XAML has had a layout pass. Only commit when
       // *both* new lines have positive measured dimensions and actual text.
-      if(!root.get()||!config.enabled||!OverlaysPresent()||
-          !top.HasMeasuredText()||!bottom.HasMeasuredText()) {
+      if(!root.get()||!config.enabled||!OverlaysPresent()) {
         Status(L"Overlay did not measure both lines; keeping Windows clock");
         Restore();if(timer)timer.Stop();return;
+      }
+      if(!top.HasMeasuredText()||!bottom.HasMeasuredText()){
+        if(GetTickCount64()-pendingStarted<1000)return;
+        Status(L"Overlay did not measure both lines; keeping Windows clock");Restore();if(timer)timer.Stop();return;
       }
       Wh_Log(L"[ILoClock] Measured custom lines: top=%.1fx%.1f bottom=%.1fx%.1f",
           top.custom.ActualWidth(),top.custom.ActualHeight(),bottom.custom.ActualWidth(),bottom.custom.ActualHeight());
@@ -13663,8 +14088,10 @@ struct Watch {
       Status(L"Clock layout changed; restoring native lines");
       Restore();if(timer)timer.Stop();return;
     }
-    RenderLines();
-    tooltip.Tick();
+    SYSTEMTIME now{};GetLocalTime(&now);
+    if(fastLines||MinuteKey(now)!=lastMinute||(weatherLines&&Weather::Revision()!=lastWeatherRevision))RenderLines();
+    else RefreshColors();
+    ScheduleNext();
   }
   bool AttachOverlays(FrameworkElement const& common,FrameworkElement const& tray) {
     auto topGrid=top.nativeParent.try_as<Controls::Grid>();
@@ -13699,6 +14126,13 @@ struct Watch {
   void Apply(FrameworkElement const& tray,Config const& c) {
     if(working)return;
     WorkGuard guard{working};working=true;
+    auto now=GetTickCount64();
+    // Skip a recursive lookup during repeated dock animation passes, but
+    // periodically verify that Windows has not replaced its clock template.
+    if(config==c&&now-lastLayoutCheck<1000&&(Attached()||(pending&&OverlaysPresent()))&&top.native.XamlRoot()==tray.XamlRoot()&&bottom.native.XamlRoot()==tray.XamlRoot()){
+      if(timer&&!timer.IsEnabled())timer.Start();return;
+    }
+    lastLayoutCheck=now;
     auto time=IloClockText(tray,L"TimeInnerTextBlock",24).try_as<Controls::TextBlock>();
     auto date=IloClockText(tray,L"DateInnerTextBlock",24).try_as<Controls::TextBlock>();
     if(!time||!date) {Status(L"Both native text blocks not found");Restore();if(timer)timer.Stop();return;}
@@ -13706,6 +14140,11 @@ struct Watch {
     try {
       bool same=top.native==time&&bottom.native==date;
       if(same&&config==c&&(Attached()||(pending&&OverlaysPresent()))) {
+        if(!pending){
+          SYSTEMTIME local{};GetLocalTime(&local);
+          if(!fastLines&&(MinuteKey(local)!=lastMinute||(weatherLines&&Weather::Revision()!=lastWeatherRevision))){RenderLines();ScheduleNext();}
+          else RefreshColors();
+        }
         if(timer&&!timer.IsEnabled())timer.Start();return;
       }
       if(timer)timer.Stop();
@@ -13725,6 +14164,7 @@ struct Watch {
       if(lastLayout!=layout) {lastLayout=layout;Wh_Log(L"[ILoClock] Native parents: %ls",layout.c_str());}
       stage=L"format and style both custom lines";
       config=c;
+      fastLines=FastLines(c);weatherLines=UsesWeatherLines(c);
       if(UsesGpuLines(c))try{gpuActive=GpuStats::Acquire();}catch(...){Wh_Log(L"[ILoClock] GPU counters could not start");}
       zone=Uses(c,L"%time_tz1%")||Uses(c,L"%date_tz1%")||Uses(c,L"%weekday_tz1%")?FindZone(c.timeZone):std::nullopt;
       top.Style(c,true);bottom.Style(c,false);RenderLines();
@@ -13738,8 +14178,8 @@ struct Watch {
       tooltip.Install(time,date,common,tray,c,zone);
       Wh_Log(L"[ILoClock] Overlay ready: %ls; formatted lengths top=%u bottom=%u",combined?L"combined":L"separate",
           unsigned(top.custom.Text().size()),unsigned(bottom.custom.Text().size()));
-      pending=true;Status(L"Waiting for both custom lines to measure");
-      if(timer&&!timer.IsEnabled())timer.Start();
+      pending=true;pendingStarted=GetTickCount64();Status(L"Waiting for both custom lines to measure");
+      if(timer){timer.Interval(std::chrono::milliseconds(100));if(!timer.IsEnabled())timer.Start();}
     } catch (...) {
       Wh_Log(L"[ILoClock] Apply failed at %ls: %08X",stage,winrt::to_hresult());
       Restore();if(timer)timer.Stop();
@@ -13755,8 +14195,7 @@ static void Sync(FrameworkElement const& tray) {
   if(syncing)return;
   struct SyncGuard { bool& flag; ~SyncGuard(){flag=false;} } guard{syncing};
   syncing=true;
-  auto c=ReadConfig();
-  Weather::Set(c);
+  auto current=CurrentConfig();auto const& c=*current;
   auto dispatcher=tray.Dispatcher();
   if(!dispatcher||!dispatcher.HasThreadAccess())return;
   std::lock_guard lock(watchesMutex);
@@ -13894,22 +14333,122 @@ static void IloCollectTrayIcons(FrameworkElement const& group, int depth,
   });
 }
 
+static void IloCollectTrayZoomItems(FrameworkElement const& root,
+    std::vector<std::pair<FrameworkElement,FrameworkElement>>& items) {
+  for(auto name:{L"NotificationAreaIcons",L"ControlCenterButton",L"NotifyIconStack"})
+    IloCollectTrayIcons(FindChildByName(root,name),12,items);
+  for(auto groupName:{L"NotificationCenterButton",L"SecondaryClockStack"}){
+    auto notification=FindChildByName(root,groupName);if(!notification)continue;
+    auto clock=IloClockGlyph(notification),owner=clock;
+    while(owner&&owner!=notification&&owner.Name()!=L"SystemTrayIcon")
+      owner=Media::VisualTreeHelper::GetParent(owner).try_as<FrameworkElement>();
+    IloCollectTrayIcons(notification,12,items);
+    if(clock&&owner){
+      std::erase_if(items,[&](auto const& pair){return pair.first==owner;});
+      if(!g_settings.zoomExcludeClock)items.emplace_back(owner,clock);
+    }
+  }
+}
+
+struct IloTrayZoomMask {
+  winrt::weak_ref<FrameworkElement> element;
+  winrt::Windows::Foundation::IInspectable original{nullptr};
+  Data::BindingBase binding{nullptr};
+  bool Apply(FrameworkElement const& e){
+    auto prop=UIElement::OpacityProperty();original=e.ReadLocalValue(prop);
+    if(auto expression=e.GetBindingExpression(prop)){binding=expression.ParentBinding();if(!binding)return false;}
+    else if(original!=DependencyProperty::UnsetValue()&&!original.try_as<winrt::Windows::Foundation::IReference<double>>())return false;
+    element=winrt::make_weak(e);e.Opacity(0);return true;
+  }
+  void Restore(){try{if(auto e=element.get()){
+    auto prop=UIElement::OpacityProperty();auto local=e.ReadLocalValue(prop).try_as<winrt::Windows::Foundation::IReference<double>>();
+    if(local&&local.Value()==0&&!e.GetBindingExpression(prop)){
+      if(binding)e.SetBinding(prop,binding);else if(original==DependencyProperty::UnsetValue())e.ClearValue(prop);else e.SetValue(prop,original);
+    }
+  }}catch(...){}element={};}
+};
+
+static void IloFindTrayZoomBackgrounds(FrameworkElement const& root,int depth,bool group,
+    std::vector<FrameworkElement>& result){
+  if(!root||depth<=0)return;
+  auto name=root.Name();
+  if(group&&(name==L"SystemTrayIcon"||name==L"NotifyItemIcon"||name==L"ChevronIcon"))return;
+  if((name==L"BackgroundBorder"||name==L"BackgroundElement"||name==L"BackgroundRectangle")&&
+      (root.try_as<Controls::Border>()||root.try_as<Shapes::Rectangle>())){
+    if(std::find(result.begin(),result.end(),root)==result.end())result.push_back(root);
+    return;
+  }
+  EnumChildElements(root,[&](FrameworkElement child){IloFindTrayZoomBackgrounds(child,depth-1,group,result);return false;});
+}
+
 struct IloHoverZoom {
   using Clock = std::chrono::steady_clock;
   FrameworkElement panel{nullptr};
   DispatcherTimer timer{nullptr};
-  Input::PointerEventHandler move{nullptr}, leave{nullptr};
+  Input::PointerEventHandler move{nullptr}, leave{nullptr},sharedMove{nullptr};
   winrt::event_token tick{}, moved{}, entered{}, exited{}, canceled{}, unloaded{};
+  winrt::event_token sharedMoved{},sharedEntered{},sharedExited{},sharedCanceled{};
   std::vector<IloZoomIcon> icons;
+  std::vector<IloTrayZoomMask> trayMasks;
   int percent=180, neighbors=1, duration=120;
+  int trayPercent=180, waveGap=5;
   bool spread=true, running=false;
   bool trayMode=false;
+  bool combinedMode=false;
   bool macStyle=false;
   bool animateBackground=true;
   std::optional<winrt::Windows::Foundation::Point> lastPoint;
   HWND trayWindow{};
   HWND trayIsland{};
   bool watchingTray=false;
+  ULONGLONG lastDiscovery{};
+  uint64_t discoveryGeneration{};
+  bool discoveryStart{}, discoveryHideBackground{};
+  bool discoveryExcludeChevron{}, discoveryExcludeClock{};
+  std::vector<winrt::weak_ref<FrameworkElement>> discoveredChildren;
+  winrt::weak_ref<FrameworkElement> combinedTray;
+  winrt::weak_ref<FrameworkElement> waveSource;
+  winrt::weak_ref<FrameworkElement> waveGroup;
+  double waveFraction{};
+
+  void RestoreTrayMasks(){for(auto& mask:trayMasks)mask.Restore();trayMasks.clear();}
+  void SyncTrayMasks(FrameworkElement const& root){
+    if(!root||!g_settings.zoomHideBackground){RestoreTrayMasks();return;}
+    std::vector<FrameworkElement> backgrounds;
+    for(auto const& item:icons)if(item.trayIcon)IloFindTrayZoomBackgrounds(item.button,10,false,backgrounds);
+    // Quick settings can share one background between several native icons.
+    for(auto name:{L"ControlCenterButton",L"NotificationCenterButton",L"SecondaryClockStack"}){
+      auto group=FindChildByName(root,name);if(!group)continue;
+      if(g_settings.zoomExcludeClock&&IloClockGlyph(group))continue;
+      bool participates=false;
+      for(auto const& item:icons)if(item.trayIcon){
+        for(auto node=item.button;node&&node!=root;node=Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>())if(node==group){participates=true;break;}
+        if(participates)break;
+      }
+      if(participates)IloFindTrayZoomBackgrounds(group,9,true,backgrounds);
+    }
+    // A decorative border must never contain the glyph itself.
+    std::erase_if(backgrounds,[&](auto const& bg){
+      for(auto const& item:icons)if(item.trayIcon){
+        for(auto node=item.icon;node&&node!=root;node=Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>())if(node==bg)return true;
+      }
+      return false;
+    });
+    std::erase_if(trayMasks,[&](auto& mask){if(std::find(backgrounds.begin(),backgrounds.end(),mask.element.get())!=backgrounds.end())return false;mask.Restore();return true;});
+    for(auto const& bg:backgrounds)if(std::none_of(trayMasks.begin(),trayMasks.end(),[&](auto const& mask){return mask.element.get()==bg;}))try{
+      IloTrayZoomMask mask;if(mask.Apply(bg))trayMasks.push_back(std::move(mask));
+    }catch(...){}
+  }
+
+  bool IconsStillAttached(FrameworkElement const& root) const {
+    auto xr=root.XamlRoot();
+    if(!xr||icons.empty())return false;
+    for(auto const& item:icons) {
+      if(!item.button||!item.icon||item.button.XamlRoot()!=xr||item.icon.XamlRoot()!=xr)
+        return false;
+    }
+    return true;
+  }
 
   // Some notification icon templates do not deliver PointerExited when the
   // pointer leaves the XAML island. Verify the physical pointer while an icon
@@ -13922,6 +14461,10 @@ struct IloHoverZoom {
       return false;
     if (GetAncestor(WindowFromPoint(cursor), GA_ROOT) != trayWindow)
       return false;
+    // For a shared wave, the underlying XAML group positions can differ
+    // from their compositor positions. Routed pointer events track the
+    // actual hit element; don't reject it using native unshifted bounds.
+    if(macStyle)return bool(waveSource.get());
 
     // The island's client origin and XAML's rasterization scale describe the
     // same coordinate space, including when a secondary bar moves.
@@ -13953,11 +14496,13 @@ struct IloHoverZoom {
   void Frame() {
     bool busy=false;
     bool hover=false;
+    auto source=combinedMode?waveSource.get():FrameworkElement{nullptr};
+    const bool watchPointer=trayMode&&(!combinedMode||std::any_of(icons.begin(),icons.end(),[&](auto const& item){return item.trayIcon&&item.button==source;}));
     auto now=Clock::now();
     for (auto& item : icons) {
       if (!item.transform) continue;
       if (item.icon.RenderTransform()!=item.transform) { item.Restore(); continue; }
-      hover |= trayMode && item.target.scale > 1;
+      hover |= watchPointer && item.target.scale > 1;
       if (item.current.scale == item.target.scale && item.current.shift == item.target.shift &&
           item.current.shiftY == item.target.shiftY) {
         if (item.current.scale == 1 && item.current.shift == 0 && item.current.shiftY == 0) item.Restore();
@@ -13987,8 +14532,10 @@ struct IloHoverZoom {
   void Point(std::optional<winrt::Windows::Foundation::Point> pos) {
     // All positions here are DIPs in the repeater, including at fractional DPI.
     lastPoint = pos;
+    if(!pos){waveSource={};waveGroup={};}
     if (running) Frame();
-    if (trayMode || !macStyle) {
+    if(macStyle&&trayMode){PointWave(pos);return;}
+    if (!macStyle) {
       PointCentered(pos);
       return;
     }
@@ -14036,6 +14583,121 @@ struct IloHoverZoom {
       }
     }
     Frame();
+  }
+
+  // The tray has nested native templates, unlike the flat task repeater.
+  // Measure their button slots in one coordinate system, then walk the
+  // physical icon order (not the template's enumeration order).
+  void PointWave(std::optional<winrt::Windows::Foundation::Point> pos){
+    using Rect=winrt::Windows::Foundation::Rect;
+    struct Slot{size_t index;Rect bounds;};
+    std::vector<Slot> slots;
+    if(pos){
+      slots.reserve(icons.size());
+      for(size_t i=0;i<icons.size();++i)try{
+        auto const& b=icons[i].button;
+        if(b.Visibility()!=Visibility::Visible||b.ActualWidth()<=0||b.ActualHeight()<=0)continue;
+        auto coordinateRoot=panel;
+        if(combinedMode){
+          coordinateRoot=icons[i].trayIcon?combinedTray.get():Media::VisualTreeHelper::GetParent(b).try_as<FrameworkElement>();
+          if(!coordinateRoot)continue;
+        }
+        auto rect=b.TransformToVisual(coordinateRoot).TransformBounds({0,0,float(b.ActualWidth()),float(b.ActualHeight())});
+        if(std::isfinite(rect.X)&&std::isfinite(rect.Y)&&rect.Width>0&&rect.Height>0)slots.push_back({i,rect});
+      }catch(...){}
+      std::sort(slots.begin(),slots.end(),[&](auto const& a,auto const& b){
+        if(combinedMode&&icons[a.index].trayIcon!=icons[b.index].trayIcon)return !icons[a.index].trayIcon;
+        return a.bounds.X+a.bounds.Width*0.5f<b.bounds.X+b.bounds.Width*0.5f;
+      });
+    }
+    std::optional<double> phase;
+    if(pos){
+      auto source=waveSource.get();
+      for(size_t j=0;j<slots.size();++j)if(icons[slots[j].index].button==source){phase=double(j)+waveFraction-0.5;break;}
+    }
+    std::vector<IloZoomPose> poses(icons.size());
+    if(phase)for(size_t j=0;j<slots.size();++j){
+      auto index=slots[j].index;auto& item=icons[index];auto& next=poses[index];
+      double distance=double(j)-*phase,weight=IloZoomWeight(distance,neighbors);
+      if(weight<=0)continue;
+      double w=item.button.ActualWidth(),h=item.button.ActualHeight(),iw=item.icon.ActualWidth(),ih=item.icon.ActualHeight();
+      if(w<=0||h<=0||iw<=0||ih<=0)continue;
+      auto node=item.icon;double cx=iw/2,cy=ih/2;
+      while(node&&node!=item.button){auto off=node.ActualOffset();cx+=off.x;cy+=off.y;node=Media::VisualTreeHelper::GetParent(node).try_as<FrameworkElement>();}
+      if(!node)continue;
+      double inkW=iw,inkH=ih;
+      if(item.trayIcon&&winrt::get_class_name(item.icon)==L"SystemTray.TextIconContent"){
+        if(auto grid=FindChildByName(item.icon,L"ContainerGrid"))if(auto layer=FindChildByName(grid,L"Base")){
+          auto text=FindChildByName(layer,L"InnerTextBlock").try_as<Controls::TextBlock>();
+          if(text&&text.FontSize()>0){inkW=std::min(iw,text.FontSize());inkH=std::min(ih,text.FontSize());}
+        }
+      }
+      double room=std::max(0.,std::min(cx,w-cx)-inkW/2);
+      double maximum=std::max(0.,(item.trayIcon?trayPercent:percent)/100.-1.);
+      if(item.trayIcon){
+        // Use the same centered fit and pivot as the working classic tray
+        // zoom, then apply the macOS wave weight to its available scale.
+        double maxScale=std::max(1.,std::min({1.+maximum,2*std::min(cx,w-cx)/inkW,2*std::min(cy,h-cy)/inkH}));
+        double extra=(maxScale-1.)*weight;
+        if(extra<=0||!item.Prepare())continue;
+        auto origin=item.icon.RenderTransformOrigin();
+        item.transform.CenterX(iw*(0.5-origin.X));item.transform.CenterY(ih*(0.5-origin.Y));
+        next.scale=1+extra;
+        if(spread){double free=std::max(0.,room-inkW*extra/2);next.shift=std::clamp(distance*weight*inkW*maximum,-free,free);}
+        continue;
+      }
+      double extra=std::min({maximum*weight,2*room/inkW,std::max(0.,h-inkH)/inkH});
+      if(extra<=0||!item.Prepare())continue;
+      auto origin=item.icon.RenderTransformOrigin();
+      item.transform.CenterX(iw*(0.5-origin.X));
+      item.transform.CenterY(ih*(0.5-origin.Y)+inkH/2);
+      if(!item.trayIcon&&animateBackground)item.SetPlatePivot(cx,cy+inkH/2);
+      next.scale=1+extra;
+      next.shiftY=std::max(0.,extra*inkH-(cy-inkH/2));
+      next.shiftY=std::min(next.shiftY,std::max(0.,h-(cy+inkH/2)));
+      if(spread){double free=std::max(0.,room-inkW*extra/2);next.shift=std::clamp(distance*weight*inkW*maximum,-free,free);}
+    }
+    auto now=Clock::now();
+    for(size_t i=0;i<icons.size();++i){auto& item=icons[i];auto const& next=poses[i];if(item.target.scale!=next.scale||item.target.shift!=next.shift||item.target.shiftY!=next.shiftY){item.from=item.current;item.target=next;item.since=now;}}
+    Frame();
+  }
+
+  void SharedWaveSource(Input::PointerRoutedEventArgs const& e,FrameworkElement const& group,bool fromTray,winrt::Windows::Foundation::Point pos){
+    waveSource={};
+    waveGroup=winrt::make_weak(group);
+    auto localPoint=[&](IloZoomIcon const& item){
+      if(fromTray)return group.TransformToVisual(item.button).TransformPoint(pos);
+      auto off=item.button.ActualOffset();return winrt::Windows::Foundation::Point{pos.X-off.x,pos.Y-off.y};
+    };
+    // Match exactly the independent classic tray hit test, before falling
+    // back to the routed source. Some native icon groups report a source
+    // outside the individual icon template.
+    if(fromTray)for(auto const& item:icons){
+      if(!item.trayIcon||item.button.Visibility()!=Visibility::Visible)continue;
+      try{auto p=localPoint(item);double w=item.button.ActualWidth(),h=item.button.ActualHeight();
+        if(w>0&&h>0&&p.X>=0&&p.X<w&&p.Y>=0&&p.Y<h){waveSource=winrt::make_weak(item.button);waveFraction=double(p.X)/w;return;}
+      }catch(...){}
+    }
+    // The event's actual source is authoritative, even when ILô has moved
+    // the taskbar groups through Composition visuals rather than XAML layout.
+    for(auto node=e.OriginalSource().try_as<DependencyObject>();node;node=Media::VisualTreeHelper::GetParent(node)){
+      auto found=std::find_if(icons.begin(),icons.end(),[&](auto const& item){return item.trayIcon==fromTray&&item.button==node;});
+      if(found!=icons.end()){
+        auto p=e.GetCurrentPoint(found->button).Position();double width=found->button.ActualWidth();
+        if(width>0){waveSource=winrt::make_weak(found->button);waveFraction=std::clamp(double(p.X)/width,0.,1.);}
+        return;
+      }
+      if(node==group)break;
+    }
+    // Keep the wave flowing across the short gap between the two groups.
+    double nearest=std::clamp(double(waveGap)*0.5+2.,2.,12.);
+    for(auto const& item:icons){
+      if(item.trayIcon!=fromTray||item.button.Visibility()!=Visibility::Visible)continue;
+      winrt::Windows::Foundation::Point p{};try{p=localPoint(item);}catch(...){continue;}double width=item.button.ActualWidth();
+      if(width<=0||p.Y<0||p.Y>=item.button.ActualHeight())continue;
+      double distance=std::max({0.,-double(p.X),double(p.X)-width});
+      if(distance<=nearest){nearest=distance;waveSource=winrt::make_weak(item.button);waveFraction=std::clamp(double(p.X)/width,0.,1.);}
+    }
   }
   void PointCentered(std::optional<winrt::Windows::Foundation::Point> pos) {
     const auto now = Clock::now();
@@ -14095,29 +14757,25 @@ struct IloHoverZoom {
     if (trayWindow != window) {
       trayWindow = window;
       trayIsland = nullptr;
+      lastDiscovery=0;
     }
     trayMode = true;
-    percent = g_settings.zoomTrayPercent;
+    combinedMode=false;
+    if(macStyle!=g_settings.zoomMacStyle){for(auto& item:icons)item.Restore();macStyle=g_settings.zoomMacStyle;}
+    percent = trayPercent = g_settings.zoomTrayPercent;
+    neighbors=g_settings.zoomNeighbors;spread=g_settings.zoomSpread;waveGap=g_settings.userDefinedTrayTaskGap;
     duration = g_settings.zoomDuration;
+    const auto now=GetTickCount64();
+    const auto generation=g_taskbarChildStyleGeneration.load(std::memory_order_acquire);
+    if(lastDiscovery&&now-lastDiscovery<150&&discoveryGeneration==generation&&
+       discoveryExcludeChevron==g_settings.zoomExcludeChevron&&
+       discoveryHideBackground==g_settings.zoomHideBackground&&
+       discoveryExcludeClock==g_settings.zoomExcludeClock&&IconsStillAttached(root)) {
+      if(lastPoint)Point(lastPoint);
+      return;
+    }
     std::vector<std::pair<FrameworkElement, FrameworkElement>> items;
-    for (auto name : {L"NotificationAreaIcons", L"ControlCenterButton", L"NotifyIconStack"}) {
-      IloCollectTrayIcons(FindChildByName(root, name), 12, items);
-    }
-    for (auto groupName : {L"NotificationCenterButton", L"SecondaryClockStack"}) {
-      auto notification = FindChildByName(root, groupName);
-      if (!notification) continue;
-      // Bell and calendar can share one native flyout. Register each icon view
-      // separately so hovering the bell does not magnify the clock.
-      auto clock = IloClockGlyph(notification);
-      auto owner = clock;
-      while (owner && owner != notification && owner.Name() != L"SystemTrayIcon")
-        owner = Media::VisualTreeHelper::GetParent(owner).try_as<FrameworkElement>();
-      IloCollectTrayIcons(notification, 12, items);
-      if (clock && owner) {
-        std::erase_if(items, [&](auto const& pair) { return pair.first == owner; });
-        if (!g_settings.zoomExcludeClock) items.emplace_back(owner, clock);
-      }
-    }
+    IloCollectTrayZoomItems(root,items);
     std::vector<IloZoomIcon> next;
     next.reserve(items.size());
     for (auto const& [owner, glyph] : items) {
@@ -14126,9 +14784,16 @@ struct IloHoverZoom {
       });
       if (old != icons.end()) next.push_back(std::move(*old));
       else next.emplace_back(owner, glyph, nullptr);
+      next.back().trayIcon=true;
     }
     for (auto& old : icons) if (old.icon) old.Release();
     icons.swap(next);
+    SyncTrayMasks(root);
+    lastDiscovery=now;
+    discoveryGeneration=generation;
+    discoveryExcludeChevron=g_settings.zoomExcludeChevron;
+    discoveryExcludeClock=g_settings.zoomExcludeClock;
+    discoveryHideBackground=g_settings.zoomHideBackground;
     if (lastPoint) Point(lastPoint);
   }
 
@@ -14147,12 +14812,25 @@ struct IloHoverZoom {
     });
     move=Input::PointerEventHandler([this](auto const&,Input::PointerRoutedEventArgs const& e) noexcept {
       try {
-        if(e.Pointer().PointerDeviceType()==winrt::Windows::Devices::Input::PointerDeviceType::Mouse)
-          Point(e.GetCurrentPoint(panel).Position());
+        if(e.Pointer().PointerDeviceType()==winrt::Windows::Devices::Input::PointerDeviceType::Mouse){
+          if(combinedMode)if(auto tray=combinedTray.get()){
+            // On nested tray builds the same event can bubble to the task
+            // repeater. Its tray handler has already set the wave source.
+            for(auto node=e.OriginalSource().try_as<DependencyObject>();node;node=Media::VisualTreeHelper::GetParent(node)){
+              if(node==tray)return;if(node==panel)break;
+            }
+          }
+          auto pos=e.GetCurrentPoint(panel).Position();
+          if(macStyle&&trayMode)SharedWaveSource(e,panel,!combinedMode,pos);
+          Point(pos);
+        }
       } catch (...) {}
     });
-    leave=Input::PointerEventHandler([this](auto const&,auto const&) noexcept {
-      try { Point(std::nullopt); } catch (...) {}
+    leave=Input::PointerEventHandler([this](winrt::Windows::Foundation::IInspectable const& sender,auto const&) noexcept {
+      try {
+        if(combinedMode&&waveGroup.get()&&waveGroup.get()!=sender.try_as<FrameworkElement>())return;
+        Point(std::nullopt);
+      } catch (...) {}
     });
     moved=panel.PointerMoved(move);
     entered=panel.PointerEntered(move);
@@ -14162,11 +14840,33 @@ struct IloHoverZoom {
       try { Clear(); } catch (...) {}
     });
   }
+  void BindSharedTray(FrameworkElement const& tray){
+    // Keep the native group's pointer coordinate space. The common XAML
+    // root does not receive every handled pointer event from tray controls.
+    combinedTray=winrt::make_weak(tray);
+    sharedMove=Input::PointerEventHandler([this](auto const&,Input::PointerRoutedEventArgs const& e) noexcept {
+      try{if(e.Pointer().PointerDeviceType()!=winrt::Windows::Devices::Input::PointerDeviceType::Mouse)return;
+        if(auto group=combinedTray.get()){
+          auto pos=e.GetCurrentPoint(group).Position();SharedWaveSource(e,group,true,pos);Point(pos);
+        }
+      }catch(...){}
+    });
+    sharedMoved=tray.PointerMoved(sharedMove);sharedEntered=tray.PointerEntered(sharedMove);
+    sharedExited=tray.PointerExited(leave);sharedCanceled=tray.PointerCanceled(leave);
+  }
   void Clear() {
+    RestoreTrayMasks();
+    if(auto tray=combinedTray.get()){
+      if(sharedMoved.value)tray.PointerMoved(sharedMoved);
+      if(sharedEntered.value)tray.PointerEntered(sharedEntered);
+      if(sharedExited.value)tray.PointerExited(sharedExited);
+      if(sharedCanceled.value)tray.PointerCanceled(sharedCanceled);
+    }
+    sharedMoved=sharedEntered=sharedExited=sharedCanceled={};sharedMove=nullptr;
     if(panel && unloaded.value) panel.Unloaded(unloaded);
     if(timer) {timer.Stop();timer.Tick(tick);timer=nullptr;}
     if(panel && move) {
-      if (moved.value) panel.PointerMoved(moved);
+      if(moved.value)panel.PointerMoved(moved);
       if (entered.value) panel.PointerEntered(entered);
     }
     if(panel && leave) {
@@ -14178,9 +14878,19 @@ struct IloHoverZoom {
     watchingTray=false;trayWindow=nullptr;trayIsland=nullptr;
     moved=entered=exited=canceled=unloaded={};
     lastPoint.reset();
+    lastDiscovery=0;
+    discoveredChildren.clear();
+    combinedTray={};waveSource={};waveGroup={};combinedMode=false;trayMode=false;
   }
-  void Sync(FrameworkElement const& root, ChildrenLayoutMeasurementTai const& layout) {
-    if(panel!=root){Clear();Bind(root);}
+  void Sync(FrameworkElement const& root, ChildrenLayoutMeasurementTai const& layout,
+            FrameworkElement const& tray=nullptr,HWND window=nullptr) {
+    bool combined=bool(tray);
+    if(panel!=root||combinedMode!=combined||combinedTray.get()!=tray){Clear();combinedMode=combined;Bind(root);if(combined)BindSharedTray(tray);}
+    if(combinedMode!=combined||combinedTray.get()!=tray||trayWindow!=window){lastDiscovery=0;trayIsland=nullptr;}
+    combinedMode=trayMode=combined;
+    combinedTray=tray?winrt::make_weak(tray):winrt::weak_ref<FrameworkElement>{};
+    trayWindow=window;
+    trayPercent=g_settings.zoomTrayPercent;waveGap=g_settings.userDefinedTrayTaskGap;
     const bool showAnimatedBackground = !g_settings.zoomHideBackground && !g_settings.zoomDisableBackgroundZoom;
     if (macStyle != g_settings.zoomMacStyle || animateBackground != showAnimatedBackground) {
       animateBackground = showAnimatedBackground;
@@ -14189,6 +14899,19 @@ struct IloHoverZoom {
     }
     percent=g_settings.zoomPercent;neighbors=g_settings.zoomNeighbors;
     duration=g_settings.zoomDuration;spread=g_settings.zoomSpread;
+    const auto now=GetTickCount64();
+    const auto generation=g_taskbarChildStyleGeneration.load(std::memory_order_acquire);
+    // The freshly captured child sequence detects app launches, closes, and
+    // reordering immediately. Only unchanged template discovery is reused.
+    if(lastDiscovery&&now-lastDiscovery<(combined?150ull:250ull)&&discoveryGeneration==generation&&
+       discoveryStart==g_settings.zoomStart&&discoveryHideBackground==g_settings.zoomHideBackground&&
+       (!combined||(discoveryExcludeChevron==g_settings.zoomExcludeChevron&&discoveryExcludeClock==g_settings.zoomExcludeClock))&&
+       discoveredChildren.size()==layout.children.size()&&IconsStillAttached(root)&&
+       std::equal(discoveredChildren.begin(),discoveredChildren.end(),layout.children.begin(),
+           [](auto const& cached,auto const& entry){return cached.get()==entry.element;})) {
+      if(lastPoint)Point(lastPoint);
+      return;
+    }
     std::vector<IloZoomIcon> next;
     next.reserve(layout.children.size());
     for(auto const& entry:layout.children) {
@@ -14213,9 +14936,27 @@ struct IloHoverZoom {
       if(old!=icons.end()) next.push_back(std::move(*old));
       else next.emplace_back(b, icon, background);
     }
+    if(combined){
+      std::vector<std::pair<FrameworkElement,FrameworkElement>> items;IloCollectTrayZoomItems(tray,items);
+      for(auto const& [owner,glyph]:items){
+        auto old=std::find_if(icons.begin(),icons.end(),[&](auto const& i){return i.button==owner&&i.icon==glyph;});
+        if(old!=icons.end())next.push_back(std::move(*old));else next.emplace_back(owner,glyph,nullptr);
+        next.back().trayIcon=true;
+      }
+    }
     for(auto& item:icons) if(item.icon) item.Release();
     icons.swap(next);
     for (auto& item : icons) item.HideBackground(g_settings.zoomHideBackground);
+    if(combined)SyncTrayMasks(tray);else RestoreTrayMasks();
+    discoveredChildren.clear();
+    discoveredChildren.reserve(layout.children.size());
+    for(auto const& entry:layout.children)discoveredChildren.push_back(winrt::make_weak(entry.element));
+    lastDiscovery=now;
+    discoveryGeneration=generation;
+    discoveryStart=g_settings.zoomStart;
+    discoveryHideBackground=g_settings.zoomHideBackground;
+    discoveryExcludeChevron=g_settings.zoomExcludeChevron;
+    discoveryExcludeClock=g_settings.zoomExcludeClock;
     if (lastPoint) Point(lastPoint);
   }
 };
@@ -14232,8 +14973,8 @@ struct IloZoomBinding {
 static std::vector<IloZoomBinding> iloZoomBindings;
 static void IloSyncZoom(std::wstring const& monitor,FrameworkElement const& panel,
                         ChildrenLayoutMeasurementTai const& children, bool tray = false,
-                        HWND trayWindow = nullptr) {
-  const bool enabled = g_settings.zoomEnabled && (!tray || !g_settings.zoomExcludeTray) && !g_unloading;
+                        HWND trayWindow = nullptr,FrameworkElement const& combinedTray=nullptr,bool allow=true) {
+  const bool enabled = allow && g_settings.zoomEnabled && (!tray || !g_settings.zoomExcludeTray) && !g_unloading;
   std::shared_ptr<IloHoverZoom> zoom;
   {
     std::lock_guard lock(iloZoomMutex);
@@ -14253,7 +14994,7 @@ static void IloSyncZoom(std::wstring const& monitor,FrameworkElement const& pane
   }
   if (!enabled || g_unloading) zoom->Clear();
   else if (tray) zoom->SyncTray(panel, trayWindow);
-  else zoom->Sync(panel,children);
+  else zoom->Sync(panel,children,combinedTray,trayWindow);
 }
 static void IloShutdownZoom() {
   std::vector<IloZoomBinding> bindings;
@@ -14884,46 +15625,6 @@ void SetTaskbarOverflowButtonSuppressed(FrameworkElement const& overflowButton,
   } catch (...) {
   }
 }
-// ---- Temporary taskbar geometry diagnostics -------------------------------
-// Set to false after collecting logs. The throttle keeps ApplyStyle from
-// flooding Windhawk logs during insertion/removal animations.
-constexpr bool kDebugTaskbarGeometry = false;
-constexpr int64_t kDebugTaskbarGeometryMinIntervalMs = 250;
-std::atomic<int64_t> g_lastTaskbarGeometryDebugLogMs = 0;
-bool ShouldLogTaskbarGeometry(bool interesting) {
-  if constexpr (!kDebugTaskbarGeometry) {
-    return false;
-  }
-  if (!interesting) {
-    return false;
-  }
-  const int64_t nowMs = DelayedApplyNowMs();
-  int64_t lastMs = g_lastTaskbarGeometryDebugLogMs.load();
-  while (nowMs - lastMs >= kDebugTaskbarGeometryMinIntervalMs) {
-    if (g_lastTaskbarGeometryDebugLogMs.compare_exchange_weak(lastMs, nowMs)) {
-      return true;
-    }
-  }
-  return false;
-}
-bool TryGetDebugBoundsRelativeTo(FrameworkElement const& element,
-                                 winrt::Windows::UI::Xaml::UIElement const& relativeTo,
-                                 winrt::Windows::Foundation::Rect& rect) {
-  if (!element) {
-    return false;
-  }
-  try {
-    auto transform = element.TransformToVisual(relativeTo);
-    rect = transform.TransformBounds(
-        winrt::Windows::Foundation::Rect(0, 0, element.ActualWidth(), element.ActualHeight()));
-    return std::isfinite(rect.X) &&
-           std::isfinite(rect.Y) &&
-           std::isfinite(rect.Width) &&
-           std::isfinite(rect.Height);
-  } catch (...) {
-    return false;
-  }
-}
 static bool BuildMeasuredMinimizeAnimationButtonsTai(
     ChildrenLayoutMeasurementTai const& taskbarChildrenMeasurement,
     const RECT& monitorRect,
@@ -15032,226 +15733,14 @@ static void UpdateMinimizeAnimationCorrectionForMonitorTai(
       haveMonitorRect ? &taskbarClampRect : nullptr,
       std::move(measuredButtons));
 }
-void LogDebugRect(PCWSTR label, bool ok, winrt::Windows::Foundation::Rect const& rect) {
-  if (!ok) {
-    Wh_Log(L"    %-18s unavailable", label);
-    return;
-  }
-  Wh_Log(L"    %-18s X=%8.2f Y=%8.2f W=%8.2f H=%8.2f R=%8.2f B=%8.2f",
-         label,
-         rect.X,
-         rect.Y,
-         rect.Width,
-         rect.Height,
-         rect.X + rect.Width,
-         rect.Y + rect.Height);
-}
-void LogElementGeometry(PCWSTR tag,
-                        FrameworkElement const& element,
-                        FrameworkElement const& rootGridTaskBar,
-                        FrameworkElement const& taskbarFrameRepeater,
-                        FrameworkElement const& taskFrame) {
-  if (!element) {
-    Wh_Log(L"[TBGEOM] %s: <null>", tag);
-    return;
-  }
-  std::wstring className;
-  std::wstring name;
-  std::wstring automationId;
-  try { className = std::wstring(winrt::get_class_name(element).c_str()); } catch (...) { className = L"<class?>"; }
-  try { name = std::wstring(element.Name().c_str()); } catch (...) { name = L""; }
-  try { automationId = std::wstring(Automation::AutomationProperties::GetAutomationId(element).c_str()); } catch (...) { automationId = L""; }
-  auto parent = Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-  std::wstring parentClass;
-  std::wstring parentName;
-  if (parent) {
-    try { parentClass = std::wstring(winrt::get_class_name(parent).c_str()); } catch (...) { parentClass = L"<class?>"; }
-    try { parentName = std::wstring(parent.Name().c_str()); } catch (...) { parentName = L""; }
-  } else {
-    parentClass = L"<null>";
-  }
-  Thickness margin{};
-  winrt::Windows::Foundation::Numerics::float3 actualOffset{};
-  try { margin = element.Margin(); } catch (...) {}
-  try { actualOffset = element.ActualOffset(); } catch (...) {}
-  winrt::Windows::Foundation::Numerics::float3 visualOffset{};
-  winrt::Windows::Foundation::Numerics::float2 visualSize{};
-  if (auto visual = winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::GetElementVisual(element)) {
-    visualOffset = visual.Offset();
-    visualSize = visual.Size();
-  }
-  Wh_Log(L"[TBGEOM] %s class=%s name=%s aid=%s parent=%s/%s",
-         tag,
-         className.c_str(),
-         name.c_str(),
-         automationId.c_str(),
-         parentClass.c_str(),
-         parentName.c_str());
-  // VA/HA use the Windows.UI.Xaml enum ordering: Top/Left=0, Center=1,
-  // Bottom/Right=2, Stretch=3.
-  int verticalAlignmentValue = -1;
-  int horizontalAlignmentValue = -1;
-  try { verticalAlignmentValue = static_cast<int>(element.VerticalAlignment()); } catch (...) {}
-  try { horizontalAlignmentValue = static_cast<int>(element.HorizontalAlignment()); } catch (...) {}
-  Wh_Log(L"    size Actual=%8.2fx%-8.2f W=%8.2f H=%8.2f MinW=%8.2f MaxW=%8.2f MinH=%8.2f MaxH=%8.2f VA=%d HA=%d Margin=(%.2f,%.2f,%.2f,%.2f)",
-         element.ActualWidth(),
-         element.ActualHeight(),
-         element.Width(),
-         element.Height(),
-         element.MinWidth(),
-         element.MaxWidth(),
-         element.MinHeight(),
-         element.MaxHeight(),
-         verticalAlignmentValue,
-         horizontalAlignmentValue,
-         margin.Left,
-         margin.Top,
-         margin.Right,
-         margin.Bottom);
-  Wh_Log(L"    ActualOffset=(%.2f,%.2f,%.2f) VisualOffset=(%.2f,%.2f,%.2f) VisualSize=(%.2f,%.2f)",
-         actualOffset.x,
-         actualOffset.y,
-         actualOffset.z,
-         visualOffset.x,
-         visualOffset.y,
-         visualOffset.z,
-         visualSize.x,
-         visualSize.y);
-  winrt::Windows::Foundation::Rect rect{};
-  LogDebugRect(L"to-parent", parent ? TryGetDebugBoundsRelativeTo(element, parent, rect) : false, rect);
-  LogDebugRect(L"to-repeater", taskbarFrameRepeater ? TryGetDebugBoundsRelativeTo(element, taskbarFrameRepeater, rect) : false, rect);
-  LogDebugRect(L"to-rootGrid", rootGridTaskBar ? TryGetDebugBoundsRelativeTo(element, rootGridTaskBar, rect) : false, rect);
-  LogDebugRect(L"to-taskFrame", taskFrame ? TryGetDebugBoundsRelativeTo(element, taskFrame, rect) : false, rect);
-  LogDebugRect(L"to-xamlRoot", TryGetDebugBoundsRelativeTo(element, winrt::Windows::UI::Xaml::UIElement{nullptr}, rect), rect);
-}
-void LogAncestorGeometryChain(PCWSTR tag,
-                              FrameworkElement element,
-                              FrameworkElement const& rootGridTaskBar,
-                              int maxDepth = 8) {
-  Wh_Log(L"[TBGEOM] ancestor-chain for %s", tag);
-  for (int depth = 0; element && depth < maxDepth; ++depth) {
-    std::wstring className;
-    std::wstring name;
-    try { className = std::wstring(winrt::get_class_name(element).c_str()); } catch (...) { className = L"<class?>"; }
-    try { name = std::wstring(element.Name().c_str()); } catch (...) { name = L""; }
-    Thickness margin{};
-    winrt::Windows::Foundation::Numerics::float3 actualOffset{};
-    winrt::Windows::Foundation::Numerics::float3 visualOffset{};
-    try { margin = element.Margin(); } catch (...) {}
-    try { actualOffset = element.ActualOffset(); } catch (...) {}
-    if (auto visual = winrt::Windows::UI::Xaml::Hosting::ElementCompositionPreview::GetElementVisual(element)) {
-      visualOffset = visual.Offset();
-    }
-    winrt::Windows::Foundation::Rect rect{};
-    const bool okRoot = rootGridTaskBar && TryGetDebugBoundsRelativeTo(element, rootGridTaskBar, rect);
-    int verticalAlignmentValue = -1;
-    try { verticalAlignmentValue = static_cast<int>(element.VerticalAlignment()); } catch (...) {}
-    Wh_Log(L"    #%d class=%s name=%s VA=%d Actual=%6.2fx%-6.2f ActualOffset=(%.2f,%.2f,%.2f) VisualOffset=(%.2f,%.2f,%.2f) Margin=(%.2f,%.2f,%.2f,%.2f) rootRect=%s X=%.2f Y=%.2f W=%.2f H=%.2f",
-           depth,
-           className.c_str(),
-           name.c_str(),
-           verticalAlignmentValue,
-           element.ActualWidth(),
-           element.ActualHeight(),
-           actualOffset.x,
-           actualOffset.y,
-           actualOffset.z,
-           visualOffset.x,
-           visualOffset.y,
-           visualOffset.z,
-           margin.Left,
-           margin.Top,
-           margin.Right,
-           margin.Bottom,
-           okRoot ? L"ok" : L"--",
-           okRoot ? rect.X : 0.0,
-           okRoot ? rect.Y : 0.0,
-           okRoot ? rect.Width : 0.0,
-           okRoot ? rect.Height : 0.0);
-    element = Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>();
-  }
-}
-void LogTaskbarGeometryProbe(PCWSTR reason,
-                             std::wstring const& monitorName,
-                             FrameworkElement const& xamlRootContent,
-                             FrameworkElement const& taskFrame,
-                             FrameworkElement const& rootGridTaskBar,
-                             FrameworkElement const& taskbarFrameRepeater,
-                             FrameworkElement const& trayFrame,
-                             FrameworkElement const& systemTrayFrameGrid,
-                             FrameworkElement const& taskbarBackground,
-                             FrameworkElement const& backgroundFillChild,
-                             FrameworkElement const& startButton,
-                             double rootWidth,
-                             double childrenWidthTaskbarDbl,
-                             double taskbarLeftEdge,
-                             double taskbarRightEdge,
-                             double startButtonLeft,
-                             double startButtonTop,
-                             double startButtonWidth,
-                             double startButtonHeight,
-                             double predictedCenteredTaskbarLeft,
-                             bool isOverflowing,
-                             bool taskbarLayoutIsEdgeClamped,
-                             bool useStableStartButtonAnchor,
-                             float targetContentLeft,
-                             float targetContentWidth,
-                             float targetTaskRootOffsetX,
-                             float targetOffsetXTray,
-                             float targetBackgroundLeftScreen,
-                             float targetBackgroundRightScreen,
-                             TaskbarState const& state) {
-  Wh_Log(L"[TBGEOM] ===== %s monitor=%s overflow=%d edgeClamp=%d useStableStart=%d =====",
-         reason,
-         monitorName.c_str(),
-         isOverflowing ? 1 : 0,
-         taskbarLayoutIsEdgeClamped ? 1 : 0,
-         useStableStartButtonAnchor ? 1 : 0);
-  Wh_Log(L"[TBGEOM] scalars rootWidth=%.2f taskChildren=%.2f measuredEdges=[%.2f..%.2f] predictedLeft=%.2f",
-         rootWidth,
-         childrenWidthTaskbarDbl,
-         taskbarLeftEdge,
-         taskbarRightEdge,
-         predictedCenteredTaskbarLeft);
-  Wh_Log(L"[TBGEOM] startSample X=%.2f Y=%.2f W=%.2f H=%.2f stable=%d stableRect X=%.2f Y=%.2f W=%.2f H=%.2f stablePasses=%d",
-         startButtonLeft,
-         startButtonTop,
-         startButtonWidth,
-         startButtonHeight,
-         state.hasStableStartButtonAnchorRect ? 1 : 0,
-         state.stableStartButtonAnchorLeft,
-         state.stableStartButtonAnchorTop,
-         state.stableStartButtonAnchorWidth,
-         state.stableStartButtonAnchorHeight,
-         state.startButtonAnchorStablePasses);
-  Wh_Log(L"[TBGEOM] targets contentLeft=%.2f contentWidth=%.2f rootOffsetX=%.2f trayOffsetX=%.2f bgScreen=[%.2f..%.2f]",
-         targetContentLeft,
-         targetContentWidth,
-         targetTaskRootOffsetX,
-         targetOffsetXTray,
-         targetBackgroundLeftScreen,
-         targetBackgroundRightScreen);
-  LogElementGeometry(L"xamlRootContent", xamlRootContent, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"taskFrame", taskFrame, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"rootGridTaskBar", rootGridTaskBar, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"repeater", taskbarFrameRepeater, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"startButton", startButton, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"trayFrame", trayFrame, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"trayGrid", systemTrayFrameGrid, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"taskbarBackground", taskbarBackground, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogElementGeometry(L"backgroundFill", backgroundFillChild, rootGridTaskBar, taskbarFrameRepeater, taskFrame);
-  LogAncestorGeometryChain(L"startButton", startButton, rootGridTaskBar);
-  LogAncestorGeometryChain(L"repeater", taskbarFrameRepeater, rootGridTaskBar);
-  // Fork addition: SystemTrayFrameGrid -> SystemTrayFrame -> XAML root is the
-  // chain that decides the tray's vertical placement, so log it alongside the
-  // task-area chains.
-  LogAncestorGeometryChain(L"trayGrid", systemTrayFrameGrid, rootGridTaskBar);
-  Wh_Log(L"[TBGEOM] ===== end =====");
-}
 void UpdateGlobalSettings() {
   std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
   if (IsExplorer() && !g_unloading) IloHiding::Read();
-  auto getInt = [&](PCWSTR key) { return IloPanel::Int(key); };
+  auto snapshot=IloPanel::Snapshot();
+  const bool usesAccent=IloPanel::IsAccent(snapshot->Text(L"TaskbarBackgroundTintColor"))||IloPanel::IsAccent(snapshot->Text(L"TaskbarBackgroundFallbackColor"))||IloPanel::IsAccent(snapshot->Text(L"TaskbarBorderColorHex"))||IloPanel::IsAccent(snapshot->Text(L"ClockTopColor"))||IloPanel::IsAccent(snapshot->Text(L"ClockBottomColor"));
+  if(usesAccent&&!IloPanel::accentSelected.load())(void)IloPanel::AccentColor();
+  IloPanel::SetAccentSelected(usesAccent&&!g_unloading);
+  auto getInt = [&](PCWSTR key) { return snapshot->Int(key); };
   auto clamp = [](int v, int lo, int hi) { return v < lo ? lo : v > hi ? hi : v; };
   // Booleans
   g_settings.userDefinedFlatTaskbarBottomCorners = (getInt(L"FlatTaskbarBottomCorners") != 0);
@@ -15265,22 +15754,22 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedAutoHideShowUnderTaskbarOnly = (getInt(L"AutoHideShowUnderTaskbarOnly") != 0) && !g_unloading;
   g_settings.userDefinedCustomizeTaskbarBackground = (getInt(L"CustomizeTaskbarBackground") != 0);
   g_settings.userDefinedDisableCustomBlurBackground = (getInt(L"DisableCustomBlurBackground") != 0);
-  // Fork addition: see OpenPopupLogFileTai.
-  g_logFlyoutPlacementTai.store(getInt(L"LogFlyoutPlacement") != 0,
-                                std::memory_order_relaxed);
-  PCWSTR appsDividerAlignment = IloPanel::Str(L"AppsDividerAlignment");
+  PCWSTR appsDividerAlignment = snapshot->Str(L"AppsDividerAlignment");
   g_settings.userDefinedDividerLeftAligned =
       appsDividerAlignment && _wcsicmp(appsDividerAlignment, L"left") == 0;
   if (appsDividerAlignment) {
     IloPanel::Free(appsDividerAlignment);
   }
-  PCWSTR zoomStyle = IloPanel::Str(L"HoverZoomStyle");
+  PCWSTR zoomStyle = snapshot->Str(L"HoverZoomStyle");
   g_settings.zoomMacStyle = zoomStyle && _wcsicmp(zoomStyle, L"macos") == 0;
   if (zoomStyle) IloPanel::Free(zoomStyle);
   g_settings.zoomEnabled = getInt(L"HoverZoomEnabled") != 0;
   g_settings.zoomHideBackground = getInt(L"HoverZoomHideBackground") != 0;
   g_settings.zoomExcludeTray = getInt(L"HoverZoomExcludeTray") != 0;
   g_settings.zoomExcludeChevron = getInt(L"HoverZoomExcludeChevron") != 0;
+  PCWSTR chevronPosition = snapshot->Str(L"TrayChevronPosition");
+  g_settings.trayChevronRight = chevronPosition && _wcsicmp(chevronPosition,L"right")==0;
+  if(chevronPosition)IloPanel::Free(chevronPosition);
   g_settings.zoomExcludeClock = getInt(L"HoverZoomExcludeClock") != 0;
   g_settings.zoomSpread = getInt(L"HoverZoomSpread") != 0;
   g_settings.zoomStart = getInt(L"HoverZoomStart") != 0;
@@ -15315,8 +15804,9 @@ void UpdateGlobalSettings() {
                                  kMinTaskbarIconSize,
                                  maxTaskbarIconSize);
   g_settings.userDefinedTaskbarIconSize = g_unloading ? kSystemMediumTaskbarIconSize : taskbarIconSize;
-  g_settings.userDefinedTrayIconSize = std::max(kMinTrayIconSize, getInt(L"TrayIconSize"));
-  g_settings.userDefinedTrayButtonSize = std::max(kMinTrayButtonSize, getInt(L"TrayButtonSize"));
+  const int trayIconLimit=std::max(kMinTrayIconSize,int(g_settings.userDefinedTaskbarHeight)-4);
+  g_settings.userDefinedTrayIconSize = std::clamp(getInt(L"TrayIconSize"),kMinTrayIconSize,trayIconLimit);
+  g_settings.userDefinedTrayButtonSize = std::max(unsigned(kMinTrayButtonSize),g_settings.userDefinedTrayIconSize*2u);
   // Corner radii
   float tcr = float(fmax(0.0f, getInt(L"TaskbarCornerRadius")));
   tcr = fmin(tcr, g_settings.userDefinedTaskbarHeight / 2.0f);
@@ -15331,12 +15821,12 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedTaskbarBackgroundBlurAmount = clamp(abs(getInt(L"TaskbarBackgroundBlurAmount")), 0, 100);
   g_settings.userDefinedTaskbarBackgroundTintSaturation = clamp(abs(getInt(L"TaskbarBackgroundTintSaturation")), 0, 500);
   g_settings.userDefinedTaskbarBackgroundInversion = clamp(abs(getInt(L"TaskbarBackgroundInversion")), 0, 100);
-  PCWSTR bgTintColor = IloPanel::Str(L"TaskbarBackgroundTintColor");
+  PCWSTR bgTintColor = snapshot->Str(L"TaskbarBackgroundTintColor");
   g_settings.userDefinedTaskbarBackgroundTintColor = (bgTintColor && *bgTintColor) ? bgTintColor : L"{ThemeResource CardStrokeColorDefaultSolid}";
   if (bgTintColor) {
     IloPanel::Free(bgTintColor);
   }
-  PCWSTR bgFallbackColor = IloPanel::Str(L"TaskbarBackgroundFallbackColor");
+  PCWSTR bgFallbackColor = snapshot->Str(L"TaskbarBackgroundFallbackColor");
   g_settings.userDefinedTaskbarBackgroundFallbackColor = (bgFallbackColor && *bgFallbackColor) ? bgFallbackColor : L"{ThemeResource CardStrokeColorDefaultSolid}";
   if (bgFallbackColor) {
     IloPanel::Free(bgFallbackColor);
@@ -15349,14 +15839,16 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedAppsDividerThickness = g_unloading ? 0.0f : (clamp(abs(getInt(L"AppsDividerThickness")), 0, 100) * 0.1f);
   g_settings.userDefinedAppsDividerVerticalScale = g_unloading ? 0.0f : (clamp(abs(getInt(L"AppsDividerVerticalScale")), 0, 100) / 100.0f);
   // Border color
-  PCWSTR originalHex = IloPanel::Str(L"TaskbarBorderColorHex");
+  PCWSTR originalHex = snapshot->Str(L"TaskbarBorderColorHex");
   PCWSTR hex = originalHex;
   if (!hex || *hex == L'\0') {
     hex = L"#ffffff";
   }
   if (*hex == L'#') ++hex;
   unsigned int r = 255, g = 255, b = 255;
-  if (swscanf_s(hex, L"%02x%02x%02x", &r, &g, &b) != 3) {
+  if(originalHex&&IloPanel::IsAccent(originalHex)){
+    auto accent=IloPanel::AccentColor();r=accent.R;g=accent.G;b=accent.B;
+  }else if (swscanf_s(hex, L"%02x%02x%02x", &r, &g, &b) != 3) {
     r = g = b = 255;
   }
   g_settings.borderColorR = r;
@@ -15366,7 +15858,7 @@ void UpdateGlobalSettings() {
     IloPanel::Free(originalHex);
   }
   // String list
-  PCWSTR dividerAppNames = IloPanel::Str(L"DividedAppNames");
+  PCWSTR dividerAppNames = snapshot->Str(L"DividedAppNames");
   CompileDividedAppPatternsTai(SplitAndTrim(dividerAppNames));
   if (dividerAppNames) {
     IloPanel::Free(dividerAppNames);
@@ -15861,7 +16353,6 @@ void RepairSecondaryTaskbarIslandTai(HWND taskbarWindow,
              monitorName.c_str(), windowRect.left, windowRect.top,
              windowRect.right, windowRect.bottom);
   Wh_Log(L"[SecondaryTaskbarIsland] %s", detail);
-  LogTaskbarEventToFileTai(L"SecondaryTaskbarIsland", detail);
 }
 // Clear the region on every taskbar window in this process, regardless of
 // monitor. Used on unload so a clipped taskbar is never left behind if the
@@ -16084,9 +16575,6 @@ static int PlaceInputSwitchFlyoutXTai(HWND hWnd,
       std::min(anchorCenterX - (cx / 2), static_cast<int>(workArea.right) - cx));
   Wh_Log(L"[InputSwitch] %s: anchor=%s centre=%d X %d -> %d (cx=%d)",
          monitorName.c_str(), anchor, anchorCenterX, x, newX, cx);
-  LogInputSwitchPlacementToFileTai(monitorName.c_str(), anchor,
-                                   anchorCenterXDip, monitorDpiX, x, newX, y,
-                                   cx, cy);
   return newX;
 }
 // Fork addition: open the Notification Center -- the clock and calendar
@@ -16167,9 +16655,6 @@ static void PlaceNotificationCenterViewRectTai(RECT* rect) {
   const int x = monitorInfo.rcMonitor.left + localX;
   Wh_Log(L"[NotificationCenter] %s: X %ld -> %d (cx=%d)", monitorName.c_str(),
          rect->left, x, cx);
-  LogNotificationCenterPlacementToFileTai(monitorName.c_str(), monitorDpiX,
-                                          taskbarState.lastRightMostEdgeTray,
-                                          *rect, x);
   OffsetRect(rect, x - rect->left, 0);
 }
 long WINAPI CActionCenterExperienceManager_GetViewPosition_Hook(void* pThis,
@@ -16476,6 +16961,58 @@ using namespace winrt::Windows::UI::Xaml::Controls;
 using namespace winrt::Windows::UI::Xaml::Controls::Primitives;
 using winrt::Windows::UI::Core::CoreDispatcher;
 enum class Kind { Clock, Quick };
+// All independent menus use the same modest extra clearance from the dock.
+// The transparent margin is outside the rounded, painted plate.
+constexpr double kMenuDockGap = 4.0;
+static Thickness MenuDockMargin(bool topTaskbar){
+  return {0,topTaskbar?kMenuDockGap:0,0,topTaskbar?0:kMenuDockGap};
+}
+// Only our own menu surfaces are clipped. A rounded XAML Border alone can
+// leave the composition brush's rectangular backing visible at its corners.
+// Clip the complete panel (including row hover/focus visuals), not the empty
+// space between Win+X and its submenu or the dock-facing margin.
+struct MenuCornerClip {
+  FrameworkElement host{nullptr};winrt::event_token resized{};double radius{};
+  static void Apply(FrameworkElement const& element,double radius) noexcept {
+    try{
+      if(!element||radius<=0)return;
+      float w=float(element.ActualWidth()),h=float(element.ActualHeight());
+      if(!std::isfinite(w)||!std::isfinite(h)||w<=0||h<=0)return;
+      auto visual=Hosting::ElementCompositionPreview::GetElementVisual(element);
+      if(!visual)return;
+      float r=std::min(float(radius),std::min(w,h)/2);
+      auto existing=visual.Clip().try_as<winrt::Windows::UI::Composition::CompositionGeometricClip>();
+      auto geometry=existing?existing.Geometry().try_as<winrt::Windows::UI::Composition::CompositionRoundedRectangleGeometry>():nullptr;
+      if(!geometry){geometry=visual.Compositor().CreateRoundedRectangleGeometry();visual.Clip(visual.Compositor().CreateGeometricClip(geometry));}
+      geometry.Size({w,h});geometry.CornerRadius({r,r});
+    }catch(...){Wh_Log(L"[MenuCorners] Rounded clip unavailable; using XAML corners");}
+  }
+  void Attach(FrameworkElement const& element,double r){
+    if(!element||r<=0)return;
+    host=element;radius=r;auto weak=winrt::make_weak(host);
+    resized=host.SizeChanged([weak,r](auto const&,auto const&) noexcept {if(auto live=weak.get())Apply(live,r);});
+    Refresh();
+  }
+  void Refresh() noexcept {Apply(host,radius);}
+  void Clear() noexcept {
+    try{if(host&&resized.value)host.SizeChanged(resized);}catch(...){}
+    try{if(host)Hosting::ElementCompositionPreview::GetElementVisual(host).Clip(nullptr);}catch(...){}
+    host=nullptr;resized={};radius=0;
+  }
+};
+static Style MenuPresenterStyle(bool styled,bool wideMenu,bool topTaskbar){
+  // A stock FlyoutPresenter has a rectangular shadow/background behind the
+  // content. The custom surface owns all painting, including the round edges.
+  std::wstring xaml=LR"xml(<Style xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" TargetType="FlyoutPresenter"><Setter Property="IsDefaultShadowEnabled" Value="False"/><Setter Property="MinWidth" Value="0"/>)xml";
+  if(wideMenu)xaml+=LR"xml(<Setter Property="MaxWidth" Value="1024"/><Setter Property="MaxHeight" Value="1024"/><Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/><Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/><Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/><Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>)xml";
+  if(styled){
+    xaml+=LR"xml(<Setter Property="Background" Value="Transparent"/><Setter Property="BorderBrush" Value="Transparent"/><Setter Property="Padding" Value="0"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="FlyoutPresenter"><ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/></ControlTemplate></Setter.Value></Setter>)xml";
+  }else{
+    // Leave the Windows template intact when ILô surface styling is disabled.
+    xaml+=topTaskbar?L"<Setter Property=\"Margin\" Value=\"0,4,0,0\"/>":L"<Setter Property=\"Margin\" Value=\"0,0,0,4\"/>";
+  }
+  xaml+=L"</Style>";return Markup::XamlReader::Load(xaml).as<Style>();
+}
 using InvokeProvider = Automation::Provider::IInvokeProvider;
 struct Action {
   std::wstring label,glyph,font;
@@ -16583,13 +17120,15 @@ static FrameworkElement QuickAnchor(FrameworkElement const& target,bool allowPoi
     if(!icon&&e.Name()==L"SystemTrayIcon")icon=e;
     if(IsQuickGroup(e)){group=e;break;}
   }
-  if(group&&icon)return icon;
   if(!group&&!allowPointer)return nullptr;
   auto xr=target.XamlRoot();auto point=RootPointer(xr);
   if(!group&&point){unsigned budget=1800;group=FindQuickGroup(xr.Content(),0,budget);if(!ContainsPoint(group,*point))return nullptr;}
   if(!group)return nullptr;
-  if(point){unsigned budget=180;if(auto hit=QuickIconAt(group,*point,0,budget))return hit;}
-  return group;
+  // Native flyouts sometimes target the whole control-center group rather
+  // than the individual sound/network icon. Prefer the actual hit icon and
+  // retain the native owner for keyboard invocations without a pointer hit.
+  if(point&&ContainsPoint(group,*point)){unsigned budget=180;if(auto hit=QuickIconAt(group,*point,0,budget))return hit;}
+  return icon?icon:group;
 }
 static FrameworkElement Anchor(FrameworkElement const& target,bool allowPointer){
   if(!target)return nullptr;
@@ -16688,15 +17227,18 @@ static std::optional<std::vector<Action>> ReadWinXActions(winrt::Windows::Founda
 }
 struct Session {
   Flyout fly{nullptr};Border plate{nullptr};
+  MenuCornerClip corners;
   Kind kind=Kind::Clock;
   MenuFlyout nativeMenu{nullptr};Popup nativePopup{nullptr};winrt::weak_ref<FrameworkElement> nativeTarget;
   std::vector<Action> actions;
   std::vector<Button> buttons;
   std::vector<winrt::event_token> clicks;
-  Grid content{nullptr};winrt::event_token key{},opened{};
-  bool closed{},styled{};
+  Grid content{nullptr};winrt::event_token key{},opened{},onClosed{};
+  bool closed{},styled{},invoking{};
   void Dispose() noexcept {
+    try{if(fly&&onClosed.value)fly.Closed(onClosed);}catch(...){}onClosed={};
     try{if(fly)fly.Hide();}catch(...){}
+    corners.Clear();
     try{if(content&&key.value)content.KeyDown(key);if(fly&&opened.value)fly.Opened(opened);}catch(...){}
     for(size_t i=0;i<buttons.size()&&i<clicks.size();++i)try{buttons[i].Click(clicks[i]);}catch(...){}
     try{if(plate)plate.Background(nullptr);if(fly)fly.Content(nullptr);}catch(...){}
@@ -16705,6 +17247,7 @@ struct Session {
   }
   void Invoke(size_t n) noexcept {
     if(g_unloading||closed)return;
+    struct InvocationGuard{bool& flag;~InvocationGuard(){flag=false;}} guard{invoking};invoking=true;
     closed=true;
     try{if(fly)fly.Hide();}catch(...){}
     if(kind==Kind::Quick){
@@ -16734,20 +17277,23 @@ static std::shared_ptr<Session> Build(std::vector<Action> actions,bool topTaskba
   // The taskbar island is much shorter than this menu: let the flyout open
   // in its own window, outside the island, before choosing its direction.
   s->fly.ShouldConstrainToRootBounds(false);
-  s->fly.Placement(topTaskbar?FlyoutPlacementMode::BottomEdgeAlignedRight:FlyoutPlacementMode::TopEdgeAlignedRight);
+  // The clock keeps its right-edge alignment; quick settings open centered
+  // above (or below a top taskbar) their individual icon.
+  s->fly.Placement(kind==Kind::Quick?(topTaskbar?FlyoutPlacementMode::Bottom:FlyoutPlacementMode::Top):
+      (topTaskbar?FlyoutPlacementMode::BottomEdgeAlignedRight:FlyoutPlacementMode::TopEdgeAlignedRight));
   s->content=Grid();StackPanel rows;rows.Padding({4,4,4,4});rows.MinWidth(235);rows.MaxWidth(420);
   s->plate=Border();s->plate.IsHitTestVisible(false);s->plate.HorizontalAlignment(HorizontalAlignment::Stretch);s->plate.VerticalAlignment(VerticalAlignment::Stretch);
   {
     std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
     if(IloSurfaceStyle::Enabled()){
-      auto radius=std::clamp(double(g_settings.userDefinedTaskbarCornerRadius),0.0,24.0);s->plate.CornerRadius({radius,radius,radius,radius});
+      auto radius=IloSurfaceStyle::PopupCornerRadius();s->plate.CornerRadius({radius,radius,radius,radius});
       s->content.Children().Append(s->plate);
       auto fallback=ParseWindhawkColorSetting(g_settings.userDefinedTaskbarBackgroundFallbackColor,winrt::Windows::UI::Color{255,32,32,32});
       s->plate.Background(CreateSolidBackgroundBrushFromSetting(fallback));s->styled=true;
-      auto style=Markup::XamlReader::Load(LR"xml(<Style xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" TargetType="FlyoutPresenter"><Setter Property="Background" Value="Transparent"/><Setter Property="Padding" Value="0"/><Setter Property="BorderThickness" Value="0"/><Setter Property="MinWidth" Value="0"/></Style>)xml").as<Style>();
-      s->fly.FlyoutPresenterStyle(style);
+      s->content.Margin(MenuDockMargin(topTaskbar));s->corners.Attach(s->content,radius);
     }
   }
+  s->fly.FlyoutPresenterStyle(MenuPresenterStyle(s->styled,false,topTaskbar));
   std::weak_ptr<Session> weak=s;
   auto add=[&](std::wstring const& label,std::wstring const& glyph,std::wstring const& font,bool enabled,size_t index,std::optional<Symbol> symbol={}){
     Button button;button.HorizontalAlignment(HorizontalAlignment::Stretch);button.HorizontalContentAlignment(HorizontalAlignment::Stretch);
@@ -16778,7 +17324,7 @@ static std::shared_ptr<Session> Build(std::vector<Action> actions,bool topTaskba
     Wh_Log(L"[%ls] Flyout opened; constrained to root=%d",session->kind==Kind::Clock?L"ClockMenu":L"QuickMenu",int(session->fly.IsConstrainedToRootBounds()));
     // Connect the composition brush only after the independent flyout has
     // its own live XAML tree; retain the solid fallback if it fails.
-    if(session->styled)try{std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);if(IloSurfaceStyle::Enabled())if(auto brush=IloSurfaceStyle::Create(session->plate))session->plate.Background(brush);}catch(...){Wh_Log(L"[ClockMenu] Dock brush unavailable; using solid fallback");}
+    if(session->styled)try{session->corners.Refresh();std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);if(IloSurfaceStyle::Enabled())if(auto brush=IloSurfaceStyle::Create(session->plate))session->plate.Background(brush);}catch(...){Wh_Log(L"[ClockMenu] Dock brush unavailable; using solid fallback");}
     for(auto const& button:session->buttons)if(button.IsEnabled()){button.Focus(FocusState::Programmatic);break;}
   }}catch(...){}});
   guard.completed=true;return s;
@@ -16788,10 +17334,12 @@ static std::shared_ptr<Session> Build(std::vector<Action> actions,bool topTaskba
 // menu merely because the pointer moves into the submenu.
 struct WinXPanel {
   Grid host{nullptr};Border plate{nullptr};ScrollViewer scroll{nullptr};
+  MenuCornerClip corners;
   std::vector<Button> buttons;
   std::vector<winrt::event_token> clicks,enters;
   size_t parent=SIZE_MAX;
   void Dispose() noexcept {
+    corners.Clear();
     for(size_t i=0;i<buttons.size();++i){
       if(i<clicks.size())try{buttons[i].Click(clicks[i]);}catch(...){}
       if(i<enters.size()&&enters[i].value)try{buttons[i].PointerEntered(enters[i]);}catch(...){}
@@ -16804,9 +17352,10 @@ struct WinXSession {
   Flyout fly{nullptr};Grid content{nullptr};StackPanel panes{nullptr};
   MenuFlyout nativeMenu{nullptr};winrt::weak_ref<FrameworkElement> nativeTarget;
   WinXPanel main;std::vector<WinXPanel> subs;std::vector<Action> actions;
-  winrt::event_token key{},opened{};bool styled{},closed{},opensLeft{};
+  winrt::event_token key{},opened{},onClosed{};bool styled{},closed{},opensLeft{},invoking{};
   size_t active=SIZE_MAX;
   void Dispose() noexcept {
+    try{if(fly&&onClosed.value)fly.Closed(onClosed);}catch(...){}onClosed={};
     try{if(content&&key.value)content.KeyDown(key);if(fly&&opened.value)fly.Opened(opened);}catch(...){}
     try{if(fly)fly.Hide();}catch(...){}
     main.Dispose();for(auto& p:subs)p.Dispose();subs.clear();
@@ -16815,7 +17364,7 @@ struct WinXSession {
   }
   void Style(WinXPanel& p) noexcept {
     if(!styled||!p.plate)return;
-    try{std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);if(IloSurfaceStyle::Enabled())if(auto brush=IloSurfaceStyle::Create(p.plate))p.plate.Background(brush);}catch(...){Wh_Log(L"[WinXMenu] Dock brush unavailable; using fallback");}
+    try{p.corners.Refresh();std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);if(IloSurfaceStyle::Enabled())if(auto brush=IloSurfaceStyle::Create(p.plate))p.plate.Background(brush);}catch(...){Wh_Log(L"[WinXMenu] Dock brush unavailable; using fallback");}
   }
   static void FocusFirst(WinXPanel& p,bool last=false,FocusState state=FocusState::Keyboard){
     for(size_t i=0;i<p.buttons.size();++i){auto& b=p.buttons[last?p.buttons.size()-1-i:i];if(b.IsEnabled()&&b.Focus(state))return;}
@@ -16837,6 +17386,7 @@ struct WinXSession {
   }
   void InvokeLeaf(Action const& action) noexcept {
     if(closed||g_unloading||!action.enabled)return;
+    struct InvocationGuard{bool& flag;~InvocationGuard(){flag=false;}} guard{invoking};invoking=true;
     try{
       // Keep the original row and peer alive across Hide and invocation.
       auto a=action;closed=true;fly.Hide();
@@ -16848,7 +17398,7 @@ struct WinXSession {
   void InvokeRoot(size_t n,FocusState state=FocusState::Programmatic) noexcept {
     if(g_unloading||closed)return;
     try{
-      if(n==actions.size()){closed=true;fly.Hide();IloPanel::Launch();return;}
+      if(n==actions.size()){struct InvocationGuard{bool& flag;~InvocationGuard(){flag=false;}} guard{invoking};invoking=true;closed=true;fly.Hide();IloPanel::Launch();return;}
       if(n>=actions.size()||!actions[n].enabled)return;
       if(!actions[n].children.empty()){OpenSub(n,true,state);return;}
       InvokeLeaf(actions[n]);
@@ -16925,17 +17475,17 @@ static std::shared_ptr<WinXSession> BuildWinX(std::vector<Action> actions,Framew
   // never crop or horizontally scroll the combined menu.
   // The overall flyout is rectangular even when its submenu is much shorter
   // than the main menu. Do not cast a shadow over that empty transparent area.
-  std::wstring presenterStyle=LR"xml(<Style xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" TargetType="FlyoutPresenter"><Setter Property="IsDefaultShadowEnabled" Value="False"/><Setter Property="MinWidth" Value="0"/><Setter Property="MaxWidth" Value="1024"/><Setter Property="MaxHeight" Value="1024"/><Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/><Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/><Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/><Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>)xml";
-  if(s->styled)presenterStyle+=LR"xml(<Setter Property="Background" Value="Transparent"/><Setter Property="Padding" Value="0"/><Setter Property="BorderThickness" Value="0"/>)xml";
-  presenterStyle+=L"</Style>";s->fly.FlyoutPresenterStyle(Markup::XamlReader::Load(presenterStyle).as<Style>());
+  if(s->styled)s->content.Margin(MenuDockMargin(top));
+  s->fly.FlyoutPresenterStyle(MenuPresenterStyle(s->styled,true,top));
   std::weak_ptr<WinXSession> weak=s;
   auto makePanel=[&](WinXPanel& panel,std::vector<Action> const& list,bool root,size_t parent){
     panel.parent=parent;panel.host=Grid();panel.host.FlowDirection(anchor.FlowDirection());panel.host.Width(width);panel.host.VerticalAlignment(VerticalAlignment::Bottom);
     if(s->styled){
       panel.plate=Border();panel.plate.IsHitTestVisible(false);
       std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
-      auto radius=std::clamp(double(g_settings.userDefinedTaskbarCornerRadius),0.0,24.0);panel.plate.CornerRadius({radius,radius,radius,radius});
+      auto radius=IloSurfaceStyle::PopupCornerRadius();panel.plate.CornerRadius({radius,radius,radius,radius});
       auto fallback=ParseWindhawkColorSetting(g_settings.userDefinedTaskbarBackgroundFallbackColor,winrt::Windows::UI::Color{255,32,32,32});panel.plate.Background(CreateSolidBackgroundBrushFromSetting(fallback));panel.host.Children().Append(panel.plate);
+      panel.corners.Attach(panel.host,radius);
     }
     StackPanel rows;rows.Padding({4,4,4,4});panel.scroll=ScrollViewer();panel.scroll.MaxHeight(height);panel.scroll.VerticalScrollBarVisibility(ScrollBarVisibility::Auto);panel.scroll.HorizontalScrollMode(ScrollMode::Disabled);panel.scroll.HorizontalScrollBarVisibility(ScrollBarVisibility::Disabled);panel.scroll.Content(rows);panel.host.Children().Append(panel.scroll);
     auto addSeparator=[&]{auto sep=Markup::XamlReader::Load(LR"xml(<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Height="1" Margin="8,3" Background="{ThemeResource SystemControlForegroundBaseLowBrush}"/>)xml").as<Border>();rows.Children().Append(sep);};
@@ -16968,26 +17518,53 @@ static std::shared_ptr<WinXSession> BuildWinX(std::vector<Action> actions,Framew
   s->opened=s->fly.Opened([weak](auto const&,auto const&) noexcept {try{if(auto live=weak.lock()){live->Style(live->main);WinXSession::FocusFirst(live->main,false,FocusState::Programmatic);Wh_Log(L"[WinXMenu] Flyout opened; constrained to root=%d",int(live->fly.IsConstrainedToRootBounds()));}}catch(...){}});
   guard.completed=true;return s;
 }
-struct Slot {
+struct Slot : std::enable_shared_from_this<Slot> {
   CoreDispatcher dispatcher{nullptr};DispatcherTimer timer{nullptr};winrt::event_token tick{};
+  DispatcherTimer cleanupTimer{nullptr};winrt::event_token cleanupTick{};
   winrt::weak_ref<Popup> pending;winrt::weak_ref<FrameworkElement> anchor;
   Kind pendingKind=Kind::Clock;
   bool top{},busy{};std::shared_ptr<Session> active;std::shared_ptr<WinXSession> winx;
-  void Close(){if(active){active->Dispose();active.reset();}if(winx){winx->Dispose();winx.reset();}}
+  std::weak_ptr<Session> closedActive;std::weak_ptr<WinXSession> closedWinX;
+  bool InvocationInProgress() const{return (active&&active->invoking)||(winx&&winx->invoking);}
+  void Close(){
+    if(cleanupTimer)cleanupTimer.Stop();closedActive.reset();closedWinX.reset();
+    auto old=std::move(active);auto oldWinX=std::move(winx);
+    if(old)old->Dispose();if(oldWinX)oldWinX->Dispose();
+  }
+  // Closed can be delivered inside Hide or while a native command is still
+  // running. Defer destruction to the same dispatcher; never clear a newly
+  // opened session or invalidate a row that is being invoked.
+  void Retire(std::shared_ptr<Session> const& s){if(active!=s||!cleanupTimer)return;closedActive=s;cleanupTimer.Start();}
+  void Retire(std::shared_ptr<WinXSession> const& s){if(winx!=s||!cleanupTimer)return;closedWinX=s;cleanupTimer.Start();}
+  template<class T> void ObserveClosed(std::shared_ptr<T> const& s){
+    auto weakSlot=weak_from_this();std::weak_ptr<T> weakSession=s;
+    s->onClosed=s->fly.Closed([weakSlot,weakSession](auto const&,auto const&) noexcept {
+      try{if(auto slot=weakSlot.lock())if(auto session=weakSession.lock())slot->Retire(session);}catch(...){}
+    });
+  }
+  void Cleanup() noexcept {
+    try{
+      if(busy||InvocationInProgress())return;
+      if(cleanupTimer)cleanupTimer.Stop();
+      auto old=closedActive.lock();auto oldWinX=closedWinX.lock();closedActive.reset();closedWinX.reset();
+      if(old&&active==old){active.reset();old->Dispose();}
+      if(oldWinX&&winx==oldWinX){winx.reset();oldWinX->Dispose();}
+    }catch(...){Wh_Log(L"[TrayMenu] Deferred cleanup failed");}
+  }
   void Cancel(){if(timer)timer.Stop();pending={};anchor={};}
   bool ShowWinX(FrameworkElement const& target,std::vector<Action> actions,bool topTaskbar,MenuFlyout const& original,FrameworkElement const& originalTarget){
-    if(busy||!WinXEnabled()||!target||!target.XamlRoot())return false;
+    if(busy||InvocationInProgress()||!WinXEnabled()||!target||!target.XamlRoot())return false;
     struct Guard{bool& flag;~Guard(){flag=false;}} guard{busy};busy=true;
     std::shared_ptr<WinXSession> next;
     try{
       next=BuildWinX(std::move(actions),target,topTaskbar);next->nativeMenu=original;next->nativeTarget=winrt::make_weak(originalTarget);
-      Close();next->fly.ShowAt(target);winx=next;
+      Close();ObserveClosed(next);winx=next;next->fly.ShowAt(target);
       size_t shortcuts=0;for(auto const& a:next->actions){if(!a.accessKey.empty()||!a.accelerators.empty())++shortcuts;for(auto const& child:a.children)if(!child.accessKey.empty()||!child.accelerators.empty())++shortcuts;}
       Wh_Log(L"[WinXMenu] Independent menu shown; rows=%zu, submenus=%zu, native shortcut rows=%zu",next->actions.size(),next->subs.size(),shortcuts);return true;
-    }catch(...){Wh_Log(L"[WinXMenu] Show failed: %08X; native retained",winrt::to_hresult());if(next)next->Dispose();return false;}
+    }catch(...){Wh_Log(L"[WinXMenu] Show failed: %08X; native retained",winrt::to_hresult());if(next){if(winx==next)Close();else next->Dispose();}return false;}
   }
   bool Show(FrameworkElement const& target,std::vector<Action> actions,bool topTaskbar,Kind kind,Popup const& native={nullptr},MenuFlyout const& original={nullptr},FrameworkElement const& originalTarget={nullptr}){
-    if(busy||!Enabled(kind)||!target||!target.XamlRoot())return false;
+    if(busy||InvocationInProgress()||!Enabled(kind)||!target||!target.XamlRoot())return false;
     struct Guard{bool& flag;~Guard(){flag=false;}} guard{busy};busy=true;
     std::shared_ptr<Session> next;
     try{next=Build(std::move(actions),topTaskbar,kind);}catch(...){Wh_Log(L"[%ls] Build failed: %08X; native retained",kind==Kind::Clock?L"ClockMenu":L"QuickMenu",winrt::to_hresult());return false;}
@@ -16995,12 +17572,12 @@ struct Slot {
     try{
       next->content.FlowDirection(target.FlowDirection());
       if(kind==Kind::Quick){next->nativeMenu=original;next->nativePopup=native;next->nativeTarget=winrt::make_weak(originalTarget?originalTarget:target);}
-      Close();if(native&&native.IsOpen()){native.IsOpen(false);closedNative=true;}
-      next->fly.ShowAt(target);active=next;
+      Close();ObserveClosed(next);if(native&&native.IsOpen()){native.IsOpen(false);closedNative=true;}
+      active=next;next->fly.ShowAt(target);
       if(kind==Kind::Clock)Wh_Log(L"[ClockMenu] Independent menu shown; native labels preserved; command bindings=%d/%d",int(bool(next->actions[0].command)),int(bool(next->actions[1].command)));
-      else Wh_Log(L"[QuickMenu] Independent menu shown; native labels preserved; rows=%zu",next->actions.size());
+      else Wh_Log(L"[QuickMenu] Centered independent menu shown; anchor=%ls; native labels preserved; rows=%zu",target.Name().c_str(),next->actions.size());
       return true;
-    }catch(...){Wh_Log(L"[%ls] Show failed: %08X",kind==Kind::Clock?L"ClockMenu":L"QuickMenu",winrt::to_hresult());next->Dispose();if(closedNative)try{native.IsOpen(true);}catch(...){}return false;}
+    }catch(...){Wh_Log(L"[%ls] Show failed: %08X",kind==Kind::Clock?L"ClockMenu":L"QuickMenu",winrt::to_hresult());if(active==next)Close();else next->Dispose();if(closedNative)try{native.IsOpen(true);}catch(...){}return false;}
   }
   void Tick() noexcept {
     try{auto p=pending.get();auto target=anchor.get();bool above=top;auto kind=pendingKind;Cancel();if(!Enabled(kind)||!p||!p.IsOpen()||!target)return;
@@ -17009,14 +17586,16 @@ struct Slot {
       Show(target,std::move(*actions),above,kind,p);
     }catch(...){Wh_Log(L"[ClockMenu] Native menu capture failed: %08X",winrt::to_hresult());}
   }
-  void Dispose(){Cancel();if(timer&&tick.value)timer.Tick(tick);timer=nullptr;Close();}
+  void Dispose(){Cancel();if(timer&&tick.value)timer.Tick(tick);timer=nullptr;Close();if(cleanupTimer){if(cleanupTick.value)cleanupTimer.Tick(cleanupTick);cleanupTimer=nullptr;}}
 };
 static std::mutex mutex;static std::vector<std::shared_ptr<Slot>> slots;
 static std::shared_ptr<Slot> GetSlot(CoreDispatcher const& dispatcher){
   if(!dispatcher||!dispatcher.HasThreadAccess()||g_unloading)return {};
   std::lock_guard lock(mutex);for(auto const& slot:slots)if(slot->dispatcher==dispatcher)return slot;
   auto s=std::make_shared<Slot>();s->dispatcher=dispatcher;s->timer=DispatcherTimer();s->timer.Interval(std::chrono::milliseconds(60));
-  std::weak_ptr<Slot> weak=s;s->tick=s->timer.Tick([weak](auto const&,auto const&) noexcept {if(auto slot=weak.lock())slot->Tick();});slots.push_back(s);return s;
+  std::weak_ptr<Slot> weak=s;s->tick=s->timer.Tick([weak](auto const&,auto const&) noexcept {if(auto slot=weak.lock())slot->Tick();});
+  s->cleanupTimer=DispatcherTimer();s->cleanupTimer.Interval(std::chrono::milliseconds(16));
+  s->cleanupTick=s->cleanupTimer.Tick([weak](auto const&,auto const&) noexcept {if(auto slot=weak.lock())slot->Cleanup();});slots.push_back(s);return s;
 }
 static bool ReplaceMenu(MenuFlyout const& menu,FrameworkElement const& target){
   if(WinXEnabled()&&menu&&target){
@@ -17121,10 +17700,6 @@ static void MoveTrayContextMenuAnchorTai(winrt::Windows::Foundation::Point& posi
   wcsncpy_s(placement.monitorName, taskbar.monitorName.c_str(), _TRUNCATE);
   Wh_Log(L"[TrayContextMenu] %s: anchor %.2f -> %.2f",
          taskbar.monitorName.c_str(), cornerX, placement.anchorX);
-  LogContextMenuPlacementToFileTai(
-      L"TrayContextMenu", L"anchor", placement.monitorName, placement.trayRight,
-      placement.rootWidth, placement.margin, 0.0f, 0.0f, cornerX,
-      placement.anchorY, placement.anchorX, placement.anchorY);
 }
 // XAML put a corner of the menu on the point, so wherever it landed is within
 // one menu size of the target. An offset further out is not the menu's
@@ -17178,11 +17753,6 @@ static void SettleTrayContextMenuTai(Controls::Primitives::Popup const& popup,
   Wh_Log(L"[TrayContextMenu] %s: opened at (%.2f,%.2f), %.2fx%.2f, now (%.2f,%.2f)",
          placement.monitorName, placedLeft, placedTop, menuWidth, menuHeight,
          moveX ? left : placedLeft, moveY ? top : placedTop);
-  LogContextMenuPlacementToFileTai(
-      L"TrayContextMenu", (moveX || moveY) ? L"moved" : L"kept",
-      placement.monitorName, placement.trayRight, placement.rootWidth,
-      placement.margin, menuWidth, menuHeight, placedLeft, placedTop,
-      moveX ? left : placedLeft, moveY ? top : placedTop);
 }
 // The Point is returned through a hidden pointer, as MSVC does for a class with
 // constructors, so it is spelled out as the first argument.
@@ -17320,16 +17890,9 @@ static void MoveStartButtonContextMenuAnchorTai(
       std::max(0.0f, taskbar.state.lastStartButtonXCalculated -
                          taskbar.innerPaddingDip - frameOrigin.X);
   const float windowsX = frameOrigin.X + position.X;
-  const float windowsY = frameOrigin.Y + position.Y;
   position.X += shift;
   Wh_Log(L"[StartButtonContextMenu] %s: anchor %.2f -> %.2f",
          taskbar.monitorName.c_str(), windowsX, windowsX + shift);
-  LogContextMenuPlacementToFileTai(
-      L"StartButtonContextMenu", L"anchor", taskbar.monitorName.c_str(),
-      static_cast<int>(taskbar.state.lastStartButtonXCalculated + 0.5f),
-      static_cast<float>(xamlRoot.Size().Width),
-      static_cast<float>(margin.Left), 0.0f, 0.0f, windowsX, windowsY,
-      windowsX + shift, windowsY);
 }
 // The Point is returned through a hidden pointer, like GetShowPosition's. The
 // TaskbarFrame is passed by value, as a pointer to the caller's copy, which the
@@ -17803,6 +18366,31 @@ void Clear() {
 }
 } // namespace IloXamlMenu
 
+struct TaskbarLayoutNodesTai {
+  FrameworkElement rootGrid{nullptr},repeater{nullptr},tray{nullptr},trayHost{nullptr},trayGrid{nullptr},background{nullptr},fillParent{nullptr},fill{nullptr};
+  bool nested{};
+};
+static FrameworkElement LayoutParentTai(FrameworkElement const& element){return element?Media::VisualTreeHelper::GetParent(element).try_as<FrameworkElement>():nullptr;}
+static bool DirectLayoutChildTai(FrameworkElement const& parent,FrameworkElement const& child){return parent&&child&&LayoutParentTai(child)==parent;}
+static bool RestoreLayoutTopologyTai(TaskbarState::Topology const& cache,FrameworkElement const& root,FrameworkElement const& frame,uint64_t generation,ULONGLONG now,TaskbarLayoutNodesTai& out){
+  if(!cache.discovered||now-cache.discovered>=500||cache.generation!=generation||cache.frame.get()!=frame)return false;
+  TaskbarLayoutNodesTai nodes{cache.rootGrid.get(),cache.repeater.get(),cache.tray.get(),cache.trayHost.get(),cache.trayGrid.get(),cache.background.get(),cache.fillParent.get(),cache.fill.get(),cache.nested};
+  if(!DirectLayoutChildTai(frame,nodes.rootGrid)||!DirectLayoutChildTai(nodes.rootGrid,nodes.repeater)||!DirectLayoutChildTai(nodes.rootGrid,nodes.background)||!DirectLayoutChildTai(nodes.background,nodes.fillParent)||!DirectLayoutChildTai(nodes.fillParent,nodes.fill))return false;
+  if(nodes.nested){
+    auto host=nodes.trayHost.try_as<Controls::ContentControl>();
+    if(!host||!DirectLayoutChildTai(nodes.repeater,nodes.trayHost)||host.Content().try_as<FrameworkElement>()!=nodes.tray)return false;
+  }else if(!DirectLayoutChildTai(root,nodes.tray))return false;
+  auto gridParent=LayoutParentTai(nodes.trayGrid);
+  if(!nodes.trayGrid||!(gridParent==nodes.tray||DirectLayoutChildTai(nodes.tray,gridParent)))return false;
+  auto xr=root.XamlRoot();if(!xr||nodes.trayGrid.XamlRoot()!=xr||nodes.fill.XamlRoot()!=xr)return false;
+  out=std::move(nodes);return true;
+}
+static void RememberLayoutTopologyTai(TaskbarState::Topology& cache,FrameworkElement const& frame,TaskbarLayoutNodesTai const& nodes,uint64_t generation,ULONGLONG now){
+  cache.frame=winrt::make_weak(frame);cache.rootGrid=winrt::make_weak(nodes.rootGrid);cache.repeater=winrt::make_weak(nodes.repeater);
+  cache.tray=winrt::make_weak(nodes.tray);cache.trayHost=nodes.trayHost?winrt::make_weak(nodes.trayHost):winrt::weak_ref<FrameworkElement>{};cache.trayGrid=winrt::make_weak(nodes.trayGrid);
+  cache.background=winrt::make_weak(nodes.background);cache.fillParent=winrt::make_weak(nodes.fillParent);cache.fill=winrt::make_weak(nodes.fill);
+  cache.nested=nodes.nested;cache.generation=generation;cache.discovered=now;
+}
 bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorName) {
   if (!xamlRootContent) {
     Wh_Log(L"xamlRootContent is null");
@@ -17823,10 +18411,20 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     state.RestoreFullWidthHost();
     state.RestoreTrayTranslation();
     state.RestoreBackgroundOrder();
+    state.RestoreChevronOrder();
+    state.RestoreTraySizes();
   }
-  // Fork addition: see g_xamlRootMonitorNamesTai.
-  RecordXamlRootMonitorTai(xamlRootContent, monitorName);
-  if (!g_unloading) {IloXamlMenu::Init();try{IloPopupSurface::Sync(xamlRootContent);}catch(...){Wh_Log(L"[PopupSurface] Taskbar registration failed");}}
+  const auto discoveryNow=GetTickCount64();
+  const auto topologyGeneration=g_taskbarChildStyleGeneration.load(std::memory_order_acquire);
+  // Registration belongs to the XAML root rather than to each animation
+  // frame. Rebind immediately on root/monitor changes, or retry periodically.
+  if(!g_unloading){
+    auto xr=xamlRootContent.XamlRoot();auto identity=xr?GetComIdentityTai(xr):nullptr;
+    if(identity&&(identity!=state.popupRootIdentity||state.popupMonitor!=monitorName||!state.lastPopupRegistration||discoveryNow-state.lastPopupRegistration>=1000)){
+      RecordXamlRootMonitorTai(xamlRootContent,monitorName);IloXamlMenu::Init();
+      try{IloPopupSurface::Sync(xamlRootContent);state.popupRootIdentity=identity;state.popupMonitor=monitorName;state.lastPopupRegistration=discoveryNow;}catch(...){Wh_Log(L"[PopupSurface] Taskbar registration failed");}
+    }
+  }
   g_scheduled_low_priority_update = false;
   bool forceStyleApply = false;
   int forceStyleApplyPasses = g_force_style_apply_passes.load();
@@ -17852,7 +18450,8 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   auto snapPx = [rasterizationScale](float value) -> float {
     return SnapToPhysicalPixel(value, rasterizationScale);
   };
-  auto taskFrame = FindTaskFrameTai(xamlRootContent);
+  auto taskFrame=(!g_unloading&&state.topology.discovered&&discoveryNow-state.topology.discovered<500&&state.topology.generation==topologyGeneration)?state.topology.frame.get():FrameworkElement{nullptr};
+  if(!taskFrame||(taskFrame!=xamlRootContent&&!DirectLayoutChildTai(xamlRootContent,taskFrame)))taskFrame=FindTaskFrameTai(xamlRootContent);
   if (!taskFrame) {
     Wh_Log(L"Failed to find Taskbar.TaskbarFrame");
     return false;
@@ -17869,23 +18468,26 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     }
   }
   auto now = std::chrono::steady_clock::now();
+  if(state.chevronRightRequested!=g_settings.trayChevronRight||state.traySizeEnabled!=g_settings.userDefinedStyleTrayArea)forceStyleApply=true;
   if (!forceStyleApply && !g_unloading && now - state.lastApplyStyleTime < std::chrono::milliseconds(200)) {
     return true;
   }
   state.lastApplyStyleTime = now;
-  auto rootGridTaskBar = FindChildByName(taskFrame, L"RootGrid");
+  TaskbarLayoutNodesTai cachedNodes;
+  bool reusedTopology=!g_unloading&&!displayGeometryChanged&&RestoreLayoutTopologyTai(state.topology,xamlRootContent,taskFrame,topologyGeneration,discoveryNow,cachedNodes);
+  auto rootGridTaskBar = reusedTopology?cachedNodes.rootGrid:FindChildByName(taskFrame, L"RootGrid");
   if (!rootGridTaskBar) {
     Wh_Log(L"Failed to find RootGrid in taskFrame");
     return false;
   }
-  auto taskbarFrameRepeater = FindChildByName(rootGridTaskBar, L"TaskbarFrameRepeater");
+  auto taskbarFrameRepeater = reusedTopology?cachedNodes.repeater:FindChildByName(rootGridTaskBar, L"TaskbarFrameRepeater");
   if (!taskbarFrameRepeater) {
     Wh_Log(L"Failed to find TaskbarFrameRepeater in rootGridTaskBar");
     return false;
   }
-  auto trayFrame = FindChildByClassName(xamlRootContent, L"SystemTray.SystemTrayFrame");
-  FrameworkElement trayHost = nullptr;
-  bool nestedTray = false;
+  auto trayFrame = reusedTopology?cachedNodes.tray:FindChildByClassName(xamlRootContent, L"SystemTray.SystemTrayFrame");
+  FrameworkElement trayHost = reusedTopology?cachedNodes.trayHost:nullptr;
+  bool nestedTray = reusedTopology&&cachedNodes.nested;
   if (!trayFrame) {
     EnumChildElements(taskbarFrameRepeater, [&](FrameworkElement item) {
       trayFrame = TrayContentTai(item);
@@ -17898,7 +18500,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     Wh_Log(L"Failed to find SystemTray.SystemTrayFrame");
     return false;
   }
-  auto systemTrayFrameGrid = FindChildByName(trayFrame, L"SystemTrayFrameGrid");
+  auto systemTrayFrameGrid = reusedTopology?cachedNodes.trayGrid:FindChildByName(trayFrame, L"SystemTrayFrameGrid");
   if (!systemTrayFrameGrid) {
     // Some templates add a single presenter/border between frame and panel.
     EnumChildElements(trayFrame, [&](FrameworkElement child) {
@@ -17913,29 +18515,47 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     return false;
   }
   // Optional custom clock; failures must not affect the existing dock layout.
-  try { IloClock::Sync(systemTrayFrameGrid); }
-  catch (...) { Wh_Log(L"[ILoClock] Sync failed: %08X", winrt::to_hresult()); }
-  auto taskbarBackground = FindChildByClassName(rootGridTaskBar, L"Taskbar.TaskbarBackground");
+  if(SyncTrayIconSizes(systemTrayFrameGrid,state,topologyGeneration,discoveryNow)&&!g_unloading){
+    // Property changes invalidate the native arrange pass. Schedule fresh
+    // measurements instead of resizing the dock from stale slot widths.
+    forceStyleApply=true;
+    if(HWND window=FindCurrentProcessTaskbarWnd())ArmStyleFollowupPasses(window);
+    ApplySettingsDebounced(1);
+  }
+  try{state.SyncChevronOrder(systemTrayFrameGrid,g_settings.trayChevronRight);}catch(...){state.RestoreChevronOrder();}
+  if(g_unloading||state.clockGrid.get()!=systemTrayFrameGrid||state.lastClockGeneration!=topologyGeneration||!state.lastClockSync||discoveryNow-state.lastClockSync>=200){
+    try {IloClock::Sync(systemTrayFrameGrid);state.clockGrid=winrt::make_weak(systemTrayFrameGrid);state.lastClockGeneration=topologyGeneration;state.lastClockSync=discoveryNow;}
+    catch (...) { Wh_Log(L"[ILoClock] Sync failed: %08X", winrt::to_hresult()); }
+  }
+  auto taskbarBackground = reusedTopology?cachedNodes.background:FindChildByClassName(rootGridTaskBar, L"Taskbar.TaskbarBackground");
   if (!taskbarBackground) {
     Wh_Log(L"Failed to find Taskbar.TaskbarBackground in rootGridTaskBar");
     return false;
   }
-  auto backgroundFillParent = FindChildByClassName(taskbarBackground, L"Windows.UI.Xaml.Controls.Grid");
+  auto backgroundFillParent = reusedTopology?cachedNodes.fillParent:FindChildByClassName(taskbarBackground, L"Windows.UI.Xaml.Controls.Grid");
   if (!backgroundFillParent) {
     Wh_Log(L"Failed to find backgroundFillParent in taskbarBackground");
     return false;
   }
-  auto backgroundFillChild = FindChildByName(backgroundFillParent, L"BackgroundFill");
+  auto backgroundFillChild = reusedTopology?cachedNodes.fill:FindChildByName(backgroundFillParent, L"BackgroundFill");
   if (!backgroundFillChild) {
     Wh_Log(L"Failed to find BackgroundFill in backgroundFillParent");
     return false;
   }
+  if(!g_unloading&&!reusedTopology)RememberLayoutTopologyTai(state.topology,taskFrame,{rootGridTaskBar,taskbarFrameRepeater,trayFrame,trayHost,systemTrayFrameGrid,taskbarBackground,backgroundFillParent,backgroundFillChild,nestedTray},topologyGeneration,discoveryNow);
   auto taskbarChildrenMeasurement =
       CaptureChildrenLayoutTai(taskbarFrameRepeater);
-  IloSyncZoom(monitorName, taskbarFrameRepeater, taskbarChildrenMeasurement);
-  IloSyncZoom(monitorName, systemTrayFrameGrid, taskbarChildrenMeasurement, true,
-              g_applyStyleTaskbarWindowTai ? g_applyStyleTaskbarWindowTai
-                                           : FindTaskbarWindowForMonitorTai(monitorName));
+  HWND zoomWindow=g_applyStyleTaskbarWindowTai?g_applyStyleTaskbarWindowTai:FindTaskbarWindowForMonitorTai(monitorName);
+  const bool continuousZoom=g_settings.zoomEnabled&&g_settings.zoomMacStyle&&
+      !g_settings.zoomExcludeTray&&!g_settings.userDefinedTrayAreaDivider&&(g_settings.trayChevronRight||!g_settings.zoomExcludeChevron)&&!g_unloading;
+  if(continuousZoom){
+    // Release the independent tray controller before sharing its icons.
+    IloSyncZoom(monitorName,systemTrayFrameGrid,taskbarChildrenMeasurement,true,zoomWindow,nullptr,false);
+    IloSyncZoom(monitorName,taskbarFrameRepeater,taskbarChildrenMeasurement,false,zoomWindow,systemTrayFrameGrid);
+  }else{
+    IloSyncZoom(monitorName,taskbarFrameRepeater,taskbarChildrenMeasurement);
+    IloSyncZoom(monitorName,systemTrayFrameGrid,taskbarChildrenMeasurement,true,zoomWindow);
+  }
   bool widgetPresent = IsTaskbarWidgetsEnabled();
   auto widgetElement = widgetPresent
       ? FindCapturedChildByClassNameTai(
@@ -18540,57 +19160,6 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     state.lastTrayFrameWidth = static_cast<unsigned int>(trayFrameWidth);
   }
   signed int userDefinedTaskbarOffsetY = (g_settings.userDefinedFlatTaskbarBottomCorners || g_settings.userDefinedFullWidthTaskbarBackground) ? 0 : g_settings.userDefinedTaskbarOffsetY;
-  if (ShouldLogTaskbarGeometry(isOverflowing || taskbarLayoutIsEdgeClamped || taskbarLayoutIsTrayConstrained || useStableStartButtonAnchor || targetTaskbarIslandScale < 0.999f || forceStyleApply || invalidateDimensionsThisPass)) {
-    Wh_Log(L"[TBGEOM] virtualSurface=%d virtualWidth=%.2f actualRepeaterWidth=%.2f layoutSurfaceWidth=%.2f overflowSuppressed=%d",
-           useVirtualTaskbarSurface ? 1 : 0,
-           taskbarVirtualSurfaceWidth,
-           taskbarFrameRepeater.ActualWidth(),
-           taskbarLayoutSurfaceWidth,
-           (overflowButton && useVirtualTaskbarSurface) ? 1 : 0);
-    Wh_Log(L"[TBGEOM] scale target=%.4f centerX=%.2f rawBg=[%.2f..%.2f] scaledBg=[%.2f..%.2f]",
-           targetTaskbarIslandScale,
-           targetScaleCenterScreenX,
-           targetBackgroundLeftScreen,
-           targetBackgroundRightScreen,
-           scaledBackgroundLeftScreen,
-           scaledBackgroundRightScreen);
-    Wh_Log(L"[TBGEOM] trayConstraint=%d predictedGapToTray=%.2f minGap=%.2f stableStartMatches=%d",
-           taskbarLayoutIsTrayConstrained ? 1 : 0,
-           predictedGapToTray,
-           minimumTaskbarToTrayGap,
-           stableStartAnchorMatchesCurrentSample ? 1 : 0);
-    LogTaskbarGeometryProbe(
-        L"ApplyStyle",
-        monitorName,
-        xamlRootContent,
-        taskFrame,
-        rootGridTaskBar,
-        taskbarFrameRepeater,
-        trayFrame,
-        systemTrayFrameGrid,
-        taskbarBackground,
-        backgroundFillChild,
-        startButtonElement,
-        rootWidth,
-        childrenWidthTaskbarDbl,
-        taskbarLeftEdge,
-        taskbarRightEdge,
-        startButtonLeft,
-        startButtonTop,
-        startButtonWidth,
-        startButtonHeight,
-        predictedCenteredTaskbarLeft,
-        isOverflowing,
-        taskbarLayoutIsEdgeClamped,
-        useStableStartButtonAnchor,
-        targetContentLeft,
-        targetContentWidth,
-        targetTaskRootOffsetX,
-        targetOffsetXTray,
-        targetBackgroundLeftScreen,
-        targetBackgroundRightScreen,
-        state);
-  }
   const float unscaledStartButtonScreenX = useStableStartButtonAnchor
       ? snapPx(state.stableStartButtonAnchorLeft + targetTaskRootOffsetX)
       : targetBackgroundLeftScreen;
@@ -18781,17 +19350,24 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     return false;
   }
   auto divider = FindChildByName(systemTrayFrameGrid, L"NotifyIconStack");
+  if(state.ChevronMoved()){
+    SetDividerForElement(divider,clipHeight,false,true);
+    divider=FindChildByName(systemTrayFrameGrid,L"NotificationAreaIcons");
+    if(!divider||divider.ActualWidth()<=0){
+      SetDividerForElement(divider,clipHeight,false,true);
+      divider=FindChildByName(systemTrayFrameGrid,L"ControlCenterButton");
+    }else SetDividerForElement(FindChildByName(systemTrayFrameGrid,L"ControlCenterButton"),clipHeight,false,true);
+  }else{
+    SetDividerForElement(FindChildByName(systemTrayFrameGrid,L"NotificationAreaIcons"),clipHeight,false,true);
+    SetDividerForElement(FindChildByName(systemTrayFrameGrid,L"ControlCenterButton"),clipHeight,false,true);
+  }
   FrameworkElement iconsPanel = nullptr;
-  if (g_settings.userDefinedStyleTrayArea || !divider) {
+  if (!divider) {
     if (auto icons = FindChildByName(systemTrayFrameGrid, L"NotificationAreaIcons")) {
       if (auto presenter = FindChildByClassName(icons, L"Windows.UI.Xaml.Controls.ItemsPresenter")) {
         iconsPanel = FindChildByClassName(presenter, L"Windows.UI.Xaml.Controls.StackPanel");
       }
     }
-  }
-  if (g_settings.userDefinedStyleTrayArea) {
-    if (iconsPanel) ProcessStackPanelChildren(iconsPanel, clipHeight);
-    ChangeControlCenterIconSize(systemTrayFrameGrid);
   }
   SetDividerForElement(divider ? divider : iconsPanel, clipHeight,
                        g_settings.userDefinedTrayAreaDivider, true);
@@ -19090,6 +19666,7 @@ void ResetGlobalVars() {
 }
 bool g_PartialMode = false;
 void Wh_ModSettingsChanged() {
+  IloPanel::InvalidateSettings();
   if (g_PartialMode) {
     return;
   }
@@ -19363,22 +19940,59 @@ namespace IloPanel {
 HANDLE stopEvent{}, refreshEvent{};
 HANDLE& NativeSettings::RefreshSignal(){return refreshEvent;}
 std::thread refreshWorker;
+static void RefreshAccentAppearance(){
+    if(g_unloading||!accentSelected.load())return;
+    {
+        std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
+        if(IsAccent(Snapshot()->Text(L"TaskbarBorderColorHex"))){
+            auto color=AccentColor();g_settings.borderColorR=color.R;g_settings.borderColorG=color.G;g_settings.borderColorB=color.B;
+        }
+        RequestTaskbarChildStyleRefresh();
+    }
+    // Repaint just the appearance, without resetting the visibility policy.
+    ArmSingleStyleApplyPass();ApplySettingsDebounced(1);
+    if(HWND panel=FindWindowW(NativeSettings::windowClass,nullptr)){
+        DWORD pid{};GetWindowThreadProcessId(panel,&pid);if(pid==GetCurrentProcessId())PostMessageW(panel,WM_APP+171,0,0);
+    }
+}
 void StartRefreshWorker() {
     stopEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
     refreshEvent = CreateEventW(nullptr, FALSE, FALSE, L"Local\\ILo.PanelTest.Refresh.v3");
     if (!stopEvent || !refreshEvent) return;
+    {std::lock_guard lock(accentWakeMutex);accentWakeEvent=CreateEventW(nullptr,FALSE,FALSE,nullptr);}
     refreshWorker = std::thread([] {
-        const HANDLE events[] = {stopEvent, refreshEvent};
-        while (WaitForMultipleObjects(2, events, FALSE, INFINITE) == WAIT_OBJECT_0 + 1) {
-            { std::lock_guard guard(profileLock); ReadLocked(true); }
-            Wh_ModSettingsChanged();
-            Wh_Log(L"[ILoPanel] Profil relu, TrayTaskGap=%d", Int(L"TrayTaskGap"));
+        using namespace winrt::Windows::UI::ViewManagement;
+        bool apartment=false;try{winrt::init_apartment(winrt::apartment_type::multi_threaded);apartment=true;}catch(...){}
+        UISettings ui{nullptr};
+        auto checkAccent=[&]{
+            if(!accentSelected.load())return;
+            try{
+                if(!ui)ui=UISettings();
+                auto next=PackAccent(ui.GetColorValue(UIColorType::Accent));
+                if(accentRgb.exchange(next)!=next)RefreshAccentAppearance();
+            }catch(...){}
+        };
+        const HANDLE events[] = {stopEvent, refreshEvent, accentWakeEvent};
+        const DWORD count=accentWakeEvent?3:2;
+        checkAccent();
+        for(;;){
+            // No new worker or periodic wake while all colors are fixed.
+            const DWORD delay=accentSelected.load()||!accentWakeEvent?1500:INFINITE;
+            auto result=WaitForMultipleObjects(count,events,FALSE,delay);
+            if(result==WAIT_OBJECT_0||result==WAIT_FAILED)break;
+            if(result==WAIT_OBJECT_0+1){
+                Wh_ModSettingsChanged();
+                Wh_Log(L"[ILoPanel] Profil relu, TrayTaskGap=%d", Int(L"TrayTaskGap"));
+            }
+            checkAccent();
         }
+        ui=nullptr;if(apartment)winrt::uninit_apartment();
     });
 }
 void StopRefreshWorker() {
     if (stopEvent) SetEvent(stopEvent);
     if (refreshWorker.joinable()) refreshWorker.join();
+    {std::lock_guard lock(accentWakeMutex);if(accentWakeEvent)CloseHandle(accentWakeEvent);accentWakeEvent=nullptr;}
     if (refreshEvent) CloseHandle(refreshEvent);
     if (stopEvent) CloseHandle(stopEvent);
     stopEvent = refreshEvent = nullptr;
@@ -19436,6 +20050,8 @@ void Wh_ModBeforeUninit() {
         state->RestoreFullWidthHost();
         state->RestoreTrayTranslation();
         state->RestoreBackgroundOrder();
+        state->RestoreChevronOrder();
+        state->RestoreTraySizes();
       };
       auto dispatcher = state->layoutDispatcher;
       if (dispatcher && dispatcher.HasThreadAccess()) restore();
@@ -19444,6 +20060,9 @@ void Wh_ModBeforeUninit() {
       Wh_Log(L"Tray cleanup on closing dispatcher: %08X",error.code().value);
     }
   }
+  // Most observers have already stopped on their own XAML dispatcher as
+  // the last brush disconnected. Revoke any remaining system notifications.
+  IloBlurEnvironment::Shutdown();
 }
 void Wh_ModUninit() {
   if (g_PartialMode) {

@@ -4,6 +4,18 @@
 
 ## English
 
+### ILô 2.1.0
+
+- **Notification area:** choose the position of the hidden-icons chevron (left or just before the clock). Icon button spacing now adjusts automatically to icon size, and native dimensions are restored when customization is disabled.
+- **Hover zoom:** macOS-style magnification now includes notification icons, with a continuous wave across the dock when the chevron is on the right or included on the left, provided the tray separator is disabled. The background-hiding option also applies to eligible tray icons.
+- **Windows accent color:** use the live Windows accent in every color picker (tint, fallback, outline/dividers and both clock lines). Thanks to [**cjbfrog**](https://github.com/cjbfrog) for the suggestion!
+- **Menus and tooltips:** sound and network context menus are centered above their icons; context menus have more space above the dock; rounded corners match the dock, including weather and generic tray tooltips. Fixed rectangular corner artifacts.
+- **Backup and restore:** export and import settings as validated `.ILo` files or reset all dock settings from Advanced options.
+- **Performance:** shared blur resources and cached composition effects, settings snapshots, reduced XAML tree searches and idle popup work, and smarter clock, weather and system-metric updates. GPU/VRAM counters run only when needed.
+- **Stability:** fixed Explorer crashes when hovering app thumbnails with intermediate outline opacity. Thanks to [**cjbfrog**](https://github.com/cjbfrog) for discovering and reporting this bug!
+- Improved dock realignment when applications close, startup restoration of visibility rules and hide/reveal animations, and graphics resource cleanup.
+- Removed obsolete flyout-position logging and the manual notification button-size setting. Existing profiles are preserved; earlier `.ILo` backups from the test versions are supported.
+
 ### ILô 2.0.2
 
 - Improved assisted update installation: the **Copy source and open Windhawk** button copies the verified source and opens the installed Windhawk application.
@@ -126,6 +138,18 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 2.1.0
+
+- **Zone de notification :** position personnalisable du chevron des applications masquées (à gauche ou juste avant l’horloge). L’espacement des boutons s’adapte automatiquement à la taille des icônes, et les dimensions natives sont restaurées à la désactivation de la personnalisation.
+- **Zoom au survol :** extension de l’effet macOS au systray, avec continuité entre les applications et la zone de notification lorsque le chevron est à droite ou inclus dans le zoom à gauche, à condition que le séparateur soit désactivé. Le masquage des fonds s’applique également aux icônes de notification concernées.
+- **Couleur d’accentuation de Windows :** disponible dans tous les sélecteurs (teinte, repli, contour/séparateurs et deux lignes de l’horloge), avec mise à jour automatique. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour sa suggestion !
+- **Menus et infobulles :** centrage des menus contextuels du son et du réseau au-dessus de leurs icônes, espacement accru avec le dock, harmonisation des arrondis des menus et infobulles météo et de notification. Correction des artefacts rectangulaires dans les coins.
+- **Sauvegarde et restauration :** export et import des paramètres au format `.ILo` avec validation du fichier, et remise à zéro complète depuis les options avancées.
+- **Performances :** mutualisation du moteur de flou et mise en cache des effets de composition, des paramètres et des éléments XAML ; réduction du travail des volets inactifs et actualisation intelligente de l’horloge, de la météo et des statistiques. Les compteurs GPU/VRAM ne fonctionnent que lorsque nécessaire.
+- **Stabilité :** correction des plantages d’Explorer associés aux valeurs intermédiaires d’opacité du contour lors de l’affichage des miniatures. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour la découverte et le signalement de ce bug !
+- Amélioration du réalignement du dock à la fermeture d’une application, de la restauration des règles de visibilité et des animations de masquage au démarrage, ainsi que de la libération des ressources graphiques.
+- Suppression de la journalisation de la position des volets et du réglage manuel de la taille des boutons de notification. Les profils existants sont conservés ; les anciennes sauvegardes `.ILo` des versions de test restent compatibles.
 
 ### ILô 2.0.2
 

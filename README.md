@@ -1,6 +1,6 @@
-# ILô 2.0.2
+# ILô 2.1.0
 
-<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô 2.0.2 — Windows 11 dock"></a></p>
+<p align="center"><a href="assets/ilo-dock.png"><img src="assets/ilo-dock.png" width="1200" alt="ILô — Windows 11 dock"></a></p>
 
 <p align="center"><a href="assets/ilo-clock-tooltip.png"><img src="assets/ilo-clock-tooltip.png" width="900" alt="ILô clock, three-day weather forecast and system information"></a></p>
 <p align="center"><a href="assets/ilo-settings-2.png"><img src="assets/ilo-settings-2.png" width="1200" alt="ILô redesigned settings panel"></a></p>
@@ -9,11 +9,17 @@
 
 [Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
 
-### What's new in ILô 2.0.2
+### What's new in ILô 2.1.0
 
-- Improved assisted update installation: the **Copy source and open Windhawk** button copies the verified source and opens the installed Windhawk application.
-- Clear feedback immediately below the button, with instructions to update and compile the existing ILô mod and a fallback if Windhawk cannot be opened automatically.
-- Update controls now appear before the release notes. SHA-256 verification and existing ILô profiles are preserved.
+- **Notification area:** choose the position of the hidden-icons chevron (left or just before the clock). Icon button spacing now adjusts automatically to icon size, and native dimensions are restored when customization is disabled.
+- **Hover zoom:** macOS-style magnification now includes notification icons, with a continuous wave across the dock when the chevron is on the right or included on the left, provided the tray separator is disabled. The background-hiding option also applies to eligible tray icons.
+- **Windows accent color:** use the live Windows accent in every color picker (tint, fallback, outline/dividers and both clock lines). Thanks to [**cjbfrog**](https://github.com/cjbfrog) for the suggestion!
+- **Menus and tooltips:** sound and network context menus are centered above their icons; context menus have more space above the dock; rounded corners match the dock, including weather and generic tray tooltips. Fixed rectangular corner artifacts.
+- **Backup and restore:** export and import settings as validated `.ILo` files or reset all dock settings from Advanced options.
+- **Performance:** shared blur resources and cached composition effects, settings snapshots, reduced XAML tree searches and idle popup work, and smarter clock, weather and system-metric updates. GPU/VRAM counters run only when needed.
+- **Stability:** fixed Explorer crashes when hovering app thumbnails with intermediate outline opacity. Thanks to [**cjbfrog**](https://github.com/cjbfrog) for discovering and reporting this bug!
+- Improved dock realignment when applications close, startup restoration of visibility rules and hide/reveal animations, and graphics resource cleanup.
+- Removed obsolete flyout-position logging and the manual notification button-size setting. Existing profiles are preserved; earlier `.ILo` backups from the test versions are supported.
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke and tested on Windows 11 build 26300.10075 with Windhawk 1.7.3.
 
@@ -50,6 +56,7 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | `8` |
 | Gap between apps and the notification area | Adjust the space between the task area and the tray area. Default is 5 | `5` |
 | Notification area vertical offset | Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0. | `0` |
+| Hidden icons chevron position | Left (Windows default) or right (before clock). | `left` |
 | Taskbar background horizontal padding | Set the horizontal padding on both sides of the taskbar background. Default is 2 | `2` |
 | Full-width taskbar background | When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off | `false` |
 | Ignore "Show Desktop" button | When enabled, the "Show Desktop" button is ignored in width calculations. Default is off | `false` |
@@ -67,7 +74,7 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Background inversion | Inverts the blurred background behind the taskbar to enhance contrast. 0 = off, 100 = fully inverted. Default is 10 | `10` |
 | Background fallback color | Color used when transparency effects or energy saver disable blur, or when the custom blur background is disabled. Accepts `#RRGGBB`, `#AARRGGBB`, or {ThemeResource Name}. Default is {ThemeResource CardStrokeColorDefaultSolid} | `{ThemeResource CardStrokeColorDefaultSolid}` |
 | Border opacity | Set the opacity of the taskbar border. Range 0-100. Default is 0 | `0` |
-| Border color (HEX) | Set the color of the taskbar border and app dividers, Hex color as `#RRGGBB`. Default is `#ffffff` | `#ffffff` |
+| Border and divider color | Custom `#RRGGBB` or live Windows accent color. | `#ffffff` |
 | Taskbar border thickness scale (%) | Set the scale of the taskbar border. Range 0-100. Default is 8 | `8` |
 | Apps divider thickness scale (%) | Set the thickness scale of the taskbar dividers. Range 0-100. Default is 8 | `8` |
 | Apps divider vertical scale (%) | Set the vertical scale of the taskbar dividers. Range 0-100. Default is 40 | `40` |
@@ -75,8 +82,7 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | App names for divider placement | Type partial app names where you'd like a divider to appear. Use ; to separate multiple entries (e.g., Steam; Notepad\+\+; Settings). Case-insensitive and supports regex. | Empty |
 | Tray area divider | When enabled, the tray area will be separated by a divider. Default is off | `false` |
 | Customize notification area icons | When enabled, the options for tray icon size will take effect. Default is off | `false` |
-| Tray icon size | Set the width and height of tray icons. Minimum is 15. Default is 15 | `15` |
-| Tray button size | Set the size (width and height) of tray buttons. Minimum is 20. Default is 30 | `30` |
+| Tray icon size | Button spacing adjusts automatically. Icon size is limited by dock height. | `15` |
 | Move Start Menu with Taskbar | When enabled, the Start and Search menus are moved to align with taskbar size and location. Default is on. | `true` |
 | Move Control Center with Taskbar | When enabled, the Control Center is moved to align with taskbar size and location. Default is on. | `true` |
 | Move Notification Center with Taskbar | When enabled, the Notification Center is moved to align with taskbar size and location. Default is on. | `true` |
@@ -87,7 +93,6 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Open Start on the monitor in use | When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on. | `true` |
 | Restrict the taskbar window to the dock | Limit the interactive area of the visible taskbar to the dock. Disable and re-enable the mod after changing this option. | `false` |
 | Show an auto-hidden taskbar only from under it | Reveal at the bottom edge under the dock content, even with a full-width background. | `true` |
-| Log flyout placement to a file | When enabled, a line is added to windhawk_popup_log.txt in %TEMP% each time the Start menu, Search, a flyout or a taskbar menu is placed, to help diagnose placement bugs. At 1 MB the file is renamed windhawk_popup_log.old.txt and a new one is started. Default is off. | `false` |
 | Visibility | With Windows taskbar auto-hide enabled, choose when the dock may hide. | `windows` |
 | Foreground window only | Evaluate only the active window. | `false` |
 | Primary monitor only | Use Windows visibility rules on other monitors. | `false` |
@@ -99,8 +104,8 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Hide time (ms) | 16–1000 ms for custom transitions. | `200` |
 | Frame rate (fps) | Target 15–120 fps, subject to Windows timer resolution. | `60` |
 | Magnify icons on hover | Magnify application icons when the mouse passes over them. | `false` |
-| Application zoom style | Zoom enlarges the hovered icon around its center. MacOS also animates nearby icons. Choices: Zoom style, MacOS style. | `zoom` |
-| Hide icon backgrounds when hover zoom is enabled | Hide the rounded background of buttons covered by hover zoom, including at rest. Turn this off to show the backgrounds. | `true` |
+| Hover zoom style | Classic zoom or macOS wave across eligible app and tray icons; the tray divider breaks continuity. | `zoom` |
+| Hide icon backgrounds when hover zoom is enabled | Hide the backgrounds of app and notification icons included in hover zoom. | `true` |
 | Disable icon background zoom | Keep the visible application button background at its normal size and position. | `false` |
 | Maximum application zoom (%) | 110–250%. Available space in the button limits the effective zoom. | `180` |
 | Maximum notification area zoom (%) | 110–250%. Available space in the tray button limits the effective zoom. | `180` |
@@ -118,11 +123,17 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 [Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
 
-### Nouveautés d'ILô 2.0.2
+### Nouveautés d'ILô 2.1.0
 
-- Installation assistée des mises à jour améliorée : le bouton **Copier le code et ouvrir Windhawk** copie la source vérifiée et ouvre l'application Windhawk installée.
-- Confirmation immédiatement sous le bouton, avec les instructions pour mettre à jour et compiler le mod ILô existant et une solution de repli si l'ouverture automatique échoue.
-- Les commandes de mise à jour apparaissent avant les notes de version. La vérification SHA-256 et les profils ILô existants sont conservés.
+- **Zone de notification :** position personnalisable du chevron des applications masquées (à gauche ou juste avant l’horloge). L’espacement des boutons s’adapte automatiquement à la taille des icônes, et les dimensions natives sont restaurées à la désactivation de la personnalisation.
+- **Zoom au survol :** extension de l’effet macOS au systray, avec continuité entre les applications et la zone de notification lorsque le chevron est à droite ou inclus dans le zoom à gauche, à condition que le séparateur soit désactivé. Le masquage des fonds s’applique également aux icônes de notification concernées.
+- **Couleur d’accentuation de Windows :** disponible dans tous les sélecteurs (teinte, repli, contour/séparateurs et deux lignes de l’horloge), avec mise à jour automatique. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour sa suggestion !
+- **Menus et infobulles :** centrage des menus contextuels du son et du réseau au-dessus de leurs icônes, espacement accru avec le dock, harmonisation des arrondis des menus et infobulles météo et de notification. Correction des artefacts rectangulaires dans les coins.
+- **Sauvegarde et restauration :** export et import des paramètres au format `.ILo` avec validation du fichier, et remise à zéro complète depuis les options avancées.
+- **Performances :** mutualisation du moteur de flou et mise en cache des effets de composition, des paramètres et des éléments XAML ; réduction du travail des volets inactifs et actualisation intelligente de l’horloge, de la météo et des statistiques. Les compteurs GPU/VRAM ne fonctionnent que lorsque nécessaire.
+- **Stabilité :** correction des plantages d’Explorer associés aux valeurs intermédiaires d’opacité du contour lors de l’affichage des miniatures. Merci à [**cjbfrog**](https://github.com/cjbfrog) pour la découverte et le signalement de ce bug !
+- Amélioration du réalignement du dock à la fermeture d’une application, de la restauration des règles de visibilité et des animations de masquage au démarrage, ainsi que de la libération des ressources graphiques.
+- Suppression de la journalisation de la position des volets et du réglage manuel de la taille des boutons de notification. Les profils existants sont conservés ; les anciennes sauvegardes `.ILo` des versions de test restent compatibles.
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Version validée sur Windows 11 build 26300.10075 avec Windhawk 1.7.3.
 
@@ -161,6 +172,7 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Décalage vertical du dock | Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8. | `8` |
 | Espacement avant la zone de notification | Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5. | `5` |
 | Décalage vertical des icônes de notification | Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0. | `0` |
+| Position du chevron des applications masquées | À gauche (Windows) ou à droite (avant l’horloge). | `left` |
 | Marges latérales du fond | Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2. | `2` |
 | Fond sur toute la largeur | Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut. | `false` |
 | Exclure le bouton « Afficher le Bureau » | Exclut ce bouton du calcul de la largeur du dock. Désactivé par défaut. | `false` |
@@ -178,7 +190,7 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Inversion des couleurs du fond | Inverse les couleurs derrière le flou pour renforcer le contraste. De 0 à 100. Valeur par défaut : 10. | `10` |
 | Couleur de repli | Couleur utilisée quand le flou est indisponible ou désactivé, notamment en mode économie d’énergie. Accepte #RRGGBB, #AARRGGBB ou {ThemeResource Nom}. Par défaut : {ThemeResource CardStrokeColorDefaultSolid}. | `"{ThemeResource CardStrokeColorDefaultSolid}"` |
 | Opacité du contour | Règle l’opacité du contour de 0 à 100. Valeur par défaut : 0. | `0` |
-| Couleur du contour et des séparateurs | Saisis une couleur au format #RRGGBB. Valeur par défaut : #ffffff. | `"#ffffff"` |
+| Couleur du contour et des séparateurs | Couleur `#RRGGBB` personnalisée ou accentuation Windows dynamique. | `#ffffff` |
 | Épaisseur du contour (%) | Règle l’épaisseur relative du contour de 0 à 100. Valeur par défaut : 8. | `8` |
 | Épaisseur des séparateurs (%) | Règle l’épaisseur relative des séparateurs de 0 à 100. Valeur par défaut : 8. | `8` |
 | Hauteur des séparateurs (%) | Règle la hauteur relative des séparateurs de 0 à 100. Valeur par défaut : 40. | `40` |
@@ -186,8 +198,7 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Applications avec séparateur | Indique des fragments de noms ou des expressions régulières, séparés par un point-virgule. La recherche ignore la casse. | `""` |
 | Séparateur de la zone de notification | Affiche un séparateur entre les applications et les icônes de notification. Désactivé par défaut. | `false` |
 | Personnaliser les icônes de notification | Active les réglages de taille des icônes et des boutons de notification. Désactivé par défaut. | `false` |
-| Taille des icônes de notification | Règle la largeur et la hauteur des icônes. Minimum et valeur par défaut : 15. | `15` |
-| Taille des boutons de notification | Règle la taille des boutons. Minimum : 20. Valeur par défaut : 30. | `30` |
+| Taille des icônes de notification | Espacement automatique des boutons. Taille limitée par la hauteur du dock. | `15` |
 | Aligner Démarrer et Recherche | Aligne ces menus sur le dock. Activé par défaut. | `true` |
 | Aligner les paramètres rapides | Positionne le volet des paramètres rapides par rapport au dock. Activé par défaut. | `true` |
 | Aligner le centre de notifications | Positionne le volet des notifications et du calendrier par rapport au dock. Activé par défaut. | `true` |
@@ -198,7 +209,6 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Ouvrir Démarrer sur l’écran actif | Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut. | `true` |
 | Limiter la zone interactive au dock | Limite la zone interactive de la barre visible au dock. Désactive puis réactive le mod après toute modification. | `false` |
 | Révéler la barre uniquement sous le dock | Révèle la barre au bord inférieur sous le contenu du dock, même avec un fond pleine largeur. | `true` |
-| Journaliser la position des volets | Écrit les positions dans windhawk_popup_log.txt dans %TEMP%. À 1 Mo, le fichier précédent est renommé windhawk_popup_log.old.txt. Désactivé par défaut. | `false` |
 | Visibilité | Avec le masquage automatique Windows activé, choisis quand le dock peut se masquer. | `windows` |
 | Fenêtre active uniquement | Prend uniquement en compte la fenêtre active. | `false` |
 | Écran principal uniquement | Laisse Windows gérer la visibilité sur les autres écrans. | `false` |
@@ -210,8 +220,8 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Durée de masquage (ms) | 16 à 1 000 ms pour les transitions personnalisées. | `200` |
 | Fréquence (images/s) | Cible de 15 à 120 images/s, selon la résolution du minuteur Windows. | `60` |
 | Agrandissement des icônes au survol | Agrandit les icônes des applications au passage de la souris. | `false` |
-| Style de zoom des applications | Le style zoom agrandit l’icône survolée autour de son centre. Le style MacOS anime aussi les icônes voisines. | `zoom` |
-| Masquer le fond des icônes quand le zoom est activé | Masque le cadre des boutons concernés tant que le zoom au survol est activé, même au repos. Décochez pour afficher les cadres. | `true` |
+| Style de zoom au survol | Zoom classique ou effet macOS sur les applications et le systray ; le séparateur interrompt la continuité. | `zoom` |
+| Masquer le fond des icônes quand le zoom est activé | Masque les fonds des boutons des applications et du systray inclus dans le zoom. | `true` |
 | Désactiver le zoom du fond des icônes | Garde le fond visible des boutons d’application à sa taille et à sa position normales. | `false` |
 | Zoom maximal des applications (%) | De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif. | `180` |
 | Zoom maximal de la zone de notification (%) | De 110 à 250 %. La place disponible dans le bouton limite le zoom effectif. | `180` |
