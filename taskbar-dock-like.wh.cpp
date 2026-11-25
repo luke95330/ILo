@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Floating Windows 11 dock with ILô Search, customizable icons and notification area.
 // @description:fr-FR Dock flottant pour Windows 11 avec ILô Search, icônes et zone de notification personnalisables.
-// @version         2.2.0
+// @version         2.3.0
 // @github          https://github.com/luke95330
 // @homepage        https://github.com/luke95330/ILo
 // @donateUrl       https://paypal.me/MightyLuke
@@ -21,11 +21,13 @@
 // Local fork of https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed
 // ==WindhawkModReadme==
 /*
-# ILô 2.2.0
+# ILô 2.3.0
 
 ## Français
 
-**Nouveauté phare : ILô Search.** La recherche ILô remplace complètement l'interface de recherche Windows du dock par sa propre icône ou son propre champ, une fenêtre animée et des résultats organisés par catégorie. Recherchez des applications, documents, images, sons, vidéos, dossiers et réglages Windows ou ILô. Choisissez l'index Windows Search ou Everything (si installé et actif), avec repli automatique vers Windows Search. Un clic droit sur un résultat donne accès aux actions adaptées au fichier ou à l'application. La recherche native Windows reste accessible via Win+S ou la présentation Windows (origine).
+**Nouveauté phare : ILô Search, désormais intégré à Windows.** ILô remplace l'interface de recherche native du dock, de Win+S et du menu Démarrer, et prend en charge les demandes de recherche des applications compatibles, notamment Start11. Commencez à taper dans Démarrer pour ouvrir directement ILô Search. Le champ de Démarrer disparaît lorsque la recherche est déjà visible dans le dock ; il reste accessible en mode Masquée. Les options Remplacer Win+S et Rediriger les recherches sont activées par défaut. Désactivez-les ou choisissez Windows (origine) pour conserver la recherche native. Recherchez des applications, documents, images, sons, vidéos, dossiers et réglages Windows ou ILô avec Windows Search ou Everything (si installé et actif), avec repli automatique vers Windows Search. Un clic droit sur un résultat donne accès aux actions adaptées au fichier ou à l'application.
+
+**Dock flottant :** le décalage vertical ajoute désormais une marge uniquement côté bord de l'écran. Le masquage par chevauchement utilise la hauteur visible du dock et ne se déclenche plus dans l'ancienne marge supérieure. Cette version allège également le code et les traitements de recherche.
 
 Dans **Zone de recherche**, personnalisez le champ, le volet, les couleurs, le flou et les animations. Par défaut, ILô Search utilise l'icône seule, une largeur de champ de 220, une hauteur automatique (0) et une fenêtre de 700 × 700 DIP.
 
@@ -47,7 +49,7 @@ ILô centre les applications et la zone de notification dans un dock. La marge i
 | Hauteur de la barre des tâches | Règle la hauteur demandée pour la barre. Valeur par défaut : 24. |
 | Taille des icônes des applications | Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22. |
 | Taille des boutons des applications | Règle la largeur et la hauteur des boutons. Valeur par défaut : 20. |
-| Décalage vertical du dock | Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8. |
+| Décalage vertical du dock | Espace entre le dock et le bord de l'écran (en bas pour un dock inférieur), sans marge côté applications. Valeur par défaut : 8. |
 | Espacement avant la zone de notification | Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5. |
 | Décalage vertical des icônes de notification | Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0. |
 | Marges latérales du fond | Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2. |
@@ -112,7 +114,9 @@ Les info-bulles XAML et les menus contextuels modernes de la barre des tâches r
 
 ## English
 
-**Flagship feature: ILô Search.** ILô completely replaces the Windows taskbar search interface with its own icon or field, animated window and categorized results. Find apps, documents, images, audio, videos, folders, and Windows or ILô settings. Choose the Windows Search index or Everything (when installed and running), with automatic Windows Search fallback. Right-click a result for file- or app-specific actions. Native Windows Search is still available through Win+S or the Windows (original) presentation.
+**Flagship feature: ILô Search, now integrated with Windows.** ILô replaces the native search interface from the dock, Win+S and Start, and accepts search requests from compatible apps, including Start11. Start typing in the Start menu to open ILô Search directly. The Start search field is hidden when search is already visible in the dock and remains available in Hidden mode. Replace Win+S and Redirect searches are enabled by default. Disable them or choose Windows (original) to retain native search. Find apps, documents, images, audio, videos, folders, and Windows or ILô settings using Windows Search or Everything (when installed and running), with automatic Windows Search fallback. Right-click a result for file- or app-specific actions.
+
+**Floating dock:** the vertical offset now adds a gap only on the screen-edge side. Overlap-based hiding uses the painted dock height instead of the former invisible upper padding. The release also removes unused code and reduces unnecessary search work.
 
 In **Search**, customize the field, window, colors, blur and animations. Defaults: icon only, 220 DIP field width, automatic height (0), and a 700 × 700 DIP window.
 
@@ -144,7 +148,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 | Taskbar height | Set the height of the taskbar. Default is 24 | `24` |
 | Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22 | `22` |
 | Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 20 | `20` |
-| Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | `8` |
+| Taskbar vertical offset | Gap between the dock and the screen edge, with no padding on the application side. Default is 8. | `8` |
 | Gap between apps and the notification area | Adjust the space between the task area and the tray area. Default is 5 | `5` |
 | Notification area vertical offset | Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0. | `0` |
 | Taskbar background horizontal padding | Set the horizontal padding on both sides of the taskbar background. Default is 2 | `2` |
@@ -201,6 +205,16 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 // ==/WindhawkModReadme==
 // ==WindhawkModSettings==
 /*
+- SearchReplaceWinS: true
+  $name: "Replace Win+S"
+  $name:fr-FR: "Remplacer Win+S"
+  $description: "Open ILô Search instead of the Windows search panel when using Win+S. Windows (original) retains native behavior."
+  $description:fr-FR: "Ouvre ILô Search à la place du panneau de recherche Windows avec Win+S. Windows (origine) conserve le comportement natif."
+- SearchRedirectWindows: true
+  $name: "Redirect searches"
+  $name:fr-FR: "Rediriger les recherches"
+  $description: "Open ILô Search directly from Start and compatible apps such as Start11, with native fallback when needed."
+  $description:fr-FR: "Ouvre directement ILô Search depuis Démarrer et les applications compatibles comme Start11, avec repli natif si nécessaire."
 - SearchPresentation: "icon"
   $name: "Search presentation"
   $name:fr-FR: "Présentation de la recherche"
@@ -340,8 +354,8 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 - TaskbarOffsetY: 8
   $name: Taskbar vertical offset
   $name:fr-FR: "Décalage vertical du dock"
-  $description: Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8
-  $description:fr-FR: "Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."
+  $description: Gap between the dock and the screen edge, with no padding on the application side. Default is 8.
+  $description:fr-FR: "Espace entre le dock et le bord de l'écran, sans marge côté applications. Valeur par défaut : 8."
 - TrayTaskGap: 5
   $name: Gap between apps and the notification area
   $name:fr-FR: "Espacement avant la zone de notification"
@@ -933,6 +947,7 @@ ILô uses the tray alignment from TAI Dock 1.0.3. Disable the previous dock and 
 #include <shobjidl.h>
 #include <shlobj.h>
 #include <shlguid.h>
+#include <uiautomationclient.h>
 #include <dwmapi.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Data.Json.h>
@@ -1108,7 +1123,7 @@ constexpr PCWSTR donate=L"https://paypal.me/MightyLuke";
 #ifdef WH_MOD_VERSION
 constexpr PCWSTR version=WH_MOD_VERSION;
 #else
-constexpr PCWSTR version=L"2.2.0";
+constexpr PCWSTR version=L"2.3.0";
 #endif
 enum class Phase { Idle, Checking, Current, Available, Downloading, Ready, NoRelease, Error };
 enum class Failure { None, Network, Metadata, Asset, Integrity, Source, Cancelled };
@@ -1222,7 +1237,7 @@ const auto& Catalog() {
     {L"TaskbarHeight", label(L"Taskbar height", L"Hauteur de la barre des tâches"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the height of the taskbar. Default is 24", L"Règle la hauteur demandée pour la barre. Valeur par défaut : 24."), Kind::Number, {}},
     {L"TaskbarIconSize", label(L"Taskbar icon size", L"Taille des icônes des applications"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22", L"Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22."), Kind::Number, {}},
     {L"TaskbarButtonSize", label(L"Taskbar button size", L"Taille des boutons des applications"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the size (width and height) of taskbar buttons. Default is 20", L"Règle la largeur et la hauteur des boutons. Valeur par défaut : 20."), Kind::Number, {}},
-    {L"TaskbarOffsetY", label(L"Taskbar vertical offset", L"Décalage vertical du dock"), label(L"Dock and layout", L"Dock et disposition"), label(L"Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8", L"Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8."), Kind::Number, {}},
+    {L"TaskbarOffsetY", label(L"Taskbar vertical offset", L"Décalage vertical du dock"), label(L"Dock and layout", L"Dock et disposition"), label(L"Gap between the dock and the screen edge, with no padding on the application side. Default is 8.", L"Espace entre le dock et le bord de l'écran, sans marge côté applications. Valeur par défaut : 8."), Kind::Number, {}},
     {L"TrayTaskGap", label(L"Gap between apps and the notification area", L"Espacement avant la zone de notification"), label(L"Dock and layout", L"Dock et disposition"), label(L"Adjust the space between the task area and the tray area. Default is 5", L"Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5."), Kind::Number, {}},
     {L"TaskbarBackgroundHorizontalPadding", label(L"Taskbar background horizontal padding", L"Marges latérales du fond"), label(L"Dock and layout", L"Dock et disposition"), label(L"Set the horizontal padding on both sides of the taskbar background. Default is 2", L"Ajoute une marge de chaque côté du contenu du dock. Valeur par défaut : 2."), Kind::Number, {}},
     {L"FullWidthTaskbarBackground", label(L"Full-width taskbar background", L"Fond sur toute la largeur"), label(L"Dock and layout", L"Dock et disposition"), label(L"When enabled, the taskbar background fills the entire width of the screen, similar to the default Windows behavior. Default is off", L"Étend le fond de la barre sur toute la largeur de l’écran. Désactivé par défaut."), Kind::Toggle, {}},
@@ -1320,6 +1335,8 @@ const auto& Catalog() {
     {L"StartMenuOnActiveMonitor", label(L"Open Start on the monitor in use", L"Ouvrir Démarrer sur l’écran actif"), label(L"Menus and flyouts", L"Menus et volets"), label(L"When enabled, the Start menu opened with the Win key (or Ctrl+Esc) opens on the monitor of the window you are working in, or the one under the mouse when the desktop or a taskbar has focus, instead of always on the main display. A taskbar's Start button already opens it on that taskbar's monitor. Only monitors with a taskbar are used. Default is on.", L"Avec la touche Windows ou Ctrl + Échap, utilise l’écran de la fenêtre active ou celui du pointeur quand le Bureau a le focus. Seuls les écrans avec une barre des tâches sont pris en compte. Activé par défaut."), Kind::Toggle, {}},
     {L"QuickContextMenuEnabled", label(L"ILo sound and network menus", L"Menus son et réseau ILô"), label(L"Menus and flyouts", L"Menus et volets"), label(L"Use independent ILo menus for the Quick Settings icons (sound, network and battery when present), keeping Windows actions. On by default.", L"Utilise les menus ILô pour les icônes de paramètres rapides (son, réseau et batterie si présente), avec les actions Windows. Activé par défaut."), Kind::Toggle, {}},
     {L"WinXContextMenuEnabled", label(L"ILo Win+X menu", L"Menu Win+X ILô"), label(L"Menus and flyouts", L"Menus et volets"), label(L"An independent Start context menu with native labels, commands and submenus. On by default.", L"Un menu indépendant pour le clic droit sur Démarrer, avec les libellés, commandes et sous-menus natifs. Activé par défaut."), Kind::Toggle, {}},
+        {L"SearchReplaceWinS", label(L"Replace Win+S", L"Remplacer Win+S"), label(L"Search", L"Zone de recherche"), label(L"Open ILô Search instead of Windows Search with Win+S. Windows (original) retains native behavior.",L"Ouvre ILô Search à la place de Windows Search avec Win+S. Windows (origine) conserve le comportement natif."), Kind::Toggle, {}},
+        {L"SearchRedirectWindows", label(L"Redirect searches", L"Rediriger les recherches"), label(L"Search", L"Zone de recherche"), label(L"Open ILô Search directly from Start and compatible apps such as Start11, with native fallback when needed.",L"Ouvre directement ILô Search depuis Démarrer et les applications compatibles comme Start11, avec repli natif si nécessaire."), Kind::Toggle, {}},
         {L"SearchPresentation", label(L"Search presentation", L"Présentation de la recherche"), label(L"Search", L"Zone de recherche"), label(L"Choose ILo's search independently of the Windows taskbar preference.", L"Choisis la présentation ILô indépendamment du réglage Windows."), Kind::Choice, {{L"native",label(L"Windows (original)",L"Windows (origine)")},{L"hidden",label(L"Hidden",L"Masquée")},{L"icon",label(L"Icon only",L"Icône seule")},{L"box",label(L"Search field",L"Champ de recherche")}}},
     {L"SearchFieldWidth", label(L"Field width", L"Largeur du champ"), label(L"Search", L"Zone de recherche"), label(L"Width of the dock field and the compact search opened from the icon.", L"Largeur du champ du dock et de la recherche compacte ouverte depuis l'icône."), Kind::Number, {}},
     {L"SearchFieldHeight", label(L"Field height", L"Hauteur du champ"), label(L"Search", L"Zone de recherche"), label(L"0 fits the dock automatically, leaving a small margin above and below.", L"0 adapte la hauteur au dock en conservant une petite marge en haut et en bas."), Kind::Number, {}},
@@ -1371,6 +1388,8 @@ static Settings Factory(){
     // current Windhawk preferences (those may themselves be customized).
     return {
         {L"TaskbarHeight",L"24"},
+        {L"SearchReplaceWinS",L"1"},
+        {L"SearchRedirectWindows",L"1"},
         {L"SearchPresentation",L"icon"},
         {L"SearchFieldWidth",L"220"},
         {L"SearchFieldHeight",L"0"},
@@ -1624,7 +1643,7 @@ static std::optional<Settings> Decode(std::string const& file,std::wstring& bad)
     auto payload=file.substr(headerSize);auto hash=Updates::Sha256(payload);
     if(hash.size()!=digestSize||file.compare(header.pos,digestSize,std::string(hash.begin(),hash.end()))!=0)return {};
     Reader r{payload};uint32_t count{};
-    if(!r.U32(count)||count<std::size(Catalog<false>())-21||count>std::size(Catalog<false>())+1)return {};
+    if(!r.U32(count)||count<std::size(Catalog<false>())-23||count>std::size(Catalog<false>())+1)return {};
     Settings settings;
     for(uint32_t i=0;i<count;++i){std::wstring key,value;if(!r.String(key,96)||!r.String(value,maxText)||!settings.emplace(std::move(key),std::move(value)).second)return {};}
     if(r.pos!=payload.size())return {};
@@ -2670,6 +2689,7 @@ std::map<std::wstring,std::wstring> baseline, values;
             card(L"Open on the active screen",L"Ouverture sur l'écran actif",{L"StartMenuOnActiveMonitor",L"NotificationCenterPrimaryOnly"});
             card(L"Align flyouts with the dock",L"Aligner les volets sur le dock",{L"MoveFlyoutStartMenu",L"MoveFlyoutControlCenter",L"MoveFlyoutNotificationCenter",L"MoveFlyoutKeyboardLayout",L"MoveTrayContextMenus",L"AlignFlyoutInner"});
         }else if(is(L"Search",L"Zone de recherche")){
+            card(L"Windows integration",L"Intégration Windows",{L"SearchReplaceWinS",L"SearchRedirectWindows"});
             card(L"Presentation in the dock",L"Présentation dans le dock",{L"SearchPresentation",L"SearchFieldWidth",L"SearchFieldHeight",L"SearchFieldRadius",L"SearchFieldBorderSize",L"SearchFieldBorderColor",L"SearchFieldBackgroundColor",L"SearchFieldOpacity"});
             card(L"Search window",L"Fenêtre de recherche",{L"SearchWindowWidth",L"SearchWindowHeight",L"SearchWindowRadius",L"SearchWindowBorderSize",L"SearchWindowBorderColor",L"SearchWindowBackgroundColor",L"SearchWindowOpacity",L"SearchWindowBlur",L"SearchWindowAnimation"});
             card(L"Search sources",L"Sources de recherche",{L"SearchEngine",L"SearchFiles",L"SearchSettings",L"SearchWeb"});
@@ -3093,13 +3113,17 @@ bool g_taskbarButtonWidthCustomized;
 constexpr int kDefaultTaskbarHeight = 24;
 constexpr int kDefaultTaskbarIconSize = 22;
 constexpr int kDefaultTaskbarButtonSize = 20;
-constexpr int kHeightCapPaddingPerSide = 6;
 constexpr int kSystemSmallTaskbarIconSize = 16;
 constexpr int kSystemMediumTaskbarIconSize = 24;
 constexpr int kSystemSmallTaskbarButtonSize = 32;
 constexpr int kSystemMediumTaskbarButtonSize = 44;
 constexpr int kMinTaskbarHeight = kSystemMediumTaskbarButtonSize;
 constexpr int kMaxTaskbarHeight = 200;
+// Keep the existing native window-height limit, but reserve only one gap.
+constexpr int kMaxTaskbarWindowHeight=kMaxTaskbarHeight+12;
+static constexpr int EffectiveDockGapDip(int height,int requested,bool flush) noexcept {
+    return flush?0:std::clamp(requested,0,std::max(0,kMaxTaskbarWindowHeight-height));
+}
 constexpr int kMinTaskbarButtonSize = kSystemMediumTaskbarButtonSize;
 constexpr int kMaxTaskbarButtonSize = 300;
 constexpr int kMinTaskbarIconSize = 8;
@@ -3114,34 +3138,6 @@ constexpr int kHookDrainTimeoutMs = 10000;
 bool WaitForConditionWithTimeout(std::function<bool()> condition,
                                  int timeoutMs,
                                  int pollIntervalMs);
-FrameworkElement TryQueryFrameworkElement(IUnknown* unknown,
-                                          PCWSTR context = L"FrameworkElement") {
-    if (!unknown) {
-        return nullptr;
-    }
-    FrameworkElement element{nullptr};
-    try {
-        HRESULT hr = unknown->QueryInterface(winrt::guid_of<FrameworkElement>(),
-                                             winrt::put_abi(element));
-        if (FAILED(hr) || !element) {
-            if (context) {
-                Wh_Log(L"%s QueryInterface failed: %08X", context, hr);
-            }
-            return nullptr;
-        }
-    } catch (winrt::hresult_error const& ex) {
-        if (context) {
-            Wh_Log(L"%s QueryInterface threw %08X: %s", context, ex.code(), ex.message().c_str());
-        }
-        return nullptr;
-    } catch (...) {
-        if (context) {
-            Wh_Log(L"%s QueryInterface threw: %08X", context, winrt::to_hresult());
-        }
-        return nullptr;
-    }
-    return element;
-}
 int ClampInt(int value, int minValue, int maxValue) {
     return value < minValue ? minValue : (value > maxValue ? maxValue : value);
 }
@@ -3165,7 +3161,7 @@ struct ModSettings {
   int trayContentOffsetY;
   bool trayChevronRight{};
   int userDefinedTaskbarBackgroundHorizontalPadding;
-  unsigned int userDefinedTaskbarOffsetY;
+  int userDefinedTaskbarGapDip;
   unsigned int userDefinedTaskbarHeight;
   unsigned int userDefinedTaskbarIconSize;
   unsigned int userDefinedTrayIconSize;
@@ -3201,6 +3197,36 @@ struct ModSettings {
 };
 ModSettings g_settings;
 std::recursive_mutex g_settingsMutex;
+// The same resting geometry drives the shell size, XAML layout and popup /
+// overlap calculations. The gap is always on the screen-edge side.
+struct DockVerticalGeometryTai {
+  int height{},gap{};
+  int WindowHeight()const noexcept{return height+gap;}
+  double ContentY(bool top)const noexcept{return top?gap:0;}
+  double ContentCenter(bool top)const noexcept{return ContentY(top)+height*.5;}
+};
+static DockVerticalGeometryTai DockVerticalGeometry(){
+  std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
+  return {int(g_settings.userDefinedTaskbarHeight),g_settings.userDefinedTaskbarGapDip};
+}
+static bool DockAtTop(RECT const& bar,RECT const& monitor)noexcept{
+  return int64_t(bar.top)+bar.bottom<int64_t(monitor.top)+monitor.bottom;
+}
+HMONITOR GetTaskbarMonitorTai(HWND taskbarWindow);
+static bool DockAtTop(HWND bar)noexcept{
+  RECT bounds{};MONITORINFO mi{sizeof(mi)};
+  return bar&&GetWindowRect(bar,&bounds)&&GetMonitorInfoW(GetTaskbarMonitorTai(bar),&mi)&&DockAtTop(bounds,mi.rcMonitor);
+}
+static RECT RestingDockBandTai(RECT monitor,RECT const& bar,DockVerticalGeometryTai geometry,double pixelsPerDip,double islandScale=1.)noexcept{
+  if(geometry.height<=0||!std::isfinite(pixelsPerDip)||pixelsPerDip<=0){geometry={int(std::max(1L,bar.bottom-bar.top)),0};pixelsPerDip=1.;}
+  const bool top=DockAtTop(bar,monitor);
+  const double height=geometry.height*pixelsPerDip,gap=geometry.gap*pixelsPerDip;
+  const double center=top?monitor.top+gap+height*.5:monitor.bottom-gap-height*.5;
+  const double half=height*.5*std::clamp(islandScale,0.01,1.);
+  monitor.top=LONG(std::floor(std::max(double(monitor.top),center-half)));
+  monitor.bottom=LONG(std::ceil(std::min(double(monitor.bottom),center+half)));
+  return monitor;
+}
 bool GetUserDefinedAlignFlyoutInner() {
   std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
   return g_settings.userDefinedAlignFlyoutInner;
@@ -3231,7 +3257,8 @@ struct TaskbarChildStyleCache {
   uint64_t signature{0};
   bool valid{false};
 };
-namespace IloSearch {struct Dock;}
+namespace IloSearch {struct Dock;namespace Integration {static bool HandleMessage(HWND,UINT,WPARAM,LPARAM);static std::optional<LRESULT> HandleStartSearch(HWND,WPARAM,LPARAM);}}
+namespace IloStartSearch {static void FromLayout()noexcept;static void AttachToStartThread(bool stop=false)noexcept;}
 struct TaskbarState {
   std::recursive_mutex mutex;
   std::shared_ptr<IloSearch::Dock> search;
@@ -3473,6 +3500,7 @@ struct TaskbarState {
     bool seen{};
   };
   std::vector<TraySizeProperty> traySizeProperties;
+  std::array<std::optional<TraySizeProperty>,2> dockAlignments;
   winrt::weak_ref<FrameworkElement> traySizeRoot;
   uint64_t traySizeGeneration{};
   ULONGLONG traySizeLastSync{};
@@ -3481,6 +3509,9 @@ struct TaskbarState {
     if(a==b)return true;
     if(auto x=a.try_as<winrt::Windows::Foundation::IReference<double>>()){
       auto y=b.try_as<winrt::Windows::Foundation::IReference<double>>();return y&&x.Value()==y.Value();
+    }
+    if(auto x=a.try_as<winrt::Windows::Foundation::IReference<VerticalAlignment>>()){
+      auto y=b.try_as<winrt::Windows::Foundation::IReference<VerticalAlignment>>();return y&&x.Value()==y.Value();
     }
     if(auto x=a.try_as<winrt::Windows::Foundation::IReference<CornerRadius>>()){
       auto y=b.try_as<winrt::Windows::Foundation::IReference<CornerRadius>>();if(!y)return false;
@@ -3496,6 +3527,23 @@ struct TaskbarState {
       return true;
     }}catch(...){}
     return false;
+  }
+  void RestoreDockAlignments()noexcept{
+    for(auto& item:dockAlignments)if(item){RestoreTrayProperty(*item);item.reset();}
+  }
+  bool SetDockAlignment(size_t index,FrameworkElement const& element,VerticalAlignment value){
+    auto& saved=dockAlignments[index];
+    if(saved&&saved->element.get()!=element){RestoreTrayProperty(*saved);saved.reset();}
+    if(!element)return false;
+    auto prop=FrameworkElement::VerticalAlignmentProperty();
+    auto local=element.ReadLocalValue(prop),applied=winrt::box_value(value);auto expr=element.GetBindingExpression(prop);
+    if(saved&&(!EqualTrayValue(local,saved->applied)||expr))saved.reset();
+    if(element.VerticalAlignment()==value)return false;
+    if(saved){element.SetValue(prop,applied);saved->applied=applied;return true;}
+    winrt::Windows::UI::Xaml::Data::BindingBase binding{nullptr};
+    if(expr){binding=expr.ParentBinding();if(!binding)return false;}
+    else if(local!=DependencyProperty::UnsetValue()&&!local.try_as<winrt::Windows::Foundation::IReference<VerticalAlignment>>())return false;
+    element.SetValue(prop,applied);saved=TraySizeProperty{winrt::make_weak(element),prop,local,applied,binding,true};return true;
   }
   bool RestoreTraySizes(){
     bool changed=false;for(auto const& entry:traySizeProperties)changed|=RestoreTrayProperty(entry);
@@ -3976,11 +4024,7 @@ int GetFlyoutTaskbarBottomGapPx(float dpiScaleY) {
         g_settings.userDefinedFullWidthTaskbarBackground) {
         return 0;
     }
-    int offsetY = static_cast<int>(g_settings.userDefinedTaskbarOffsetY);
-    if (offsetY >= 0) {
-        return 0;
-    }
-    return static_cast<int>((-offsetY * dpiScaleY) + 0.5f);
+    return static_cast<int>((g_settings.userDefinedTaskbarGapDip * dpiScaleY) + 0.5f);
 }
 int GetFlyoutTaskbarHeightPx(float dpiScaleY) {
     std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
@@ -4372,7 +4416,6 @@ bool IsVerticalTaskbar() {
     return appBarData.uEdge == ABE_LEFT || appBarData.uEdge == ABE_RIGHT;
 }
 void OverrideResourceDirectoryLookup(
-    PCSTR sourceFunctionName,
     const winrt::Windows::Foundation::IInspectable* key,
     winrt::Windows::Foundation::IInspectable* value) {
     if (g_unloading || !key || !value) {
@@ -4395,8 +4438,6 @@ void OverrideResourceDirectoryLookup(
         return;
     }
     if (newValueDouble != *valueDouble) {
-        Wh_Log(L"[%S] Overriding value %s: %f->%f", sourceFunctionName,
-               keyString->c_str(), *valueDouble, newValueDouble);
         *value = winrt::box_value(newValueDouble);
     }
 }
@@ -4419,7 +4460,7 @@ ResourceDictionary_Lookup_TaskbarView_Hook(
     if (!ret || !*ret) {
         return ret;
     }
-    OverrideResourceDirectoryLookup(__FUNCTION__, key, ret);
+    OverrideResourceDirectoryLookup(key, ret);
     return ret;
 }
 using ResourceDictionary_Lookup_SearchUxUi_t =
@@ -4441,7 +4482,7 @@ ResourceDictionary_Lookup_SearchUxUi_Hook(
     if (!ret || !*ret) {
         return ret;
     }
-    OverrideResourceDirectoryLookup(__FUNCTION__, key, ret);
+    OverrideResourceDirectoryLookup(key, ret);
     return ret;
 }
 static std::atomic<int> appIconSourcePercent{100};
@@ -5838,141 +5879,6 @@ void WINAPI TaskbarComponentHost_UpdateDefaultWidth_Hook(void* pThis) {
         *iconHeight = prevIconHeight;
     }
 }
-using ExperienceToggleButton_IconHeight_get_t = double(WINAPI*)(void* pThis);
-ExperienceToggleButton_IconHeight_get_t
-    ExperienceToggleButton_IconHeight_get_Original;
-using ExperienceToggleButton_IconHeight_set_t = void(WINAPI*)(void* pThis,
-                                                              double height);
-ExperienceToggleButton_IconHeight_set_t
-    ExperienceToggleButton_IconHeight_set_Original;
-// The icon height setter calls UpdateButtonPadding, reentering the hook below,
-// where the flag suppresses it: the padding is calculated with the posture
-// height anyway.
-thread_local bool g_inExperienceToggleButton_IconHeight;
-void SetExperienceToggleButtonIconHeight(void* pThis, double height) {
-    g_inExperienceToggleButton_IconHeight = true;
-    ExperienceToggleButton_IconHeight_set_Original(pThis, height);
-    g_inExperienceToggleButton_IconHeight = false;
-}
-// The widget content is laid out for the stock icon size, so its margins are
-// scaled to the customized one.
-void UpdateAugmentedEntryPointContent(FrameworkElement panelElement) {
-    FrameworkElement augmentedEntryPointContentGrid =
-        FindChildByName(panelElement, L"AugmentedEntryPointContentGrid");
-    if (!augmentedEntryPointContentGrid) {
-        return;
-    }
-    double marginValue = static_cast<double>(40 - g_settings_tbiconsize.iconSize) / 2;
-    if (marginValue < 0) {
-        marginValue = 0;
-    }
-    EnumChildElements(augmentedEntryPointContentGrid, [marginValue](
-                                                          FrameworkElement
-                                                              child) {
-        if (winrt::get_class_name(child) != L"Windows.UI.Xaml.Controls.Grid") {
-            return false;
-        }
-        FrameworkElement panelGrid =
-            FindChildByClassName(child, L"Windows.UI.Xaml.Controls.Grid");
-        if (!panelGrid) {
-            return false;
-        }
-        FrameworkElement panel = FindChildByClassName(
-            panelGrid, L"AdaptiveCards.Rendering.Uwp.WholeItemsPanel");
-        if (!panel) {
-            return false;
-        }
-        Wh_Log(L"Processing %f x %f widget", panelGrid.Width(),
-               panelGrid.Height());
-        double labelsTopBorderExtraMargin = 0;
-        bool widePanel = panelGrid.Width() > panelGrid.Height();
-        if (widePanel) {
-            auto margin = Thickness{3, 3, 3, 3};
-            if (!g_unloading && marginValue <= 3) {
-                labelsTopBorderExtraMargin = 3 - marginValue;
-                margin.Left = marginValue;
-                margin.Top = marginValue;
-                // Logically these should be marginValue too, but having no
-                // right/bottom margin doesn't seem to matter, while having
-                // values which are too tight sometimes cause the icon to
-                // disappear for some reason. Relevant issue:
-                // https://github.com/ramensoftware/windhawk-mods/issues/726
-                margin.Right = 0;
-                margin.Bottom = 0;
-            }
-            Wh_Log(L"Setting Margin=%f,%f,%f,%f for panel", margin.Left,
-                   margin.Top, margin.Right, margin.Bottom);
-            panel.Margin(margin);
-            panelGrid.VerticalAlignment(g_unloading
-                                            ? VerticalAlignment::Stretch
-                                            : VerticalAlignment::Center);
-        } else {
-            auto margin = Thickness{8, 8, 8, 8};
-            if (!g_unloading) {
-                margin.Left = marginValue;
-                margin.Top = marginValue;
-                // Logically these should be marginValue too, but having no
-                // right/bottom margin doesn't seem to matter, while having
-                // values which are too tight sometimes cause the icon to
-                // disappear for some reason. Relevant issue:
-                // https://github.com/ramensoftware/windhawk-mods/issues/726
-                margin.Right = 0;
-                margin.Bottom = 0;
-                if (g_taskbarHeight < 48) {
-                    margin.Top -= static_cast<double>(48 - g_taskbarHeight) / 2;
-                    if (margin.Top < 0) {
-                        margin.Top = 0;
-                    }
-                }
-            }
-            Wh_Log(L"Setting Margin=%f,%f,%f,%f for panel", margin.Left,
-                   margin.Top, margin.Right, margin.Bottom);
-            panel.Margin(margin);
-        }
-        FrameworkElement tickerGrid = panel;
-        if ((tickerGrid = FindChildByClassName(
-                 tickerGrid, L"Windows.UI.Xaml.Controls.Border")) &&
-            (tickerGrid = FindChildByClassName(
-                 tickerGrid, L"AdaptiveCards.Rendering.Uwp.WholeItemsPanel")) &&
-            (tickerGrid = FindChildByClassName(
-                 tickerGrid, L"Windows.UI.Xaml.Controls.Grid"))) {
-            // OK.
-        } else {
-            return false;
-        }
-        double badgeMaxValue = g_unloading ? 24 : 40 - marginValue * 2;
-        FrameworkElement badgeSmall = tickerGrid;
-        if ((badgeSmall = FindChildByName(badgeSmall, L"SmallTicker1")) &&
-            (badgeSmall = FindChildByClassName(
-                 badgeSmall, L"AdaptiveCards.Rendering.Uwp.WholeItemsPanel")) &&
-            (badgeSmall =
-                 FindChildByName(badgeSmall, L"BadgeAnchorSmallTicker"))) {
-            Wh_Log(L"Setting MaxWidth=%f, MaxHeight=%f for small badge",
-                   badgeMaxValue, badgeMaxValue);
-            badgeSmall.MaxWidth(badgeMaxValue);
-            badgeSmall.MaxHeight(badgeMaxValue);
-        }
-        FrameworkElement badgeLarge = tickerGrid;
-        if ((badgeLarge = FindChildByName(badgeLarge, L"LargeTicker1")) &&
-            (badgeLarge = FindChildByClassName(
-                 badgeLarge, L"AdaptiveCards.Rendering.Uwp.WholeItemsPanel")) &&
-            (badgeLarge =
-                 FindChildByName(badgeLarge, L"BadgeAnchorLargeTicker"))) {
-            Wh_Log(L"Setting MaxWidth=%f, MaxHeight=%f for large badge",
-                   badgeMaxValue, badgeMaxValue);
-            badgeLarge.MaxWidth(badgeMaxValue);
-            badgeLarge.MaxHeight(badgeMaxValue);
-        }
-        FrameworkElement labelsBorder = tickerGrid;
-        if ((labelsBorder = FindChildByName(labelsBorder, L"LargeTicker2"))) {
-            auto margin = Thickness{0, labelsTopBorderExtraMargin, 0, 0};
-            Wh_Log(L"Setting Margin=%f,%f,%f,%f for labels border", margin.Left,
-                   margin.Top, margin.Right, margin.Bottom);
-            labelsBorder.Margin(margin);
-        }
-        return false;
-    });
-}
 using ExperienceToggleButton_UpdateButtonPadding_t = void(WINAPI*)(void* pThis);
 ExperienceToggleButton_UpdateButtonPadding_t
     ExperienceToggleButton_UpdateButtonPadding_Original;double GetEffectiveTaskbarButtonTargetWidth();
@@ -6033,16 +5939,6 @@ bool IsSearchIconButton(void* pThis) {
 // the taskbar hands over as the stock height of the current posture.
 using SearchButtonBase_IconHeight_t = void(WINAPI*)(void* pThis, double height);
 SearchButtonBase_IconHeight_t SearchButtonBase_IconHeight_Original;
-// The icon height property setter ends with a virtual call to
-// UpdateButtonPadding, so setting it reenters the hook below. The padding is
-// calculated there with the posture height anyway, and the nested run of the
-// restoring call would only put the customized height back in its place.
-thread_local bool g_inSearchButtonBase_IconHeight;
-void SetSearchButtonIconHeight(void* pThis, double height) {
-    g_inSearchButtonBase_IconHeight = true;
-    SearchButtonBase_IconHeight_Original(pThis, height);
-    g_inSearchButtonBase_IconHeight = false;
-}
 void WINAPI SearchButtonBase_IconHeight_Hook(void* pThis, double height) {
     Wh_Log(L"> height=%f", height);
     if (!g_unloading && IsSearchIconButton(pThis)) {
@@ -6232,17 +6128,9 @@ void LoadSettingsTBIconSize() {
     const int requestedHeight =
         ReadPositiveIntSettingOrDefault(L"TaskbarHeight", kDefaultTaskbarHeight);
     int taskbarHeight = ClampInt(abs(requestedHeight), kMinTaskbarHeight, kMaxTaskbarHeight);
-    const int taskbarOffsetY =
-        std::max(0, IloPanel::Int(L"TaskbarOffsetY"));
-    const int heightExpansion =
-        ((IloPanel::Int(L"FlatTaskbarBottomCorners") ||
-          IloPanel::Int(L"FullWidthTaskbarBackground"))
-             ? 0
-             : (taskbarOffsetY * 2));
-    g_settings_tbiconsize.taskbarHeight = ClampInt(
-        taskbarHeight + heightExpansion,
-        kMinTaskbarHeight,
-        kMaxTaskbarHeight + (kHeightCapPaddingPerSide * 2));
+    const int gap=EffectiveDockGapDip(taskbarHeight,IloPanel::Int(L"TaskbarOffsetY"),
+        IloPanel::Int(L"FlatTaskbarBottomCorners")||IloPanel::Int(L"FullWidthTaskbarBackground"));
+    g_settings_tbiconsize.taskbarHeight=taskbarHeight+gap;
     const int requestedButtonSize =
         ReadPositiveIntSettingOrDefault(L"TaskbarButtonSize", kDefaultTaskbarButtonSize);
     const int taskbarButtonSize =
@@ -6252,7 +6140,7 @@ void LoadSettingsTBIconSize() {
     const int requestedIconSize =
         ReadPositiveIntSettingOrDefault(L"TaskbarIconSize", kDefaultTaskbarIconSize);
     const int maxIconSize =
-        GetMaxTaskbarIconSizeForLayout(g_settings_tbiconsize.taskbarHeight, taskbarButtonSize);
+        GetMaxTaskbarIconSizeForLayout(taskbarHeight, taskbarButtonSize);
     g_settings_tbiconsize.iconSize = ClampInt(abs(requestedIconSize), kMinTaskbarIconSize, maxIconSize);
     g_settings_tbiconsize.iconSizeSmall =
         std::min(g_settings_tbiconsize.iconSize, kSystemSmallTaskbarIconSize);
@@ -6638,18 +6526,6 @@ bool HookTaskbarViewDllSymbols(HMODULE module,
                 {LR"(private: void __cdecl winrt::Microsoft::Windows::Taskbar::implementation::TaskbarComponentHost::UpdateDefaultWidth(void))"},
                 &TaskbarComponentHost_UpdateDefaultWidth_Original,
                 TaskbarComponentHost_UpdateDefaultWidth_Hook,
-                true,  // Missing in older Windows 11 versions.
-            },
-            {
-                {LR"(public: double __cdecl winrt::Taskbar::implementation::ExperienceToggleButton::IconHeight(void)const )"},
-                &ExperienceToggleButton_IconHeight_get_Original,
-                nullptr,
-                true,  // Missing in older Windows 11 versions.
-            },
-            {
-                {LR"(public: void __cdecl winrt::Taskbar::implementation::ExperienceToggleButton::IconHeight(double))"},
-                &ExperienceToggleButton_IconHeight_set_Original,
-                nullptr,
                 true,  // Missing in older Windows 11 versions.
             },
             {
@@ -7381,7 +7257,6 @@ bool RunFromWindowThread(HWND hWnd,
     return true;
 }
 void ApplySettingsFromTaskbarThread() {
-    Wh_Log(L"Applying settings");
     EnumThreadWindows(
         GetCurrentThreadId(),
         [](HWND hWnd, LPARAM lParam) -> BOOL {
@@ -7461,52 +7336,6 @@ void ApplySettingsStartButtonPosition(HWND hTaskbarWnd) {
             hTaskbarWnd, [](void* pParam) { ApplySettingsFromTaskbarThread(); }, 0);
     }
 }
-// The layout of MSVC's std::vector, which the mod's own STL may not match.
-struct MsvcRectVector {
-    winrt::Windows::Foundation::Rect* first;
-    winrt::Windows::Foundation::Rect* last;
-    winrt::Windows::Foundation::Rect* end;
-};
-// The per-item bounds recorded by the taskbar layout, which the taskbar reports
-// to the shell, e.g. to anchor the search flyout to the search box. Depending
-// on the Windows version, they're the layout slots rather than where the items
-// were arranged, so the pinned buttons get their arranged bounds.
-using TaskbarFrame_ChildItemBounds_t = MsvcRectVector*(WINAPI*)(void* pThis);
-TaskbarFrame_ChildItemBounds_t TaskbarFrame_ChildItemBounds_Original;
-MsvcRectVector* WINAPI TaskbarFrame_ChildItemBounds_Hook(void* pThis) {
-    MsvcRectVector* bounds = TaskbarFrame_ChildItemBounds_Original(pThis);
-    if (g_unloading) {
-        return bounds;
-    }
-    FrameworkElement taskbarFrame = nullptr;
-    ((IUnknown**)pThis)[1]->QueryInterface(winrt::guid_of<FrameworkElement>(),
-                                           winrt::put_abi(taskbarFrame));
-    if (!taskbarFrame) {
-        return bounds;
-    }
-    FrameworkElement child = taskbarFrame;
-    if (!(child = FindChildByName(child, L"RootGrid")) ||
-        !(child = FindChildByName(child, L"TaskbarFrameRepeater"))) {
-        return bounds;
-    }
-    auto repeater =
-        child.try_as<winrt::Microsoft::UI::Xaml::Controls::ItemsRepeater>();
-    if (!repeater) {
-        return bounds;
-    }
-    // The bounds are indexed by item index.
-    int count = static_cast<int>(bounds->last - bounds->first);
-    for (int index = 0; index < count; index++) {
-        auto element = repeater.TryGetElement(index).try_as<FrameworkElement>();
-        if (!element || !IsPinnedClusterButton(IdentifySystemButton(element))) {
-            continue;
-        }
-        auto offset = element.ActualOffset();
-        auto size = element.ActualSize();
-        bounds->first[index] = {offset.x, offset.y, size.x, size.y};
-    }
-    return bounds;
-}
 // The start button context menu is centered over the start button or aligned to
 // its leading edge depending on the taskbar alignment (TaskbarFrame's
 // Alignment, where Left=0 and Center=1). Both the placement mode and the anchor
@@ -7556,12 +7385,13 @@ std::mutex startupReconcileMutex;
 constexpr UINT kDelayMs = 5;
 std::atomic<bool> limitReveal{};
 std::mutex spanMutex;
-std::unordered_map<HWND, std::pair<LONG, LONG>> spans;
+struct DockSpan{LONG left{},right{};double islandScale{1.};};
+std::unordered_map<HWND,DockSpan> spans;
 
-void SetSpan(HWND bar, LONG left, LONG right) {
+void SetSpan(HWND bar, LONG left, LONG right,double islandScale=1.) {
     if (!bar) return;
     std::lock_guard lock(spanMutex);
-    if (right - left >= 10) spans[bar] = {left, right};
+    if (right - left >= 10) spans[bar] = {left,right,std::isfinite(islandScale)?std::clamp(islandScale,.01,1.):1.};
     else spans.erase(bar);
 }
 bool AllowsPointer(HWND bar, LONG localX) {
@@ -7569,8 +7399,9 @@ bool AllowsPointer(HWND bar, LONG localX) {
     std::lock_guard lock(spanMutex);
     auto it = spans.find(bar);
     return it == spans.end() ||
-           (localX >= it->second.first && localX < it->second.second);
+           (localX >= it->second.left && localX < it->second.right);
 }
+double DockScale(HWND bar){std::lock_guard lock(spanMutex);auto it=spans.find(bar);return it==spans.end()?1.:it->second.islandScale;}
 void NotifyBars();
 void Read() {
     auto c = std::make_shared<Config>();
@@ -7610,9 +7441,9 @@ bool Bar(HWND w) {
     return w && GetClassNameW(w,cls,64) &&
         (!wcscmp(cls,L"Shell_TrayWnd") || !wcscmp(cls,L"Shell_SecondaryTrayWnd"));
 }
-enum class PopupHold{Clock,Search};
-static PCWSTR HoldKey(PopupHold kind){return kind==PopupHold::Clock?L"ILo.Hiding.ClockHover.v1":L"ILo.Hiding.SearchOpen.v1";}
-static bool PopupHeld(HWND w){return w&&(GetPropW(w,HoldKey(PopupHold::Clock))||GetPropW(w,HoldKey(PopupHold::Search)));}
+enum class PopupHold{Clock,Search,SearchOpening};
+static PCWSTR HoldKey(PopupHold kind){switch(kind){case PopupHold::Clock:return L"ILo.Hiding.ClockHover.v1";case PopupHold::SearchOpening:return L"ILo.Hiding.SearchOpening.v1";default:return L"ILo.Hiding.SearchOpen.v1";}}
+static bool PopupHeld(HWND w){return w&&(GetPropW(w,HoldKey(PopupHold::Clock))||GetPropW(w,HoldKey(PopupHold::Search))||GetPropW(w,HoldKey(PopupHold::SearchOpening)));}
 static UINT popupHoldMessage{};
 static void SetPopupHold(HWND w,PopupHold kind,bool hold){
     if(!Bar(w))return;
@@ -7840,7 +7671,11 @@ void Tick(HWND w,State& s,const Config& c) {
         if(autoHide && c.mode!=Mode::System && (!c.primary || (mi.dwFlags&MONITORINFOF_PRIMARY))){
             if(c.mode==Mode::Never)pin=true;
             else{
-                auto band=mi.rcMonitor;band.top=band.bottom-(bar.bottom-bar.top);
+                // Use the dock's resting painted height rather than the
+                // shell HWND (which includes the screen-edge gap and can
+                // be offscreen during an auto-hide animation).
+                const UINT dpi=GetDpiForWindow(w);
+                auto band=RestingDockBandTai(mi.rcMonitor,bar,DockVerticalGeometry(),dpi?dpi/96.:1.,DockScale(w));
                 Scan scan{c,monitor,mi.rcMonitor,band};
                 if(c.foreground){if(auto fg=GetForegroundWindow())Visit(fg,reinterpret_cast<LPARAM>(&scan));}
                 else EnumWindows(Visit,reinterpret_cast<LPARAM>(&scan));
@@ -8111,6 +7946,8 @@ void AfterShellMove(HWND w,RECT from,RECT to) {
     Begin(w,*s,from,to,show,*c);
 }
 LRESULT CALLBACK Observe(HWND w,UINT msg,WPARAM wp,LPARAM lp,DWORD_PTR){
+    if(msg==WM_COPYDATA)if(auto result=IloSearch::Integration::HandleStartSearch(w,wp,lp))return *result;
+    if(IloSearch::Integration::HandleMessage(w,msg,wp,lp))return 0;
     if(!g_unloading&&msg==popupHoldMessage&&popupHoldMessage){
         if(PopupHeld(w))KillTimer(w,2);
         else {auto s=Get(w);APPBARDATA data{sizeof(data)};if((!s||!s->pinned)&&(SHAppBarMessage(ABM_GETSTATE,&data)&ABS_AUTOHIDE))SetTimer(w,2,100,nullptr);}
@@ -8195,7 +8032,7 @@ void Stop(){
     EnumWindows([](HWND w,LPARAM)->BOOL {
         DWORD pid{}; GetWindowThreadProcessId(w,&pid);
         if(pid==GetCurrentProcessId() && Bar(w) && GetPropW(w,listenerKey)){
-            RemovePropW(w,HoldKey(PopupHold::Clock));RemovePropW(w,HoldKey(PopupHold::Search));
+            RemovePropW(w,HoldKey(PopupHold::Clock));RemovePropW(w,HoldKey(PopupHold::Search));RemovePropW(w,HoldKey(PopupHold::SearchOpening));
             SendMessageW(w,resetMessage,0,0);
             WindhawkUtils::RemoveWindowSubclassFromAnyThread(w,Observe);
             RemovePropW(w,listenerKey);
@@ -8705,37 +8542,6 @@ std::wstring GetProcessFileName(DWORD dwProcessId) {
     processFileName++;
     return processFileName;
 }
-bool IsStartMenuOpen() {
-    bool open = false;
-    EnumWindows(
-        [](HWND hWnd, LPARAM lParam) -> BOOL {
-            WCHAR szClassName[32];
-            if (GetClassName(hWnd, szClassName, ARRAYSIZE(szClassName)) == 0 ||
-                _wcsicmp(szClassName, L"Windows.UI.Core.CoreWindow") != 0) {
-                return TRUE;
-            }
-            DWORD dwProcessId = 0;
-            if (!GetWindowThreadProcessId(hWnd, &dwProcessId)) {
-                return TRUE;
-            }
-            std::wstring processFileName = GetProcessFileName(dwProcessId);
-            if (_wcsicmp(processFileName.c_str(),
-                         L"StartMenuExperienceHost.exe") != 0) {
-                return TRUE;
-            }
-            // The start menu window stays cloaked while hidden and is uncloaked
-            // while shown.
-            BOOL cloaked = FALSE;
-            if (SUCCEEDED(DwmGetWindowAttribute(hWnd, DWMWA_CLOAKED, &cloaked,
-                                                sizeof(cloaked))) &&
-                !cloaked) {
-                *(bool*)lParam = true;
-            }
-            return FALSE;
-        },
-        (LPARAM)&open);
-    return open;
-}
 HWND GetTaskbarForMonitor(HMONITOR monitor) {
     HWND hTaskbarWnd = FindWindow(L"Shell_TrayWnd", nullptr);
     if (!hTaskbarWnd) {
@@ -9066,150 +8872,10 @@ if (target == DwmTarget::StartMenu) {
     x = monitorLeft + static_cast<int>(absRootWidth - cx);
   }
 }
-Wh_Log(L"Recalc: monitor=%s taskbarState.lastLeftMostEdgeTray: %f, lastStartButtonXCalculated: %f g_lastRootWidth %f cx: %d, x:%d;cy: %d; y: %d; target:%d g_lastTargetWidth: %f, absStartX: %f; absRootWidth: %f; absTargetWidth: %f", monitorName.c_str(), taskbarState.lastLeftMostEdgeTray, taskbarState.lastStartButtonXCalculated, taskbarState.lastRootWidth, cx, x, cy, y, target, taskbarState.lastTargetWidth, absStartX, absRootWidth, absTargetWidth);
 MoveFlyoutWindowTai(hwnd, x, y, cx, cy);
     return original();
 }
-using SearchBoxOnTaskbarSearchAppPositioner_GetAppRectForSearchBoxOnTaskbar_t =
-    RECT*(WINAPI*)(void* pThis,
-                   RECT* result,
-                   const void* monitorInfo,
-                   bool rtl,
-                   int width,
-                   int height,
-                   bool fullWidth);
-SearchBoxOnTaskbarSearchAppPositioner_GetAppRectForSearchBoxOnTaskbar_t
-    SearchBoxOnTaskbarSearchAppPositioner_GetAppRectForSearchBoxOnTaskbar;
-using Mirror_IsThreadRTL_t = int(WINAPI*)();
-Mirror_IsThreadRTL_t Mirror_IsThreadRTL;
-// Depending on how the search app is activated, the search window positioner
-// places the window by the search button and then, for a center-aligned
-// taskbar, centers it on the monitor, instead of using its usual position, such
-// as by the search box. With the search button pinned to the left, the usual
-// position is used, which is also where the search app expects the search box
-// to be. A vertical taskbar has no search box, and the window stays centered.
-// When opened from the Start menu, the window is left as is, to be positioned
-// along with the Start menu.
-using SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_t =
-    void(WINAPI*)(void* pThis,
-                  RECT* appRect,
-                  const void* monitorInfo,
-                  int width);
-SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_t
-    SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_Original;
-void WINAPI
-SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_Hook(
-    void* pThis,
-    RECT* appRect,
-    const void* monitorInfo,
-    int width) {
-    RECT originalRect = *appRect;
-    SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_Original(
-        pThis, appRect, monitorInfo, width);
-    if (!g_settings_startbuttonposition.otherSystemButtonsOnTheLeft || g_unloading) {
-        return;
-    }
-    // Not centered horizontally, e.g. with a vertical taskbar.
-    if (appRect->left == originalRect.left || IsStartMenuOpen()) {
-        return;
-    }
-    RECT rect;
-    SearchBoxOnTaskbarSearchAppPositioner_GetAppRectForSearchBoxOnTaskbar(
-        pThis, &rect, monitorInfo, Mirror_IsThreadRTL() != 0, width, 0, false);
-    // The usual positioning centers the window if it doesn't fit by the search
-    // box. The monitor info starts with the monitor rect.
-    const RECT* monitorRect = (const RECT*)monitorInfo;
-    if (rect.left < monitorRect->left || rect.right > monitorRect->right) {
-        return;
-    }
-    appRect->left = rect.left;
-}
-bool HookTwinuiPcshellSymbols() {
-    HMODULE module = LoadLibraryEx(L"twinui.pcshell.dll", nullptr,
-                                   LOAD_LIBRARY_SEARCH_SYSTEM32);
-    if (!module) {
-        Wh_Log(L"Failed to load twinui.pcshell.dll");
-        return false;
-    }
-    // twinui.pcshell.dll
-    WindhawkUtils::SYMBOL_HOOK twinuiPcshellHooks[] = {
-        {
-            {LR"(private: struct tagRECT __cdecl SearchBoxOnTaskbarSearchAppPositioner::GetAppRectForSearchBoxOnTaskbar(struct MonitorInfo const &,bool,int,int,bool))"},
-            &SearchBoxOnTaskbarSearchAppPositioner_GetAppRectForSearchBoxOnTaskbar,
-        },
-        {
-            {LR"(int __cdecl Mirror_IsThreadRTL(void))"},
-            &Mirror_IsThreadRTL,
-        },
-        {
-            {LR"(private: void __cdecl SearchBoxOnTaskbarSearchAppPositioner::AdjustAppRectForCenterAlignedTaskbar(struct tagRECT *,struct MonitorInfo,int))"},
-            &SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_Original,
-            SearchBoxOnTaskbarSearchAppPositioner_AdjustAppRectForCenterAlignedTaskbar_Hook,
-        },
-    };
-    return HookSymbolsTai(module, twinuiPcshellHooks,
-                       ARRAYSIZE(twinuiPcshellHooks));
-}
 namespace StartMenuUI {
-// Overrides a property's local value, keeping the latest local value set by
-// Windows to restore it, or to clear the property if there's none.
-template <typename T>
-class PropertyOverride {
-   public:
-    using PropertyGetter = DependencyProperty (*)();
-    explicit PropertyOverride(PropertyGetter property) : m_property(property) {}
-    void Set(DependencyObject element, T value) {
-        auto property = m_property();
-        auto localValue = element.ReadLocalValue(property).try_as<T>();
-        if (m_element.get() != element || localValue != m_value) {
-            m_element = element;
-            m_windowsValue = localValue;
-        }
-        m_value = value;
-        element.SetValue(property, winrt::box_value(value));
-    }
-    void Restore() {
-        auto element = m_element.get();
-        m_element = nullptr;
-        if (!element) {
-            return;
-        }
-        auto property = m_property();
-        if (element.ReadLocalValue(property).try_as<T>() != m_value) {
-            return;
-        }
-        if (m_windowsValue) {
-            element.SetValue(property, winrt::box_value(*m_windowsValue));
-        } else {
-            element.ClearValue(property);
-        }
-    }
-    // Stops overriding, leaving the current value.
-    void Release() { m_element = nullptr; }
-   private:
-    PropertyGetter m_property;
-    winrt::weak_ref<DependencyObject> m_element;
-    std::optional<T> m_windowsValue;
-    T m_value{};
-};
-// The Start menu is moved to the left, or to the top with a vertical taskbar,
-// which has the Start menu next to it. Its position along the other axis is
-// left to Windows, which sets it for the side the taskbar is docked to, also
-// when the taskbar orientation changes.
-bool g_inApplyStyle;
-PropertyOverride<double> g_canvasTopOverride{&Controls::Canvas::TopProperty};
-PropertyOverride<double> g_canvasLeftOverride{&Controls::Canvas::LeftProperty};
-PropertyOverride<VerticalAlignment> g_verticalAlignmentOverride{
-    &FrameworkElement::VerticalAlignmentProperty};
-PropertyOverride<HorizontalAlignment> g_horizontalAlignmentOverride{
-    &FrameworkElement::HorizontalAlignmentProperty};
-PropertyOverride<Thickness> g_marginOverride{&FrameworkElement::MarginProperty};
-winrt::weak_ref<DependencyObject> g_startSizingFrameWeakRef;
-int64_t g_canvasTopPropertyChangedToken;
-int64_t g_canvasLeftPropertyChangedToken;
-winrt::weak_ref<DependencyObject> g_frameRootWeakRef;
-int64_t g_verticalAlignmentPropertyChangedToken;
-int64_t g_horizontalAlignmentPropertyChangedToken;
 winrt::event_token g_visibilityChangedToken;
 HWND GetCoreWnd() {
     struct ENUM_WINDOWS_PARAM {
@@ -9246,64 +8912,7 @@ void ApplyStyleClassicStartMenu(FrameworkElement content, HMONITOR monitor) {
     // the global two-argument overload defined in win-dock-mod.cpp.
     ::ApplyStyle(content, GetMonitorName(monitor));
 }
-void ApplyStyleRedesignedStartMenu(FrameworkElement content,
-                                   bool verticalTaskbar) {
-    FrameworkElement frameRoot = FindChildByName(content, L"FrameRoot");
-    if (!frameRoot) {
-        Wh_Log(L"Failed to find Start menu frame root");
-        return;
-    }
-    if (g_unloading) {
-        g_horizontalAlignmentOverride.Restore();
-        g_verticalAlignmentOverride.Restore();
-        g_marginOverride.Restore();
-        return;
-    }
-    g_marginOverride.Restore();
-    if (verticalTaskbar) {
-        g_horizontalAlignmentOverride.Release();
-        // Keep the vertical margin set by Windows, moved to the bottom so that
-        // it doesn't offset the menu from the top.
-        auto margin = frameRoot.Margin();
-        margin.Bottom += margin.Top;
-        margin.Top = 0;
-        g_marginOverride.Set(frameRoot, margin);
-        g_verticalAlignmentOverride.Set(frameRoot, VerticalAlignment::Top);
-    } else {
-        g_verticalAlignmentOverride.Release();
-        g_horizontalAlignmentOverride.Set(frameRoot, HorizontalAlignment::Center);
-    }
-    if (!g_frameRootWeakRef.get()) {
-        auto frameRootDo = frameRoot.as<DependencyObject>();
-        g_frameRootWeakRef = frameRootDo;
-        g_verticalAlignmentPropertyChangedToken =
-            frameRootDo.RegisterPropertyChangedCallback(
-                FrameworkElement::VerticalAlignmentProperty(),
-                [](DependencyObject sender, DependencyProperty property) {
-                    auto alignment =
-                        sender.as<FrameworkElement>().VerticalAlignment();
-                    Wh_Log(L"FrameRoot VerticalAlignment changed to %d",
-                           static_cast<int>(alignment));
-                    if (!g_inApplyStyle) {
-                        ApplyStyle();
-                    }
-                });
-        g_horizontalAlignmentPropertyChangedToken =
-            frameRootDo.RegisterPropertyChangedCallback(
-                FrameworkElement::HorizontalAlignmentProperty(),
-                [](DependencyObject sender, DependencyProperty property) {
-                    auto alignment =
-                        sender.as<FrameworkElement>().HorizontalAlignment();
-                    Wh_Log(L"FrameRoot HorizontalAlignment changed to %d",
-                           static_cast<int>(alignment));
-                    if (!g_inApplyStyle) {
-                        ApplyStyle();
-                    }
-                });
-    }
-}
 void ApplyStyle() {
-    g_inApplyStyle = true;
     HWND coreWnd = GetCoreWnd();
     HMONITOR monitor = MonitorFromWindow(coreWnd, MONITOR_DEFAULTTONEAREST);
     bool verticalTaskbar = IsVerticalTaskbarOnMonitor(monitor);
@@ -9320,7 +8929,6 @@ void ApplyStyle() {
     } else {
         Wh_Log(L"Error: Unsupported Start menu content class name");
     }
-    g_inApplyStyle = false;
 }
 void Init() {
     if (g_visibilityChangedToken) {
@@ -9350,38 +8958,6 @@ void Uninit() {
     }
     window.VisibilityChanged(g_visibilityChangedToken);
     g_visibilityChangedToken = {};
-    auto startSizingFrameDo = g_startSizingFrameWeakRef.get();
-    if (startSizingFrameDo) {
-        if (g_canvasTopPropertyChangedToken) {
-            startSizingFrameDo.UnregisterPropertyChangedCallback(
-                Controls::Canvas::TopProperty(),
-                g_canvasTopPropertyChangedToken);
-            g_canvasTopPropertyChangedToken = 0;
-        }
-        if (g_canvasLeftPropertyChangedToken) {
-            startSizingFrameDo.UnregisterPropertyChangedCallback(
-                Controls::Canvas::LeftProperty(),
-                g_canvasLeftPropertyChangedToken);
-            g_canvasLeftPropertyChangedToken = 0;
-        }
-    }
-    g_startSizingFrameWeakRef = nullptr;
-    auto frameRootDo = g_frameRootWeakRef.get();
-    if (frameRootDo) {
-        if (g_verticalAlignmentPropertyChangedToken) {
-            frameRootDo.UnregisterPropertyChangedCallback(
-                FrameworkElement::VerticalAlignmentProperty(),
-                g_verticalAlignmentPropertyChangedToken);
-            g_verticalAlignmentPropertyChangedToken = 0;
-        }
-        if (g_horizontalAlignmentPropertyChangedToken) {
-            frameRootDo.UnregisterPropertyChangedCallback(
-                FrameworkElement::HorizontalAlignmentProperty(),
-                g_horizontalAlignmentPropertyChangedToken);
-            g_horizontalAlignmentPropertyChangedToken = 0;
-        }
-    }
-    g_frameRootWeakRef = nullptr;
     ApplyStyle();
 }
 void SettingsChanged() {
@@ -12220,8 +11796,6 @@ constexpr int kInitialExplorerStyleRetryDelayMs = kTaskbarIslandAnimationDuratio
 constexpr int kButtonSizeLowPrioritySuppressionMs = kTaskbarIslandAnimationDurationMs;
 constexpr int kGeometryCriticalLowPrioritySuppressionMs =
     (kTaskbarIslandAnimationDurationMs * 2) + kDefaultStyleDebounceDelayMs;
-constexpr int kScheduledLowPriorityFlagTtlMs =
-    kLowPriorityStyleDelayMs + kDefaultStyleDebounceDelayMs + kTaskbarIslandAnimationDurationMs;
 constexpr double kMinimumTrustedRefreshHz = 24.0;
 constexpr double kMaximumTrustedRefreshHz = 1000.0;
 constexpr int kDefaultFrameIntervalMs = 16;
@@ -12785,7 +12359,6 @@ void DelayedApplyWorker() {
         continue;
       }
       g_scheduled_low_priority_update = false;
-      Wh_Log(L"Delayed apply triggered");
       const bool initialStyleApply = !g_initial_style_apply_completed.load();
       if (initialStyleApply) {
         ArmStyleFollowupPasses(hTaskbarWnd, true);
@@ -12822,9 +12395,6 @@ void ApplySettingsDebounced(int delayMs) {
   if (delayMs <= 0) {
     delayMs = kLowPriorityStyleDelayMs;
   }
-  if (delayMs < 1) {
-    delayMs = kDefaultStyleDebounceDelayMs;
-  }
   int64_t nowMs = DelayedApplyNowMs();
   int64_t dueMs = nowMs + delayMs;
   int64_t initialNotBeforeMs = g_initial_style_apply_not_before_ms.load();
@@ -12833,7 +12403,6 @@ void ApplySettingsDebounced(int delayMs) {
   }
   g_delayed_apply_generation.fetch_add(1);
   g_delayed_apply_due_ms = dueMs;
-  Wh_Log(L"Scheduled delayed apply in %lld ms", static_cast<long long>(std::max<int64_t>(0, dueMs - nowMs)));
   EnsureDelayedApplyWorker();
 }
 void ApplySettingsDebounced() {
@@ -12958,24 +12527,13 @@ void WINAPI StartDocked__StartSizingFrame_UpdateWindowRegion_WithArgs_Hook(void*
     g_lastRecordedStartMenuWidth = measuredStartMenuWidth;
     Wh_SetIntValue(L"lastRecordedStartMenuWidth", g_lastRecordedStartMenuWidth);
   }
-}
-std::atomic<int64_t> g_update_flag_set_time_ms = 0;
-int64_t NowMs() { return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count(); }
-void ResetFlagAfterDelay() {
-  std::this_thread::sleep_for(std::chrono::milliseconds(kScheduledLowPriorityFlagTtlMs));
-  int64_t now = NowMs();
-  int64_t set_time = g_update_flag_set_time_ms.load();
-  if (g_scheduled_low_priority_update && (now - set_time >= kScheduledLowPriorityFlagTtlMs)) {
-    g_scheduled_low_priority_update = false;
-  }
+  IloStartSearch::FromLayout();
 }
 void ApplySettingsFromTaskbarThreadIfRequired() {
   if (!g_unloading && DelayedApplyNowMs() < g_suppress_low_priority_apply_until_ms.load()) {
     return;
   }
   if (!g_scheduled_low_priority_update.exchange(true)) {
-    g_update_flag_set_time_ms = NowMs();
-    Wh_Log(L"Scheduled low priority update");
     ApplySettingsDebounced(-1);
   }
 }
@@ -16270,17 +15828,13 @@ void UpdateGlobalSettings() {
   g_settings.userDefinedTrayTaskGap = g_unloading ? 0 : std::max(0, getInt(L"TrayTaskGap"));
   g_settings.trayContentOffsetY = std::clamp<int>(getInt(L"TrayContentOffsetY"), -12, 12);
   g_settings.userDefinedTaskbarBackgroundHorizontalPadding = g_unloading ? 0 : std::max(0, getInt(L"TaskbarBackgroundHorizontalPadding"));
-  // Offset Y (negative up; non-positive settings sit on the screen edge)
-  const int offsetY = std::max(-2, getInt(L"TaskbarOffsetY"));
-  g_settings.userDefinedTaskbarOffsetY =
-      (g_unloading || g_settings.userDefinedFlatTaskbarBottomCorners)
-          ? 0
-          : -offsetY;
   // Height & Sizes
   int h = ClampInt(abs(ReadPositiveIntSettingOrDefault(L"TaskbarHeight", kDefaultTaskbarHeight)),
                    kMinTaskbarHeight,
                    kMaxTaskbarHeight);
   g_settings.userDefinedTaskbarHeight = g_unloading ? kSystemMediumTaskbarButtonSize : h;
+  g_settings.userDefinedTaskbarGapDip=EffectiveDockGapDip(h,getInt(L"TaskbarOffsetY"),
+      g_unloading||g_settings.userDefinedFlatTaskbarBottomCorners);
   int taskbarButtonSize = ClampInt(abs(ReadPositiveIntSettingOrDefault(L"TaskbarButtonSize", kDefaultTaskbarButtonSize)),
                                    kMinTaskbarButtonSize,
                                    kMaxTaskbarButtonSize);
@@ -16351,61 +15905,6 @@ void UpdateGlobalSettings() {
   if (dividerAppNames) {
     IloPanel::Free(dividerAppNames);
   }
-}
-bool HasInvalidSettings() {
-  std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
-  if (g_settings.userDefinedTrayTaskGap < 0) return true;
-  if (g_settings.userDefinedTaskbarBackgroundHorizontalPadding < 0) return true;
-  if ((int)g_settings.userDefinedTaskbarOffsetY < -2 && !g_settings.userDefinedFlatTaskbarBottomCorners) return true;
-  if (g_settings.userDefinedTaskbarHeight < kMinTaskbarHeight || g_settings.userDefinedTaskbarHeight > kMaxTaskbarHeight) return true;
-  if (g_settings.userDefinedTaskbarIconSize <= 0) return true;
-  if (g_settings.userDefinedTrayIconSize <= 0) return true;
-  if (g_settings.userDefinedTaskbarButtonSize <= 0) return true;
-  if (g_settings.userDefinedTrayButtonSize <= 0) return true;
-  if (g_settings.userDefinedTaskbarCornerRadius < 0.0f || g_settings.userDefinedTaskbarCornerRadius > (g_settings.userDefinedTaskbarHeight / 2.0f)) return true;
-  if (g_settings.userDefinedTaskButtonCornerRadius < 0 || g_settings.userDefinedTaskButtonCornerRadius > (g_settings.userDefinedTaskbarHeight / 2)) return true;
-  if (g_settings.userDefinedTaskbarBackgroundOpacity > 100) return true;
-  if (g_settings.userDefinedTaskbarBackgroundTint > 100) return true;
-  if (g_settings.userDefinedTaskbarBackgroundLuminosity > 100) return true;
-  if (g_settings.userDefinedTaskbarBackgroundBlurAmount > 100) return true;
-  if (g_settings.userDefinedTaskbarBackgroundTintSaturation > 500) return true;
-  if (g_settings.userDefinedTaskbarBackgroundInversion > 100) return true;
-  if (g_settings.userDefinedTaskbarBorderOpacity > 255) return true;
-  if (g_settings.userDefinedTaskbarBorderThickness < 0.0 || g_settings.userDefinedTaskbarBorderThickness > 10.0) return true;
-  return false;
-}
-void LogAllSettings() {
-  std::lock_guard<std::recursive_mutex> settingsLock(g_settingsMutex);
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTrayTaskGap, L"userDefinedTrayTaskGap");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundHorizontalPadding, L"userDefinedTaskbarBackgroundHorizontalPadding");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarOffsetY, L"userDefinedTaskbarOffsetY");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarHeight, L"userDefinedTaskbarHeight");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarIconSize, L"userDefinedTaskbarIconSize");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTrayIconSize, L"userDefinedTrayIconSize");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarButtonSize, L"userDefinedTaskbarButtonSize");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTrayButtonSize, L"userDefinedTrayButtonSize");
-  Wh_Log(L"setting %d %s", (int)g_settings.userDefinedTaskbarCornerRadius, L"userDefinedTaskbarCornerRadius");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskButtonCornerRadius, L"userDefinedTaskButtonCornerRadius");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedFlatTaskbarBottomCorners ? 1 : 0, L"userDefinedFlatTaskbarBottomCorners");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundOpacity, L"userDefinedTaskbarBackgroundOpacity");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundTint, L"userDefinedTaskbarBackgroundTint");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundLuminosity, L"userDefinedTaskbarBackgroundLuminosity");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundBlurAmount, L"userDefinedTaskbarBackgroundBlurAmount");
-  Wh_Log(L"setting %s %s", g_settings.userDefinedTaskbarBackgroundTintColor.c_str(), L"userDefinedTaskbarBackgroundTintColor");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundTintSaturation, L"userDefinedTaskbarBackgroundTintSaturation");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBackgroundInversion, L"userDefinedTaskbarBackgroundInversion");
-  Wh_Log(L"setting %s %s", g_settings.userDefinedTaskbarBackgroundFallbackColor.c_str(), L"userDefinedTaskbarBackgroundFallbackColor");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTaskbarBorderOpacity, L"userDefinedTaskbarBorderOpacity");
-  Wh_Log(L"setting %d %s", (int)(g_settings.userDefinedTaskbarBorderThickness * 100.0 / 10.0), L"userDefinedTaskbarBorderThickness (scaled)");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedFullWidthTaskbarBackground ? 1 : 0, L"userDefinedFullWidthTaskbarBackground");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedIgnoreShowDesktopButton ? 1 : 0, L"userDefinedIgnoreShowDesktopButton");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedStyleTrayArea ? 1 : 0, L"userDefinedStyleTrayArea");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedTrayAreaDivider ? 1 : 0, L"userDefinedTrayAreaDivider");
-  Wh_Log(L"setting %d %s", g_settings.borderColorR, L"borderColorR");
-  Wh_Log(L"setting %d %s", g_settings.borderColorG, L"borderColorG");
-  Wh_Log(L"setting %d %s", g_settings.borderColorB, L"borderColorB");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedCustomizeTaskbarBackground ? 1 : 0, L"userDefinedCustomizeTaskbarBackground");
-  Wh_Log(L"setting %d %s", g_settings.userDefinedDisableCustomBlurBackground ? 1 : 0, L"userDefinedDisableCustomBlurBackground");
 }
 // ---------------------------------------------------------------------------
 // Fork addition: clip the taskbar window's clickable region to the visible
@@ -18887,7 +18386,7 @@ struct Result{std::wstring title,detail,target;Kind kind{};int score{};std::wstr
 struct Config{
   std::wstring mode,engine,fieldBorder,fieldBackground,windowBorder,windowBackground;
   int fieldWidth{},fieldHeight{},fieldRadius{},fieldStroke{},fieldOpacity{},width{},height{},radius{},stroke{},opacity{};
-  bool blur{},animate{},files{},settings{},web{};
+  bool blur{},animate{},files{},settings{},web{},replaceWinS{},redirectWindows{};
   bool operator==(Config const&)const=default;
 };
 static Config ReadConfig(std::shared_ptr<const IloPanel::SettingsSnapshot> const& s){
@@ -18902,7 +18401,8 @@ static Config ReadConfig(std::shared_ptr<const IloPanel::SettingsSnapshot> const
   c.width=number(L"SearchWindowWidth",320,900);c.height=number(L"SearchWindowHeight",220,700);c.radius=number(L"SearchWindowRadius",0,40);
   c.stroke=number(L"SearchWindowBorderSize",0,8);c.opacity=number(L"SearchWindowOpacity",0,100);
   c.blur=s->Int(L"SearchWindowBlur")!=0;c.animate=s->Int(L"SearchWindowAnimation")!=0;c.files=s->Int(L"SearchFiles")!=0;
-  c.settings=s->Int(L"SearchSettings")!=0;c.web=s->Int(L"SearchWeb")!=0;return c;
+  c.settings=s->Int(L"SearchSettings")!=0;c.web=s->Int(L"SearchWeb")!=0;
+  c.replaceWinS=s->Int(L"SearchReplaceWinS")!=0;c.redirectWindows=s->Int(L"SearchRedirectWindows")!=0;return c;
 }
 static bool LocalPath(std::wstring_view p){return p.size()>3&&p.size()<32768&&iswalpha(p[0])&&p[1]==L':'&&(p[2]==L'\\'||p[2]==L'/')&&p.find(L'\0')==p.npos;}
 static std::wstring FileName(std::wstring_view p){auto n=p.find_last_of(L"\\/");return std::wstring(n==p.npos?p:p.substr(n+1));}
@@ -18922,8 +18422,9 @@ static std::wstring ShellName(IShellItem* item,SIGDN type){
   std::wstring result(value);CoTaskMemFree(value);return result;
 }
 static std::wstring Lower(std::wstring value){for(auto& c:value)c=std::towlower(c);return value;}
-static bool IsLink(std::wstring_view path){return path.size()>4&&_wcsicmp(std::wstring(path.substr(path.size()-4)).c_str(),L".lnk")==0;}
-static bool IsUrlLink(std::wstring_view path){return path.size()>4&&_wcsicmp(std::wstring(path.substr(path.size()-4)).c_str(),L".url")==0;}
+static bool HasShortcutSuffix(std::wstring_view path,PCWSTR suffix){return path.size()>4&&CompareStringOrdinal(path.data()+path.size()-4,4,suffix,4,TRUE)==CSTR_EQUAL;}
+static bool IsLink(std::wstring_view path){return HasShortcutSuffix(path,L".lnk");}
+static bool IsUrlLink(std::wstring_view path){return HasShortcutSuffix(path,L".url");}
 static bool IsShortcut(std::wstring_view path){return IsLink(path)||IsUrlLink(path);}
 static winrt::com_ptr<IShellLinkW> ReadLink(std::wstring const& path){
   winrt::com_ptr<IShellLinkW> link;winrt::com_ptr<IPersistFile> file;
@@ -18980,12 +18481,13 @@ static std::vector<Result> LoadApps(){
   std::vector<Result> apps;winrt::com_ptr<IShellItem> root;winrt::com_ptr<IEnumShellItems> items;
   if(FAILED(SHGetKnownFolderItem(FOLDERID_AppsFolder,KF_FLAG_DEFAULT,nullptr,IID_IShellItem,root.put_void()))||
      FAILED(root->BindToHandler(nullptr,BHID_EnumItems,IID_IEnumShellItems,items.put_void())))return apps;
+  apps.reserve(512);const std::wstring detail=T(L"Application",L"Application");
   for(unsigned i=0;i<4000&&!g_unloading;++i){
     winrt::com_ptr<IShellItem> item;ULONG fetched{};
     if(items->Next(1,item.put(),&fetched)!=S_OK||!fetched)break;
     auto name=ShellName(item.get(),SIGDN_NORMALDISPLAY),target=ShellName(item.get(),SIGDN_DESKTOPABSOLUTEPARSING);
     if(!name.empty()&&!target.empty()){
-      Result app{std::move(name),T(L"Application",L"Application"),std::move(target),Kind::App,0};
+      Result app{std::move(name),detail,std::move(target),Kind::App,0};
       winrt::com_ptr<IShellItem2> properties;if(SUCCEEDED(item->QueryInterface(IID_IShellItem2,properties.put_void()))){
         PWSTR id{};if(SUCCEEDED(properties->GetString(PKEY_AppUserModel_ID,&id))&&id){app.appId=id;CoTaskMemFree(id);}}
       apps.push_back(std::move(app));
@@ -19126,7 +18628,8 @@ static std::wstring Extension(std::wstring const& path){auto dot=path.find_last_
 // extensions use Windows' registered perceived type, cached on the worker.
 static Category FileCategory(std::wstring const& ext){
   if(ext.empty())return Category::Other;
-  auto in=[&](std::wstring_view list){return list.find(L"|"+ext.substr(1)+L"|")!=list.npos;};
+  const auto token=L"|"+ext.substr(1)+L"|";
+  auto in=[&](std::wstring_view list){return list.find(token)!=list.npos;};
   if(in(L"|exe|com|"))return Category::Apps;
   if(in(L"|doc|docx|docm|dot|dotx|dotm|xls|xlsx|xlsm|xlsb|xlt|xltx|xltm|ppt|pptx|pptm|pps|ppsx|ppsm|pot|potx|potm|odt|ods|odp|odg|odf|ott|ots|otp|rtf|txt|md|rst|pdf|xps|oxps|csv|tsv|psd|psb|ai|indd|idml|eps|afdesign|afphoto|afpub|xcf|kra|sketch|fig|blend|dwg|dxf|pub|vsd|vsdx|mpp|one|pages|numbers|key|epub|tex|bib|html|htm|xml|json|yaml|yml|ini|log|sql|cpp|c|h|hpp|cs|java|js|tsx|jsx|py|lua|rs|go|rb|php|css|scss|"))return Category::Documents;
   if(in(L"|jpg|jpeg|jpe|jfif|png|apng|gif|bmp|dib|webp|avif|heic|heif|hif|tif|tiff|svg|svgz|ico|cur|jxl|jp2|j2k|jpf|jpx|dng|cr2|cr3|crw|nef|nrw|arw|srf|sr2|raf|rw2|orf|pef|srw|raw|rwl|iiq|3fr|erf|kdc|mrw|x3f|exr|hdr|tga|dds|pcx|ppm|pgm|pbm|pnm|"))return Category::Images;
@@ -19189,11 +18692,11 @@ static void Worker(){
   HRESULT hr=CoInitializeEx(nullptr,COINIT_MULTITHREADED);if(FAILED(hr))return;
   struct ComGuard{~ComGuard(){CoUninitialize();}} guard;
   struct CachedIcon{std::shared_ptr<const IconPixels> image;uint64_t use;};
-  std::vector<Result> apps;ShortcutIndex shortcuts;std::unordered_map<std::wstring,std::wstring> shortcutCache;ULONGLONG appsTime{};std::unordered_map<std::wstring,CachedIcon> iconCache;std::unordered_map<std::wstring,Category> categoryCache;
+  std::vector<Result> apps;std::optional<ShortcutIndex> shortcuts;std::unordered_map<std::wstring,std::wstring> shortcutCache;ULONGLONG appsTime{};std::unordered_map<std::wstring,CachedIcon> iconCache;std::unordered_map<std::wstring,Category> categoryCache;
   uint64_t iconUse{};size_t iconBytes{};bool warm{};
   constexpr size_t maxIcons=512,maxIconBytes=4*1024*1024;
   auto trimIcons=[&]{while(iconCache.size()>maxIcons||iconBytes>maxIconBytes){auto oldest=std::min_element(iconCache.begin(),iconCache.end(),[](auto const& a,auto const& b){return a.second.use<b.second.use;});if(oldest==iconCache.end())break;if(oldest->second.image)iconBytes-=oldest->second.image->pixels.size();iconCache.erase(oldest);}};
-  auto releaseCaches=[&]{decltype(apps){}.swap(apps);ShortcutIndex{}.swap(shortcuts);decltype(shortcutCache){}.swap(shortcutCache);decltype(iconCache){}.swap(iconCache);decltype(categoryCache){}.swap(categoryCache);appsTime=0;iconUse=0;iconBytes=0;warm=false;};
+  auto releaseCaches=[&]{decltype(apps){}.swap(apps);shortcuts.reset();decltype(shortcutCache){}.swap(shortcutCache);decltype(iconCache){}.swap(iconCache);decltype(categoryCache){}.swap(categoryCache);appsTime=0;iconUse=0;iconBytes=0;warm=false;};
   for(;;){Request request;{
       std::unique_lock lock(workerMutex);auto ready=[] {return stopping||pending.has_value();};
       // A brief warm cache makes repeated searches fast. After three idle
@@ -19205,10 +18708,11 @@ static void Worker(){
     if(obsolete())continue;warm=true;
     Batch batch;
     try{
-      if(!appsTime||GetTickCount64()-appsTime>60000){apps=LoadApps();shortcuts=StartShortcuts();shortcutCache.clear();appsTime=GetTickCount64();std::erase_if(iconCache,[&](auto const& p){if(!p.first.starts_with(L"link:"))return false;if(p.second.image)iconBytes-=p.second.image->pixels.size();return true;});}
+      if(!appsTime||GetTickCount64()-appsTime>60000){apps=LoadApps();shortcuts.reset();shortcutCache.clear();appsTime=GetTickCount64();std::erase_if(iconCache,[&](auto const& p){if(!p.first.starts_with(L"link:"))return false;if(p.second.image)iconBytes-=p.second.image->pixels.size();return true;});}
       if(obsolete())continue;
       for(auto const& a:apps)if(int rank=Rank(a.title,request.query)){auto result=a;result.score=rank+15;batch.rows.push_back(std::move(result));}
       if(request.config.settings)SearchSettings(batch.rows,request.query);
+      if(obsolete())continue;
       if(request.config.files&&request.query.size()>=2){bool ok=false;
         if(request.config.engine==L"everything"){std::vector<Result> files;ok=EverythingFiles(files,request.query);if(ok){batch.rows.insert(batch.rows.end(),std::make_move_iterator(files.begin()),std::make_move_iterator(files.end()));batch.source=L"Everything";}}
         if(!ok){bool index=WindowsFiles(batch.rows,request.query);batch.source=index?L"Windows Search":T(L"File index unavailable",L"Index de fichiers indisponible");if(request.config.engine==L"everything")batch.source+=T(L" · Everything unavailable",L" · Everything indisponible");}
@@ -19219,19 +18723,21 @@ static void Worker(){
       unsigned counts[8]{};
       for(auto& r:batch.rows)r.category=Classify(r,categoryCache);
       std::erase_if(batch.rows,[&](auto const& r){return ++counts[int(r.category)]>(r.category==Category::Apps?24u:r.category==Category::Settings?18u:24u);});
-      // Resolve only the displayed applications, and cache their links until
-      // the catalog refresh, rather than opening every shortcut at startup.
-      for(auto& row:batch.rows)if(row.kind==Kind::App){auto key=row.title+L"\n"+row.target;auto it=shortcutCache.find(key);if(it==shortcutCache.end())it=shortcutCache.emplace(std::move(key),MatchShortcut(row,shortcuts)).first;row.shortcut=it->second;}
+      // The Start-menu tree is needed only for displayed applications.
+      // A document-only query never enumerates or resolves its shortcuts.
+      if(obsolete())continue;
+      if(!shortcuts&&std::any_of(batch.rows.begin(),batch.rows.end(),[](auto const& row){return row.kind==Kind::App;}))shortcuts.emplace(StartShortcuts());
+      for(auto& row:batch.rows)if(row.kind==Kind::App){if(obsolete())break;auto key=row.title+L"\n"+row.target;auto it=shortcutCache.find(key);if(it==shortcutCache.end())it=shortcutCache.emplace(std::move(key),MatchShortcut(row,*shortcuts)).first;row.shortcut=it->second;}
       if(request.config.web&&!request.query.empty())batch.rows.push_back({T(L"Search the web",L"Rechercher sur le web"),T(L"Open in the default browser",L"Ouvrir dans le navigateur par défaut"),request.query,Kind::Web,0});
     }catch(...){batch.source=T(L"Search unavailable",L"Recherche indisponible");}
     // Publish the text immediately, then enrich it with cached shell icons.
-    bool needIcons=false;
     if(obsolete())continue;
-    for(auto& row:batch.rows){auto key=IconKey(row);if(key.empty())continue;auto it=iconCache.find(key);if(it!=iconCache.end()){row.icon=it->second.image;it->second.use=++iconUse;}else needIcons=true;}
-    if(needIcons){
+    std::vector<std::pair<size_t,std::wstring>> missingIcons;
+    for(size_t i=0;i<batch.rows.size();++i){auto& row=batch.rows[i];auto key=IconKey(row);if(key.empty())continue;auto it=iconCache.find(key);if(it!=iconCache.end()){row.icon=it->second.image;it->second.use=++iconUse;}else missingIcons.emplace_back(i,std::move(key));}
+    if(!missingIcons.empty()){
       {std::lock_guard lock(request.slot->mutex);if(request.slot->generation!=request.generation)continue;request.slot->batch=batch;request.slot->batch.iconsReady=false;request.slot->ready=true;}
-      for(auto& row:batch.rows){if(g_unloading)break;{std::lock_guard lock(request.slot->mutex);if(request.slot->generation!=request.generation)break;}
-        auto key=IconKey(row);if(key.empty()||row.icon)continue;auto it=iconCache.find(key);if(it!=iconCache.end()){row.icon=it->second.image;it->second.use=++iconUse;continue;}
+      for(auto& [index,key]:missingIcons){if(obsolete())break;auto& row=batch.rows[index];
+        auto it=iconCache.find(key);if(it!=iconCache.end()){row.icon=it->second.image;it->second.use=++iconUse;continue;}
         try{row.icon=LoadIcon(row);auto [entry,added]=iconCache.emplace(std::move(key),CachedIcon{row.icon,++iconUse});if(added&&row.icon)iconBytes+=row.icon->pixels.size();trimIcons();}catch(...){}
       }
     }
@@ -19253,7 +18759,10 @@ static CornerRadius Radius(double r){return {r,r,r,r};}
 static Thickness Stroke(double s){return {s,s,s,s};}
 static winrt::Windows::UI::Color Alpha(winrt::Windows::UI::Color c,int percent){c.A=uint8_t(std::lround(c.A*std::clamp(percent,0,100)/100.0));return c;}
 static void StyleField(Border const& field,Config const& config,double height,winrt::Windows::UI::Color fg){
-  field.CornerRadius(Radius(std::min(double(config.fieldRadius),height/2)));field.BorderThickness(Stroke(config.fieldStroke));
+  const auto radius=Radius(std::min(double(config.fieldRadius),height/2));
+  const auto current=field.CornerRadius();
+  if(current.TopLeft!=radius.TopLeft||current.TopRight!=radius.TopRight||current.BottomLeft!=radius.BottomLeft||current.BottomRight!=radius.BottomRight)field.CornerRadius(radius);
+  const auto stroke=Stroke(config.fieldStroke);if(field.BorderThickness()!=stroke)field.BorderThickness(stroke);
   Paint(field.Background(),Alpha(Color(config.fieldBackground,fg),config.fieldOpacity),[&](auto b){field.Background(b);});
   Paint(field.BorderBrush(),Color(config.fieldBorder,Alpha(fg,24)),[&](auto b){field.BorderBrush(b);});
 }
@@ -19560,24 +19069,79 @@ struct SearchDockArea{RECT monitor,work;bool top;double edge;};
 static std::optional<SearchDockArea> DockArea(HWND taskbar,double scale){
   if(!taskbar||scale<=0)return {};
   MONITORINFO mi{sizeof(mi)};RECT bar{};if(!GetMonitorInfoW(GetTaskbarMonitorTai(taskbar),&mi)||!GetWindowRect(taskbar,&bar))return {};
-  const bool top=(int64_t(bar.top)+bar.bottom)<(int64_t(mi.rcMonitor.top)+mi.rcMonitor.bottom);
-  double inset=0,height=0;{
-    std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
-    if(!g_settings.userDefinedFullWidthTaskbarBackground&&!g_settings.userDefinedFlatTaskbarBottomCorners)inset=std::abs(double(static_cast<int>(g_settings.userDefinedTaskbarOffsetY)));
-    height=std::max(1.,double(g_settings.userDefinedTaskbarHeight));
-  }
-  double edge=top?mi.rcMonitor.top+(height+inset)*scale:mi.rcMonitor.bottom-(height+inset)*scale;
-  if(IsTaskbarWindowOnItsMonitorTai(taskbar,bar)&&bar.bottom-bar.top>inset*scale){
-    const double measured=top?bar.bottom-inset*scale:bar.top+inset*scale;
-    if(measured>=mi.rcMonitor.top&&measured<=mi.rcMonitor.bottom)edge=measured;
-  }
-  return SearchDockArea{mi.rcMonitor,mi.rcWork,top,edge};
+  const bool top=DockAtTop(bar,mi.rcMonitor);
+  const auto band=RestingDockBandTai(mi.rcMonitor,bar,DockVerticalGeometry(),scale,IloHiding::DockScale(taskbar));
+  return SearchDockArea{mi.rcMonitor,mi.rcWork,top,double(top?band.bottom:band.top)};
 }
+// A short-lived reference to the exact system popup involved in an explicit
+// search handoff. Never dismiss a window identified only by its title.
+struct NativeSearchSurface{
+  HWND window{};DWORD pid{},thread{};
+  bool Valid()const noexcept{DWORD current{};return window&&pid&&thread&&GetWindowThreadProcessId(window,&current)==thread&&current==pid&&GetAncestor(window,GA_ROOT)==window;}
+  bool Visible()const noexcept{
+    if(!Valid()||!IsWindowVisible(window)||IsIconic(window))return false;
+    DWORD cloaked{};RECT r{};return SUCCEEDED(DwmGetWindowAttribute(window,DWMWA_CLOAKED,&cloaked,sizeof(cloaked)))&&!cloaked&&GetWindowRect(window,&r)&&!IsRectEmpty(&r)&&MonitorFromRect(&r,MONITOR_DEFAULTTONULL);
+  }
+  bool Hidden()const noexcept{
+    if(!Valid()||!IsWindowVisible(window)||IsIconic(window))return true;
+    DWORD cloaked{};return SUCCEEDED(DwmGetWindowAttribute(window,DWMWA_CLOAKED,&cloaked,sizeof(cloaked)))&&cloaked!=0;
+  }
+  bool Presented()const noexcept{
+    if(!Visible())return false;
+    RECT r{};if(!GetWindowRect(window,&r))return false;
+    // Test the body, not just the edit that Start can focus while its own
+    // panel still covers SearchHost. A visible native result surface is an
+    // actual search opening, including a click that arrived before UIA.
+    for(int y:{1,2}){POINT p{r.left+(r.right-r.left)/2,r.top+(r.bottom-r.top)*y/3};HWND hit=WindowFromPoint(p);if(hit&&(hit==window||GetAncestor(hit,GA_ROOT)==window))return true;}
+    return false;
+  }
+};
+static NativeSearchSurface CaptureNativeSearchSurface(HWND w,DWORD pid){
+  if(!w||!pid)return {};w=GetAncestor(w,GA_ROOT);DWORD current{};auto thread=GetWindowThreadProcessId(w,&current);
+  return current==pid&&thread?NativeSearchSurface{w,pid,thread}:NativeSearchSurface{};
+}
+static bool IsWindowsSystemApp(DWORD pid,PCWSTR executable){
+  if(!pid)return false;HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);if(!process)return false;
+  wchar_t image[1024]{},windows[MAX_PATH]{};DWORD count=ARRAYSIZE(image);BOOL ok=QueryFullProcessImageNameW(process,0,image,&count);CloseHandle(process);
+  if(!ok||!GetWindowsDirectoryW(windows,ARRAYSIZE(windows)))return false;
+  PCWSTR name=wcsrchr(image,L'\\');if(!name||_wcsicmp(name+1,executable))return false;
+  std::wstring prefix=std::wstring(windows)+L"\\SystemApps\\";return _wcsnicmp(image,prefix.c_str(),prefix.size())==0;
+}
+static NativeSearchSurface FindNativeStartForSearch(HWND origin){
+  struct Context{HMONITOR monitor;NativeSearchSurface surface;};Context c{MonitorFromWindow(origin,MONITOR_DEFAULTTONEAREST),{}};
+  EnumWindows([](HWND w,LPARAM param)->BOOL{
+    auto& c=*reinterpret_cast<Context*>(param);if(!IsWindowVisible(w)||MonitorFromWindow(w,MONITOR_DEFAULTTONULL)!=c.monitor)return TRUE;
+    wchar_t cls[64]{};if(!GetClassNameW(w,cls,ARRAYSIZE(cls))||_wcsicmp(cls,L"Windows.UI.Core.CoreWindow"))return TRUE;
+    DWORD pid{};GetWindowThreadProcessId(w,&pid);auto ref=CaptureNativeSearchSurface(w,pid);
+    if(ref.Visible()&&IsWindowsSystemApp(pid,L"StartMenuExperienceHost.exe")){c.surface=ref;return FALSE;}return TRUE;
+  },reinterpret_cast<LPARAM>(&c));return c.surface;
+}
+struct NativeSearchHandoff{NativeSearchSurface search,start;};
+static std::atomic<HWND> nativeDismissSource{};
+static std::atomic<ULONGLONG> nativeDismissUntil{};
+
 struct Session:std::enable_shared_from_this<Session>{
   Config config;Flyout fly{nullptr};Border plate{nullptr};Grid body{nullptr};TextBox input{nullptr};ScrollViewer scroll{nullptr};StackPanel list{nullptr};TextBlock status{nullptr},emptyState{nullptr};
-  winrt::weak_ref<TextBox> dockEditor;winrt::weak_ref<FrameworkElement> dockField;
+  HWND resultsWindow{},resultsIsland{};HMODULE resultsModule{};std::wstring resultsClass;
+  int resultsShapeWidth{},resultsShapeHeight{},resultsShapeRadius{-1};
+  Hosting::DesktopWindowXamlSource resultsSource{nullptr};winrt::weak_ref<FrameworkElement> directAnchor;
+  winrt::com_ptr<IDesktopWindowXamlSourceNative2> resultsInput;
+  // XAML Islands need their own message preprocessing. The taskbar thread
+  // owns this island; route only messages addressed to our own window tree.
+  inline static thread_local HHOOK resultsInputHook{};
+  inline static thread_local std::vector<Session*> resultsInputHosts;
+  std::function<void()> nativeOpened,nativeClosed;
+  DispatcherTimer dismissTimer{nullptr};winrt::event_token dismissTick{};bool mouseWasDown{};
+  NativeSearchHandoff nativeHandoff;DispatcherTimer shellDismissTimer{nullptr};winrt::event_token shellDismissTick{};
+  ULONGLONG shellDismissStarted{},startDismissAt{},searchCloseAt{},sourcesHiddenAt{},lastHandoffFocusAttempt{};unsigned handoffFocusAttempts{};
+  // A single recovery is permitted if the XAML light-dismiss has already
+  // completed during our own verified native-window dismissal.
+  NativeSearchSurface interruptedSource;ULONGLONG interruptedUntil{};bool interruptedHandoff{};
+  DWORD foreignInputTick{};bool foreignObserved{};
+  std::optional<RECT> directBounds;ULONGLONG foregroundLostAt{};bool hostLayoutLogged{};
+  winrt::weak_ref<TextBox> dockEditor;
   std::wstring query;bool dockTyping{},queryInitialized{},compact{},layoutInitialized{},closeRequested{},liveOpened{};
-  ULONGLONG openStarted{},openedAt{};
+  ULONGLONG openStarted{},openedAt{};bool externalDockOpen{},preserveEditorOnClose{};
   double expandedWidth{},expandedHeight{},compactHeight{},compactWidth{},dockCenterDip{};
   double compactCenterDip{},fieldHeight{},compactRadius{},compactBorder{};
   static constexpr double compactPaddingX=6.,compactPaddingY=5.;
@@ -19594,9 +19158,10 @@ struct Session:std::enable_shared_from_this<Session>{
   std::shared_ptr<CopyJob> copyJob;
   bool copying{},resumeQueryTimer{};ULONGLONG copyStarted{};
   DispatcherTimer timer{nullptr};IloClockMenu::MenuCornerClip corners;std::shared_ptr<Slot> slot=std::make_shared<Slot>();
-  std::vector<Result> results;std::vector<size_t> visible;std::vector<Button> filters,rowButtons;std::vector<Border> resultTiles;std::vector<winrt::event_token> filterTokens,rowTokens;
+  std::vector<Result> results;std::vector<size_t> visible;std::vector<Button> filters,rowButtons;std::vector<Border> resultTiles;std::vector<winrt::event_token> filterTokens;
   struct Cell{int row;double x;};std::vector<Cell> cells;
-  std::vector<winrt::event_token> contextTokens,rightTapTokens,pressTokens,hoverTokens,moveTokens;
+  struct RowEvents{winrt::event_token click{},context{},rightTap{},press{},hover{},move{};};
+  std::vector<RowEvents> rowEvents;
   struct ContextPoint{
     std::optional<winrt::Windows::Foundation::Point> local;
     std::optional<POINT> screen;
@@ -19618,7 +19183,258 @@ struct Session:std::enable_shared_from_this<Session>{
   std::wstring source;
   void HoldDock(bool held){if(dockHeld==held)return;dockHeld=held;IloHiding::SetPopupHold(taskbar,IloHiding::PopupHold::Search,held);}
   bool HasQuery()const{return std::any_of(query.begin(),query.end(),[](wchar_t ch){return !iswspace(ch);});}
-  void Hide(){if(copying&&!disposing&&!g_unloading)return;closeRequested=true;try{if(fly)fly.Hide();}catch(...){HoldDock(false);closed=true;if(scheduleRetirement)scheduleRetirement(shared_from_this());}}
+  bool IsOpen()const{return externalDockOpen?resultsWindow&&IsWindowVisible(resultsWindow):fly&&fly.IsOpen();}
+  void Hide(){if(copying&&!disposing&&!g_unloading)return;closeRequested=true;try{if(externalDockOpen){if(resultsWindow)ShowWindow(resultsWindow,SW_HIDE);if(liveOpened&&nativeClosed)nativeClosed();}else if(fly)fly.Hide();}catch(...){HoldDock(false);closed=true;if(scheduleRetirement)scheduleRetirement(shared_from_this());}}
+  bool PlaceNativeWindow(){
+    auto anchor=directAnchor.get();if(!anchor||!anchor.XamlRoot()||!plate)return false;
+    auto xr=anchor.XamlRoot();double scale=xr.RasterizationScale();if(scale<=0)return false;
+    auto area=DockArea(taskbar,scale);if(!area)return false;
+    // Work entirely in physical screen coordinates, not XAML-root offsets.
+    // This window has its own unambiguous compositor and no taskbar clip.
+    const double w=plate.Width(),h=plate.Height(),gap=IloClockMenu::kMenuDockGap;
+    LONG width=std::max(1L,LONG(std::lround(w*scale))),height=std::max(1L,LONG(std::lround(h*scale)));
+    double x=DesiredLeftPx(w,compact?compactCenterDip:dockCenterDip,scale).value_or((double(area->monitor.left)+area->monitor.right-width)/2.);
+    double y=topTaskbar?area->edge+gap*scale:area->edge-height-gap*scale;
+    LONG left=LONG(std::lround(std::clamp(x,double(area->monitor.left),std::max(double(area->monitor.left),double(area->monitor.right-width)))));
+    LONG top=LONG(std::lround(std::clamp(y,double(area->monitor.top),std::max(double(area->monitor.top),double(area->monitor.bottom-height)))));
+    directBounds=RECT{left,top,left+width,top+height};
+    if(resultsWindow){
+      RECT current{};if(!GetWindowRect(resultsWindow,&current)||!EqualRect(&current,&*directBounds)){
+        if(!SetWindowPos(resultsWindow,HWND_TOPMOST,left,top,width,height,SWP_NOACTIVATE))return false;
+      }
+    }
+    return true;
+  }
+  void ApplyResultsShape()noexcept{
+    if(!resultsWindow||!plate)return;
+    try{
+      RECT r{};if(!GetWindowRect(resultsWindow,&r))return;
+      int width=r.right-r.left,height=r.bottom-r.top;if(width<=0||height<=0)return;
+      // Use the same physical extent as the plate, rather than the HWND's
+      // reported DPI (an island can inherit a different DPI context).
+      double dipWidth=plate.Width();
+      if(!std::isfinite(dipWidth)||dipWidth<=0)return;
+      int radius=std::clamp(int(std::lround((compact?compactRadius:config.radius)*width/dipWidth)),0,std::min(width,height)/2);
+      if(width==resultsShapeWidth&&height==resultsShapeHeight&&radius==resultsShapeRadius)return;
+      HRGN shape=radius?CreateRoundRectRgn(0,0,width,height,2*radius,2*radius):CreateRectRgn(0,0,width,height);
+      if(!shape)return;
+      // Cache before SetWindowRgn, which can synchronously notify the window.
+      resultsShapeWidth=width;resultsShapeHeight=height;resultsShapeRadius=radius;
+      if(!SetWindowRgn(resultsWindow,shape,TRUE)){
+        auto error=GetLastError();
+        DeleteObject(shape);resultsShapeRadius=-1;
+        Wh_Log(L"[ILoSearch] Results window shape failed: %lu",error);
+      }
+    }catch(...){}
+  }
+  void ResizeResultsIsland()noexcept{
+    if(!resultsWindow||!resultsIsland)return;RECT r{};if(GetClientRect(resultsWindow,&r))SetWindowPos(resultsIsland,nullptr,0,0,r.right,r.bottom,SWP_NOZORDER|SWP_NOACTIVATE|SWP_SHOWWINDOW);
+    ApplyResultsShape();
+  }
+  static LRESULT CALLBACK ResultsInputProc(int code,WPARAM wp,LPARAM lp)noexcept{
+    if(code>=0&&wp==PM_REMOVE&&lp)try{
+      auto msg=reinterpret_cast<MSG*>(lp);
+      if(msg->hwnd){
+        winrt::com_ptr<IDesktopWindowXamlSourceNative2> island;
+        for(auto host:resultsInputHosts){
+          if(!host||host->closed||host->disposing||!host->resultsWindow||!IsWindowVisible(host->resultsWindow))continue;
+          if(msg->hwnd==host->resultsWindow||IsChild(host->resultsWindow,msg->hwnd)){island=host->resultsInput;break;}
+        }
+        if(island){BOOL handled=FALSE;if(SUCCEEDED(island->PreTranslateMessage(msg,&handled))&&handled){msg->message=WM_NULL;msg->wParam=0;msg->lParam=0;}}
+      }
+    }catch(...){}
+    return CallNextHookEx(nullptr,code,wp,lp);
+  }
+  void AttachResultsInput(){
+    if(dockTyping)return;
+    resultsInput=resultsSource.try_as<IDesktopWindowXamlSourceNative2>();
+    if(!resultsInput)throw winrt::hresult_error(E_NOINTERFACE);
+    resultsInputHosts.push_back(this);
+    if(!resultsInputHook){
+      resultsInputHook=SetWindowsHookExW(WH_GETMESSAGE,ResultsInputProc,nullptr,GetCurrentThreadId());
+      if(!resultsInputHook){auto error=GetLastError();resultsInputHosts.pop_back();resultsInput=nullptr;throw winrt::hresult_error(HRESULT_FROM_WIN32(error));}
+    }
+  }
+  void DetachResultsInput()noexcept{
+    std::erase(resultsInputHosts,this);
+    if(resultsInputHosts.empty()&&resultsInputHook){UnhookWindowsHookEx(resultsInputHook);resultsInputHook=nullptr;}
+    resultsInput=nullptr;
+  }
+  bool FocusNativeEditor(){
+    if(dockTyping||closed||!input||!resultsWindow||!resultsIsland||!resultsSource||!resultsInput)return false;
+    if(GetForegroundWindow()!=resultsWindow&&!SetForegroundWindow(resultsWindow))return false;
+    if(GetForegroundWindow()!=resultsWindow)return false;
+    input.ApplyTemplate();outer.UpdateLayout();
+    if(!resultsSource.HasFocus()){
+      SetFocus(resultsIsland);
+      resultsSource.NavigateFocus(Hosting::XamlSourceFocusNavigationRequest(Hosting::XamlSourceFocusNavigationReason::First));
+    }
+    input.Focus(FocusState::Keyboard);
+    auto xr=input.XamlRoot();
+    return xr&&resultsSource.HasFocus()&&Input::FocusManager::GetFocusedElement(xr)==input&&GetForegroundWindow()==resultsWindow;
+  }
+  static LRESULT CALLBACK ResultsProc(HWND w,UINT msg,WPARAM wp,LPARAM lp)noexcept{
+    if(msg==WM_NCCREATE){auto cs=reinterpret_cast<CREATESTRUCTW*>(lp);SetWindowLongPtrW(w,GWLP_USERDATA,reinterpret_cast<LONG_PTR>(cs->lpCreateParams));}
+    auto self=reinterpret_cast<Session*>(GetWindowLongPtrW(w,GWLP_USERDATA));
+    if(self)try{
+      if(msg==WM_SIZE){self->ResizeResultsIsland();return 0;}
+      if(msg==WM_MOUSEACTIVATE&&self->dockTyping)return MA_NOACTIVATE;
+      if(msg==WM_CLOSE){self->Hide();return 0;}
+      if(msg==WM_ERASEBKGND)return 1;
+      if(msg==WM_NCDESTROY){self->resultsWindow=nullptr;SetWindowLongPtrW(w,GWLP_USERDATA,0);}
+    }catch(...){}
+    return DefWindowProcW(w,msg,wp,lp);
+  }
+  void OpenNativeWindow(){
+    if(!PlaceNativeWindow()||!directBounds)throw winrt::hresult_error(E_FAIL);
+    GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<PCWSTR>(&ResultsProc),&resultsModule);
+    resultsClass=L"ILo.Search.Results."+std::to_wstring(reinterpret_cast<uintptr_t>(this));
+    WNDCLASSW wc{};wc.hInstance=resultsModule;wc.lpfnWndProc=ResultsProc;wc.lpszClassName=resultsClass.c_str();wc.hCursor=LoadCursorW(nullptr,IDC_ARROW);wc.hbrBackground=static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
+    if(!RegisterClassW(&wc))throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    auto r=*directBounds;
+    const DWORD exStyle=WS_EX_TOOLWINDOW|WS_EX_TOPMOST|(dockTyping?WS_EX_NOACTIVATE:0);
+    resultsWindow=CreateWindowExW(exStyle,resultsClass.c_str(),L"ILo Search",WS_POPUP,r.left,r.top,r.right-r.left,r.bottom-r.top,nullptr,nullptr,resultsModule,this);
+    if(!resultsWindow)throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    Wh_Log(L"[ILoSearch] Results HWND created: %p (%ld,%ld) %ldx%ld",resultsWindow,r.left,r.top,r.right-r.left,r.bottom-r.top);
+    BOOL dark=ThemeColor(true).R>128;DwmSetWindowAttribute(resultsWindow,DWMWA_USE_IMMERSIVE_DARK_MODE,&dark,sizeof(dark));
+    BOOL hostBrush=TRUE;DwmSetWindowAttribute(resultsWindow,17,&hostBrush,sizeof(hostBrush));
+    MARGINS glass{-1};DwmExtendFrameIntoClientArea(resultsWindow,&glass);
+    // Only the ILô surface draws the fill, border and corners. Prevent a
+    // second native frame/material from showing behind its rounded plate.
+    const DWORD backdrop=DWMSBT_NONE;DwmSetWindowAttribute(resultsWindow,DWMWA_SYSTEMBACKDROP_TYPE,&backdrop,sizeof(backdrop));
+    const COLORREF border=DWMWA_COLOR_NONE;DwmSetWindowAttribute(resultsWindow,DWMWA_BORDER_COLOR,&border,sizeof(border));
+    const DWORD corner=DWMWCP_DONOTROUND;DwmSetWindowAttribute(resultsWindow,DWMWA_WINDOW_CORNER_PREFERENCE,&corner,sizeof(corner));
+    resultsSource=Hosting::DesktopWindowXamlSource();auto native=resultsSource.as<IDesktopWindowXamlSourceNative>();
+    winrt::check_hresult(native->AttachToWindow(resultsWindow));winrt::check_hresult(native->get_WindowHandle(&resultsIsland));
+    resultsSource.Content(outer);AttachResultsInput();ResizeResultsIsland();
+    // In field mode the dock retains focus. In icon mode the island itself
+    // is the editor and receives focus before accepting a launcher request.
+    if(!SetWindowPos(resultsWindow,HWND_TOPMOST,r.left,r.top,r.right-r.left,r.bottom-r.top,SWP_NOACTIVATE|SWP_SHOWWINDOW))throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    if(dockTyping){if(auto editor=dockEditor.get())if(editor.FocusState()==FocusState::Unfocused)editor.Focus(FocusState::Keyboard);}
+    else if(!FocusNativeEditor()){Wh_Log(L"[ILoSearch] Independent editor could not receive focus");throw winrt::hresult_error(E_FAIL);}
+    if(nativeOpened)nativeOpened();
+    Wh_Log(L"[ILoSearch] Results host visible=%d island=%p",int(IsWindowVisible(resultsWindow)),resultsIsland);
+  }
+  void CloseNativeWindow()noexcept{
+    if(resultsInput)DetachResultsInput();
+    if(resultsWindow)ShowWindow(resultsWindow,SW_HIDE);
+    try{if(resultsSource){resultsSource.Content(nullptr);resultsSource.Close();}}catch(...){Wh_Log(L"[ILoSearch] Results island cleanup failed");}resultsSource=nullptr;resultsIsland=nullptr;
+    if(resultsWindow){SetWindowLongPtrW(resultsWindow,GWLP_USERDATA,0);DestroyWindow(resultsWindow);resultsWindow=nullptr;}
+    if(!resultsClass.empty()&&resultsModule)UnregisterClassW(resultsClass.c_str(),resultsModule);resultsClass.clear();resultsModule=nullptr;
+    resultsShapeWidth=resultsShapeHeight=0;resultsShapeRadius=-1;
+    nativeOpened={};nativeClosed={};directAnchor={};directBounds.reset();
+  }
+  bool OwnForeground()const{
+    HWND fg=GetForegroundWindow();if(!fg||!taskbar)return false;
+    if(GetAncestor(fg,GA_ROOT)==taskbar||GetAncestor(fg,GA_ROOTOWNER)==taskbar)return true;
+    DWORD pid{};return GetWindowThreadProcessId(fg,&pid)==GetWindowThreadProcessId(taskbar,nullptr)&&pid==GetCurrentProcessId();
+  }
+  void StopNativeHandoff()noexcept{
+    try{if(shellDismissTimer){shellDismissTimer.Stop();if(shellDismissTick.value)shellDismissTimer.Tick(shellDismissTick);}}catch(...){}
+    HWND expected=nativeHandoff.search.window;if(expected)nativeDismissSource.compare_exchange_strong(expected,nullptr);
+    shellDismissTimer=nullptr;shellDismissTick={};nativeHandoff={};shellDismissStarted=startDismissAt=searchCloseAt=sourcesHiddenAt=lastHandoffFocusAttempt=0;handoffFocusAttempts=0;foreignInputTick=0;foreignObserved=false;
+  }
+  bool HandoffCanRetain()const noexcept{
+    if(!shellDismissStarted||closed||disposing||closeRequested||g_unloading||GetTickCount64()-shellDismissStarted>=1200||MouseDown()||
+       ((GetAsyncKeyState(VK_MENU)|GetAsyncKeyState(VK_LWIN)|GetAsyncKeyState(VK_RWIN))&0x8000))return false;
+    // Retain only during an outstanding request to dismiss the original
+    // verified native UI. Windows may restore a different foreground window
+    // from the one visible before Start. The identity of that application
+    // is not a reliable way to recognize a shell dismissal.
+    const auto requested=startDismissAt?startDismissAt:searchCloseAt;
+    if(requested)return GetTickCount64()-requested<550;
+    // Before dismissal, only the original native search may still be in
+    // foreground as our own editor is being activated.
+    return GetTickCount64()-shellDismissStarted<250&&nativeHandoff.search.Valid()&&GetForegroundWindow()==nativeHandoff.search.window;
+  }
+  bool DismissNativeStart(){
+    auto const& surface=nativeHandoff.start;
+    if(startDismissAt||!surface.Visible())return false;
+    HWND target=surface.window;GUITHREADINFO info{sizeof(info)};
+    if(GetGUIThreadInfo(surface.thread,&info)&&info.hwndFocus&&GetAncestor(info.hwndFocus,GA_ROOT)==surface.window)target=info.hwndFocus;
+    if(!surface.Valid())return false;
+    PostMessageW(surface.window,WM_CANCELMODE,0,0);
+    LPARAM key=LPARAM(1|(MapVirtualKeyW(VK_ESCAPE,MAPVK_VK_TO_VSC)<<16));
+    bool posted=PostMessageW(target,WM_KEYDOWN,VK_ESCAPE,key)!=FALSE;
+    PostMessageW(target,WM_KEYUP,VK_ESCAPE,key|LPARAM(0xC0000000u));
+    if(posted){startDismissAt=GetTickCount64();Wh_Log(L"[ILoSearch] Native Start dismissal requested");}return posted;
+  }
+  void VerifyNativeDismissal(){
+    if(closed||disposing||g_unloading||!liveOpened||!IsOpen()){StopNativeHandoff();return;}
+    auto now=GetTickCount64();
+    if(now-shellDismissStarted>=1200){Wh_Log(L"[ILoSearch] Native handoff: settlement timed out (search=%d start=%d focus=%d)",int(nativeHandoff.search.Visible()),int(nativeHandoff.start.Visible()),int(OwnForeground()));StopNativeHandoff();return;}
+    if(!OwnForeground()){
+      if(!HandoffCanRetain()){Wh_Log(L"[ILoSearch] Native handoff: foreground changed outside dismissal");StopNativeHandoff();return;}
+      LASTINPUTINFO last{sizeof(last)};
+      if(!GetLastInputInfo(&last)){StopNativeHandoff();return;}
+      if(!foreignObserved){foreignObserved=true;foreignInputTick=last.dwTime;}
+      else if(last.dwTime!=foreignInputTick){Wh_Log(L"[ILoSearch] Native handoff: new interaction while other window active");StopNativeHandoff();return;}
+      if(nativeHandoff.search.Hidden()&&!nativeHandoff.start.Hidden()){DismissNativeStart();return;}
+      // Do not contest focus while a native surface is still closing. Only
+      // its confirmed disappearance authorizes the bounded return to our UI.
+      if((searchCloseAt||startDismissAt)&&(!nativeHandoff.search.Hidden()||!nativeHandoff.start.Hidden()))return;
+      if(handoffFocusAttempts>=2||(lastHandoffFocusAttempt&&now-lastHandoffFocusAttempt<55))return;
+      ++handoffFocusAttempts;lastHandoffFocusAttempt=now;
+      const bool restored=externalDockOpen&&!dockTyping?FocusNativeEditor():SetForegroundWindow(taskbar)&&OwnForeground();
+      Wh_Log(L"[ILoSearch] Native handoff: editor focus recovery attempt=%u success=%d",handoffFocusAttempts,int(restored));
+      if(!restored)return;
+      if(auto editor=dockEditor.get())editor.Focus(FocusState::Keyboard);else if(input)input.Focus(FocusState::Keyboard);
+      foregroundLostAt=0;sourcesHiddenAt=0;
+      if(resultsWindow&&IsWindowVisible(resultsWindow))SetWindowPos(resultsWindow,HWND_TOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
+    }else foreignObserved=false;
+    bool searchVisible=!nativeHandoff.search.Hidden(),startVisible=!nativeHandoff.start.Hidden();
+    // The first focus transfer usually suffices (notably with Start11).
+    // Only request dismissal if the *same* native popup actually remains.
+    if(!searchVisible&&!startVisible){
+      // SearchHost can finish an in-flight Start animation after the first
+      // foreground change. Keep the bounded observation alive for that race.
+      if(!sourcesHiddenAt)sourcesHiddenAt=now;
+      if(now-shellDismissStarted<240||now-sourcesHiddenAt<120||!OwnForeground())return;
+      Wh_Log(L"[ILoSearch] Native handoff: source panels dismissed");StopNativeHandoff();return;
+    }
+    sourcesHiddenAt=0;
+    if(now-shellDismissStarted<35||MouseDown())return;
+    // The next character must already have a real ILô editor to go to.
+    // Do not close SearchHost while focus is still being prepared.
+    auto editor=dockTyping?dockEditor.get():input;
+    if(!editor)return;
+    if(editor.FocusState()==FocusState::Unfocused){editor.Focus(FocusState::Keyboard);return;}
+    if(searchVisible&&!searchCloseAt){
+      // Only the original, visible SearchHost UI window, after our verified
+      // result panel has opened. WM_CLOSE is a normal window close request,
+      // never a process termination, and is not sent to the Start host.
+      if(nativeHandoff.search.Visible()&&OwnForeground()&&PostMessageW(nativeHandoff.search.window,WM_CLOSE,0,0)){
+        searchCloseAt=now;Wh_Log(L"[ILoSearch] Native search close requested after editor ready (query length=%zu)",std::wstring_view(editor.Text()).size());
+      }
+      return;
+    }
+    if(startVisible&&!startDismissAt&&!searchVisible)DismissNativeStart();
+  }
+  void BeginNativeHandoff(NativeSearchHandoff handoff){
+    StopNativeHandoff();nativeHandoff=handoff;
+    if(!handoff.search.Valid()){nativeHandoff={};return;}
+    nativeDismissUntil=GetTickCount64()+1200;nativeDismissSource=handoff.search.window;
+    shellDismissStarted=GetTickCount64();shellDismissTimer=DispatcherTimer();shellDismissTimer.Interval(std::chrono::milliseconds(15));std::weak_ptr<Session> weak=shared_from_this();
+    shellDismissTick=shellDismissTimer.Tick([weak](auto&&,auto&&)noexcept{if(auto live=weak.lock())try{live->VerifyNativeDismissal();}catch(...){live->StopNativeHandoff();}});shellDismissTimer.Start();
+  }
+  static bool MouseDown(){return ((GetAsyncKeyState(VK_LBUTTON)|GetAsyncKeyState(VK_RBUTTON)|GetAsyncKeyState(VK_MBUTTON))&0x8000)!=0;}
+  void DismissDirectPopup(){
+    if(closed||disposing||!resultsWindow||!IsWindowVisible(resultsWindow)){if(dismissTimer)dismissTimer.Stop();return;}
+    // Only while our panel is visible. Do not intercept any mouse event or
+    // close the result panel during a native context action/copy dialog.
+    const bool down=MouseDown(),pressed=down&&!mouseWasDown;mouseWasDown=down;
+    if(copying||opening)return;
+    if(!OwnForeground()&&!HandoffCanRetain()){
+      if(!foregroundLostAt)foregroundLostAt=GetTickCount64();
+      else if(GetTickCount64()-foregroundLostAt>=80){Wh_Log(L"[ILoSearch] Results closing after foreground loss");Hide();return;}
+    }else foregroundLostAt=0;
+    if(!pressed)return;
+    if(pointerOnDockField&&pointerOnDockField())return;
+    POINT cursor{};if(!GetCursorPos(&cursor))return;
+    if(auto bounds=NativePanelBounds(cursor);bounds&&PtInRect(&*bounds,cursor))return;
+    if(directBounds&&PtInRect(&*directBounds,cursor))return;
+    Hide();
+  }
   void RestartPlacement(){
     if(!placementTimer||closed)return;
     placementRetries=0;offsetAdjusted=nativeAdjusted=marginAdjusted=placementRejected=false;placementTimer.Start();
@@ -19631,6 +19447,7 @@ struct Session:std::enable_shared_from_this<Session>{
   }
   std::optional<RECT> NativePanelBounds(std::optional<POINT> cursor={},HWND* native=nullptr){
     if(native)*native=nullptr;
+    if(resultsWindow){RECT r{};if(GetWindowRect(resultsWindow,&r)&&(!cursor||PtInRect(&r,*cursor))){if(native)*native=resultsWindow;return r;}return {};}
     if(!plate||!plate.XamlRoot()||plate.ActualWidth()<=0||plate.ActualHeight()<=0)return {};
     const double scale=plate.XamlRoot().RasterizationScale();if(scale<=0)return {};
     const double margin=outer?outer.Margin().Top+outer.Margin().Bottom+outer.Padding().Top+outer.Padding().Bottom:0;
@@ -19663,6 +19480,17 @@ struct Session:std::enable_shared_from_this<Session>{
     return {};
   }
   bool SettlePlacement(){
+    if(externalDockOpen){
+      if(!PlaceNativeWindow()||!resultsWindow||!plate||!plate.XamlRoot()||plate.ActualWidth()<=0||plate.ActualHeight()<=0)return false;
+      ApplyResultsShape();
+      if(!hostLayoutLogged){
+        hostLayoutLogged=true;RECT r{};GetWindowRect(resultsWindow,&r);POINT center{(r.left+r.right)/2,(r.top+r.bottom)/2};HWND hit=WindowFromPoint(center);
+        bool unobscured=hit==resultsWindow||IsChild(resultsWindow,hit);
+        Wh_Log(L"[ILoSearch] Results host layout: %ldx%ld px, %.1fx%.1f DIP, visible=%d, unobscured=%d",r.right-r.left,r.bottom-r.top,plate.ActualWidth(),plate.ActualHeight(),int(IsWindowVisible(resultsWindow)),int(unobscured));
+        if(!unobscured&&IsWindowVisible(resultsWindow)&&OwnForeground())SetWindowPos(resultsWindow,HWND_TOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
+      }
+      return true;
+    }
     if(!taskbar||!plate||!outer)return true;
     HWND popupWindow{};auto bounds=NativePanelBounds({},&popupWindow);if(!bounds)return false;
     double scale=plate.XamlRoot().RasterizationScale();if(scale<=0)return true;
@@ -19732,12 +19560,14 @@ struct Session:std::enable_shared_from_this<Session>{
     // A collapsed child still contributes StackPanel spacing on some XAML
     // builds. Keep only the actual, populated categories in this strip.
     if(categoryBar&&mask!=categoryMask){categoryBar.Children().Clear();for(size_t i=0;i<filters.size();++i)if(present[i])categoryBar.Children().Append(filters[i]);categoryMask=mask;}
+    const auto fg=ThemeColor(true);
     for(size_t i=0;i<filters.size();++i){
       if(!present[i]&&categoryTips[i]&&categoryTips[i].IsOpen())categoryTips[i].IsOpen(false);
-      filters[i].Visibility(present[i]?Visibility::Visible:Visibility::Collapsed);
-      filters[i].Background(Brush(Alpha(ThemeColor(true),int(i)==filter?20:0)));
+      const auto visibility=present[i]?Visibility::Visible:Visibility::Collapsed;
+      if(filters[i].Visibility()!=visibility)filters[i].Visibility(visibility);
+      Paint(filters[i].Background(),Alpha(fg,int(i)==filter?(batchReady?18:20):0),[&](auto brush){filters[i].Background(brush);});
     }
-    if(categoryBar)categoryBar.Visibility(present[0]?Visibility::Visible:Visibility::Collapsed);
+    if(categoryBar){const auto visibility=present[0]?Visibility::Visible:Visibility::Collapsed;if(categoryBar.Visibility()!=visibility)categoryBar.Visibility(visibility);}
   }
   void SwitchCategory(int next){
     if(closed||copying||next==filter||next<0||size_t(next)>=filters.size()||filters[next].Visibility()!=Visibility::Visible)return;
@@ -19763,29 +19593,40 @@ struct Session:std::enable_shared_from_this<Session>{
     if(previous>=0&&size_t(previous)<rowButtons.size())try{if(contextRowTip)ToolTipService::SetToolTip(rowButtons[previous],contextRowTip);if(restoreFocus){if(auto editor=dockEditor.get())editor.Focus(FocusState::Programmatic);else rowButtons[previous].Focus(FocusState::Programmatic);}}catch(...){}contextRowTip=nullptr;
   }
   void ClearRows()noexcept{
-    ResetTransition();DismissContext();++renderRevision;for(size_t i=0;i<rowButtons.size();++i){try{if(i<rowTokens.size())rowButtons[i].Click(rowTokens[i]);if(i<contextTokens.size())rowButtons[i].ContextRequested(contextTokens[i]);if(i<rightTapTokens.size())rowButtons[i].RightTapped(rightTapTokens[i]);if(i<pressTokens.size())rowButtons[i].PointerPressed(pressTokens[i]);if(i<hoverTokens.size())rowButtons[i].PointerEntered(hoverTokens[i]);if(i<moveTokens.size())rowButtons[i].PointerMoved(moveTokens[i]);}catch(...){}}
-    try{if(list)list.Children().Clear();}catch(...){}
-    rowButtons.clear();rowTokens.clear();contextTokens.clear();rightTapTokens.clear();pressTokens.clear();hoverTokens.clear();moveTokens.clear();resultTiles.clear();visible.clear();cells.clear();selected=-1;lastRightRow=lastHoverRow=-1;lastRightPress=0;lastRightPoint={};lastHoverPoint={};
+    ResetTransition();DismissContext();++renderRevision;
+    for(size_t i=0;i<rowButtons.size()&&i<rowEvents.size();++i){auto const& row=rowButtons[i];auto const& e=rowEvents[i];
+      try{if(e.click.value)row.Click(e.click);}catch(...){}
+      try{if(e.context.value)row.ContextRequested(e.context);}catch(...){}
+      try{if(e.rightTap.value)row.RightTapped(e.rightTap);}catch(...){}
+      try{if(e.press.value)row.PointerPressed(e.press);}catch(...){}
+      try{if(e.hover.value)row.PointerEntered(e.hover);}catch(...){}
+      try{if(e.move.value)row.PointerMoved(e.move);}catch(...){}
+    }
+    try{if(list&&list.Children().Size())list.Children().Clear();}catch(...){}
+    rowButtons.clear();rowEvents.clear();resultTiles.clear();visible.clear();cells.clear();selected=-1;lastRightRow=lastHoverRow=-1;lastRightPress=0;lastRightPoint={};lastHoverPoint={};
   }
   void Dispose()noexcept{
     if(disposing)return;disposing=true;closed=true;HoldDock(false);
+    StopNativeHandoff();
     if(copyJob){copyJob->Cancel();copyJob.reset();}
     try{if(copyTimer){copyTimer.Stop();if(copyTick.value)copyTimer.Tick(copyTick);copyTimer=nullptr;}}catch(...){}
     StopDeployment();try{if(deployTimer&&deployTick.value)deployTimer.Tick(deployTick);}catch(...){}deployTimer=nullptr;
     try{if(placementTimer){placementTimer.Stop();if(placementTick.value)placementTimer.Tick(placementTick);placementTimer=nullptr;}}catch(...){}
+    try{if(dismissTimer){dismissTimer.Stop();if(dismissTick.value)dismissTimer.Tick(dismissTick);dismissTimer=nullptr;}}catch(...){}
     try{Cancel();if(timer&&tick.value)timer.Tick(tick);}catch(...){}
     try{if(input&&changed.value)input.TextChanged(changed);if(input&&inputKey.value)input.KeyDown(inputKey);if(body&&key.value)body.KeyDown(key);}catch(...){}
     ClearRows();
     for(size_t i=0;i<filters.size()&&i<filterTokens.size();++i)try{filters[i].Click(filterTokens[i]);}catch(...){}
     for(size_t i=0;i<categoryTips.size();++i)try{if(categoryTips[i]){categoryTips[i].Opened(tipOpened[i]);categoryTips[i].Closed(tipClosed[i]);categoryTips[i].IsOpen(false);}categoryThemes[i].Restore();categoryTips[i]=nullptr;}catch(...){}
     try{if(fly&&opened.value)fly.Opened(opened);if(fly&&closingToken.value)fly.Closing(closingToken);if(fly&&closedToken.value)fly.Closed(closedToken);if(fly)fly.Hide();}catch(...){}
+    CloseNativeWindow();
     corners.Clear();try{if(plate)plate.Background(nullptr);if(fly)fly.Content(nullptr);}catch(...){}
-    filters.clear();filterTokens.clear();mirror={};pointerOnDockField={};selectAnchor={};reopenAfterCopy={};scheduleRetirement={};dockEditor={};dockField={};fly=nullptr;plate=nullptr;body=nullptr;input=nullptr;list=nullptr;scroll=nullptr;status=nullptr;emptyState=nullptr;timer=nullptr;
+    filters.clear();filterTokens.clear();mirror={};pointerOnDockField={};selectAnchor={};reopenAfterCopy={};scheduleRetirement={};dockEditor={};fly=nullptr;plate=nullptr;body=nullptr;input=nullptr;list=nullptr;scroll=nullptr;status=nullptr;emptyState=nullptr;timer=nullptr;
   }
   void QueryChanged(std::wstring value){
     if(closed||copying||(queryInitialized&&query==value))return;queryInitialized=true;query=std::move(value);
     if(!dockTyping)SetCompact(!HasQuery());
-    results.clear();ClearRows();RefreshCategories(false);displayedGeneration=0;
+    results.clear();ClearRows();if(categoryMask)RefreshCategories(false);displayedGeneration=0;
     {std::lock_guard lock(slot->mutex);generation=++slot->generation;slot->ready=false;slot->batch={};}
     if(!HasQuery()){
       timer.Stop();submitted=false;source.clear();status.Text(L"");if(emptyState)emptyState.Visibility(compact||deployCollapsing?Visibility::Collapsed:Visibility::Visible);return;
@@ -19805,7 +19646,9 @@ struct Session:std::enable_shared_from_this<Session>{
       if(updateOnly)UpdateIcons();else{displayedGeneration=generation;Render();}
     }
   }
-  void UpdateIcons(){for(size_t i=0;i<visible.size()&&i<resultTiles.size();++i)if(visible[i]<results.size())if(auto image=IconImage(results[visible[i]].icon,results[visible[i]].category==Category::Apps?44:28)){resultTiles[i].Child(image);resultTiles[i].Background(Brush({0,0,0,0}));}}
+  // Only the second stage of the same result batch reaches this path.
+  // Cached icons drawn in the first stage need no new XAML bitmap.
+  void UpdateIcons(){for(size_t i=0;i<visible.size()&&i<resultTiles.size();++i){if(visible[i]>=results.size()||resultTiles[i].Child().try_as<Image>())continue;if(auto image=IconImage(results[visible[i]].icon,results[visible[i]].category==Category::Apps?44:28)){resultTiles[i].Child(image);resultTiles[i].Background(Brush({0,0,0,0}));}}}
   void Select(int index,bool bringIntoView){
     if(index<0||size_t(index)>=rowButtons.size())return;
     auto fg=ThemeColor(true);if(selected>=0&&size_t(selected)<rowButtons.size())rowButtons[selected].Background(Brush(Alpha(fg,0)));
@@ -19979,11 +19822,13 @@ struct Session:std::enable_shared_from_this<Session>{
   void Render(){
     if(!list||closed)return;ClearRows();RefreshCategories(true);auto fg=ThemeColor(true);std::weak_ptr<Session> weak=shared_from_this();const auto revision=renderRevision;
     if(!HasQuery()){
-      status.Text(L"");if(emptyState)emptyState.Visibility(Visibility::Visible);for(size_t i=0;i<filters.size();++i)filters[i].Background(Brush(Alpha(fg,int(i)==filter?18:0)));return;
+      status.Text(L"");if(emptyState)emptyState.Visibility(Visibility::Visible);return;
     }
+    std::array<std::vector<size_t>,8> groups;
+    for(size_t i=0;i<results.size();++i)if(!filter||filter==int(results[i].category))groups[int(results[i].category)].push_back(i);
     int visualRow=0;
     for(auto category:kCategoryOrder){if(filter&&filter!=int(category))continue;
-      std::vector<size_t> group;for(size_t i=0;i<results.size();++i)if(results[i].category==category)group.push_back(i);if(group.empty())continue;
+      auto const& group=groups[int(category)];if(group.empty())continue;
       if(!filter){auto heading=Text(CategoryName(category),15);heading.FontWeight(winrt::Windows::UI::Text::FontWeight{600});heading.Margin({6,visible.empty()?2.:12.,0,5});list.Children().Append(heading);}
       const bool apps=category==Category::Apps,settings=category==Category::Settings;
       const int columns=apps?std::clamp(int(contentWidth/126.),1,6):settings?std::clamp(int(contentWidth/235.),1,3):1;
@@ -19992,7 +19837,6 @@ struct Session:std::enable_shared_from_this<Session>{
       for(size_t pos=0;pos<group.size();++pos){size_t i=group[pos];auto const& r=results[i];
       if(pos%columns==0){RowDefinition def;def.Height({1,GridUnitType::Auto});cards.RowDefinitions().Append(def);}
       Button row;row.MinHeight(46);row.HorizontalAlignment(HorizontalAlignment::Stretch);row.HorizontalContentAlignment(HorizontalAlignment::Stretch);row.Padding({5,2,5,2});row.CornerRadius(Radius(8));row.BorderThickness(Stroke(0));row.Background(Brush(Alpha(fg,0)));row.IsTabStop(true);
-      Grid line;line.ColumnSpacing(12);ColumnDefinition glyph;glyph.Width({36,GridUnitType::Pixel});ColumnDefinition title;title.Width({1,GridUnitType::Star});line.ColumnDefinitions().Append(glyph);line.ColumnDefinitions().Append(title);
       Border tile;tile.Width(apps?50:34);tile.Height(apps?50:34);tile.CornerRadius(Radius(8));tile.Background(Brush(Alpha(fg,12)));tile.VerticalAlignment(VerticalAlignment::Center);tile.HorizontalAlignment(HorizontalAlignment::Center);
       PCWSTR symbol=apps?L"\uE71D":r.kind==Kind::Folder?L"\uE8B7":r.kind==Kind::Web?L"\uE774":settings?L"\uE713":category==Category::Images?L"\uEB9F":category==Category::Audio?L"\uE8D6":category==Category::Video?L"\uE714":L"\uE8A5";
       if(auto image=IconImage(r.icon,apps?44:28)){tile.Child(image);tile.Background(Brush({0,0,0,0}));}else tile.Child(Glyph(symbol,apps?30:18));
@@ -20000,6 +19844,7 @@ struct Session:std::enable_shared_from_this<Session>{
         row.Height(104);row.Padding({6,7,6,5});row.VerticalContentAlignment(VerticalAlignment::Top);
         StackPanel card;card.Spacing(5);card.Children().Append(tile);auto caption=Text(r.title,13);caption.TextAlignment(TextAlignment::Center);caption.TextWrapping(TextWrapping::Wrap);caption.MaxLines(2);card.Children().Append(caption);card.IsHitTestVisible(false);row.Content(card);
       }else{
+        Grid line;line.ColumnSpacing(12);ColumnDefinition glyph;glyph.Width({36,GridUnitType::Pixel});ColumnDefinition title;title.Width({1,GridUnitType::Star});line.ColumnDefinitions().Append(glyph);line.ColumnDefinitions().Append(title);
         line.Children().Append(tile);StackPanel detail;detail.VerticalAlignment(VerticalAlignment::Center);detail.Spacing(1);auto caption=Text(r.title,14);if(settings){caption.TextWrapping(TextWrapping::Wrap);caption.MaxLines(2);}detail.Children().Append(caption);
         // Preserve the source of settings (Windows or ILô and its category)
         // in the compact grid, just as in the other result lists.
@@ -20007,17 +19852,18 @@ struct Session:std::enable_shared_from_this<Session>{
       }
       ToolTipService::SetToolTip(row,winrt::box_value(winrt::hstring(r.title)));
       Automation::AutomationProperties::SetName(row,r.title);int index=int(visible.size());visible.push_back(i);resultTiles.push_back(tile);cells.push_back({visualRow+int(pos/columns),(double(pos%columns)+.5)/columns});
-      rowButtons.push_back(row);rowTokens.push_back(row.Click([weak,revision,index](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision)live->Open(index);}catch(...){}}));
+      rowButtons.push_back(row);rowEvents.emplace_back();auto& events=rowEvents.back();events.click=row.Click([weak,revision,index](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision)live->Open(index);}catch(...){}});
+      if(HasFileMenu(r)){
       auto remember=[weak,revision,index](auto&&,Input::PointerRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->rowButtons.size()){
         live->lastHoverRow=index;live->lastHoverPoint=live->CapturePointer(index,args);
       }}catch(...){}};
-      hoverTokens.push_back(row.PointerEntered(remember));moveTokens.push_back(row.PointerMoved(remember));
-      pressTokens.push_back(row.PointerPressed([weak,revision,index](auto&&,Input::PointerRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->rowButtons.size()){
+      events.hover=row.PointerEntered(remember);events.move=row.PointerMoved(remember);
+      events.press=row.PointerPressed([weak,revision,index](auto&&,Input::PointerRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->rowButtons.size()){
         bool right=(GetAsyncKeyState(VK_RBUTTON)&0x8000)!=0;
         try{right=right||args.GetCurrentPoint(live->rowButtons[index]).Properties().IsRightButtonPressed();}catch(...){}
         if(right){live->lastRightRow=index;live->lastRightPress=GetTickCount64();live->lastRightPoint=live->CapturePointer(index,args);}
-      }}catch(...){}}));
-      contextTokens.push_back(row.ContextRequested([weak,revision,index](auto&&,Input::ContextRequestedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->visible.size()&&HasFileMenu(live->results[live->visible[index]])){
+      }}catch(...){}});
+      events.context=row.ContextRequested([weak,revision,index](auto&&,Input::ContextRequestedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->visible.size()&&HasFileMenu(live->results[live->visible[index]])){
         winrt::Windows::Foundation::Point p{};std::optional<winrt::Windows::Foundation::Point> position;
         try{if(args.TryGetPosition(live->rowButtons[index],p))position=p;}catch(...){}
         auto probe=live->MouseAnchor(index,position);std::optional<ContextPoint> point;
@@ -20029,11 +19875,12 @@ struct Session:std::enable_shared_from_this<Session>{
         // the pointer's position (or the icon-centered pointer fallback).
         if(!keyboard&&probe.screen)mouse=true;
         if(mouse)point=probe;args.Handled(true);live->ShowContext(index,point);
-      }}catch(...){}}));
-      rightTapTokens.push_back(row.RightTapped([weak,revision,index](auto&&,Input::RightTappedRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->visible.size()&&HasFileMenu(live->results[live->visible[index]])){
+      }}catch(...){}});
+      events.rightTap=row.RightTapped([weak,revision,index](auto&&,Input::RightTappedRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock();live&&live->renderRevision==revision&&size_t(index)<live->visible.size()&&HasFileMenu(live->results[live->visible[index]])){
         std::optional<winrt::Windows::Foundation::Point> p;try{p=args.GetPosition(live->rowButtons[index]);}catch(...){}
         args.Handled(true);live->ShowContext(index,live->MouseAnchor(index,p));
-      }}catch(...){}}));
+      }}catch(...){}});
+      }
       Grid::SetRow(row,int(pos/columns));Grid::SetColumn(row,int(pos%columns));cards.Children().Append(row);
       }list.Children().Append(cards);visualRow+=int((group.size()+columns-1)/columns);
     }
@@ -20041,22 +19888,25 @@ struct Session:std::enable_shared_from_this<Session>{
     if(scroll)scroll.ChangeView(nullptr,winrt::box_value(0.).as<winrt::Windows::Foundation::IReference<double>>(),nullptr,true);
     std::wstring description=std::to_wstring(visible.size())+T(L" results",L" résultats");if(!source.empty())description+=L"  ·  "+source;
     status.Text(visible.empty()?std::wstring(T(L"No matching results",L"Aucun résultat"))+(source.empty()?L"":L" · "+source):description);
-    for(size_t i=0;i<filters.size();++i)filters[i].Background(Brush(Alpha(fg,int(i)==filter?18:0)));
   }
   void Open(int index){if(closed||opening||index<0||size_t(index)>=visible.size())return;auto result=results[visible[size_t(index)]];opening=true;struct Guard{bool& b;~Guard(){b=false;}} guard{opening};
     Wh_Log(L"[ILoSearch] Activating result, kind=%d",int(result.kind));
     if(Activate(result)){closed=true;Hide();}else if(!closed&&status){status.Text(T(L"Unable to open this result",L"Impossible d'ouvrir ce résultat"));Wh_Log(L"[ILoSearch] Result activation failed");}}
+  winrt::Windows::Foundation::IInspectable FocusedElement(){
+    if(externalDockOpen&&!dockTyping&&body&&body.XamlRoot())return Input::FocusManager::GetFocusedElement(body.XamlRoot());
+    return Input::FocusManager::GetFocusedElement();
+  }
   void OnKey(Input::KeyRoutedEventArgs const& args){using VK=winrt::Windows::System::VirtualKey;
     if(args.Handled()||copying)return;
     if(contextOverlay){
       if(args.Key()==VK::Escape){args.Handled(true);DismissContext(true);}
-      else if(args.Key()==VK::Down||args.Key()==VK::Up){args.Handled(true);auto focus=Input::FocusManager::GetFocusedElement();int at=-1,n=int(contextButtons.size());for(int i=0;i<n;++i)if(contextButtons[i]==focus)at=i;for(int i=1;i<=n;++i){int next=(at+(args.Key()==VK::Down?i:-i)+2*n)%n;if(contextButtons[next].IsEnabled()&&contextButtons[next].Focus(FocusState::Keyboard))break;}}
+      else if(args.Key()==VK::Down||args.Key()==VK::Up){args.Handled(true);auto focus=FocusedElement();int at=-1,n=int(contextButtons.size());for(int i=0;i<n;++i)if(contextButtons[i]==focus)at=i;for(int i=1;i<=n;++i){int next=(at+(args.Key()==VK::Down?i:-i)+2*n)%n;if(contextButtons[next].IsEnabled()&&contextButtons[next].Focus(FocusState::Keyboard))break;}}
       return;
     }
     if(args.Key()==VK::Escape){args.Handled(true);Hide();}
-    else if(args.Key()==VK::Enter){auto focus=Input::FocusManager::GetFocusedElement();int index=selected;bool fromInput=focus&&((input&&focus==input)||(dockEditor.get()&&focus==dockEditor.get())),fromResult=false;for(size_t i=0;i<rowButtons.size();++i)if(rowButtons[i]==focus){index=int(i);fromResult=true;break;}if(fromInput||fromResult){args.Handled(true);Open(index);}}
+    else if(args.Key()==VK::Enter){auto focus=FocusedElement();int index=selected;bool fromInput=focus&&((input&&focus==input)||(dockEditor.get()&&focus==dockEditor.get())),fromResult=false;for(size_t i=0;i<rowButtons.size();++i)if(rowButtons[i]==focus){index=int(i);fromResult=true;break;}if(fromInput||fromResult){args.Handled(true);Open(index);}}
     else if(args.Key()==VK::Down||args.Key()==VK::Up||args.Key()==VK::Left||args.Key()==VK::Right){
-      if(cells.empty())return;auto focus=Input::FocusManager::GetFocusedElement();int at=-1;for(size_t i=0;i<rowButtons.size();++i)if(rowButtons[i]==focus){at=int(i);break;}
+      if(cells.empty())return;auto focus=FocusedElement();int at=-1;for(size_t i=0;i<rowButtons.size();++i)if(rowButtons[i]==focus){at=int(i);break;}
       const bool horizontal=args.Key()==VK::Left||args.Key()==VK::Right;
       const bool fromInput=focus&&((input&&focus==input)||(dockEditor.get()&&focus==dockEditor.get()));
       if(at<0&&(horizontal||!fromInput))return;
@@ -20075,7 +19925,7 @@ struct Session:std::enable_shared_from_this<Session>{
       std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
       plate.BorderThickness(Stroke(compactBorder));
       plate.BorderBrush(Brush({g_settings.userDefinedTaskbarBorderOpacity,static_cast<BYTE>(g_settings.borderColorR),static_cast<BYTE>(g_settings.borderColorG),static_cast<BYTE>(g_settings.borderColorB)}));
-      if(liveOpened&&IloSurfaceStyle::Enabled())try{if(auto brush=IloSurfaceStyle::Create(plate)){plate.Background(brush);return;}}catch(...){}
+      if(liveOpened&&IloSurfaceStyle::Enabled())try{if(auto brush=IloSurfaceStyle::Create(plate,externalDockOpen)){plate.Background(brush);return;}}catch(...){}
       auto fallback=ParseWindhawkColorSetting(g_settings.userDefinedTaskbarBackgroundFallbackColor,ThemeColor(false));
       auto brush=CreateSolidBackgroundBrushFromSetting(fallback);
       if(brush){brush.Opacity(IloSurfaceStyle::Opacity());plate.Background(brush);}else plate.Background(Brush(ThemeColor(false)));
@@ -20085,7 +19935,7 @@ struct Session:std::enable_shared_from_this<Session>{
     auto fallback=Color(config.windowBackground,ThemeColor(false));
     if(config.blur&&config.windowBackground.empty()){
       std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);
-      if(IloSurfaceStyle::Enabled())try{if(auto brush=IloSurfaceStyle::Create(plate)){brush.Opacity(config.opacity/100.0);plate.Background(brush);return;}}catch(...){}
+      if(IloSurfaceStyle::Enabled())try{if(auto brush=IloSurfaceStyle::Create(plate,externalDockOpen)){brush.Opacity(config.opacity/100.0);plate.Background(brush);return;}}catch(...){}
     }
     plate.Background(Brush(Alpha(fallback,config.opacity)));
   }
@@ -20102,7 +19952,7 @@ struct Session:std::enable_shared_from_this<Session>{
   }
   bool StartDeployment(bool expand){
     StopDeployment();
-    if(!liveOpened||!config.animate||!deployTimer||!revealHost||!revealHost.XamlRoot()||!fly)return false;
+    if(!liveOpened||!config.animate||!deployTimer||!revealHost||!revealHost.XamlRoot()||(!fly&&!resultsWindow))return false;
     try{
       using winrt::Windows::Foundation::Numerics::float2;
       auto hostVisual=Hosting::ElementCompositionPreview::GetElementVisual(revealHost);auto comp=hostVisual.Compositor();
@@ -20187,20 +20037,24 @@ struct Session:std::enable_shared_from_this<Session>{
     if(compact)StyleSurface();
     else if(liveOpened)StyleSurface();
     else plate.Background(Brush(Alpha(Color(config.windowBackground,ThemeColor(false)),config.opacity)));
-    if(liveOpened)RestartPlacement();
+    if(liveOpened){if(externalDockOpen&&resultsWindow){PlaceNativeWindow();ApplyResultsShape();}RestartPlacement();}
   }
   static std::shared_ptr<Session> Build(Config const& c,FrameworkElement const& anchor,HWND taskbar,double dockFieldHeight,double centerDip,double iconCenterDip,std::wstring const& seed,
-    TextBox const& externalEditor,FrameworkElement const& externalField,std::function<bool()> pointerOnField,std::function<void(std::wstring const&)> mirror,std::function<void(bool)> selectAnchor,std::function<void(std::wstring const&)> reopenAfterCopy,std::function<void(std::shared_ptr<Session> const&)> retire){
+    TextBox const& externalEditor,FrameworkElement const& externalField,std::function<bool()> pointerOnField,std::function<void(std::wstring const&)> mirror,std::function<void(bool)> selectAnchor,std::function<void(std::wstring const&)> reopenAfterCopy,std::function<void(std::shared_ptr<Session> const&)> retire,bool independentHost=false){
     auto s=std::make_shared<Session>();struct BuildGuard{std::shared_ptr<Session> s;bool done{};~BuildGuard(){if(!done)s->Dispose();}} guard{s};
     PCWSTR stage=L"create flyout";try{
     s->config=c;s->taskbar=taskbar;s->dockCenterDip=centerDip;s->compactCenterDip=iconCenterDip;s->query=seed;s->dockTyping=bool(externalEditor);s->selectAnchor=std::move(selectAnchor);s->reopenAfterCopy=std::move(reopenAfterCopy);s->scheduleRetirement=std::move(retire);
     if(externalEditor)s->dockEditor=winrt::make_weak(externalEditor);
-    if(externalField)s->dockField=winrt::make_weak(externalField);
-    s->pointerOnDockField=std::move(pointerOnField);s->mirror=std::move(mirror);s->fly=Flyout();s->fly.ShouldConstrainToRootBounds(false);
-    s->fly.AreOpenCloseAnimationsEnabled(c.animate);
+    s->pointerOnDockField=std::move(pointerOnField);s->mirror=std::move(mirror);
+    s->externalDockOpen=independentHost;
+    if(s->externalDockOpen){
+      // Keep this tree detached until the independent desktop XAML source
+      // is attached to its real top-level HWND. Never add it to the dock.
+      s->directAnchor=winrt::make_weak(anchor);
+    }else{s->fly=Flyout();s->fly.ShouldConstrainToRootBounds(false);s->fly.AreOpenCloseAnimationsEnabled(c.animate);}
     // Transient Flyout does not transfer keyboard focus from the dock's
     // existing TextBox. Keep native IME, selection and caret in that editor.
-    if(s->dockTyping){s->fly.ShowMode(FlyoutShowMode::Transient);if(externalField)s->fly.OverlayInputPassThroughElement(externalField);}
+    if(s->dockTyping&&s->fly){s->fly.ShowMode(FlyoutShowMode::Transient);if(externalField)s->fly.OverlayInputPassThroughElement(externalField);}
     stage=L"calculate dimensions";bool top=false;double width=c.width,height=c.height,widthLimit=900;
     double scale=anchor.XamlRoot().RasterizationScale();if(auto area=DockArea(taskbar,scale)){
       top=area->top;
@@ -20216,9 +20070,8 @@ struct Session:std::enable_shared_from_this<Session>{
       s->compactRadius=std::clamp(double(g_settings.userDefinedTaskbarCornerRadius),0.,std::min(s->compactWidth,s->compactHeight)/2.);
     }
     stage=L"build surface";s->topTaskbar=top;
-    s->fly.Placement(top?FlyoutPlacementMode::Bottom:FlyoutPlacementMode::Top);
-    s->fly.FlyoutPresenterStyle(IloClockMenu::MenuPresenterStyle(true,true,top));
-    s->outer=Border();s->outer.Margin(IloClockMenu::MenuDockMargin(top));
+    if(s->fly){s->fly.Placement(top?FlyoutPlacementMode::Bottom:FlyoutPlacementMode::Top);s->fly.FlyoutPresenterStyle(IloClockMenu::MenuPresenterStyle(true,true,top));}
+    s->outer=Border();if(s->fly)s->outer.Margin(IloClockMenu::MenuDockMargin(top));
     s->plate=Border();s->plate.Width(width);s->plate.Height(height);s->plate.CornerRadius(Radius(c.radius));s->plate.Padding({16,14,16,10});s->plate.RequestedTheme(ThemeColor(true).R>128?ElementTheme::Dark:ElementTheme::Light);
     s->plate.Background(Brush(Alpha(Color(c.windowBackground,ThemeColor(false)),c.opacity)));
     s->body=Grid();s->body.RowSpacing(0);
@@ -20257,7 +20110,7 @@ struct Session:std::enable_shared_from_this<Session>{
     // Configure dimensions while the tree is detached, then assign the
     // completed content. Do not query IsOpen or animate during Build.
     s->ApplyLayout(!s->dockTyping&&!s->HasQuery());
-    stage=L"attach content";s->fly.Content(s->outer);
+    stage=L"attach content";if(s->fly)s->fly.Content(s->outer);
     stage=L"attach events";
     s->deployTimer=DispatcherTimer();s->deployTick=s->deployTimer.Tick([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock())live->FinishDeployment();}catch(...){}});
     s->placementTimer=DispatcherTimer();s->placementTimer.Interval(std::chrono::milliseconds(45));s->placementTick=s->placementTimer.Tick([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&live->placementTimer){if(live->closed||++live->placementRetries>=8||live->SettlePlacement()){live->placementTimer.Stop();live->anchorTransition=false;}}}catch(...){}});
@@ -20267,9 +20120,10 @@ struct Session:std::enable_shared_from_this<Session>{
       s->inputKey=s->input.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock())live->OnKey(args);}catch(...){}});
     }
     s->key=s->body.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock())live->OnKey(args);}catch(...){}});
-    s->opened=s->fly.Opened([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock()){
+    auto onOpened=[weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock()){
+      if(live->closed||live->disposing)return;
       live->liveOpened=true;live->openedAt=GetTickCount64();live->HoldDock(true);
-      Wh_Log(L"[ILoSearch] Flyout opened: dock editor=%d compact=%d",int(live->dockTyping),int(live->compact));
+      Wh_Log(L"[ILoSearch] %ls opened: dock editor=%d compact=%d",live->externalDockOpen?L"Native results window":L"Flyout",int(live->dockTyping),int(live->compact));
       try{live->StyleSurface();double r=live->compact?live->compactRadius:double(live->config.radius);live->corners.Attach(live->plate,r);}catch(...){Wh_Log(L"[ILoSearch] Surface styling failed: %08X",winrt::to_hresult());}
       try{
       if(live->input){live->input.ApplyTemplate();
@@ -20277,36 +20131,56 @@ struct Session:std::enable_shared_from_this<Session>{
       // at the top of a short control even with VerticalContentAlignment.
       for(PCWSTR name:{L"ContentElement",L"PlaceholderTextContentPresenter"})if(auto e=FindChildByName(live->input,name)){e.VerticalAlignment(VerticalAlignment::Center);auto m=e.Margin();m.Top=0;m.Bottom=0;e.Margin(m);if(auto control=e.try_as<Control>())control.VerticalContentAlignment(VerticalAlignment::Center);}
       live->input.Focus(FocusState::Programmatic);live->input.Select(int(live->input.Text().size()),0);
-      }else if(auto editor=live->dockEditor.get()){if(editor.FocusState()==FocusState::Unfocused)editor.Focus(FocusState::Programmatic);}
+      }else if(auto editor=live->dockEditor.get()){if(editor.FocusState()==FocusState::Unfocused)editor.Focus(live->externalDockOpen?FocusState::Keyboard:FocusState::Programmatic);}
       }catch(...){Wh_Log(L"[ILoSearch] Editor focus failed: %08X",winrt::to_hresult());}
-      live->RestartPlacement();live->QueryChanged(live->query);
-    }}catch(...){Wh_Log(L"[ILoSearch] Search flyout initialization failed: %08X",winrt::to_hresult());}});
-    s->closingToken=s->fly.Closing([weak](auto&&,FlyoutBaseClosingEventArgs const& args)noexcept{try{
+      live->RestartPlacement();
+      // The dock editor can receive input between ShowAt and Opened.
+      // Always start with its actual text, not a stale opening seed.
+      if(auto editor=live->dockEditor.get())live->QueryChanged(std::wstring(editor.Text()));else live->QueryChanged(live->query);
+      if(live->dismissTimer){live->mouseWasDown=MouseDown();live->foregroundLostAt=0;live->dismissTimer.Start();}
+      if(live->nativeHandoff.search.Valid())live->BeginNativeHandoff(live->nativeHandoff);
+    }}catch(...){Wh_Log(L"[ILoSearch] Search flyout initialization failed: %08X",winrt::to_hresult());}};
+    if(s->externalDockOpen){
+      s->dismissTimer=DispatcherTimer();s->dismissTimer.Interval(std::chrono::milliseconds(32));s->dismissTick=s->dismissTimer.Tick([weak](auto&&,auto&&)noexcept{if(auto live=weak.lock())try{live->DismissDirectPopup();}catch(...){live->Hide();}});
+      s->nativeOpened=[onOpened]{onOpened(nullptr,nullptr);};
+    }else s->opened=s->fly.Opened(onOpened);
+    if(s->fly)s->closingToken=s->fly.Closing([weak](auto&&,FlyoutBaseClosingEventArgs const& args)noexcept{try{
       auto live=weak.lock();if(!live||live->disposing||g_unloading)return;
       if(live->copying){args.Cancel(true);return;}
+      if(live->HandoffCanRetain()){args.Cancel(true);Wh_Log(L"[ILoSearch] Flyout retained while native search settles");return;}
       if(live->dockTyping&&!live->closed&&!live->closeRequested&&live->pointerOnDockField&&live->pointerOnDockField()){
         const HWND fg=GetForegroundWindow();DWORD pid{};GetWindowThreadProcessId(fg,&pid);
         if(pid==GetCurrentProcessId())args.Cancel(true);
       }
     }catch(...){}});
-    s->closedToken=s->fly.Closed([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock()){
+    auto onClosed=[weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock()){
+      // Some builds finish a native light-dismiss despite cancellation. If
+      // it occurred in our own verified closure, retain the already typed
+      // ILô query and permit exactly one fresh presenter on the next turn.
+      if(live->liveOpened&&!live->closeRequested&&(live->searchCloseAt||live->startDismissAt)&&live->HandoffCanRetain()&&live->nativeHandoff.search.Hidden()&&live->nativeHandoff.start.Hidden()){
+        live->interruptedHandoff=true;live->interruptedSource=live->nativeHandoff.search;live->interruptedUntil=GetTickCount64()+180;live->preserveEditorOnClose=true;
+        if(auto editor=live->dockEditor.get())live->query=std::wstring(editor.Text());else if(live->input)live->query=std::wstring(live->input.Text());
+      }
       const bool wasOpen=live->liveOpened;live->liveOpened=false;live->closed=true;if(!live->copying)live->HoldDock(false);
-      Wh_Log(L"[ILoSearch] Flyout closed: opened=%d requested=%d lifetime=%llu ms",int(wasOpen),int(live->closeRequested),wasOpen?GetTickCount64()-live->openedAt:0);
+      live->StopNativeHandoff();
+      Wh_Log(L"[ILoSearch] %ls closed: opened=%d requested=%d lifetime=%llu ms",live->externalDockOpen?L"Native results window":L"Flyout",int(wasOpen),int(live->closeRequested),wasOpen?GetTickCount64()-live->openedAt:0);
+      if(live->dismissTimer)live->dismissTimer.Stop();
       if(live->placementTimer)live->placementTimer.Stop();live->StopDeployment();live->ResetTransition();for(auto const& tip:live->categoryTips)if(tip&&tip.IsOpen())tip.IsOpen(false);live->Cancel();
       if(live->copying)return; // keep the query and dock during a native modal
       if(live->scheduleRetirement)live->scheduleRetirement(live);
       // A rejected or immediately dismissed opening must never delete the
       // user's first keystroke in the dock's editor.
-      if(wasOpen&&(live->closeRequested||GetTickCount64()-live->openedAt>=300)&&live->mirror)live->mirror(L"");
+      if(!live->preserveEditorOnClose&&wasOpen&&(live->closeRequested||GetTickCount64()-live->openedAt>=300)&&live->mirror)live->mirror(L"");
       if(!live->dockTyping&&live->selectAnchor)live->selectAnchor(true);
-    }}catch(...){}});
+    }}catch(...){}};
+    if(s->externalDockOpen)s->nativeClosed=[onClosed]{onClosed(nullptr,nullptr);};else s->closedToken=s->fly.Closed(onClosed);
     guard.done=true;return s;
     }catch(...){Wh_Log(L"[ILoSearch] Build stage '%ls' failed: %08X",stage,winrt::to_hresult());throw;}
   }
 };
 
-// Native search remains available through Win+S. We only own the layout of
-// the dock; no Windows registry preference is changed.
+// No Windows registry search preference is changed. Integrating other
+// entry points is optional and leaves native search available on failure.
 struct Property{
   winrt::weak_ref<FrameworkElement> element;DependencyProperty property{nullptr};
   winrt::Windows::Foundation::IInspectable original{nullptr},applied{nullptr};winrt::Windows::UI::Xaml::Data::BindingBase binding{nullptr};
@@ -20332,6 +20206,11 @@ static bool IsSearch(FrameworkElement const& e,int depth,unsigned& budget){
   if(view.find(L"SearchBoxButton")!=view.npos||view.find(L"SearchButton")!=view.npos||id==L"SearchButton"||id==L"SearchBoxButton"||id==L"SearchBox"||name==L"SearchBoxButtonRootPanel")return true;
   if(!depth)return false;int n=Media::VisualTreeHelper::GetChildrenCount(e);for(int i=0;i<n&&budget;++i)if(IsSearch(Media::VisualTreeHelper::GetChild(e,i).try_as<FrameworkElement>(),depth-1,budget))return true;return false;
 }
+// The origin is revalidated immediately before opening a redirected search.
+// Never take focus from another application if the user has moved on.
+static bool NativeForegroundMatches(HWND window,DWORD pid)noexcept{
+  DWORD current{};return window&&pid&&GetForegroundWindow()==window&&GetWindowThreadProcessId(window,&current)&&current==pid;
+}
 struct Dock:std::enable_shared_from_this<Dock>{
   Config config;winrt::weak_ref<Controls::Grid> root;winrt::weak_ref<FrameworkElement> start;
   std::vector<Property> hidden;std::optional<Property> margin;
@@ -20339,12 +20218,47 @@ struct Dock:std::enable_shared_from_this<Dock>{
   std::shared_ptr<Session> active;std::weak_ptr<IloClockMenu::Slot> menuSlot;
   winrt::event_token click{},changed{},focused{},dockKey{},context{},rightTap{};bool syncing{},busy{},nativeHideBlocked{};
   DispatcherTimer openTimer{nullptr};winrt::event_token openTick{};bool openQueued{},openWatchdog{};std::wstring pendingSeed;
+  bool pendingExternal{},pendingFocusPrepared{};HWND pendingOrigin{};DWORD pendingOriginPid{};unsigned openingRetries{};ULONGLONG focusPreparedAt{};
+  NativeSearchHandoff pendingHandoff;
+  NativeSearchSurface recoverySource;ULONGLONG recoveryUntil{};DWORD recoveryInputTick{};
   DispatcherTimer cleanupTimer{nullptr};winrt::event_token cleanupTick{};std::weak_ptr<Session> retired;
   uint64_t configRevision{};
   HWND taskbar{};Thickness baseMargin{};double reserved{},width{},fieldHeight{},panelCenterDip{},iconCenterDip{},dockAnchorX{},iconAnchorX{},anchorY{},anchorHeight{};bool rtl{};ULONGLONG lastDiscovery{},lastTheme{},lastContext{};
   winrt::Windows::Foundation::Rect fieldBoundsDip{};
+  bool ForegroundIsDock()const{
+    HWND fg=GetForegroundWindow();if(!fg||!taskbar)return false;
+    if(GetAncestor(fg,GA_ROOT)==taskbar||GetAncestor(fg,GA_ROOTOWNER)==taskbar)return true;
+    DWORD pid{};return GetWindowThreadProcessId(fg,&pid)==GetWindowThreadProcessId(taskbar,nullptr)&&pid==GetCurrentProcessId();
+  }
+  bool EditorReady()const{
+    if(!input||!ForegroundIsDock())return false;
+    return input.FocusState()!=FocusState::Unfocused;
+  }
+  void HoldOpening(bool hold){IloHiding::SetPopupHold(taskbar,IloHiding::PopupHold::SearchOpening,hold);}
+  void ClearRecovery(){recoverySource={};recoveryUntil=0;recoveryInputTick=0;}
+  bool RetryInterruptedHandoff(std::shared_ptr<Session> const& s){
+    if(!s->interruptedHandoff||s->closeRequested||openingRetries>=1||openQueued||!openTimer||g_unloading||!s->interruptedSource.Hidden()||GetTickCount64()>=s->interruptedUntil)return false;
+    LASTINPUTINFO last{sizeof(last)};if(!GetLastInputInfo(&last)||Session::MouseDown())return false;
+    ++openingRetries;s->preserveEditorOnClose=true;pendingSeed=s->query;pendingExternal=true;pendingFocusPrepared=false;pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};
+    recoverySource=s->interruptedSource;recoveryUntil=s->interruptedUntil;recoveryInputTick=last.dwTime;
+    openWatchdog=false;openQueued=true;HoldOpening(true);openTimer.Stop();openTimer.Interval(std::chrono::milliseconds(15));openTimer.Start();
+    Wh_Log(L"[ILoSearch] Native dismissal interrupted our presenter; retrying once (query length=%zu)",pendingSeed.size());return true;
+  }
+  bool RetryExternal(std::shared_ptr<Session> const& s){
+    // If Windows rejected the first transient opening while keyboard focus
+    // was settling, try once on the next dispatcher turn. Never retry after
+    // an explicit close, mouse interaction, or a change of foreground.
+    if(!s->externalDockOpen||s->closeRequested||openingRetries>=1||openQueued||!openTimer||g_unloading||!EditorReady()||
+       ((GetAsyncKeyState(VK_LBUTTON)|GetAsyncKeyState(VK_RBUTTON)|GetAsyncKeyState(VK_MBUTTON))&0x8000))return false;
+    ++openingRetries;s->preserveEditorOnClose=true;pendingSeed=std::wstring(input.Text());pendingExternal=pendingFocusPrepared=true;pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};focusPreparedAt=GetTickCount64();
+    openWatchdog=false;openQueued=true;HoldOpening(true);openTimer.Stop();openTimer.Interval(std::chrono::milliseconds(90));openTimer.Start();
+    Wh_Log(L"[ILoSearch] Keyboard search: retrying independent popup after focus settles");return true;
+  }
   void Retire(std::shared_ptr<Session> const& s){
-    if(active!=s||s->copying||!cleanupTimer)return;retired=s;cleanupTimer.Start();
+    if(active!=s||s->copying||!cleanupTimer)return;
+    if(RetryInterruptedHandoff(s))return;
+    if(s->externalDockOpen&&s->openStarted&&GetTickCount64()-s->openStarted<500&&RetryExternal(s))return;
+    retired=s;cleanupTimer.Start();
   }
   void Cleanup()noexcept{
     try{
@@ -20356,23 +20270,100 @@ struct Dock:std::enable_shared_from_this<Dock>{
     }catch(...){Wh_Log(L"[ILoSearch] Deferred session cleanup failed: %08X",winrt::to_hresult());}
   }
   void Mirror(std::wstring const& value){if(input&&std::wstring_view(input.Text())!=value){syncing=true;try{input.Text(value);}catch(...){}syncing=false;}}
-  void Open(std::wstring const& seed){
-    if(g_unloading||!field)return;
-    if(active&&active->copying)return;
+  bool Open(std::wstring const& seed,bool external=false,HWND origin=nullptr,DWORD originPid=0,NativeSearchSurface startOrigin={}){
+    if(g_unloading||!field)return false;
+    if(active&&active->copying)return false;
+    // A TextChanged event must not erase a pending keyboard handoff.
+    if(openQueued&&!external){pendingSeed=seed;return true;}
+    if(external){openingRetries=0;ClearRecovery();}
+    NativeSearchHandoff handoff;
+    if(external&&origin&&NativeForegroundMatches(origin,originPid)){handoff.search=CaptureNativeSearchSurface(origin,originPid);handoff.start=startOrigin.Valid()?startOrigin:FindNativeStartForSearch(origin);}
     if(auto current=active;current&&!current->closed){
-      if(current->liveOpened){if(input)current->QueryChanged(seed);else if(current->input&&std::wstring_view(current->input.Text())!=seed)current->input.Text(seed);return;}
-      if(current->openStarted&&GetTickCount64()-current->openStarted<1500){current->query=seed;return;}
+      bool actuallyOpen=false;try{actuallyOpen=current->IsOpen();}catch(...){}
+      if(current->liveOpened&&actuallyOpen){
+        if(external&&origin){
+          if(!NativeForegroundMatches(origin,originPid))return false;
+          if(current->externalDockOpen&&!current->dockTyping){if(!current->FocusNativeEditor())return false;}
+          else if(!SetForegroundWindow(taskbar)&&GetForegroundWindow()!=taskbar)return false;
+        }
+        if(input){if(external)Mirror(seed);current->QueryChanged(seed);if(external)input.Focus(FocusState::Programmatic);}
+        else if(current->input){if(std::wstring_view(current->input.Text())!=seed)current->input.Text(seed);if(external)current->input.Focus(FocusState::Programmatic);}
+        if(external&&handoff.search.Valid())current->BeginNativeHandoff(handoff);return true;
+      }
+      // Do not route new text into a presenter that has already vanished,
+      // even if its asynchronous Closed notification was never delivered.
+      if(!current->liveOpened&&current->openStarted&&GetTickCount64()-current->openStarted<(current->externalDockOpen?500:1500)&&!external){current->query=seed;return true;}
     }
-    pendingSeed=seed;
-    if(openQueued)return;
-    if(!openTimer)return;
+    pendingSeed=seed;pendingExternal=external;pendingFocusPrepared=false;pendingOrigin=origin;pendingOriginPid=originPid;pendingHandoff=handoff;
+    if(openQueued)return true;
+    if(!openTimer)return false;
     // Open only after the initiating click/TextChanged has unwound. Moving
     // focus and displaying a Flyout inside that routed event can immediately
     // light-dismiss it, before its first layout and Opened notification.
-    openWatchdog=false;openQueued=true;openTimer.Stop();openTimer.Interval(std::chrono::milliseconds(1));openTimer.Start();
+    openWatchdog=false;openQueued=true;openTimer.Stop();openTimer.Interval(std::chrono::milliseconds(1));openTimer.Start();return true;
   }
-  void OpenNow(std::wstring seed){
+  bool OpenExternal(std::wstring const& seed,HWND origin=nullptr,DWORD originPid=0,NativeSearchSurface startOrigin={}){
+    if(g_unloading||busy||nativeHideBlocked||!field||!field.XamlRoot()||!panelAnchor||panelAnchor.ActualHeight()<=0||!openTimer||!taskbar)return false;
+    if(config.mode!=L"hidden"&&field.Opacity()!=1)return false;
+    if(origin&&!NativeForegroundMatches(origin,originPid))return false;
+    if(!origin&&GetForegroundWindow()!=taskbar&&!SetForegroundWindow(taskbar))return false;
+    bool accepted=Open(seed,true,origin,originPid,startOrigin);if(accepted&&openQueued)HoldOpening(true);return accepted;
+  }
+  bool OpenLauncherDirect(std::wstring const& seed=L""){
+    // A launcher can forward its first character as soon as its Win+S
+    // request returns. The taskbar-message path is not a routed XAML click:
+    // confirm an actual ILô text editor here, without a deferred focus gap.
+    // No ordinary keyboard events are captured. Fall back to Windows if
+    // XAML cannot establish the editor on this dispatcher turn.
+    if(openWatchdog&&openTimer&&(!active||active->closed||active->liveOpened)){openWatchdog=false;openTimer.Stop();}
+    if(g_unloading||busy||nativeHideBlocked||openQueued||openWatchdog||!field||!field.XamlRoot()||!panelAnchor||panelAnchor.ActualHeight()<=0||!openTimer||!taskbar)return false;
+    if(config.mode!=L"hidden"&&field.Opacity()!=1)return false;
+    if(active&&active->copying)return false;
+    auto originalField=field;
+    auto focusEditor=[&](TextBox const& editor){
+      if(!editor||!editor.XamlRoot()||!ForegroundIsDock())return false;
+      editor.Focus(FocusState::Keyboard);
+      auto xr=editor.XamlRoot();return xr&&editor.FocusState()!=FocusState::Unfocused&&Input::FocusManager::GetFocusedElement(xr)==editor&&ForegroundIsDock();
+    };
+    if(input){
+      if(!ForegroundIsDock()&&!SetForegroundWindow(taskbar))return false;
+      if(!ForegroundIsDock()||field!=originalField||g_unloading)return false;
+      auto editor=input;editor.ApplyTemplate();Mirror(seed);
+      if(!focusEditor(editor)||input!=editor||field!=originalField)return false;
+      if(!seed.empty())editor.Select(int(seed.size()),0);
+      if(!Open(seed,true))return false;
+      if(openQueued){pendingFocusPrepared=true;focusPreparedAt=GetTickCount64();HoldOpening(true);}
+      if(input==editor&&field==originalField&&focusEditor(editor))return true;
+      if(openQueued){openQueued=pendingExternal=pendingFocusPrepared=false;pendingSeed.clear();HoldOpening(false);if(openTimer)openTimer.Stop();}
+      return false;
+    }
+    auto ready=[&](std::shared_ptr<Session> const& session){
+      if(!session||session->closed||!session->input||!session->input.XamlRoot()||!session->IsOpen())return false;
+      if(session->externalDockOpen&&!session->dockTyping)return session->FocusNativeEditor();
+      if(!ForegroundIsDock()&&!SetForegroundWindow(taskbar))return false;
+      return focusEditor(session->input);
+    };
+    if(active&&active->externalDockOpen&&!active->dockTyping&&active->liveOpened&&!active->closed&&active->input&&active->IsOpen()){
+      if(!ready(active))return false;
+      active->input.Text(seed);if(!seed.empty())active->input.Select(int(seed.size()),0);return ready(active);
+    }
+    // Icon/shortcut mode has no persistent text field. Create our own
+    // focusable island, instead of activating the taskbar and a Flyout.
+    openingRetries=0;ClearRecovery();HoldOpening(true);
+    bool accepted=false;
+    try{OpenNow(seed,true,nullptr,0,false,{},true);accepted=ready(active);}catch(...){Wh_Log(L"[ILoSearch] Direct launcher editor unavailable: %08X",winrt::to_hresult());}
+    auto session=active;
+    HoldOpening(false);
+    if(accepted)return true;
+    // Never leave a half-open ILô presenter competing with fallback Search.
+    openWatchdog=false;if(openTimer)openTimer.Stop();
+    if(session&&active==session){active.reset();session->Dispose();}
+    return false;
+  }
+  void OpenNow(std::wstring seed,bool external=false,HWND origin=nullptr,DWORD originPid=0,bool focusPrepared=false,NativeSearchHandoff handoff={},bool independentIcon=false){
     if(g_unloading||!field)return;
+    if(external&&origin&&!NativeForegroundMatches(origin,originPid))return;
+    if(focusPrepared&&!ForegroundIsDock()){Wh_Log(L"[ILoSearch] External field opening cancelled: foreground changed");return;}
     if(cleanupTimer)cleanupTimer.Stop();retired.reset();
     if(auto old=std::move(active))old->Dispose();
     auto originalField=field;std::shared_ptr<Session> next;
@@ -20380,27 +20371,73 @@ struct Dock:std::enable_shared_from_this<Dock>{
     try{
       SelectPanelAnchor(config.mode==L"icon"&&std::all_of(seed.begin(),seed.end(),[](wchar_t c){return iswspace(c)!=0;}));
       FrameworkElement anchor=panelAnchor&&panelAnchor.ActualHeight()>0?FrameworkElement(panelAnchor):FrameworkElement(field);std::weak_ptr<Dock> weak=shared_from_this();
-      if(input){seed=std::wstring(input.Text());if(input.FocusState()==FocusState::Unfocused)input.Focus(FocusState::Programmatic);}
+      if(input){if(external&&!focusPrepared)Mirror(seed);seed=std::wstring(input.Text());if(!external&&input.FocusState()==FocusState::Unfocused)input.Focus(FocusState::Programmatic);}
       stage=L"build session";Wh_Log(L"[ILoSearch] Opening requested: %ls, query length=%zu",config.mode.c_str(),seed.size());
       next=Session::Build(config,anchor,taskbar,fieldHeight,panelCenterDip,iconCenterDip,seed,input,field,
         [weak]{auto d=weak.lock();return d&&d->CursorOverField();},
         [weak](auto const& value){if(auto d=weak.lock())d->Mirror(value);},
         [weak](bool compact){if(auto d=weak.lock())d->SelectPanelAnchor(compact);},
         [weak](auto const& value){if(auto d=weak.lock();d&&d->active&&d->active->closed&&!g_unloading){d->Mirror(value);d->Open(value);}},
-        [weak](auto const& session){if(auto d=weak.lock())d->Retire(session);});
+        [weak](auto const& session){if(auto d=weak.lock())d->Retire(session);},external&&(bool(input)||independentIcon));
       if(g_unloading||field!=originalField){next->Dispose();return;}
-      active=next;stage=L"ShowAt";next->openStarted=GetTickCount64();next->HoldDock(true);next->fly.ShowAt(anchor);
-      if(active==next&&!next->liveOpened&&!next->closed&&openTimer){openWatchdog=true;openTimer.Interval(std::chrono::milliseconds(1500));openTimer.Start();}
+      next->nativeHandoff=handoff;
+      if(external&&!focusPrepared){
+        // Build while the native search is still intact. Only then hand
+        // focus to our taskbar; Windows dismisses its own surface normally.
+        if(origin&&!NativeForegroundMatches(origin,originPid)){next->Dispose();return;}
+        next->HoldDock(true);
+        if((next->dockTyping||!next->externalDockOpen)&&GetForegroundWindow()!=taskbar&&!SetForegroundWindow(taskbar)){Wh_Log(L"[ILoSearch] External opening: foreground transfer declined; retaining native search");next->Dispose();return;}
+        if(g_unloading||field!=originalField){next->Dispose();return;}
+        if(input&&input.FocusState()==FocusState::Unfocused)input.Focus(FocusState::Programmatic);
+      }
+      active=next;stage=L"ShowAt";next->openStarted=GetTickCount64();next->HoldDock(true);
+      if(next->externalDockOpen){
+        stage=L"native results host opening";next->OpenNativeWindow();
+        Wh_Log(L"[ILoSearch] Independent search host: open=%d opened=%d dock editor=%d",int(next->IsOpen()),int(next->liveOpened),int(next->dockTyping));
+      }else next->fly.ShowAt(anchor);
+      if(active==next&&!next->liveOpened&&!next->closed&&openTimer){openWatchdog=true;openTimer.Interval(std::chrono::milliseconds(next->externalDockOpen?500:1500));openTimer.Start();}
     }catch(...){Wh_Log(L"[ILoSearch] Unable to open custom search at '%ls': %08X",stage,winrt::to_hresult());if(active==next)active.reset();if(next)next->Dispose();}
   }
   void OpenTimerTick(){
     if(!openTimer)return;openTimer.Stop();
+    if(recoveryUntil){
+      LASTINPUTINFO last{sizeof(last)};
+      bool authorized=GetTickCount64()<recoveryUntil&&recoverySource.Hidden()&&GetLastInputInfo(&last)&&last.dwTime==recoveryInputTick&&!Session::MouseDown()&&
+        !((GetAsyncKeyState(VK_MENU)|GetAsyncKeyState(VK_LWIN)|GetAsyncKeyState(VK_RWIN))&0x8000);
+      ClearRecovery();
+      if(!authorized||(!ForegroundIsDock()&&!SetForegroundWindow(taskbar))){
+        openQueued=pendingExternal=pendingFocusPrepared=false;pendingSeed.clear();HoldOpening(false);
+        if(active&&active->closed&&cleanupTimer){retired=active;cleanupTimer.Start();}
+        Wh_Log(L"[ILoSearch] Native presenter recovery cancelled");return;
+      }
+    }
     if(openWatchdog){
       openWatchdog=false;
-      if(active&&!active->liveOpened&&!active->closed){Wh_Log(L"[ILoSearch] ShowAt returned without receiving Opened");auto old=std::move(active);old->Dispose();}
+      if(active&&!active->liveOpened&&!active->closed){Wh_Log(L"[ILoSearch] ShowAt returned without receiving Opened");auto old=std::move(active);old->Dispose();RetryExternal(old);}
       return;
     }
-    if(!openQueued)return;openQueued=false;auto seed=std::move(pendingSeed);pendingSeed.clear();OpenNow(std::move(seed));
+    if(openQueued&&pendingExternal&&input&&!pendingFocusPrepared){
+      auto origin=pendingOrigin;auto pid=pendingOriginPid;auto fieldBefore=field;auto editor=input;
+      if((origin&&!NativeForegroundMatches(origin,pid))||(!ForegroundIsDock()&&!SetForegroundWindow(taskbar))){openQueued=pendingExternal=false;pendingSeed.clear();pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};HoldOpening(false);return;}
+      if(field!=fieldBefore||input!=editor||!openQueued)return;
+      Mirror(pendingSeed);bool focused=editor.Focus(FocusState::Keyboard);editor.Select(int(editor.Text().size()),0);
+      Wh_Log(L"[ILoSearch] External field preparation: focus=%d, query length=%u",int(focused),unsigned(editor.Text().size()));
+      if(field!=fieldBefore||input!=editor||!openQueued)return;
+      pendingOrigin=nullptr;pendingOriginPid=0;pendingFocusPrepared=true;focusPreparedAt=GetTickCount64();
+      // Win+S and SearchHost transfer foreground asynchronously. Let XAML
+      // settle focus before showing the transient, non-activating flyout.
+      openTimer.Interval(std::chrono::milliseconds(60));openTimer.Start();return;
+    }
+    if(openQueued&&pendingExternal&&pendingFocusPrepared&&input&&ForegroundIsDock()&&GetTickCount64()-focusPreparedAt<350){
+      // A still-held Windows key can dismiss the native transient presenter
+      // on release. Wait briefly for it, without swallowing any key event.
+      if(((GetAsyncKeyState(VK_LWIN)|GetAsyncKeyState(VK_RWIN))&0x8000)||!EditorReady()){
+        if(input.FocusState()==FocusState::Unfocused)input.Focus(FocusState::Keyboard);
+        if(openTimer&&openQueued){openTimer.Interval(std::chrono::milliseconds(30));openTimer.Start();}return;
+      }
+    }
+    if(!openQueued){HoldOpening(false);return;}openQueued=false;auto seed=std::move(pendingSeed);pendingSeed.clear();bool external=std::exchange(pendingExternal,false),prepared=std::exchange(pendingFocusPrepared,false);HWND origin=std::exchange(pendingOrigin,nullptr);DWORD pid=std::exchange(pendingOriginPid,0);auto handoff=std::exchange(pendingHandoff,NativeSearchHandoff{});
+    struct ReleaseOpening{Dock* dock;~ReleaseOpening(){if(!dock->openQueued)dock->HoldOpening(false);}} release{this};OpenNow(std::move(seed),external,origin,pid,prepared,handoff);
   }
   bool CursorOverField(){
     POINT p{};RECT bar{};if(!field||!field.XamlRoot()||!GetCursorPos(&p)||!GetWindowRect(taskbar,&bar))return false;
@@ -20412,7 +20449,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
     if(g_unloading||!button||!button.XamlRoot())return;
     if(active&&active->copying)return;
     auto now=GetTickCount64();if(now-lastContext<200)return;lastContext=now;
-    openQueued=openWatchdog=false;if(openTimer)openTimer.Stop();pendingSeed.clear();if(auto current=active;current&&!current->closed)current->Hide();
+    openQueued=openWatchdog=pendingExternal=pendingFocusPrepared=false;openingRetries=0;pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};ClearRecovery();HoldOpening(false);if(openTimer)openTimer.Stop();pendingSeed.clear();if(auto current=active;current&&!current->closed)current->Hide();
     auto slot=IloClockMenu::GetSlot(button.Dispatcher());if(!slot)return;
     slot->Cancel();std::vector<IloClockMenu::Action> actions;
     IloClockMenu::Action windowsSearch;windowsSearch.label=T(L"Windows search settings",L"Paramètres de recherche Windows");windowsSearch.glyph=L"\uE713";windowsSearch.uri=L"ms-settings:search";windowsSearch.enabled=true;actions.push_back(std::move(windowsSearch));
@@ -20433,7 +20470,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
     dockAnchorX=center;iconAnchorX=center;anchorY=y;anchorHeight=height;
     panelCenterDip=screenCenter;iconCenterDip=screenCenter;
     if(field)if(auto grid=root.get()){
-      auto p=field.Margin();double cy=grid.ActualHeight()/2.;
+      auto p=field.Margin();double cy=y+height/2.;
       auto sx=[&](double x){return scaleCenter+(rootOffset+x-scaleCenter)*islandScale;};
       auto sy=[&](double v){return cy+(v-cy)*islandScale;};
       fieldBoundsDip={float(sx(p.Left)),float(sy(p.Top)),float(field.Width()*islandScale),float(field.Height()*islandScale)};
@@ -20448,7 +20485,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
     }
   }
   void Restore()noexcept{
-    try{if(openTimer){openTimer.Stop();if(openTick.value)openTimer.Tick(openTick);}}catch(...){}openTimer=nullptr;openTick={};openQueued=openWatchdog=false;pendingSeed.clear();
+    try{if(openTimer){openTimer.Stop();if(openTick.value)openTimer.Tick(openTick);}}catch(...){}openTimer=nullptr;openTick={};openQueued=openWatchdog=pendingExternal=pendingFocusPrepared=false;openingRetries=0;pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};ClearRecovery();HoldOpening(false);pendingSeed.clear();
     try{if(cleanupTimer){cleanupTimer.Stop();if(cleanupTick.value)cleanupTimer.Tick(cleanupTick);}}catch(...){}cleanupTimer=nullptr;cleanupTick={};retired.reset();
     if(auto old=std::move(active))old->Dispose();
     try{if(auto slot=menuSlot.lock();slot&&slot->active&&slot->active->kind==IloClockMenu::Kind::Search&&slot->active->nativeTarget.get()==button)slot->Close();}catch(...){}menuSlot.reset();
@@ -20476,10 +20513,14 @@ struct Dock:std::enable_shared_from_this<Dock>{
     }
     field=Border();field.Name(L"IloSearchDock");field.HorizontalAlignment(HorizontalAlignment::Left);field.VerticalAlignment(VerticalAlignment::Top);
     field.Padding({4,0,4,0});field.MinWidth(0);field.MinHeight(0);root=winrt::make_weak(grid);start=winrt::make_weak(starter);
-    icon=Glyph(L"\uE721",17);std::weak_ptr<Dock> weak=shared_from_this();
-    openTimer=DispatcherTimer();openTick=openTimer.Tick([weak](auto&&,auto&&)noexcept{try{if(auto d=weak.lock())d->OpenTimerTick();}catch(...){Wh_Log(L"[ILoSearch] Deferred opening failed: %08X",winrt::to_hresult());}});
+    if(config.mode!=L"hidden")icon=Glyph(L"\uE721",17);std::weak_ptr<Dock> weak=shared_from_this();
+    openTimer=DispatcherTimer();openTick=openTimer.Tick([weak](auto&&,auto&&)noexcept{if(auto d=weak.lock())try{d->OpenTimerTick();}catch(...){d->openQueued=d->pendingExternal=d->pendingFocusPrepared=false;d->ClearRecovery();d->HoldOpening(false);Wh_Log(L"[ILoSearch] Deferred opening failed: %08X",winrt::to_hresult());}});
     cleanupTimer=DispatcherTimer();cleanupTimer.Interval(std::chrono::milliseconds(32));cleanupTick=cleanupTimer.Tick([weak](auto&&,auto&&)noexcept{if(auto d=weak.lock())d->Cleanup();});
-    if(config.mode==L"box"){
+    if(config.mode==L"hidden"){
+      // Shortcut-only presentation: a non-interactive, transparent anchor
+      // consumes no dock width and never creates a visible search button.
+      field.Padding(Stroke(0));field.Width(1);field.Opacity(0);field.IsHitTestVisible(false);
+    }else if(config.mode==L"box"){
       Grid content;ColumnDefinition left;left.Width({30,GridUnitType::Pixel});ColumnDefinition right;right.Width({1,GridUnitType::Star});content.ColumnDefinitions().Append(left);content.ColumnDefinitions().Append(right);
       button=Button();button.MinWidth(0);button.MinHeight(0);button.AllowFocusOnInteraction(false);button.Padding({0,0,0,0});button.BorderThickness(Stroke(0));button.Background(Brush({0,0,0,0}));button.HorizontalContentAlignment(HorizontalAlignment::Center);button.Content(icon);content.Children().Append(button);
       input=TextBox();input.PlaceholderText(L"");input.MinWidth(0);input.MinHeight(0);input.Padding({2,4,4,2});input.BorderThickness(Stroke(0));input.CornerRadius(Radius(0));input.Background(Brush({0,0,0,0}));input.BorderBrush(Brush({0,0,0,0}));input.VerticalAlignment(VerticalAlignment::Center);input.VerticalContentAlignment(VerticalAlignment::Center);input.AcceptsReturn(false);input.MaxLength(256);input.IsSpellCheckEnabled(false);input.FontSize(13);
@@ -20492,7 +20533,10 @@ struct Dock:std::enable_shared_from_this<Dock>{
       label=Text(T(L"Search",L"Rechercher"),13);label.VerticalAlignment(VerticalAlignment::Center);label.Margin({2,0,4,0});label.Opacity(0.82);label.IsHitTestVisible(false);Grid::SetColumn(label,1);content.Children().Append(label);field.Child(content);
       changed=input.TextChanged([weak](auto&&,auto&&)noexcept{try{if(auto d=weak.lock();d&&d->input){bool empty=d->input.Text().empty();if(d->label)d->label.Visibility(empty?Visibility::Visible:Visibility::Collapsed);if(!d->syncing&&(!empty||(d->active&&!d->active->closed)))d->Open(std::wstring(d->input.Text()));}}catch(...){}});
       focused=input.GotFocus([weak](auto&&,auto&&){if(auto d=weak.lock();d&&d->taskbar&&GetAncestor(GetForegroundWindow(),GA_ROOT)!=d->taskbar)SetForegroundWindow(d->taskbar);});
-      dockKey=input.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto d=weak.lock();d&&d->active&&!d->active->closed)d->active->OnKey(args);}catch(...){}});
+      dockKey=input.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto d=weak.lock()){
+        if(args.Key()==winrt::Windows::System::VirtualKey::Escape&&d->openQueued&&d->pendingExternal){d->openQueued=d->pendingExternal=d->pendingFocusPrepared=false;d->pendingSeed.clear();d->pendingOrigin=nullptr;d->pendingOriginPid=0;d->pendingHandoff={};d->ClearRecovery();d->HoldOpening(false);if(d->openTimer)d->openTimer.Stop();args.Handled(true);return;}
+        if(d->active&&!d->active->closed)d->active->OnKey(args);
+      }}catch(...){}});
       click=button.Click([weak](auto&&,auto&&){if(auto d=weak.lock()){if(d->input)d->input.Focus(FocusState::Programmatic);d->Open(d->input?std::wstring(d->input.Text()):L"");}});
     }else{
       button=Button();button.HorizontalAlignment(HorizontalAlignment::Stretch);button.VerticalAlignment(VerticalAlignment::Stretch);button.HorizontalContentAlignment(HorizontalAlignment::Center);button.Padding({0,0,0,0});button.MinWidth(0);button.MinHeight(0);button.Background(Brush({0,0,0,0}));button.BorderThickness(Stroke(0));
@@ -20507,9 +20551,9 @@ struct Dock:std::enable_shared_from_this<Dock>{
       }else field.Child(button);
       click=button.Click([weak](auto&&,auto&&){if(auto d=weak.lock())d->Open(L"");});
     }
-    context=button.ContextRequested([weak](auto&&,Input::ContextRequestedEventArgs const& args)noexcept{try{if(auto d=weak.lock()){args.Handled(true);d->ShowMenu();}}catch(...){}});
-    rightTap=button.RightTapped([weak](auto&&,Input::RightTappedRoutedEventArgs const& args)noexcept{try{if(auto d=weak.lock()){args.Handled(true);d->ShowMenu();}}catch(...){}});
-    Automation::AutomationProperties::SetName(button,T(L"ILô Search",L"Recherche ILô"));if(input)Automation::AutomationProperties::SetName(input,T(L"ILô Search",L"Recherche ILô"));
+    if(button){context=button.ContextRequested([weak](auto&&,Input::ContextRequestedEventArgs const& args)noexcept{try{if(auto d=weak.lock()){args.Handled(true);d->ShowMenu();}}catch(...){}});
+      rightTap=button.RightTapped([weak](auto&&,Input::RightTappedRoutedEventArgs const& args)noexcept{try{if(auto d=weak.lock()){args.Handled(true);d->ShowMenu();}}catch(...){}});
+      Automation::AutomationProperties::SetName(button,T(L"ILô Search",L"Recherche ILô"));if(input)Automation::AutomationProperties::SetName(input,T(L"ILô Search",L"Recherche ILô"));}
     Controls::Grid::SetRowSpan(field,std::max(1,int(grid.RowDefinitions().Size())));Controls::Grid::SetColumnSpan(field,std::max(1,int(grid.ColumnDefinitions().Size())));Controls::Canvas::SetZIndex(field,10);field.Opacity(0);field.IsHitTestVisible(false);grid.Children().Append(field);
     panelAnchor=Border();panelAnchor.Name(L"IloSearchPanelAnchor");panelAnchor.Width(1);panelAnchor.Height(0);panelAnchor.HorizontalAlignment(HorizontalAlignment::Left);panelAnchor.VerticalAlignment(VerticalAlignment::Top);panelAnchor.IsHitTestVisible(false);
     Controls::Grid::SetRowSpan(panelAnchor,std::max(1,int(grid.RowDefinitions().Size())));Controls::Grid::SetColumnSpan(panelAnchor,std::max(1,int(grid.ColumnDefinitions().Size())));grid.Children().Append(panelAnchor);
@@ -20533,7 +20577,15 @@ struct Dock:std::enable_shared_from_this<Dock>{
       }
     }
     if(nativeHideBlocked)return modified;
-    if(config.mode==L"hidden")return modified;
+    if(config.mode==L"hidden"){
+      if(!config.replaceWinS&&!config.redirectWindows)return modified;
+      if(!starter||starter.ActualHeight()<=0)return modified;
+      if(field&&start.get()!=starter){Restore();root=winrt::make_weak(grid);return true;}
+      if(!field){CreateField(grid,starter);modified=true;}
+      auto r=starter.TransformToVisual(grid).TransformBounds({0,0,float(starter.ActualWidth()),float(starter.ActualHeight())});
+      if(std::isfinite(r.X)&&std::isfinite(r.Y)&&r.Height>0){fieldHeight=std::max(12.,std::min(double(r.Height),config.fieldHeight?double(config.fieldHeight):double(r.Height)-10));field.Height(fieldHeight);field.Margin({r.X+r.Width/2,r.Y+(r.Height-fieldHeight)/2,0,0});}
+      return modified;
+    }
     if(field&&start.get()!=starter){Restore();root=winrt::make_weak(grid);modified=true;return modified;}
     auto r=starter.TransformToVisual(grid).TransformBounds({0,0,float(starter.ActualWidth()),float(starter.ActualHeight())});
     if(!std::isfinite(r.X)||!std::isfinite(r.Y)||r.Width<=0||r.Height<=0)return modified;
@@ -20575,7 +20627,652 @@ static bool SyncDock(std::shared_ptr<Dock>& state,FrameworkElement const& root,C
   return changed;
 }
 static void RestoreDock(std::shared_ptr<Dock>& state){if(state){state->Restore();state.reset();}}
+
+// Optional Windows integration. Do not change any protocol registration,
+// inject into third-party launchers, hide/kill SearchHost, or capture typing.
+// A shell-delivered Win+S hotkey can be handled directly. On builds where
+// the shell owns that shortcut elsewhere, an observed native search opening
+// can be handed over to the ILô dock, using only its focused search field.
+namespace Integration {
+constexpr unsigned replaceShortcut=1, redirectOthers=2;
+// Dedicated, versioned request from an ILô-owned Start search control.
+// It carries only text entered in that control, never raw keyboard events.
+constexpr ULONG_PTR startProbe=0x494C5301u,startOpen=0x494C5302u;
+constexpr ULONGLONG shortcutTtl=3000, requestTtl=4000;
+static std::atomic<unsigned> options{};
+static std::atomic<UINT> deliveryMessage{};
+static std::atomic<ULONGLONG> lastWinS{},lastForwardedWinS{};
+static std::atomic<bool> chordAvailable{};
+static HANDLE quitEvent{},configEvent{};static std::thread observer;
+static std::mutex lifecycle;static bool integrationStopped{};
+struct NativeRequest{HWND window{};DWORD pid{};bool shortcut{};ULONGLONG started{};bool startMenu{};NativeSearchSurface startOrigin;bool forwardedHotkey{};};
+struct Delivery{HWND bar{};NativeRequest origin;std::wstring query;};
+static std::mutex requestMutex;static std::condition_variable requestWake;
+static std::optional<NativeRequest> pendingRequest;static std::optional<Delivery> pendingDelivery;
+static std::thread queryWorker;static bool queryStop{};
+
+static bool Enabled(bool shortcut){return !g_unloading&&(options.load()&(shortcut?replaceShortcut:redirectOthers));}
+static bool CurrentSearch(NativeRequest const& r){return Enabled(r.shortcut)&&NativeForegroundMatches(r.window,r.pid);}
+static bool Fresh(NativeRequest const& r){return CurrentSearch(r)&&GetTickCount64()-r.started<=requestTtl;}
+static bool VerifySearchWindow(HWND window,DWORD& pid){
+  if(!window||GetForegroundWindow()!=window||!IsWindowVisible(window)||IsIconic(window)||!GetWindowThreadProcessId(window,&pid)||!pid||pid==GetCurrentProcessId())return false;
+  // Only recognize Microsoft's search surface, not an arbitrary edit box
+  // or an Explorer folder search. The system-app path is verified as well
+  // as the executable name, and the user's actual foreground is required.
+  HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);if(!process)return false;
+  wchar_t image[1024]{},windows[MAX_PATH]{};DWORD length=ARRAYSIZE(image);
+  BOOL ok=QueryFullProcessImageNameW(process,0,image,&length);CloseHandle(process);
+  if(!ok||!GetWindowsDirectoryW(windows,ARRAYSIZE(windows)))return false;
+  PCWSTR name=wcsrchr(image,L'\\');if(!name)return false;++name;
+  if(_wcsicmp(name,L"SearchHost.exe")&&_wcsicmp(name,L"SearchApp.exe")&&_wcsicmp(name,L"SearchUI.exe"))return false;
+  std::wstring prefix=std::wstring(windows)+L"\\SystemApps\\";
+  return _wcsnicmp(image,prefix.c_str(),prefix.size())==0&&NativeForegroundMatches(window,pid);
 }
+static std::optional<std::wstring> ReadNativeQuery(IUIAutomation* automation,NativeRequest const& r,RECT* editBounds=nullptr){
+  if(editBounds)*editBounds={};
+  if(!automation||!Fresh(r))return {};
+  winrt::com_ptr<IUIAutomationElement> edit;if(FAILED(automation->GetFocusedElement(edit.put()))||!edit)return {};
+  int pid{},type{};BOOL password=TRUE,focused=FALSE;
+  if(FAILED(edit->get_CurrentProcessId(&pid))||DWORD(pid)!=r.pid||
+     FAILED(edit->get_CurrentControlType(&type))||type!=UIA_EditControlTypeId||
+     FAILED(edit->get_CurrentIsPassword(&password))||password||
+     FAILED(edit->get_CurrentHasKeyboardFocus(&focused))||!focused||!Fresh(r))return {};
+  auto searchLabel=[](BSTR raw){if(!raw)return false;auto label=Lower(std::wstring(raw,SysStringLen(raw)));return label.find(L"search")!=label.npos||label.find(L"recherch")!=label.npos;};
+  BSTR identity{};bool recognized=SUCCEEDED(edit->get_CurrentAutomationId(&identity))&&searchLabel(identity);SysFreeString(identity);
+  if(!recognized){BSTR name{};recognized=SUCCEEDED(edit->get_CurrentName(&name))&&searchLabel(name);SysFreeString(name);}
+  if(!recognized||!Fresh(r))return {};
+  // The query is available via the accessibility value of the focused edit
+  // in the verified Windows Search process. No other process is queried for
+  // text, no passwords or keystrokes are read, and no query is logged.
+  winrt::com_ptr<IUIAutomationValuePattern> value;
+  if(FAILED(edit->GetCurrentPatternAs(UIA_ValuePatternId,__uuidof(IUIAutomationValuePattern),value.put_void()))||!value)return {};
+  BSTR text{};HRESULT hr=value->get_CurrentValue(&text);struct FreeText{BSTR text;~FreeText(){SysFreeString(text);}} free{text};
+  if(FAILED(hr)||!Fresh(r)||SysStringLen(text)>256)return {};
+  std::wstring query=text?std::wstring(text,SysStringLen(text)):std::wstring{};
+  if(query.find(L'\0')!=query.npos)return {};
+  if(editBounds){RECT bounds{};if(SUCCEEDED(edit->get_CurrentBoundingRectangle(&bounds))&&!IsRectEmpty(&bounds)&&Fresh(r))*editBounds=bounds;}
+  return Fresh(r)?std::optional<std::wstring>(std::move(query)):std::nullopt;
+}
+static HWND BarForWindow(HWND window){
+  auto monitor=window?MonitorFromWindow(window,MONITOR_DEFAULTTONEAREST):nullptr;
+  if(monitor)if(auto bar=FindTaskbarWindowForMonitorTai(GetMonitorName(monitor)))return bar;
+  return FindCurrentProcessTaskbarWnd();
+}
+static bool QueueDelivery(NativeRequest const& r,std::wstring query){
+  if(!Fresh(r))return false;HWND bar=BarForWindow(r.window);UINT message=deliveryMessage.load();if(!bar||!message)return false;
+  {std::lock_guard lock(requestMutex);if(queryStop||!Fresh(r))return false;pendingDelivery=Delivery{bar,r,std::move(query)};}
+  // A bounded synchronous handoff avoids leaving a query in a queue if a
+  // taskbar is being recreated or its dispatcher is not available.
+  DWORD_PTR result{};bool delivered=SendMessageTimeoutW(bar,message,0,0,SMTO_ABORTIFHUNG|SMTO_BLOCK,500,&result)!=0;
+  {std::lock_guard lock(requestMutex);if(pendingDelivery&&pendingDelivery->origin.started==r.started&&pendingDelivery->origin.window==r.window){pendingDelivery.reset();return false;}}
+  return delivered;
+}
+static void QueryLoop(){
+  HRESULT apartment=CoInitializeEx(nullptr,COINIT_MULTITHREADED);if(FAILED(apartment))return;
+  struct Uninitialize{~Uninitialize(){CoUninitialize();}} uninitialize;
+  bool warmHandoff=false;
+  for(;;){NativeRequest request;{
+      std::unique_lock lock(requestMutex);requestWake.wait(lock,[]{return queryStop||pendingRequest.has_value();});
+      if(queryStop)return;request=*pendingRequest;pendingRequest.reset();
+    }
+    if(!Fresh(request))continue;
+    try{
+      winrt::com_ptr<IUIAutomation> automation;
+      if(FAILED(CoCreateInstance(CLSID_CUIAutomation,nullptr,CLSCTX_INPROC_SERVER,__uuidof(IUIAutomation),automation.put_void()))||!automation)continue;
+      if(auto settings=automation.try_as<IUIAutomation2>()){settings->put_ConnectionTimeout(500);settings->put_TransactionTimeout(800);}
+      bool handedOff=false,mouseWasDown=false;
+      ULONGLONG clickedAt{},presentedAt{};
+      if(!request.shortcut&&!request.startOrigin.Valid())request.startOrigin=FindNativeStartForSearch(request.window);
+      bool startMenu=request.startMenu||request.startOrigin.Valid();
+      auto sourceSurface=CaptureNativeSearchSurface(request.window,request.pid);
+      const ULONGLONG observedAt=request.started;
+      RECT editBounds{};
+      const int primaryButton=GetSystemMetrics(SM_SWAPBUTTON)?VK_RBUTTON:VK_LBUTTON;
+      // A click is relevant only inside the verified, focused SearchHost
+      // edit while that same search window still owns foreground. No
+      // global mouse hook or ordinary key observation is needed.
+      auto checkClick=[&]{
+        if(!startMenu||IsRectEmpty(&editBounds)||!CurrentSearch(request))return false;
+        bool down=(GetAsyncKeyState(primaryButton)&0x8000)!=0;
+        POINT p{};bool clicked=down&&!mouseWasDown&&GetCursorPos(&p)&&PtInRect(&editBounds,p);
+        mouseWasDown=down;return clicked;
+      };
+      std::optional<std::wstring> latest;ULONGLONG firstValue{},lastChange{},typingSince{},lastSample{};
+      // SearchHost can obtain foreground before its edit is ready. Brief
+      // bounded retries preserve a query already supplied by Start/Start11.
+      // Native Start can automatically focus an empty search, however, and
+      // must remain usable indefinitely until the user actually searches.
+      const ULONGLONG emptyWait=request.forwardedHotkey?700:420;
+      for(int attempt=0;(startMenu||attempt<20||(latest&&!latest->empty()&&GetTickCount64()-lastSample<500))&&CurrentSearch(request);++attempt){
+        bool interrupted=false;
+        const bool typing=latest&&!latest->empty();
+        const int slices=!typing&&startMenu&&!IsRectEmpty(&editBounds)?4:1;
+        const int delay=typing?30:slices>1?25:(attempt?65:90);
+        for(int slice=0;slice<slices;++slice){
+          {std::unique_lock lock(requestMutex);if(requestWake.wait_for(lock,std::chrono::milliseconds(delay),[]{return queryStop||pendingRequest.has_value();})){interrupted=true;break;}}
+          if(!CurrentSearch(request)){interrupted=true;break;}
+          if(checkClick()){clickedAt=GetTickCount64();break;}
+        }
+        if(interrupted)break;
+        if(startMenu||typing)request.started=GetTickCount64(); // renew only this still-current intent observation
+        if(auto query=ReadNativeQuery(automation.get(),request,startMenu?&editBounds:nullptr)){
+          auto now=GetTickCount64();lastSample=now;if(!firstValue)firstValue=now;
+          if(!latest||*latest!=*query){latest=std::move(*query);lastChange=now;}
+          const bool empty=latest->empty();
+          if(empty)typingSince=0;else if(!typingSince)typingSince=now;
+          // Keep the validated first-character grace period on a cold
+          // launch. Once actual search text is flowing, use shorter, bounded
+          // samples so the native panel does not wait for the whole word.
+          const ULONGLONG stableDelay=(!warmHandoff&&latest->size()<2)?180:
+            (typingSince&&now-typingSince>=260&&latest->size()>=2)?60:100;
+          // Recheck immediately before accepting an empty foreground event:
+          // Start's window may not have finished uncloaking when it arrived.
+          if(!startMenu&&!request.shortcut&&empty&&(attempt==0||now-firstValue>=emptyWait||attempt==19)){
+            request.startOrigin=FindNativeStartForSearch(request.window);startMenu=request.startOrigin.Valid();
+          }
+          if(checkClick())clickedAt=GetTickCount64();
+          // An explicit click may complete before we can sample the button
+          // or the UIA edit bounds. Start's passive focus does not put its
+          // actual results panel in front; the presented SearchHost body does.
+          if(startMenu&&sourceSurface.Presented()){if(!presentedAt)presentedAt=now;}else presentedAt=0;
+          const bool presented=presentedAt&&now-presentedAt>=130&&(!request.forwardedHotkey||now-lastChange>=emptyWait);
+          const bool clicked=clickedAt&&now>=clickedAt&&now-clickedAt>=65;
+          // Start/Start11 may give SearchHost foreground before forwarding
+          // its first character. Wait for a nonempty stable query, or give
+          // an intentionally empty search time to finish initializing. An
+          // idle native Start's automatic focus is NOT search intent.
+          if((request.shortcut&&empty)||(!empty&&now-lastChange>=stableDelay)||(startMenu&&empty&&(clicked||presented))||(!startMenu&&empty&&now-firstValue>=emptyWait&&now-lastChange>=emptyWait)){
+            if(!CurrentSearch(request))break;
+            request.started=now;
+            // Freeze a final verified value before the native field loses
+            // focus. Its shutdown/clearing animation is not a new query.
+            if(auto last=ReadNativeQuery(automation.get(),request);last&&*last!=*latest){latest=std::move(*last);lastChange=GetTickCount64();continue;}
+            Wh_Log(L"[ILoSearch] Native query ready: length=%zu, elapsed=%llu ms, settle=%llu ms, intent=%ls",latest->size(),now-observedAt,stableDelay,!empty?L"text":request.shortcut?L"shortcut":clicked?L"click":presented?L"presented search":L"application");
+            handedOff=QueueDelivery(request,std::move(*latest));if(handedOff)warmHandoff=true;break;
+          }
+        }
+      }
+      if(!handedOff&&Fresh(request)&&(!startMenu||clickedAt))Wh_Log(L"[ILoSearch] Windows search foreground: unable to transfer query safely; native retained");
+    }catch(...){Wh_Log(L"[ILoSearch] Windows search query transfer failed; native retained");}
+  }
+}
+static void Submit(NativeRequest request){
+  std::lock_guard lock(requestMutex);if(queryStop||!Fresh(request))return;
+  if(!queryWorker.joinable())queryWorker=std::thread(QueryLoop);pendingRequest=request;requestWake.notify_one();
+}
+// The shortcut observer never consumes a keyboard event or records ordinary
+// input. It recognizes exactly the S+Windows chord, so the two user options
+// remain independent even when Windows sends its hotkey to another thread.
+static LRESULT CALLBACK ObserveShortcut(int code,WPARAM message,LPARAM data){
+  if(code==HC_ACTION&&(message==WM_KEYDOWN||message==WM_SYSKEYDOWN)&&options.load()){
+    auto const& key=*reinterpret_cast<KBDLLHOOKSTRUCT const*>(data);
+    if(key.vkCode==L'S'&&!(key.flags&LLKHF_INJECTED)&&
+       ((GetAsyncKeyState(VK_LWIN)|GetAsyncKeyState(VK_RWIN))&0x8000)&&
+       !((GetAsyncKeyState(VK_CONTROL)|GetAsyncKeyState(VK_MENU)|GetAsyncKeyState(VK_SHIFT))&0x8000))lastWinS.store(GetTickCount64());
+  }
+  return CallNextHookEx(nullptr,code,message,data);
+}
+static void CALLBACK ForegroundEvent(HWINEVENTHOOK,DWORD event,HWND window,LONG object,LONG child,DWORD,DWORD){
+  if((event!=EVENT_SYSTEM_FOREGROUND&&event!=EVENT_OBJECT_UNCLOAKED)||object!=OBJID_WINDOW||child!=CHILDID_SELF||!options.load()||g_unloading)return;
+  try{
+    static HWND lastWindow{};static ULONGLONG lastTime{};
+    DWORD pid{};if(!VerifySearchWindow(window,pid)){if(event==EVENT_SYSTEM_FOREGROUND)lastWindow=nullptr;return;}
+    auto now=GetTickCount64();
+    if(nativeDismissSource.load()==window&&now<nativeDismissUntil.load())return;
+    // An uncloak can follow the same foreground notification. Do not
+    // restart an existing observation or consume the shortcut twice.
+    if(window==lastWindow&&now-lastTime<350)return;
+    auto mask=options.load();if(!mask)return;
+    // If exact shortcut classification is unavailable, only redirect when
+    // both switches permit it. Never silently override a disabled switch.
+    if(!chordAvailable.load()&&mask!=(replaceShortcut|redirectOthers))return;
+    auto key=lastWinS.exchange(0);bool shortcut=key&&now-key<=shortcutTtl;
+    if(!Enabled(shortcut))return;
+    lastWindow=window;lastTime=now;
+    const auto startOrigin=shortcut?NativeSearchSurface{}:FindNativeStartForSearch(window);
+    const bool startMenu=startOrigin.Valid();
+    auto forwarded=lastForwardedWinS.exchange(0);const bool forwardedHotkey=!shortcut&&forwarded&&now-forwarded<=shortcutTtl;
+    Wh_Log(L"[ILoSearch] Native search foreground (%ls); %ls",shortcut?L"Win+S":L"Start / application",startMenu?L"waiting for explicit search":L"requesting handoff");
+    Submit({window,pid,shortcut,now,startMenu,startOrigin,forwardedHotkey});
+  }catch(...){Wh_Log(L"[ILoSearch] Native search observation failed; native retained");}
+}
+static std::shared_ptr<Dock> FindDockForBar(HWND bar){
+  if(!bar||!IsTaskbarWindowClassTai(bar)||g_unloading)return {};
+  std::shared_ptr<Dock> dock;
+  for(auto const& state:GetTaskbarStatesSnapshot()){
+    if(state->ownerThread!=GetCurrentThreadId())continue;
+    std::lock_guard lock(state->mutex);if(state->search&&state->search->taskbar==bar){dock=state->search;break;}
+  }
+  return dock;
+}
+static bool OpenForBar(HWND bar,std::wstring const& query,HWND origin=nullptr,DWORD pid=0,NativeSearchSurface startOrigin={},bool launcherDirect=false){
+  auto dock=FindDockForBar(bar);
+  return dock&&(launcherDirect?dock->OpenLauncherDirect(query):dock->OpenExternal(query,origin,pid,startOrigin));
+}
+static std::optional<LRESULT> HandleStartSearch(HWND bar,WPARAM wp,LPARAM lp){
+  auto packet=reinterpret_cast<COPYDATASTRUCT const*>(lp);
+  if(!packet||(packet->dwData!=startProbe&&packet->dwData!=startOpen))return {};
+  try{
+    if(!Enabled(false))return LRESULT(0);
+    HWND sender=reinterpret_cast<HWND>(wp);DWORD pid{};
+    if(!sender||!GetWindowThreadProcessId(sender,&pid)||pid==GetCurrentProcessId()||!IsWindowsSystemApp(pid,L"StartMenuExperienceHost.exe"))return LRESULT(0);
+    wchar_t cls[64]{};if(!GetClassNameW(sender,cls,ARRAYSIZE(cls))||wcscmp(cls,L"Windows.UI.Core.CoreWindow"))return LRESULT(0);
+    auto origin=CaptureNativeSearchSurface(sender,pid);if(!origin.Valid()||origin.window!=sender)return LRESULT(0);
+    auto dock=FindDockForBar(bar);
+    if(!dock||!dock->field||!dock->field.XamlRoot()||!dock->panelAnchor||dock->panelAnchor.ActualHeight()<=0||dock->nativeHideBlocked)return LRESULT(0);
+    if(packet->dwData==startProbe)return packet->cbData==0?LRESULT(1):LRESULT(0);
+    // A search opening must come from the actual active Start window, not
+    // a background program. Only a bounded Unicode string is accepted.
+    if(!origin.Visible()||!NativeForegroundMatches(sender,pid)||!packet->lpData||packet->cbData<sizeof(wchar_t)||packet->cbData>257*sizeof(wchar_t)||packet->cbData%sizeof(wchar_t))return LRESULT(0);
+    auto data=static_cast<wchar_t const*>(packet->lpData);size_t count=packet->cbData/sizeof(wchar_t);
+    if(data[count-1]!=L'\0'||std::find(data,data+count-1,L'\0')!=data+count-1)return LRESULT(0);
+    std::wstring seed(data,count-1);
+    if(!NativeForegroundMatches(sender,pid))return LRESULT(0);
+    bool opened=dock->OpenLauncherDirect(seed);
+    Wh_Log(L"[ILoSearch] Native Start direct editor: %ls (query length=%zu)",opened?L"ready":L"unavailable",seed.size());
+    return opened?LRESULT(1):LRESULT(0);
+  }catch(...){Wh_Log(L"[ILoSearch] Native Start direct request failed: %08X",winrt::to_hresult());return LRESULT(0);}
+}
+static bool HandleMessage(HWND bar,UINT message,WPARAM,LPARAM lp){
+  const UINT delivery=deliveryMessage.load();
+  if(message!=WM_HOTKEY&&(!delivery||message!=delivery))return false;
+  if(g_unloading)return false;
+  try{
+    if(delivery&&message==delivery){
+      std::optional<Delivery> request;{std::lock_guard lock(requestMutex);if(pendingDelivery&&pendingDelivery->bar==bar){request=std::move(pendingDelivery);pendingDelivery.reset();}}
+      if(request&&Fresh(request->origin)){
+        bool opened=OpenForBar(bar,request->query,request->origin.window,request->origin.pid,request->origin.startOrigin);
+        Wh_Log(L"[ILoSearch] Windows search handoff %ls (query length=%zu)",opened?L"queued":L"unavailable; native retained",request->query.size());
+      }
+      return true;
+    }
+    if(HIWORD(lp)!=L'S'||(LOWORD(lp)&(MOD_WIN|MOD_ALT|MOD_CONTROL|MOD_SHIFT))!=MOD_WIN)return false;
+    // A launcher may immediately forward text after triggering Win+S. Only
+    // consume that request if our actual editor is already focused; retain
+    // the validated native transfer if the direct path is not ready.
+    const auto key=lastWinS.load(),now=GetTickCount64();
+    if(chordAvailable.load()&&(!key||now-key>1000)){
+      if(Enabled(false)){
+        HWND target=BarForWindow(GetForegroundWindow());if(target!=bar&&GetWindowThreadProcessId(target,nullptr)!=GetCurrentThreadId())target=bar;
+        if(OpenForBar(target?target:bar,L"",nullptr,0,{},true)){
+          lastForwardedWinS=0;Wh_Log(L"[ILoSearch] Launcher hotkey: direct ILô editor ready");return true;
+        }
+        lastForwardedWinS=now;Wh_Log(L"[ILoSearch] Launcher hotkey: direct editor not ready, native fallback");
+      }
+      return false;
+    }
+    if(!Enabled(true))return false;
+    HWND target=BarForWindow(GetForegroundWindow());if(target!=bar&&GetWindowThreadProcessId(target,nullptr)!=GetCurrentThreadId())target=bar;
+    // Use the same verified editor for a physical shortcut; retain the
+    // existing deferred opening path if immediate preparation fails.
+    bool opened=OpenForBar(target?target:bar,L"",nullptr,0,{},true);
+    if(!opened)opened=OpenForBar(target?target:bar,L"");if(!opened&&target!=bar)opened=OpenForBar(bar,L"");
+    if(opened){lastWinS=0;Wh_Log(L"[ILoSearch] Win+S handled directly by the taskbar");return true;}
+  }catch(...){Wh_Log(L"[ILoSearch] External search request failed; native retained");}
+  return false;
+}
+static void ObserveLoop(){
+  HHOOK chord{};HWINEVENTHOOK foreground{},uncloak{};
+  auto remove=[&]{if(uncloak){UnhookWinEvent(uncloak);uncloak=nullptr;}if(foreground){UnhookWinEvent(foreground);foreground=nullptr;}if(chord){UnhookWindowsHookEx(chord);chord=nullptr;}chordAvailable=false;lastWinS=0;lastForwardedWinS=0;};
+  HMODULE module{};GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<PCWSTR>(&ObserveShortcut),&module);
+  auto configure=[&]{
+    if(!options.load()){remove();return;}
+    if(!chord){chord=SetWindowsHookExW(WH_KEYBOARD_LL,ObserveShortcut,module,0);chordAvailable=bool(chord);}
+    if(!foreground)foreground=SetWinEventHook(EVENT_SYSTEM_FOREGROUND,EVENT_SYSTEM_FOREGROUND,nullptr,ForegroundEvent,0,0,WINEVENT_OUTOFCONTEXT|WINEVENT_SKIPOWNPROCESS);
+    if(!uncloak)uncloak=SetWinEventHook(EVENT_OBJECT_UNCLOAKED,EVENT_OBJECT_UNCLOAKED,nullptr,ForegroundEvent,0,0,WINEVENT_OUTOFCONTEXT|WINEVENT_SKIPOWNPROCESS);
+    Wh_Log(L"[ILoSearch] Windows integration: shortcut observer=%d, native search observer=%d",int(bool(chord)),int(bool(foreground)));
+  };
+  HANDLE events[]={quitEvent,configEvent};configure();
+  for(;;){auto wake=MsgWaitForMultipleObjectsEx(2,events,INFINITE,QS_ALLINPUT,MWMO_INPUTAVAILABLE);if(wake==WAIT_OBJECT_0||wake==WAIT_FAILED)break;
+    if(wake==WAIT_OBJECT_0+1)configure();
+    MSG msg;while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){if(msg.message==WM_QUIT){remove();return;}TranslateMessage(&msg);DispatchMessageW(&msg);}
+  }
+  remove();
+}
+static void RefreshOptions(){
+  auto snapshot=IloPanel::Snapshot();auto mode=snapshot->Text(L"SearchPresentation");unsigned next=0;
+  if(mode==L"icon"||mode==L"box"||mode==L"hidden"){
+    if(snapshot->Int(L"SearchReplaceWinS"))next|=replaceShortcut;
+    if(snapshot->Int(L"SearchRedirectWindows"))next|=redirectOthers;
+  }
+  std::lock_guard lock(lifecycle);if(integrationStopped)return;if(options.exchange(next)!=next){lastWinS=0;lastForwardedWinS=0;if(configEvent)SetEvent(configEvent);}
+}
+static void Start(){
+  RefreshOptions();std::lock_guard lock(lifecycle);if(observer.joinable())return;
+  deliveryMessage=RegisterWindowMessageW(L"ILo.Search.ExternalOpen.v1");
+  quitEvent=CreateEventW(nullptr,TRUE,FALSE,nullptr);configEvent=CreateEventW(nullptr,FALSE,FALSE,nullptr);
+  if(quitEvent&&configEvent)try{observer=std::thread(ObserveLoop);}catch(...){Wh_Log(L"[ILoSearch] Windows search observer could not start");}
+}
+static void Stop(){
+  {std::lock_guard lock(lifecycle);integrationStopped=true;options=0;deliveryMessage=0;if(quitEvent)SetEvent(quitEvent);}
+  if(observer.joinable())observer.join();
+  {std::lock_guard lock(requestMutex);queryStop=true;pendingRequest.reset();pendingDelivery.reset();}requestWake.notify_all();if(queryWorker.joinable())queryWorker.join();
+  std::lock_guard lock(lifecycle);if(quitEvent)CloseHandle(quitEvent);if(configEvent)CloseHandle(configEvent);quitEvent=configEvent=nullptr;
+}
+} // namespace Integration
+}
+
+// Native Start integration lives on StartMenuExperienceHost's own XAML UI
+// thread. Recreate only the recognized search entry, not the Start menu or
+// its keyboard routing. The rest of Start, including app navigation, remains
+// native. No keys or text from other controls are inspected.
+namespace IloStartSearch {
+static std::atomic<bool> stopping{};
+static Window window{nullptr};
+static DispatcherTimer discovery{nullptr};
+static winrt::event_token visibilityToken{},activationToken{},discoveryToken{},changed{},key{},compositionStarted{},compositionEnded{},pointerToken{},tapToken{},editorUnloadedToken{},layoutToken{},rootUnloadedToken{};
+static Controls::TextBox editor{nullptr};
+static winrt::weak_ref<Controls::Panel> parent;
+static winrt::weak_ref<FrameworkElement> observedRoot;
+static std::optional<IloSearch::Property> originalVisibility;
+static std::vector<IloSearch::Property> extraVisibility;
+enum class EntryMode{Native,KeyboardOnly,Visible};
+static EntryMode installedMode=EntryMode::Native;
+static bool keyboardOnly{},revealedForSession{};
+static bool sending{},clearing{},composing{},focusPending{},seenVisible{};
+static unsigned attempts{};
+static ULONGLONG nextDiscovery{},nextProbe{},nextLayoutCheck{};
+static HWND cachedCoreWindow{}; // Accessed only on the Start UI thread.
+static void Schedule(bool opening=false);
+
+static bool IsStartProcess()noexcept{
+  static const bool isStart=[]()noexcept{
+    wchar_t path[MAX_PATH]{};auto n=GetModuleFileNameW(nullptr,path,ARRAYSIZE(path));
+    if(!n||n>=ARRAYSIZE(path))return false;auto name=wcsrchr(path,L'\\');
+    return name&&!_wcsicmp(name+1,L"StartMenuExperienceHost.exe");
+  }();
+  return isStart;
+}
+static HWND CoreWindow()noexcept{
+  DWORD pid{};
+  if(cachedCoreWindow&&GetWindowThreadProcessId(cachedCoreWindow,&pid)==GetCurrentThreadId()&&pid==GetCurrentProcessId())return cachedCoreWindow;
+  HWND source=StartMenuUI::GetCoreWnd();
+  cachedCoreWindow=source&&GetWindowThreadProcessId(source,&pid)==GetCurrentThreadId()&&pid==GetCurrentProcessId()?source:nullptr;
+  return cachedCoreWindow;
+}
+static EntryMode Presentation(){
+  if(stopping||g_unloading)return EntryMode::Native;
+  auto settings=IloPanel::Snapshot();
+  if(!settings->Int(L"SearchRedirectWindows"))return EntryMode::Native;
+  auto mode=settings->Text(L"SearchPresentation");
+  if(mode==L"hidden")return EntryMode::Visible;
+  if(mode==L"box"||mode==L"icon")return EntryMode::KeyboardOnly;
+  return EntryMode::Native;
+}
+static bool Enabled(){return Presentation()!=EntryMode::Native;}
+static bool SourceVisible(HWND source){
+  return source&&IloSearch::CaptureNativeSearchSurface(source,GetCurrentProcessId()).Visible();
+}
+static HWND Taskbar(HWND source){
+  HWND primary=FindWindowW(L"Shell_TrayWnd",nullptr);if(!primary)return nullptr;
+  HWND bar=GetTaskbarForMonitor(MonitorFromWindow(source,MONITOR_DEFAULTTONEAREST));
+  if(!bar||!IsTaskbarWindowClassTai(bar))return primary;
+  DWORD a{},b{};GetWindowThreadProcessId(primary,&a);GetWindowThreadProcessId(bar,&b);return a&&a==b?bar:primary;
+}
+static bool Request(HWND source,bool probe,std::wstring const& seed=L""){
+  if(!source||!Enabled()||seed.size()>256)return false;
+  HWND bar=Taskbar(source);DWORD pid{};if(!bar||!GetWindowThreadProcessId(bar,&pid))return false;
+  if(!probe){
+    if(!SourceVisible(source)||GetForegroundWindow()!=source)return false;
+    // The active Start window grants its own shell permission to activate
+    // ILô's editor, using the normal foreground-window contract.
+    AllowSetForegroundWindow(pid);
+  }
+  COPYDATASTRUCT packet{};packet.dwData=probe?IloSearch::Integration::startProbe:IloSearch::Integration::startOpen;
+  if(!probe){packet.cbData=DWORD((seed.size()+1)*sizeof(wchar_t));packet.lpData=const_cast<wchar_t*>(seed.c_str());}
+  DWORD_PTR result{};
+  return SendMessageTimeoutW(bar,WM_COPYDATA,reinterpret_cast<WPARAM>(source),reinterpret_cast<LPARAM>(&packet),SMTO_ABORTIFHUNG|SMTO_ERRORONEXIT,probe?120:400,&result)&&result==1;
+}
+static void ClearEditor()noexcept{
+  try{clearing=true;if(editor)editor.Text(L"");clearing=false;}catch(...){clearing=false;}composing=false;
+}
+// Preserve Start's standard type-to-search behavior using only our existing
+// search control. In dock-visible modes it has no visual footprint or mouse
+// target. It remains a keyboard-focusable search entry, not an observer of
+// input directed to the Start menu's other controls.
+static void ApplyEntryPresentation(Controls::TextBox const& field,FrameworkElement const& entry,bool onlyKeyboard){
+  field.MinWidth(0);field.MinHeight(0);
+  field.MaxWidth(entry.MaxWidth());field.MaxHeight(entry.MaxHeight());
+  if(onlyKeyboard){
+    field.Margin({});field.Width(1);field.Height(1);
+    field.HorizontalAlignment(HorizontalAlignment::Left);field.VerticalAlignment(VerticalAlignment::Top);
+    field.UseSystemFocusVisuals(false);field.IsHitTestVisible(false);field.Opacity(0);
+    Automation::AutomationProperties::SetName(field,IloPanel::UiText(L"Type to search with ILô",L"Saisissez pour rechercher avec ILô"));
+  }else{
+    field.Width(entry.Width());field.Height(entry.Height());field.MinWidth(entry.MinWidth());field.MinHeight(entry.MinHeight());field.Margin(entry.Margin());
+    field.HorizontalAlignment(entry.HorizontalAlignment());field.VerticalAlignment(entry.VerticalAlignment());
+    field.ClearValue(Controls::Control::UseSystemFocusVisualsProperty());field.Opacity(1);field.IsHitTestVisible(true);
+    Automation::AutomationProperties::SetName(field,field.PlaceholderText());
+  }
+}
+static bool SyncEntryPresentation(EntryMode mode){
+  if(!editor||!originalVisibility||mode==EntryMode::Native)return false;
+  auto entry=originalVisibility->element.get();if(!entry)return false;
+  if(installedMode!=mode){installedMode=mode;revealedForSession=false;}
+  const bool onlyKeyboard=mode==EntryMode::KeyboardOnly&&!revealedForSession;
+  if(onlyKeyboard!=keyboardOnly){ApplyEntryPresentation(editor,entry,onlyKeyboard);keyboardOnly=onlyKeyboard;}
+  return true;
+}
+static void RemoveEditor()noexcept{
+  auto old=std::exchange(editor,nullptr);auto host=parent.get();parent={};
+  if(old)try{
+    // A failure revoking one event must not skip the remaining delegates.
+    try{if(changed.value)old.TextChanged(changed);}catch(...){}
+    try{if(key.value)old.KeyDown(key);}catch(...){}
+    try{if(compositionStarted.value)old.TextCompositionStarted(compositionStarted);}catch(...){}
+    try{if(compositionEnded.value)old.TextCompositionEnded(compositionEnded);}catch(...){}
+    try{if(pointerToken.value)old.PointerPressed(pointerToken);}catch(...){}
+    try{if(tapToken.value)old.Tapped(tapToken);}catch(...){}
+    try{if(editorUnloadedToken.value)old.Unloaded(editorUnloadedToken);}catch(...){}
+  }catch(...){}
+  changed=key=compositionStarted=compositionEnded=pointerToken=tapToken=editorUnloadedToken={};
+  if(originalVisibility){originalVisibility->Restore();originalVisibility.reset();}
+  for(auto& saved:extraVisibility)saved.Restore();extraVisibility.clear();
+  try{if(host&&old){uint32_t at{};if(host.Children().IndexOf(old,at))host.Children().RemoveAt(at);}}catch(...){}
+  composing=false;clearing=false;focusPending=false;installedMode=EntryMode::Native;keyboardOnly=revealedForSession=false;
+}
+static bool SendFromEditor(bool explicitClick=false)noexcept{
+  if(!editor||sending||clearing||composing||stopping)return false;
+  try{
+    auto current=editor;auto source=CoreWindow();
+    if(!SourceVisible(source)||GetForegroundWindow()!=source)return false;
+    if((!explicitClick||keyboardOnly)&&(current.FocusState()==FocusState::Unfocused||current.Text().empty()))return false;
+    auto seed=std::wstring(current.Text());sending=true;
+    bool accepted=false;try{accepted=Request(source,false,seed);}catch(...){}
+    if(accepted&&editor==current){ClearEditor();focusPending=false;}
+    else if(!accepted&&editor==current&&keyboardOnly&&GetForegroundWindow()==source){
+      // A failed transfer must never leave an inaccessible query behind.
+      revealedForSession=true;SyncEntryPresentation(installedMode);
+    }
+    sending=false;
+    Wh_Log(L"[ILoStartSearch] Direct search %ls (query length=%zu)",accepted?L"accepted":L"not ready; text retained",seed.size());
+    return accepted;
+  }catch(...){sending=false;return false;}
+}
+static FrameworkElement FindSearchEntry(FrameworkElement const& root,unsigned depth,unsigned& budget){
+  if(!root||!budget)return nullptr;--budget;
+  // Retemplating can leave the previous, collapsed branch in the tree.
+  // Look for the currently displayed search entry, not the first name match.
+  if(root.Visibility()!=Visibility::Visible||root==editor)return nullptr;
+  auto type=winrt::get_class_name(root);
+  // Exact Start search-toggle type only. Never replace an arbitrary input.
+  if((type==L"StartMenu.SearchBoxToggleButton"||type==L"StartDocked.SearchBoxToggleButton")&&root.Name()==L"SearchBoxToggleButton")return root;
+  if(!depth)return nullptr;
+  int count=Media::VisualTreeHelper::GetChildrenCount(root);
+  for(int i=0;i<count&&budget;++i)if(auto found=FindSearchEntry(Media::VisualTreeHelper::GetChild(root,i).try_as<FrameworkElement>(),depth-1,budget))return found;
+  return nullptr;
+}
+static FrameworkElement CurrentRoot(){return window?window.Content().try_as<FrameworkElement>():nullptr;}
+static bool DescendsFrom(DependencyObject node,DependencyObject const& root,bool visiblePath=false){
+  for(unsigned depth=0;node&&depth<64;++depth){
+    if(visiblePath)if(auto element=node.try_as<FrameworkElement>();element&&element.Visibility()!=Visibility::Visible)return false;
+    if(node==root)return true;
+    node=Media::VisualTreeHelper::GetParent(node);
+  }
+  return false;
+}
+static bool CurrentEntryValid(FrameworkElement const& root){
+  if(!root||!editor||!originalVisibility||!originalVisibility->Owns())return false;
+  auto host=parent.get();auto entry=originalVisibility->element.get();
+  return host&&entry&&editor.XamlRoot()&&entry.Visibility()==Visibility::Collapsed&&
+    Media::VisualTreeHelper::GetParent(editor)==host&&Media::VisualTreeHelper::GetParent(entry)==host&&
+    DescendsFrom(host,root,true);
+}
+static bool NativeEntryFocused(FrameworkElement const& entry,FrameworkElement const& root){
+  if(!entry||!root||!root.XamlRoot())return false;
+  auto focus=Input::FocusManager::GetFocusedElement(root.XamlRoot()).try_as<DependencyObject>();
+  return focus&&DescendsFrom(focus,entry);
+}
+static void StopWatchingRoot()noexcept{
+  if(auto old=observedRoot.get()){
+    try{if(layoutToken.value)old.LayoutUpdated(layoutToken);}catch(...){}
+    try{if(rootUnloadedToken.value)old.Unloaded(rootUnloadedToken);}catch(...){}
+  }
+  observedRoot={};layoutToken=rootUnloadedToken={};
+}
+static void WatchRoot(FrameworkElement const& root){
+  if(!root||observedRoot.get()==root)return;
+  StopWatchingRoot();observedRoot=winrt::make_weak(root);
+  // Defer tree changes until after layout. No periodic tree walk while Start
+  // is closed, and at most one check per 150 ms during layout bursts.
+  layoutToken=root.LayoutUpdated([](auto&&,auto&&)noexcept{
+    try{const auto now=GetTickCount64();if(stopping||attempts||now<nextLayoutCheck)return;nextLayoutCheck=now+150;
+      if(SourceVisible(CoreWindow())&&Enabled())Schedule();
+    }catch(...){}
+  });
+  rootUnloadedToken=root.Unloaded([](auto&&,auto&&)noexcept{try{if(!stopping){nextDiscovery=0;Schedule();}}catch(...){}});
+}
+static bool InstallEditor(HWND source,EntryMode mode){
+  if(mode==EntryMode::Native)return false;
+  auto root=CurrentRoot();if(!root)return false;
+  const bool activeStart=GetForegroundWindow()==source&&SourceVisible(source);
+  if(CurrentEntryValid(root)){
+    // Some Start revisions briefly keep an old frame as well as the new
+    // one when pinning or unpinning. Keep exactly one owned search editor,
+    // and suppress only additional, recognized native search entries.
+    std::erase_if(extraVisibility,[&](auto& saved){auto e=saved.element.get();if(!e||!saved.Owns())return true;if(!DescendsFrom(e,root)){saved.Restore();return true;}return false;});
+    unsigned budget=800;
+    if(auto extra=FindSearchEntry(root,20,budget);extra&&extraVisibility.size()<8){
+      const bool wasFocused=activeStart&&NativeEntryFocused(extra,root);
+      if(auto saved=IloSearch::Property::Set(extra,UIElement::VisibilityProperty(),Visibility::Collapsed)){
+        extraVisibility.push_back(std::move(*saved));if(wasFocused)focusPending=true;
+        Wh_Log(L"[ILoStartSearch] Suppressed regenerated native search entry");
+      }
+    }
+    return SyncEntryPresentation(mode);
+  }
+  auto shouldFocus=focusPending;
+  if(editor){
+    shouldFocus=shouldFocus||(activeStart&&editor.FocusState()!=FocusState::Unfocused);
+    RemoveEditor();focusPending=shouldFocus;
+    Wh_Log(L"[ILoStartSearch] Start search tree changed; rebuilding owned entry");
+  }
+  if(GetTickCount64()<nextProbe)return false;
+  unsigned budget=800;auto entry=FindSearchEntry(root,20,budget);
+  if(!entry||entry.Visibility()!=Visibility::Visible)return false;
+  shouldFocus=focusPending||(activeStart&&NativeEntryFocused(entry,root));
+  auto host=Media::VisualTreeHelper::GetParent(entry).try_as<Controls::Panel>();
+  if(!host||(!host.try_as<Controls::Grid>()&&!host.try_as<Controls::StackPanel>()))return false;
+  uint32_t at{};if(!host.Children().IndexOf(entry,at))return false;
+  // Do not repeatedly block Start's UI if Explorer is still initializing.
+  if(!Request(source,true)){nextProbe=GetTickCount64()+200;return false;}nextProbe=0;
+  auto field=Controls::TextBox();field.Name(L"IloStartSearchEntry");
+  field.PlaceholderText(IloPanel::UiText(L"Search with ILô",L"Rechercher avec ILô"));
+  Automation::AutomationProperties::SetName(field,field.PlaceholderText());
+  field.IsTabStop(true);field.IsSpellCheckEnabled(false);field.AcceptsReturn(false);field.MaxLength(256);
+  field.VerticalContentAlignment(VerticalAlignment::Center);
+  ApplyEntryPresentation(field,entry,mode==EntryMode::KeyboardOnly);
+  if(auto control=entry.try_as<Controls::Control>())field.TabIndex(control.TabIndex());
+  Controls::Grid::SetRow(field,Controls::Grid::GetRow(entry));Controls::Grid::SetColumn(field,Controls::Grid::GetColumn(entry));
+  Controls::Grid::SetRowSpan(field,Controls::Grid::GetRowSpan(entry));Controls::Grid::SetColumnSpan(field,Controls::Grid::GetColumnSpan(entry));
+  // Insert first; collapse the precise original only after the replacement
+  // and the Explorer endpoint are both available. Restore on any failure.
+  editor=field;parent=winrt::make_weak(host);installedMode=mode;keyboardOnly=mode==EntryMode::KeyboardOnly;revealedForSession=false;
+  try{
+    host.Children().InsertAt(at,field);
+    originalVisibility=IloSearch::Property::Set(entry,UIElement::VisibilityProperty(),Visibility::Collapsed);
+    if(!originalVisibility){RemoveEditor();return false;}
+    focusPending=shouldFocus;
+    editorUnloadedToken=field.Unloaded([](auto&&,auto&&)noexcept{try{if(!stopping&&editor){nextDiscovery=0;Schedule();}}catch(...){}});
+    changed=field.TextChanged([](auto&&,auto&&)noexcept{SendFromEditor();});
+    key=field.KeyDown([](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{
+      try{if(args.Key()==winrt::Windows::System::VirtualKey::Enter&&!composing&&SendFromEditor(true))args.Handled(true);}catch(...){}
+    });
+    compositionStarted=field.TextCompositionStarted([](auto&&,auto&&)noexcept{composing=true;});
+    compositionEnded=field.TextCompositionEnded([](auto&&,auto&&)noexcept{composing=false;SendFromEditor();});
+    pointerToken=field.PointerPressed([](auto&&,Input::PointerRoutedEventArgs const& args)noexcept{
+      try{if(editor&&!keyboardOnly&&args.GetCurrentPoint(editor).Properties().IsLeftButtonPressed()&&SendFromEditor(true))args.Handled(true);}catch(...){}
+    });
+    tapToken=field.Tapped([](auto&&,Input::TappedRoutedEventArgs const& args)noexcept{try{if(!keyboardOnly&&SendFromEditor(true))args.Handled(true);}catch(...){}});
+    Wh_Log(L"[ILoStartSearch] Recreated native Start search entry (%ls)",keyboardOnly?L"keyboard only":L"visible");return true;
+  }catch(...){RemoveEditor();throw;}
+}
+static void FocusOpeningEditor(HWND source){
+  if(!focusPending||!SourceVisible(source)||GetForegroundWindow()!=source||!editor||!editor.XamlRoot()||!originalVisibility||!originalVisibility->Owns())return;
+  if(!CurrentEntryValid(CurrentRoot()))return;
+  if(!SyncEntryPresentation(Presentation()))return;
+  editor.ApplyTemplate();editor.Focus(FocusState::Keyboard);
+  if(editor.FocusState()!=FocusState::Unfocused&&Input::FocusManager::GetFocusedElement(editor.XamlRoot())==editor){
+    focusPending=false;seenVisible=true;Wh_Log(L"[ILoStartSearch] Start search entry ready; awaiting explicit input");
+  }
+}
+static void Discover()noexcept{
+  try{
+    auto mode=Presentation();
+    if(mode==EntryMode::Native) {StopWatchingRoot();RemoveEditor();if(discovery)discovery.Stop();attempts=0;nextDiscovery=GetTickCount64()+1000;return;}
+    WatchRoot(CurrentRoot());
+    auto source=CoreWindow();bool visible=SourceVisible(source);
+    if(visible&&!seenVisible){seenVisible=true;focusPending=true;}
+    if(!visible&&seenVisible){seenVisible=false;ClearEditor();focusPending=false;}
+    if(source&&InstallEditor(source,mode)){
+      if(visible)FocusOpeningEditor(source);
+      if(!focusPending){discovery.Stop();attempts=0;return;}
+    }
+    if(attempts&&!--attempts){discovery.Stop();nextDiscovery=GetTickCount64()+1000;Wh_Log(L"[ILoStartSearch] Start entry discovery exhausted; native search retained if unavailable");}
+  }catch(...){RemoveEditor();if(discovery)discovery.Stop();attempts=0;nextDiscovery=GetTickCount64()+1000;Wh_Log(L"[ILoStartSearch] Start entry unavailable: %08X",winrt::to_hresult());}
+}
+static void Schedule(bool opening){
+  if(!discovery||stopping)return;
+  if(opening){focusPending=true;nextDiscovery=0;revealedForSession=false;}
+  if(!attempts&&GetTickCount64()>=nextDiscovery){attempts=16;discovery.Start();}
+}
+static void BindWindow(){
+  if(stopping||!IsStartProcess())return;
+  if(!window){
+    auto current=Window::Current();if(!current)return;window=current;
+    discovery=DispatcherTimer();discovery.Interval(std::chrono::milliseconds(35));
+    discoveryToken=discovery.Tick([](auto&&,auto&&)noexcept{Discover();});
+    visibilityToken=window.VisibilityChanged([](auto&&,winrt::Windows::UI::Core::VisibilityChangedEventArgs const& args)noexcept{
+      try{if(args.Visible()){Schedule(true);if(Enabled())FocusOpeningEditor(CoreWindow());}else{seenVisible=false;focusPending=false;ClearEditor();}}catch(...){}
+    });
+    activationToken=window.Activated([](auto&&,winrt::Windows::UI::Core::WindowActivatedEventArgs const& args)noexcept{
+      try{if(args.WindowActivationState()!=winrt::Windows::UI::Core::CoreWindowActivationState::Deactivated){Schedule(!seenVisible);if(Enabled())FocusOpeningEditor(CoreWindow());}else{seenVisible=false;focusPending=false;ClearEditor();}}catch(...){}
+    });
+  }
+  Schedule();
+}
+static void FromLayout()noexcept{
+  if(stopping||!IsStartProcess())return;
+  try{
+    if(attempts)return; // A bounded discovery session is already scheduled.
+    if(window&&CurrentEntryValid(CurrentRoot())&&!focusPending&&seenVisible==SourceVisible(CoreWindow())&&observedRoot.get()==CurrentRoot())return;
+    BindWindow();
+  }catch(...){Wh_Log(L"[ILoStartSearch] Start UI binding unavailable");}
+}
+static void ReleaseWindow()noexcept{
+  try{if(discovery){discovery.Stop();if(discoveryToken.value)discovery.Tick(discoveryToken);}}catch(...){}
+  try{if(window){if(visibilityToken.value)window.VisibilityChanged(visibilityToken);if(activationToken.value)window.Activated(activationToken);}}catch(...){}
+  StopWatchingRoot();RemoveEditor();discovery=nullptr;window=nullptr;visibilityToken=activationToken=discoveryToken={};attempts=0;cachedCoreWindow=nullptr;nextDiscovery=nextProbe=nextLayoutCheck=0;
+}
+static void AttachToStartThread(bool stop)noexcept{
+  if(!IsStartProcess())return;
+  if(stop)stopping=true;
+  try{if(auto source=StartMenuUI::GetCoreWnd()){
+    RunFromWindowThread(source,[](void* flag){if(flag)ReleaseWindow();else BindWindow();},stop?reinterpret_cast<void*>(1):nullptr);
+  }}catch(...){Wh_Log(L"[ILoStartSearch] Start dispatcher unavailable");}
+}
+} // namespace IloStartSearch
+
 struct TaskbarLayoutNodesTai {
   FrameworkElement rootGrid{nullptr},repeater{nullptr},tray{nullptr},trayHost{nullptr},trayGrid{nullptr},background{nullptr},fillParent{nullptr},fill{nullptr};
   bool nested{};
@@ -20624,6 +21321,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     state.RestoreBackgroundOrder();
     state.RestoreChevronOrder();
     state.RestoreTraySizes();
+    state.RestoreDockAlignments();
   }
   const auto discoveryNow=GetTickCount64();
   const auto topologyGeneration=g_taskbarChildStyleGeneration.load(std::memory_order_acquire);
@@ -20754,9 +21452,19 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     return false;
   }
   if(!g_unloading&&!reusedTopology)RememberLayoutTopologyTai(state.topology,taskFrame,{rootGridTaskBar,taskbarFrameRepeater,trayFrame,trayHost,systemTrayFrameGrid,taskbarBackground,backgroundFillParent,backgroundFillChild,nestedTray},topologyGeneration,discoveryNow);
-  auto taskbarChildrenMeasurement =
-      CaptureChildrenLayoutTai(taskbarFrameRepeater);
   HWND zoomWindow=g_applyStyleTaskbarWindowTai?g_applyStyleTaskbarWindowTai:FindTaskbarWindowForMonitorTai(monitorName);
+  const auto vertical=DockVerticalGeometry();
+  const bool topDock=DockAtTop(zoomWindow);
+  const double dockY=vertical.ContentY(topDock);
+  // The repeater and a sibling tray now occupy the application-side edge
+  // of the native frame. A nested tray already lives inside the repeater.
+  if(!g_unloading){
+    const auto alignment=topDock?VerticalAlignment::Bottom:VerticalAlignment::Top;
+    bool changed=state.SetDockAlignment(0,taskbarFrameRepeater,alignment);
+    changed=state.SetDockAlignment(1,trayFrame,nestedTray?VerticalAlignment::Center:alignment)||changed;
+    if(changed){forceStyleApply=true;RequestTaskbarDimensionInvalidation();if(zoomWindow)ArmStyleFollowupPasses(zoomWindow);}
+  }
+  auto taskbarChildrenMeasurement = CaptureChildrenLayoutTai(taskbarFrameRepeater);
   try{if(IloSearch::SyncDock(state.search,rootGridTaskBar,taskbarChildrenMeasurement,zoomWindow,discoveryNow)&&!g_unloading){
     forceStyleApply=true;if(zoomWindow)ArmStyleFollowupPasses(zoomWindow);ApplySettingsDebounced(1);
   }}catch(...){IloSearch::RestoreDock(state.search);Wh_Log(L"[ILoSearch] Dock setup failed: %08X",winrt::to_hresult());}
@@ -20949,30 +21657,6 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       .try_as<winrt::Windows::Foundation::IReference<HorizontalAlignment>>();
   if (trayHorizontalAlignmentRef && trayHorizontalAlignmentRef.Value() == HorizontalAlignment::Center) {
     trayFrame.SetValue(FrameworkElement::HorizontalAlignmentProperty(), winrt::box_value(HorizontalAlignment::Right));
-  }
-  // Fork addition. TaskbarFrame and SystemTrayFrame are siblings in the same
-  // XAML root grid, and TaskbarOffsetY makes that root 2*TaskbarOffsetY taller
-  // than the island, which is drawn inset by TaskbarOffsetY within it. taskFrame
-  // is given the full root height below, but trayFrame keeps the bare island
-  // height, so where the tray lands is decided entirely by its vertical
-  // alignment. Nothing ever set one: this relied on XAML implicitly centering an
-  // explicitly sized child, and Windows 11 25H2 stopped resolving it that way,
-  // leaving the clock, battery, volume and language indicator off by exactly
-  // TaskbarOffsetY (upstream issues #26 and #30). Pin it here rather than beside
-  // the height writes below, because those only run when dimensions are
-  // invalidated while SystemTrayFrame_Height_Hook rewrites the tray frame on
-  // every SystemTrayController::UpdateFrameSize; asserting it on every pass is
-  // what stops the misalignment from returning after an Explorer restart.
-  if (g_unloading) {
-    trayFrame.ClearValue(FrameworkElement::VerticalAlignmentProperty());
-  } else {
-    auto trayVerticalAlignmentRef = trayFrame
-        .GetValue(FrameworkElement::VerticalAlignmentProperty())
-        .try_as<winrt::Windows::Foundation::IReference<VerticalAlignment>>();
-    if (!trayVerticalAlignmentRef ||
-        trayVerticalAlignmentRef.Value() != VerticalAlignment::Center) {
-      trayFrame.SetValue(FrameworkElement::VerticalAlignmentProperty(), winrt::box_value(VerticalAlignment::Center));
-    }
   }
   int childrenCountTray = 0;
   auto trayChildrenMeasurement =
@@ -21187,10 +21871,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
     // Subtract that same amount from the outer host to preserve the total
     // XAML displacement used for pointer input.
     const float panelShift = snapPx(targetTrayLogicalLeft - nativeLeft);
-    const bool floatingDock = !g_settings.userDefinedFlatTaskbarBottomCorners &&
-                              !g_settings.userDefinedFullWidthTaskbarBackground;
-    const float inset = floatingDock
-        ? std::abs(static_cast<int>(g_settings.userDefinedTaskbarOffsetY)) : 0.0f;
+    const float inset = static_cast<float>(dockY);
     const float fineY = snapPx(static_cast<float>(g_settings.trayContentOffsetY));
     bool movedPanel = false;
     const float nativeHostY = state.ownsTrayY && value.y == state.appliedTrayY
@@ -21291,8 +21972,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   if(state.search&&!g_unloading)try{
     const bool full=g_settings.userDefinedFullWidthTaskbarBackground;
     const double center=full?rootWidth*.5:targetScaleCenterScreenX;
-    const double y=(full||g_settings.userDefinedFlatTaskbarBottomCorners)?0.:std::abs(double(static_cast<int>(g_settings.userDefinedTaskbarOffsetY)));
-    state.search->PositionPanelAnchor(center-targetTaskRootOffsetX,y,g_settings.userDefinedTaskbarHeight,center,targetTaskRootOffsetX,targetScaleCenterScreenX,targetTaskbarIslandScale);
+    state.search->PositionPanelAnchor(center-targetTaskRootOffsetX,dockY,g_settings.userDefinedTaskbarHeight,center,targetTaskRootOffsetX,targetScaleCenterScreenX,targetTaskbarIslandScale);
   }catch(...){}
   const float scaledBackgroundLeftScreen = snapPx(
       ApplyScaleToScreenX(targetBackgroundLeftScreen,
@@ -21326,13 +22006,19 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   // edge. Placed before the "nothing changed" early-out below so it still runs
   // on cheap passes; UpdateTaskbarWindowRegion is a no-op when the window
   // already has the right region.
-  if (g_clipTaskbarWindowToDock || IloHiding::limitReveal.load()) {
+  // Publish the geometry even when clickable-region clipping is disabled:
+  // the overlap policy and independent search window also consume it.
+  if(zoomWindow){
+    if(g_unloading)IloHiding::SetSpan(zoomWindow,0,0);
+    else IloHiding::SetSpan(zoomWindow,
+        std::lround(scaledBackgroundLeftScreen*rasterizationScale)-1,
+        std::lround(scaledBackgroundRightScreen*rasterizationScale)+1,
+        g_settings.userDefinedFullWidthTaskbarBackground?1.:targetTaskbarIslandScale);
+  }
+  if (g_clipTaskbarWindowToDock) {
     HWND taskbarWindow = g_applyStyleTaskbarWindowTai
                              ? g_applyStyleTaskbarWindowTai
                              : FindTaskbarWindowForMonitorTai(monitorName);
-    IloHiding::SetSpan(taskbarWindow,
-        std::lround(scaledBackgroundLeftScreen * rasterizationScale) - 1,
-        std::lround(scaledBackgroundRightScreen * rasterizationScale) + 1);
     if (g_clipTaskbarWindowToDock) {
       const bool clearRegion =
           g_unloading || g_settings.userDefinedFullWidthTaskbarBackground;
@@ -21391,7 +22077,6 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   } else {
     state.lastTrayFrameWidth = static_cast<unsigned int>(trayFrameWidth);
   }
-  signed int userDefinedTaskbarOffsetY = (g_settings.userDefinedFlatTaskbarBottomCorners || g_settings.userDefinedFullWidthTaskbarBackground) ? 0 : g_settings.userDefinedTaskbarOffsetY;
   const float unscaledStartButtonScreenX = useStableStartButtonAnchor
       ? snapPx(state.stableStartButtonAnchorLeft + targetTaskRootOffsetX)
       : targetBackgroundLeftScreen;
@@ -21399,13 +22084,13 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
       ApplyScaleToScreenX(unscaledStartButtonScreenX,
                           targetScaleCenterScreenX,
                           targetTaskbarIslandScale));
-  auto heightValue = (g_settings.userDefinedTaskbarHeight + abs(userDefinedTaskbarOffsetY * 2));
-  if (heightValue < g_settings.userDefinedTaskbarHeight / 2) {
-    Wh_Log(L"Error: heightValue<g_settings.userDefinedTaskbarHeight/2");
+  auto heightValue = vertical.WindowHeight();
+  if (heightValue < vertical.height / 2) {
+    Wh_Log(L"Error: heightValue<vertical.height/2");
     return false;
   }
   if (invalidateDimensionsThisPass) {
-    if (g_settings.userDefinedTaskbarHeight <= 0) {
+    if (vertical.height <= 0) {
       Wh_Log(L"Invalid size detected! Panel Height");
       return false;
     }
@@ -21441,7 +22126,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
   const float rootGridScaleCenterLocalX =
       snapPx(targetScaleCenterScreenX - targetTaskRootOffsetX);
   const float rootGridScaleCenterLocalY =
-      snapPx(static_cast<float>(rootGridTaskBar.ActualHeight()) * 0.5f);
+      snapPx(static_cast<float>(vertical.ContentCenter(topDock)));
   const float trayScaleCenterLocalX =
       snapPx(targetScaleCenterScreenX - targetTrayLogicalLeft);
   const float trayScaleCenterLocalY =
@@ -21673,7 +22358,7 @@ bool ApplyStyle(FrameworkElement const& xamlRootContent, std::wstring monitorNam
         // coordinates so the island background and task/tray content stay in
         // the same coordinate system.
         const float offsetXRect = alignedFullWidth ? 0.0f : snapPx(targetBackgroundLeftScreen - targetTaskRootOffsetX);
-        const float newOffsetYRect = snapPx(static_cast<float>(abs(userDefinedTaskbarOffsetY)) );
+        const float newOffsetYRect = snapPx(static_cast<float>(dockY));
         const bool backgroundShapeTargetChanged =
             std::abs(state.lastBackgroundShapeTargetWidth - targetWidthRect) > visualOffsetTolerance ||
             std::abs(state.lastBackgroundShapeTargetHeight - clipHeight) > visualOffsetTolerance ||
@@ -21900,8 +22585,10 @@ bool g_PartialMode = false;
 void Wh_ModSettingsChanged() {
   IloPanel::InvalidateSettings();
   if (g_PartialMode) {
+    IloStartSearch::AttachToStartThread();
     return;
   }
+  IloSearch::Integration::RefreshOptions();
   Wh_Log(L"Settings Changed");
   ResetGlobalVars();
   RefreshSettings();
@@ -22234,6 +22921,7 @@ void StopRefreshWorker() {
 void Wh_ModAfterInit() {
   if (g_PartialMode) {
     g_lastRecordedStartMenuWidth = Wh_GetIntValue(L"lastRecordedStartMenuWidth", g_lastRecordedStartMenuWidth);
+    IloStartSearch::AttachToStartThread();
     return;
   }
   Wh_ModAfterInitTBIconSize();
@@ -22247,14 +22935,17 @@ void Wh_ModAfterInit() {
   StartNotificationCenterHookWaitTai();
   IloPanel::StartRefreshWorker();
   IloPanel::NativeSettings::Start();
+  IloSearch::Integration::Start();
 }
 void Wh_ModBeforeUninit() {
   if (g_PartialMode) {
+    IloStartSearch::AttachToStartThread(true);
     return;
   }
   // Fork addition: see CActionCenterExperienceManager_GetViewPosition_Hook.
   IloPanel::NativeSettings::Stop();
   IloPanel::StopRefreshWorker();
+  IloSearch::Integration::Stop();
   IloHiding::Stop();
   StopNotificationCenterHookWaitTai();
   // Fork addition: see RunModuleHooksTai.
@@ -22288,6 +22979,7 @@ void Wh_ModBeforeUninit() {
         state->RestoreBackgroundOrder();
         state->RestoreChevronOrder();
         state->RestoreTraySizes();
+        state->RestoreDockAlignments();
       };
       auto dispatcher = state->layoutDispatcher;
       if (dispatcher && dispatcher.HasThreadAccess()) restore();

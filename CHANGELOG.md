@@ -4,6 +4,21 @@
 
 ## English
 
+### ILô 2.3.0
+
+#### ILô Search — your new Windows search experience
+
+- **Replace the native Windows search interface beyond the dock.** Press Win+S, start typing in the native Start menu, or search from Start11 and compatible launchers to open ILô Search directly. The two new integration settings, **Replace Win+S** and **Redirect searches**, are enabled by default and can be configured independently.
+- **A redesigned Start search entry.** ILô replaces the native Start search control with its own entry instead of waiting for SearchHost to open. When the dock displays an icon or a search field, Start's redundant field is hidden while type-to-search remains available. In Hidden mode, the ILô field remains visible in Start; Windows (original) restores the native interface.
+- **A direct, independent search window.** Search requests open the actual ILô editor before accepting typed input, reducing handoff delays, missing first characters and flashes of the native search panel. The compact-to-expanded animation, dock-field editing, keyboard navigation and existing result actions are preserved.
+- **Robust Start integration.** Reapply the search presentation when Windows rebuilds the Start menu after pinning or unpinning apps. Retain native fallback paths when a direct request cannot be handled.
+
+#### Dock layout, performance and stability
+
+- **Single-sided vertical offset:** the floating dock now reserves only its height plus the gap at the screen edge, without invisible padding above the dock. Overlap-based hiding uses the actual painted vertical extent, rather than the larger taskbar window. The apps, notification area and search window follow the same geometry.
+- **Search optimizations:** load Start-menu shortcut metadata only when application results require it, reuse cached icons, stop obsolete query work sooner, and reduce redundant XAML objects, property updates and result/category processing.
+- **Code cleanup:** remove obsolete native layout and search-positioning routines, reduce noisy layout logging, and simplify result-event and search-window cleanup. Existing settings and supported backups are preserved.
+
 ### ILô 2.2.0
 
 #### ILô Search — the flagship feature
@@ -166,6 +181,21 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 2.3.0
+
+#### ILô Search — votre nouvelle recherche Windows
+
+- **Remplacement de l'interface native de recherche au-delà du dock.** Utilisez Win+S, commencez à saisir une recherche dans le menu Démarrer natif, ou recherchez depuis Start11 et les lanceurs compatibles pour ouvrir directement ILô Search. Les deux nouvelles options **Remplacer Win+S** et **Rediriger les recherches** sont activées par défaut et réglables indépendamment.
+- **Une entrée de recherche Démarrer recréée.** ILô remplace le champ natif de Démarrer par sa propre entrée, sans attendre l'ouverture de SearchHost. Lorsque la recherche est visible dans le dock (icône seule ou champ de recherche), le champ redondant de Démarrer disparaît, mais la saisie directe reste possible. En mode Masquée, le champ ILô reste visible dans Démarrer ; Windows (origine) rétablit l'interface native.
+- **Une fenêtre de recherche autonome et directe.** Les demandes de recherche ouvrent le véritable éditeur ILô avant d'accepter la saisie, afin de réduire les délais de basculement, les premiers caractères manquants et l'apparition fugace du volet Windows. L'animation de déploiement, la saisie dans le dock, la navigation clavier et les actions sur les résultats sont conservées.
+- **Intégration fiable à Démarrer.** Réapplication de la présentation lorsque Windows reconstruit le menu après l'épinglage ou le désépinglage d'applications. Les mécanismes de repli natifs sont conservés lorsqu'une demande directe ne peut être prise en charge.
+
+#### Disposition du dock, performances et stabilité
+
+- **Décalage vertical à marge unique :** le dock flottant ne réserve plus que sa hauteur et l'espace qui le sépare du bord de l'écran, sans marge invisible côté applications. Le masquage par chevauchement tient compte de la hauteur réellement dessinée, et non de la fenêtre système plus grande. Les applications, la zone de notification et la recherche partagent cette géométrie.
+- **Optimisation de la recherche :** chargement des métadonnées des raccourcis Démarrer uniquement lorsque des résultats d'applications le nécessitent, réutilisation des icônes en cache, abandon plus rapide des requêtes obsolètes et réduction des objets XAML, des mises à jour de propriétés et des traitements redondants des résultats et catégories.
+- **Nettoyage du code :** suppression des routines natives obsolètes de disposition et de positionnement de la recherche, réduction de la journalisation répétitive et simplification de la gestion des événements et de la libération des fenêtres de recherche. Les réglages existants et les sauvegardes compatibles sont préservés.
 
 ### ILô 2.2.0
 

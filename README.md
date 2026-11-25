@@ -1,7 +1,7 @@
-# ILô 2.2.0
+# ILô 2.3.0
 
-**Meet ILô Search: a completely redesigned Windows taskbar search.**  
-**Découvrez ILô Search : la recherche Windows du dock entièrement réinventée.**
+**ILô Search now replaces Windows search from the dock, Win+S and Start.**<br>
+**ILô Search remplace désormais la recherche Windows depuis le dock, Win+S et Démarrer.**
 
 [English](#english) · [Français](#français)
 
@@ -14,36 +14,28 @@
 
 [Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
 
-### What's new in ILô 2.2.0
+### What's new in ILô 2.3.0
 
-#### ILô Search — the flagship feature
+#### ILô Search — your new Windows search experience
 
-- **A complete replacement for the Windows taskbar search interface.** ILô Search provides its own dock control, input, result window, categories and context menus, with a visual identity inspired by Spotlight. The native Windows search remains available with Win+S or by selecting the Windows (original) presentation.
-- **Four presentations:** icon only (the new default), search field, hidden, or native Windows. In icon mode, a compact search bar expands into the results window when you type; in field mode, the dock itself is the editor, with no duplicate field. No search is performed until you enter a query.
-- **Unified search:** find classic and installed apps, files and folders, and Windows and ILô settings. Use Windows Search (default) or [Everything](https://www.voidtools.com/), when it is installed and running; ILô falls back to Windows Search if Everything is unavailable. File queries use the existing index rather than rescanning disks. An optional web-search action opens your default browser only when selected.
-- **Organized results:** dedicated categories for apps, documents, images, audio, video, settings and other items, with empty categories hidden. The All view groups apps and settings first, displays both as grids, and lists the remaining results by type. Category icons, tooltips, directional transitions and keyboard navigation make browsing fast.
-- **Authentic application icons and shortcuts:** support for standard and custom shortcut icons, including shortcuts created by third-party launchers such as Playnite. Launch the original shortcut with its arguments and working directory.
-- **Act directly on results:** open/run, Open with, Run as administrator, open the file location, view properties, create a desktop shortcut, add to Start, and pin supported apps to the taskbar. Use **Create a copy…** for files and folders to choose a destination in the native Windows folder picker; the search stays open during the operation. Available actions depend on the selected item and Windows support.
-- **A fully customizable search experience:** independent field and window sizes, rounding, border thickness and colors, background colors and opacity, shared dock blur and animations. The expanded window is centered above the dock, and the icon participates in the macOS-style magnification when enabled. Right-click the dock search control for Windows search settings, indexing options and ILô Search settings.
-- **New defaults:** icon only, 220 DIP field width, automatic field height (0), and a 700 × 700 DIP results window, constrained to the available screen space.
+- **Replace the native Windows search interface beyond the dock.** Press Win+S, start typing in the native Start menu, or search from Start11 and compatible launchers to open ILô Search directly. The two new integration settings, **Replace Win+S** and **Redirect searches**, are enabled by default and can be configured independently.
+- **A redesigned Start search entry.** ILô replaces the native Start search control with its own entry instead of waiting for SearchHost to open. When the dock displays an icon or a search field, Start's redundant field is hidden while type-to-search remains available. In Hidden mode, the ILô field remains visible in Start; Windows (original) restores the native interface.
+- **A direct, independent search window.** Search requests open the actual ILô editor before accepting typed input, reducing handoff delays, missing first characters and flashes of the native search panel. The compact-to-expanded animation, dock-field editing, keyboard navigation and existing result actions are preserved.
+- **Robust Start integration.** Reapply the search presentation when Windows rebuilds the Start menu after pinning or unpinning apps. Retain native fallback paths when a direct request cannot be handled.
 
-#### Dock, performance and stability
+#### Dock layout, performance and stability
 
-- The settings panel icon adapts to Windows' light or dark taskbar theme.
-- Keep the dock visible while using ILô Search or hovering its interactive clock/weather tooltip, then resume the selected visibility policy when leaving.
-- The settings panel releases its visual tree and temporary data when closed, retaining the initialized XAML engine for fast reopening.
-- Search sessions release their visual tree and results after closing. Queries and icons are processed off the UI thread; the icon cache is limited to 4 MiB of pixel data and 512 entries, with least-recently-used eviction. Search caches are released after three minutes of inactivity.
-- Clock/weather tooltip content is prepared on demand and released after the close/hover grace period. The weather data cache is retained for quick, up-to-date display.
-- Reduced background popup monitoring (idle interval: 1.8 seconds rather than 600 ms), suspended hidden thumbnail layout watchers, and on-demand Win+X submenu construction. Active interaction and dock animations retain their established responsive paths.
-- Existing settings profiles and older compatible `.ILo` backups remain supported.
+- **Single-sided vertical offset:** the floating dock now reserves only its height plus the gap at the screen edge, without invisible padding above the dock. Overlap-based hiding uses the actual painted vertical extent, rather than the larger taskbar window. The apps, notification area and search window follow the same geometry.
+- **Search optimizations:** load Start-menu shortcut metadata only when application results require it, reuse cached icons, stop obsolete query work sooner, and reduce redundant XAML objects, property updates and result/category processing.
+- **Code cleanup:** remove obsolete native layout and search-positioning routines, reduce noisy layout logging, and simplify result-event and search-window cleanup. Existing settings and supported backups are preserved.
 
 See the [complete changelog](CHANGELOG.md#english) for earlier releases.
 
 ### Discover ILô Search
 
-Click the magnifying glass in the dock and start typing. Switch categories with their icons, move between results with the arrow keys, press **Enter** to open a result, or **Esc** to close the search. Right-click a result to access its contextual actions.
+Click the magnifying glass in the dock, press **Win+S**, or start typing in the Start menu. ILô Search also works with compatible launchers such as Start11. Find apps, documents, images, audio, video, folders and Windows or ILô settings with categorized results and a customizable Spotlight-inspired interface. Switch categories with their icons, move between results with the arrow keys, press **Enter** to open a result, or **Esc** to close the search. Right-click a result to open it, create shortcuts or copies, or access its other contextual actions.
 
-Open the ILô settings panel and select **Search** to switch presentation, customize the interface or change the file index. With Everything selected, run Everything in the background; ILô automatically uses Windows Search if it cannot connect. The native Windows interface can still be opened with Win+S.
+Open the ILô settings panel and select **Search** to switch presentation (icon only, search field, hidden or Windows original), customize the interface or change the file index. **Replace Win+S** and **Redirect searches** are on by default. Disable the relevant option to keep the corresponding native behavior, or choose Windows (original) to restore native search entirely. With Everything selected, run Everything in the background; ILô automatically uses Windows Search if it cannot connect.
 
 ILô turns the Windows 11 taskbar into a floating dock that centers your apps and system tray together. Icons can magnify on hover, and you can customize spacing, rounded corners, blur, and transparency. Adapted by Mighty-Luke for Windows 11 and Windhawk.
 
@@ -74,6 +66,8 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 | Setting | Description | Default |
 | --- | --- | --- |
+| Replace Win+S | Open ILô Search with the Windows search shortcut. | `true` |
+| Redirect searches | Open ILô Search from Start and compatible launchers. | `true` |
 | Search presentation | Icon only, search field, hidden, or native Windows. | `icon` |
 | Search field width | Width in DIPs of the dock field or compact search. | `220` |
 | Search field height | 0 automatically fits the dock with a small margin. | `0` |
@@ -98,7 +92,7 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 | Taskbar height | Set the height of the taskbar. Default is 24 | `24` |
 | Taskbar icon size | Set the width and height of taskbar icons. Values below 8 are clamped to 8; values above the current taskbar/button size are clamped to fit. Default is 22 | `22` |
 | Taskbar button size | Set the size (width and height) of taskbar buttons. Default is 20 | `20` |
-| Taskbar vertical offset | Move the taskbar up or down. Padding of the same value is applied to the top. Default is 8 | `8` |
+| Taskbar vertical offset | Gap between the dock and the screen edge, with no padding on the application side. | `8` |
 | Gap between apps and the notification area | Adjust the space between the task area and the tray area. Default is 5 | `5` |
 | Notification area vertical offset | Fine-tune the primary notification area's vertical position in DIPs (-12 to 12). Positive moves it down. Default is 0. | `0` |
 | Hidden icons chevron position | Left (Windows default) or right (before clock). | `left` |
@@ -168,36 +162,28 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 [Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
 
-### Nouveautés d'ILô 2.2.0
+### Nouveautés d'ILô 2.3.0
 
-#### ILô Search — la fonctionnalité phare
+#### ILô Search — votre nouvelle recherche Windows
 
-- **Remplacement complet de l’interface de recherche Windows du dock.** ILô Search dispose de sa propre icône ou de son propre champ, d’une fenêtre de résultats, de catégories et de menus contextuels, avec une identité graphique inspirée de Spotlight. La recherche Windows native reste accessible via Win+S ou en choisissant la présentation Windows (origine).
-- **Quatre présentations :** icône seule (nouveau défaut), champ de recherche, masquée ou Windows native. En mode icône, un champ compact se déploie en fenêtre de résultats dès la saisie ; en mode champ, le dock sert lui-même de zone de saisie, sans doublon. Aucune recherche n’est lancée avant la saisie d’une requête.
-- **Recherche unifiée :** applications classiques et installées, fichiers et dossiers, paramètres Windows et ILô. Choix entre Windows Search (par défaut) et [Everything](https://www.voidtools.com/) lorsqu’il est installé et actif, avec repli automatique vers Windows Search. Les fichiers sont recherchés dans l’index existant, sans reparcourir les disques. Un raccourci web facultatif ouvre le navigateur par défaut uniquement si vous le sélectionnez.
-- **Résultats organisés :** catégories Applications, Documents, Images, Audio, Vidéo, Paramètres et Autres, masquées lorsqu’elles sont vides. Dans Tout, les applications et paramètres passent en premier et s’affichent en grille, suivis des autres types de fichiers. Icônes de catégories, infobulles, transitions directionnelles et navigation clavier.
-- **Vraies icônes et raccourcis :** prise en charge des icônes de raccourcis standard et personnalisés, y compris ceux des lanceurs tiers comme Playnite. Les applications sont lancées en conservant le raccourci d’origine, ses arguments et son dossier de travail.
-- **Agir directement sur les résultats :** ouvrir/exécuter, ouvrir avec, exécuter en tant qu’administrateur, afficher l’emplacement et les propriétés, créer un raccourci sur le bureau, ajouter au menu Démarrer et épingler les applications compatibles à la barre des tâches. Pour les fichiers et dossiers, **Créer une copie…** permet de choisir une destination dans le sélecteur natif Windows, tout en conservant le panneau de recherche ouvert. Les actions disponibles dépendent du résultat sélectionné et de la prise en charge par Windows.
-- **Une recherche entièrement personnalisable :** dimensions du champ et du volet, arrondis, épaisseur et couleurs du contour, couleurs et opacité du fond, flou commun au dock et animations. La fenêtre déployée se centre au-dessus du dock ; l’icône participe à l’effet de zoom macOS lorsqu’il est activé. Un clic droit sur la recherche du dock donne accès aux paramètres de recherche Windows, à l’indexation et aux réglages d’ILô Search.
-- **Nouveaux réglages par défaut :** icône seule, largeur de champ de 220 DIP, hauteur automatique (0) et fenêtre de 700 × 700 DIP, adaptée à l’espace disponible.
+- **Remplacement de l'interface native de recherche au-delà du dock.** Utilisez Win+S, commencez à saisir une recherche dans le menu Démarrer natif, ou recherchez depuis Start11 et les lanceurs compatibles pour ouvrir directement ILô Search. Les deux nouvelles options **Remplacer Win+S** et **Rediriger les recherches** sont activées par défaut et réglables indépendamment.
+- **Une entrée de recherche Démarrer recréée.** ILô remplace le champ natif de Démarrer par sa propre entrée, sans attendre l'ouverture de SearchHost. Lorsque la recherche est visible dans le dock (icône seule ou champ de recherche), le champ redondant de Démarrer disparaît, mais la saisie directe reste possible. En mode Masquée, le champ ILô reste visible dans Démarrer ; Windows (origine) rétablit l'interface native.
+- **Une fenêtre de recherche autonome et directe.** Les demandes de recherche ouvrent le véritable éditeur ILô avant d'accepter la saisie, afin de réduire les délais de basculement, les premiers caractères manquants et l'apparition fugace du volet Windows. L'animation de déploiement, la saisie dans le dock, la navigation clavier et les actions sur les résultats sont conservées.
+- **Intégration fiable à Démarrer.** Réapplication de la présentation lorsque Windows reconstruit le menu après l'épinglage ou le désépinglage d'applications. Les mécanismes de repli natifs sont conservés lorsqu'une demande directe ne peut être prise en charge.
 
-#### Dock, performances et stabilité
+#### Disposition du dock, performances et stabilité
 
-- L’icône du panneau de configuration s’adapte au thème clair ou sombre de la barre des tâches Windows.
-- Maintien du dock visible pendant l’utilisation d’ILô Search ou le survol de l’infobulle interactive de l’horloge/météo, puis retour au comportement de visibilité choisi.
-- Libération de l’arbre graphique et des données temporaires du panneau de configuration à sa fermeture, tout en conservant le moteur XAML initialisé pour une réouverture rapide.
-- Libération de l’interface de recherche et des résultats après fermeture. Requêtes et traitement des icônes sur un fil indépendant ; cache limité à 4 Mio de données d’icônes et 512 entrées, avec éviction des moins récemment utilisées. Libération des caches de recherche après trois minutes d’inactivité.
-- Préparation à la demande du contenu de l’infobulle horloge/météo et libération après le délai de fermeture et de transition du pointeur. Les données météo restent mises en cache pour un affichage rapide et actualisé.
-- Réduction de la surveillance des volets au repos (intervalle de 1,8 seconde au lieu de 600 ms), suspension des observateurs de disposition des miniatures masquées et création des sous-menus Win+X à la demande. Les interactions actives et animations du dock conservent leur réactivité.
-- Les profils existants et les anciennes sauvegardes `.ILo` compatibles restent pris en charge.
+- **Décalage vertical à marge unique :** le dock flottant ne réserve plus que sa hauteur et l'espace qui le sépare du bord de l'écran, sans marge invisible côté applications. Le masquage par chevauchement tient compte de la hauteur réellement dessinée, et non de la fenêtre système plus grande. Les applications, la zone de notification et la recherche partagent cette géométrie.
+- **Optimisation de la recherche :** chargement des métadonnées des raccourcis Démarrer uniquement lorsque des résultats d'applications le nécessitent, réutilisation des icônes en cache, abandon plus rapide des requêtes obsolètes et réduction des objets XAML, des mises à jour de propriétés et des traitements redondants des résultats et catégories.
+- **Nettoyage du code :** suppression des routines natives obsolètes de disposition et de positionnement de la recherche, réduction de la journalisation répétitive et simplification de la gestion des événements et de la libération des fenêtres de recherche. Les réglages existants et les sauvegardes compatibles sont préservés.
 
 Consultez [l'historique complet des versions](CHANGELOG.md#français) pour les évolutions précédentes.
 
 ### Découvrir ILô Search
 
-Cliquez sur la loupe dans le dock et commencez à saisir votre recherche. Changez de catégorie avec les icônes, parcourez les résultats avec les flèches du clavier, appuyez sur **Entrée** pour ouvrir un résultat ou sur **Échap** pour fermer la recherche. Faites un clic droit sur un résultat pour accéder à ses actions contextuelles.
+Cliquez sur la loupe dans le dock, utilisez **Win+S** ou commencez à saisir votre recherche dans le menu Démarrer. ILô Search fonctionne également avec les lanceurs compatibles comme Start11. Recherchez applications, documents, images, sons, vidéos, dossiers et réglages Windows ou ILô, avec des catégories de résultats et une interface personnalisable inspirée de Spotlight. Changez de catégorie avec les icônes, parcourez les résultats avec les flèches du clavier, appuyez sur **Entrée** pour ouvrir un résultat ou sur **Échap** pour fermer la recherche. Faites un clic droit sur un résultat pour l'ouvrir, créer des raccourcis ou des copies, ou accéder aux autres actions contextuelles.
 
-Ouvrez les paramètres d'ILô et sélectionnez **Zone de recherche** pour modifier la présentation, personnaliser l'interface ou choisir l'index de fichiers. Si vous sélectionnez Everything, laissez-le actif en arrière-plan ; ILô utilise automatiquement Windows Search si Everything n'est pas disponible. L'interface Windows native reste accessible avec Win+S.
+Ouvrez les paramètres d'ILô et sélectionnez **Zone de recherche** pour modifier la présentation (icône seule, champ de recherche, masquée ou Windows d'origine), personnaliser l'interface ou choisir l'index de fichiers. **Remplacer Win+S** et **Rediriger les recherches** sont activées par défaut. Désactivez l'option correspondante pour conserver le comportement natif souhaité, ou choisissez Windows (origine) pour rétablir entièrement la recherche native. Si vous sélectionnez Everything, laissez-le actif en arrière-plan ; ILô utilise automatiquement Windows Search si Everything n'est pas disponible.
 
 Dock Windhawk pour Windows 11, adapté par Mighty-Luke. ILô centre les applications et la zone de notification, personnalise le fond et propose un zoom au survol. Les réglages sont disponibles en français. Conçu pour Windows 11 et Windhawk.
 
@@ -230,6 +216,8 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 
 | Réglage | Description | Valeur par défaut |
 | --- | --- | --- |
+| Remplacer Win+S | Ouvre ILô Search avec le raccourci de recherche Windows. | `true` |
+| Rediriger les recherches | Ouvre ILô Search depuis Démarrer et les lanceurs compatibles. | `true` |
 | Présentation de la recherche | Icône seule, champ de recherche, masquée ou Windows native. | `icon` |
 | Largeur du champ | Largeur du champ du dock ou de la recherche compacte, en DIP. | `220` |
 | Hauteur du champ | 0 adapte la hauteur automatiquement avec une petite marge. | `0` |
@@ -254,7 +242,7 @@ ILô dérive du [fork de vitaliiorlov](https://github.com/vitaliiorlov/windhawk-
 | Hauteur de la barre des tâches | Règle la hauteur demandée pour la barre. Valeur par défaut : 24. | `24` |
 | Taille des icônes des applications | Règle la largeur et la hauteur des icônes. Minimum : 8. Le maximum dépend de la taille de la barre et des boutons. Valeur par défaut : 22. | `22` |
 | Taille des boutons des applications | Règle la largeur et la hauteur des boutons. Valeur par défaut : 20. | `20` |
-| Décalage vertical du dock | Déplace le dock verticalement et ajoute la même marge en haut. Valeur par défaut : 8. | `8` |
+| Décalage vertical du dock | Espace entre le dock et le bord de l'écran, sans marge côté applications. | `8` |
 | Espacement avant la zone de notification | Règle la distance entre les applications et la zone de notification. Valeur par défaut : 5. | `5` |
 | Décalage vertical des icônes de notification | Ajuste la hauteur des icônes et de l’horloge sur l’écran principal, de −12 à +12 unités indépendantes de la densité. Une valeur positive les abaisse. Valeur par défaut : 0. | `0` |
 | Position du chevron des applications masquées | À gauche (Windows) ou à droite (avant l’horloge). | `left` |
