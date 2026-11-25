@@ -4,6 +4,16 @@
 
 ## English
 
+### ILô 2.3.1
+
+#### ILô Search - text editing
+
+- Restored reliable mouse and keyboard text selection in the dock field and compact and expanded search windows, including partial selection and deletion, and standard Ctrl+A, Ctrl+C, Ctrl+X and Ctrl+V shortcuts.
+- Added an independent, themed editing context menu with Undo, Cut, Copy, Paste, Delete and Select all. The menu is positioned using the pointer's screen coordinates, respects monitor bounds and keeps the editor and dock visible during editing.
+- The menu displays only available commands and adjusts its height and rounded corners accordingly. If no command is available, it shows only disabled Paste.
+- A contrasting, opaque blue selection highlight remains visible in light and dark themes, even when the editing menu is open.
+- Improved search editing stability by using the independent search host for local interactions, preserving the native text editing engine and deferring query-driven resizing until text editing events complete. Existing search integration, settings and compatible backups are preserved.
+
 ### ILô 2.3.0
 
 #### ILô Search — your new Windows search experience
@@ -181,6 +191,16 @@ First release under the **ILô** name by Mighty-Luke. Adopted the tray alignment
 Starting point for ILô. This version of [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed) built on DarkionAvey’s TAI floating taskbar. It already included dock-shaped mouse interaction, primary-monitor notification placement and optional flyout placement logging. [Archived upstream fork notes](https://github.com/luke95330/ILo/blob/9e2abd8bb4d3ea6d259a54527cd5c2573037cb74/FORK-CHANGES.md).
 
 ## Français
+
+### ILô 2.3.1
+
+#### ILô Search - édition du texte
+
+- Rétablissement de la sélection de texte à la souris et au clavier dans le champ du dock et les fenêtres compacte et déployée, y compris la sélection et la suppression partielles ainsi que les raccourcis habituels Ctrl+A, Ctrl+C, Ctrl+X et Ctrl+V.
+- Ajout d'un menu contextuel d'édition autonome aux couleurs du dock : Annuler, Couper, Copier, Coller, Supprimer et Tout sélectionner. Il se positionne selon les coordonnées écran du pointeur, respecte les limites du moniteur et maintient la recherche et le dock visibles pendant l'édition.
+- Le menu affiche uniquement les commandes disponibles et adapte sa hauteur et ses arrondis. Si aucune commande n'est disponible, seul Coller apparaît en grisé.
+- Surlignage de la sélection en bleu opaque et contrasté dans les thèmes clair et sombre, y compris lorsque le menu d'édition est ouvert.
+- Stabilisation de l'édition grâce à la fenêtre autonome pour les interactions locales, au maintien du moteur natif de saisie et au report du redimensionnement lié à la recherche jusqu'à la fin des événements d'édition. L'intégration de la recherche, les réglages existants et les sauvegardes compatibles sont conservés.
 
 ### ILô 2.3.0
 

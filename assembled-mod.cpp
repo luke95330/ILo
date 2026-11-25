@@ -4,7 +4,7 @@
 // @name:fr-FR      ILô
 // @description     Floating Windows 11 dock with ILô Search, customizable icons and notification area.
 // @description:fr-FR Dock flottant pour Windows 11 avec ILô Search, icônes et zone de notification personnalisables.
-// @version         2.3.0
+// @version         2.3.1
 // @github          https://github.com/luke95330
 // @homepage        https://github.com/luke95330/ILo
 // @donateUrl       https://paypal.me/MightyLuke
@@ -21,7 +21,7 @@
 // Local fork of https://github.com/vitaliiorlov/windhawk-taskbar-centered-condensed
 // ==WindhawkModReadme==
 /*
-# ILô 2.3.0
+# ILô 2.3.1
 
 ## Français
 
@@ -1123,7 +1123,7 @@ constexpr PCWSTR donate=L"https://paypal.me/MightyLuke";
 #ifdef WH_MOD_VERSION
 constexpr PCWSTR version=WH_MOD_VERSION;
 #else
-constexpr PCWSTR version=L"2.3.0";
+constexpr PCWSTR version=L"2.3.1";
 #endif
 enum class Phase { Idle, Checking, Current, Available, Downloading, Ready, NoRelease, Error };
 enum class Failure { None, Network, Metadata, Asset, Integrity, Source, Cancelled };
@@ -7441,9 +7441,9 @@ bool Bar(HWND w) {
     return w && GetClassNameW(w,cls,64) &&
         (!wcscmp(cls,L"Shell_TrayWnd") || !wcscmp(cls,L"Shell_SecondaryTrayWnd"));
 }
-enum class PopupHold{Clock,Search,SearchOpening};
-static PCWSTR HoldKey(PopupHold kind){switch(kind){case PopupHold::Clock:return L"ILo.Hiding.ClockHover.v1";case PopupHold::SearchOpening:return L"ILo.Hiding.SearchOpening.v1";default:return L"ILo.Hiding.SearchOpen.v1";}}
-static bool PopupHeld(HWND w){return w&&(GetPropW(w,HoldKey(PopupHold::Clock))||GetPropW(w,HoldKey(PopupHold::Search))||GetPropW(w,HoldKey(PopupHold::SearchOpening)));}
+enum class PopupHold{Clock,Search,SearchOpening,SearchEdit};
+static PCWSTR HoldKey(PopupHold kind){switch(kind){case PopupHold::Clock:return L"ILo.Hiding.ClockHover.v1";case PopupHold::SearchOpening:return L"ILo.Hiding.SearchOpening.v1";case PopupHold::SearchEdit:return L"ILo.Hiding.SearchEdit.v1";default:return L"ILo.Hiding.SearchOpen.v1";}}
+static bool PopupHeld(HWND w){return w&&(GetPropW(w,HoldKey(PopupHold::Clock))||GetPropW(w,HoldKey(PopupHold::Search))||GetPropW(w,HoldKey(PopupHold::SearchOpening))||GetPropW(w,HoldKey(PopupHold::SearchEdit)));}
 static UINT popupHoldMessage{};
 static void SetPopupHold(HWND w,PopupHold kind,bool hold){
     if(!Bar(w))return;
@@ -8032,7 +8032,7 @@ void Stop(){
     EnumWindows([](HWND w,LPARAM)->BOOL {
         DWORD pid{}; GetWindowThreadProcessId(w,&pid);
         if(pid==GetCurrentProcessId() && Bar(w) && GetPropW(w,listenerKey)){
-            RemovePropW(w,HoldKey(PopupHold::Clock));RemovePropW(w,HoldKey(PopupHold::Search));RemovePropW(w,HoldKey(PopupHold::SearchOpening));
+            RemovePropW(w,HoldKey(PopupHold::Clock));RemovePropW(w,HoldKey(PopupHold::Search));RemovePropW(w,HoldKey(PopupHold::SearchOpening));RemovePropW(w,HoldKey(PopupHold::SearchEdit));
             SendMessageW(w,resetMessage,0,0);
             WindhawkUtils::RemoveWindowSubclassFromAnyThread(w,Observe);
             RemovePropW(w,listenerKey);
@@ -18770,8 +18770,191 @@ static void TransparentEditor(TextBox const& input){
   auto transparent=Brush({0,0,0,0});input.Background(transparent);input.BorderBrush(transparent);input.BorderThickness(Stroke(0));input.CornerRadius(Radius(0));
   for(PCWSTR key:{L"TextControlBackground",L"TextControlBackgroundPointerOver",L"TextControlBackgroundFocused",L"TextControlBorderBrush",L"TextControlBorderBrushPointerOver",L"TextControlBorderBrushFocused"})input.Resources().Insert(winrt::box_value(winrt::hstring(key)),transparent);
 }
+static void StyleEditorSelection(TextBox const& input,winrt::Windows::UI::Color fg){
+  // An automatic accent can be almost identical to the translucent search
+  // field. Use a distinct, opaque blue instead, keeping the text readable
+  // in either shell theme and while the independent edit menu is open.
+  const auto color=fg.R>128?winrt::Windows::UI::Color{255,0,108,197}:winrt::Windows::UI::Color{255,105,177,255};
+  auto highlight=input.SelectionHighlightColor();
+  if(!highlight||highlight.Color()!=color||highlight.Opacity()!=1.){
+    highlight=Brush(color);
+    // Scope the template resource to this editor, never Explorer's theme.
+    input.Resources().Insert(winrt::box_value(winrt::hstring(L"TextSelectionHighlightColorThemeBrush")),highlight);
+    input.SelectionHighlightColor(highlight);
+  }
+  auto inactive=input.SelectionHighlightColorWhenNotFocused();
+  if(!inactive||inactive.Color()!=color||inactive.Opacity()!=1.)input.SelectionHighlightColorWhenNotFocused(highlight);
+}
 static FontIcon Glyph(PCWSTR glyph,double size=18){FontIcon icon;icon.FontFamily(Media::FontFamily(L"Segoe Fluent Icons"));icon.Glyph(glyph);icon.FontSize(size);icon.VerticalAlignment(VerticalAlignment::Center);return icon;}
 static TextBlock Text(std::wstring_view value,double size=14){TextBlock t;t.Text(winrt::hstring(value));t.FontSize(size);t.TextTrimming(TextTrimming::CharacterEllipsis);return t;}
+// Keep the platform TextBox as the editing engine (caret, selection, IME,
+// Unicode, undo and clipboard). Only its presentation and edit menu are ours.
+// A separate non-activating island works even when the search is compact and
+// does not compete with the search host for keyboard focus or light dismissal.
+struct EditMenu:std::enable_shared_from_this<EditMenu>{
+  enum class Command{Undo,Cut,Copy,Paste,Delete,SelectAll};
+  TextBox editor{nullptr};HWND taskbar{},window{},island{};HMODULE module{};std::wstring windowClass;
+  Hosting::DesktopWindowXamlSource source{nullptr};Border plate{nullptr};
+  IloClockMenu::MenuCornerClip corners;std::function<HWND()> owner;
+  DispatcherTimer timer{nullptr};winrt::event_token tick{},opening{},context{},rightTap{},preview{};
+  std::vector<Button> buttons;std::vector<winrt::event_token> clicks;std::vector<Command> commands;
+  POINT point{};RECT bounds{};winrt::hstring savedText;int start{},length{},keyboardRow{-1};
+  bool pending{},visible{},mouseWasDown{},held{},disposed{};ULONGLONG lastRequest{};
+  static bool MouseDown(){return ((GetAsyncKeyState(VK_LBUTTON)|GetAsyncKeyState(VK_RBUTTON)|GetAsyncKeyState(VK_MBUTTON))&0x8000)!=0;}
+  bool ContainsCursor()const noexcept{POINT p{};return (visible||window)&&GetCursorPos(&p)&&PtInRect(&bounds,p);}
+  bool ForegroundOwned()const{
+    HWND fg=GetForegroundWindow(),host=owner?owner():nullptr;
+    if(!fg||!host||!IsWindow(host))return false;
+    return GetAncestor(fg,GA_ROOT)==GetAncestor(host,GA_ROOT)||GetAncestor(fg,GA_ROOTOWNER)==GetAncestor(host,GA_ROOTOWNER);
+  }
+  void Hold(bool value){if(held!=value){held=value;IloHiding::SetPopupHold(taskbar,IloHiding::PopupHold::SearchEdit,value);}}
+  void Schedule(int ms){if(timer){timer.Stop();timer.Interval(std::chrono::milliseconds(ms));timer.Start();}}
+  void Close()noexcept{
+    pending=visible=false;keyboardRow=-1;if(window)ShowWindow(window,SW_HIDE);Hold(false);
+    try{if(!disposed)Schedule(1);}catch(...){}
+  }
+  void Destroy()noexcept{
+    for(size_t i=0;i<buttons.size()&&i<clicks.size();++i)try{buttons[i].Click(clicks[i]);}catch(...){}
+    buttons.clear();clicks.clear();commands.clear();corners.Clear();
+    if(window)ShowWindow(window,SW_HIDE);
+    try{if(plate)plate.Background(nullptr);}catch(...){}
+    try{if(source){source.Content(nullptr);source.Close();}}catch(...){}
+    plate=nullptr;source=nullptr;island=nullptr;
+    if(window){SetWindowLongPtrW(window,GWLP_USERDATA,0);DestroyWindow(window);window=nullptr;}
+    if(module&&!windowClass.empty())UnregisterClassW(windowClass.c_str(),module);
+    windowClass.clear();module=nullptr;bounds={};keyboardRow=-1;
+  }
+  void Dispose()noexcept{
+    if(disposed)return;disposed=true;Close();
+    try{if(timer){timer.Stop();if(tick.value)timer.Tick(tick);}}catch(...){}timer=nullptr;
+    try{if(editor){if(opening.value)editor.ContextMenuOpening(opening);if(context.value)editor.ContextRequested(context);if(rightTap.value)editor.RightTapped(rightTap);if(preview.value)editor.PreviewKeyDown(preview);}}catch(...){}
+    Destroy();editor=nullptr;owner={};savedText={};
+  }
+  ~EditMenu(){Dispose();}
+  void Request(bool keyboard=false){
+    if(disposed||g_unloading||!editor||!editor.XamlRoot()||editor.IsReadOnly())return;
+    POINT p{};if(!GetCursorPos(&p))return;
+    if(keyboard){if(auto rect=IloPopupSurface::ScreenBounds(editor))p={rect->left,rect->bottom};}
+    const auto now=GetTickCount64();
+    // A single right click may deliver ContextRequested, RightTapped and
+    // ContextMenuOpening. Never build multiple presenters for that gesture.
+    if((pending||visible)&&now-lastRequest<180&&std::abs(p.x-point.x)<=3&&std::abs(p.y-point.y)<=3)return;
+    lastRequest=now;point=p;savedText=editor.Text();start=editor.SelectionStart();length=editor.SelectionLength();
+    if(window)ShowWindow(window,SW_HIDE);visible=false;pending=true;Hold(true);Schedule(1);
+  }
+  bool CanPaste()const{try{return editor.CanPasteClipboardContent();}catch(...){return IsClipboardFormatAvailable(CF_UNICODETEXT)!=FALSE;}}
+  void Invoke(Command command){
+    if(!visible||!editor)return;
+    auto target=editor;Close();
+    // The menu never takes focus. Restore the captured selection only if
+    // this exact editor still contains the text that was right-clicked.
+    if(target.Text()!=savedText)return;
+    if(target.FocusState()==FocusState::Unfocused)target.Focus(FocusState::Programmatic);
+    int count=int(target.Text().size()),first=std::clamp(start,0,count),size=std::clamp(length,0,count-first);
+    if(target.SelectionStart()!=first||target.SelectionLength()!=size)target.Select(first,size);
+    switch(command){
+      case Command::Undo:if(target.CanUndo())target.Undo();break;
+      case Command::Cut:if(size)target.CutSelectionToClipboard();break;
+      case Command::Copy:if(size)target.CopySelectionToClipboard();break;
+      case Command::Paste:if(CanPaste())target.PasteFromClipboard();break;
+      case Command::Delete:if(size)target.SelectedText(L"");break;
+      case Command::SelectAll:target.SelectAll();break;
+    }
+  }
+  void OnKey(Input::KeyRoutedEventArgs const& args){
+    using VK=winrt::Windows::System::VirtualKey;auto k=args.Key();
+    if(unsigned(k)==VK_APPS||(k==VK::F10&&(GetKeyState(VK_SHIFT)&0x8000))){args.Handled(true);Request(true);return;}
+    if(!visible&&!pending)return;
+    if(k==VK::Escape){args.Handled(true);Close();return;}
+    if(visible&&(k==VK::Up||k==VK::Down)&&!buttons.empty()){
+      args.Handled(true);int n=int(buttons.size());
+      if(keyboardRow>=0)buttons[keyboardRow].Background(Brush({0,0,0,0}));
+      int at=keyboardRow<0?(k==VK::Down?-1:0):keyboardRow;
+      for(int i=1;i<=n;++i){int next=(at+(k==VK::Down?i:-i)+2*n)%n;if(buttons[next].IsEnabled()){keyboardRow=next;buttons[next].Background(Brush(Alpha(ThemeColor(true),18)));break;}}
+      return;
+    }
+    if(visible&&k==VK::Enter){args.Handled(true);if(keyboardRow>=0)Invoke(commands[keyboardRow]);else Close();return;}
+    Close(); // typing and native editing shortcuts remain in the TextBox
+  }
+  static LRESULT CALLBACK WindowProc(HWND w,UINT msg,WPARAM wp,LPARAM lp)noexcept{
+    if(msg==WM_NCCREATE){auto cs=reinterpret_cast<CREATESTRUCTW*>(lp);SetWindowLongPtrW(w,GWLP_USERDATA,reinterpret_cast<LONG_PTR>(cs->lpCreateParams));}
+    auto self=reinterpret_cast<EditMenu*>(GetWindowLongPtrW(w,GWLP_USERDATA));
+    if(msg==WM_MOUSEACTIVATE)return MA_NOACTIVATE;
+    if(msg==WM_ERASEBKGND)return 1;
+    if(self&&msg==WM_CLOSE){self->Close();return 0;}
+    if(self&&msg==WM_NCDESTROY){self->window=nullptr;SetWindowLongPtrW(w,GWLP_USERDATA,0);}
+    return DefWindowProcW(w,msg,wp,lp);
+  }
+  void Show(){
+    Destroy();if(!editor.XamlRoot()||editor.Text()!=savedText){Close();return;}
+    // A right click on an idle dock field is itself an editing gesture.
+    // Establish the owner's focus now, after the routed event has unwound.
+    HWND host=owner?owner():nullptr;
+    if(!host||!IsWindow(host)){Close();return;}
+    if(!ForegroundOwned()&&!SetForegroundWindow(host)){Close();return;}
+    if(editor.FocusState()==FocusState::Unfocused){editor.Focus(FocusState::Programmatic);if(editor.Text()==savedText)editor.Select(start,length);}
+    if(!ForegroundOwned()||editor.Text()!=savedText){Close();return;}
+    MONITORINFO mi{sizeof(mi)};if(!GetMonitorInfoW(MonitorFromPoint(point,MONITOR_DEFAULTTONEAREST),&mi)){Close();return;}
+    auto scale=editor.XamlRoot().RasterizationScale();if(scale<=0){Close();return;}
+    // Measure and build from the same set of available commands. If the
+    // editor and clipboard offer no action, retain only disabled Paste.
+    struct Entry{Command command;PCWSTR label,glyph;bool enabled;};
+    const Entry entries[]={
+      {Command::Undo,T(L"Undo",L"Annuler"),L"\uE7A7",editor.CanUndo()},
+      {Command::Cut,T(L"Cut",L"Couper"),L"\uE8C6",length>0},
+      {Command::Copy,T(L"Copy",L"Copier"),L"\uE8C8",length>0},
+      {Command::Paste,T(L"Paste",L"Coller"),L"\uE77F",CanPaste()},
+      {Command::Delete,T(L"Delete",L"Supprimer"),L"\uE74D",length>0},
+      {Command::SelectAll,T(L"Select all",L"Tout sélectionner"),L"\uE8B3",!savedText.empty()&&length!=int(savedText.size())}
+    };
+    const auto count=std::count_if(std::begin(entries),std::end(entries),[](auto const& entry){return entry.enabled;});
+    constexpr double rowHeight=34,padding=4,width=224;
+    const double height=2*padding+rowHeight*std::max(1.,double(count));auto px=[&](double dip){return std::max(1L,LONG(std::lround(dip*scale)));};
+    LONG w=std::min(px(width),mi.rcWork.right-mi.rcWork.left),h=std::min(px(height),mi.rcWork.bottom-mi.rcWork.top),gap=px(3);
+    LONG x=point.x+gap,y=point.y+gap;if(x+w>mi.rcWork.right)x=point.x-w-gap;if(y+h>mi.rcWork.bottom)y=point.y-h-gap;
+    x=std::clamp(x,mi.rcWork.left,mi.rcWork.right-w);y=std::clamp(y,mi.rcWork.top,mi.rcWork.bottom-h);bounds={x,y,x+w,y+h};
+    GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<PCWSTR>(&WindowProc),&module);
+    windowClass=L"ILo.Search.EditMenu."+std::to_wstring(reinterpret_cast<uintptr_t>(this));
+    WNDCLASSW wc{};wc.hInstance=module;wc.lpfnWndProc=WindowProc;wc.lpszClassName=windowClass.c_str();wc.hCursor=LoadCursorW(nullptr,IDC_ARROW);wc.hbrBackground=static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
+    if(!RegisterClassW(&wc))throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    window=CreateWindowExW(WS_EX_TOOLWINDOW|WS_EX_TOPMOST|WS_EX_NOACTIVATE,windowClass.c_str(),L"ILo Search - Edit",WS_POPUP,x,y,w,h,host,nullptr,module,this);
+    if(!window)throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    BOOL dark=ThemeColor(true).R>128,hostBrush=TRUE;DwmSetWindowAttribute(window,DWMWA_USE_IMMERSIVE_DARK_MODE,&dark,sizeof(dark));DwmSetWindowAttribute(window,17,&hostBrush,sizeof(hostBrush));
+    MARGINS glass{-1};DwmExtendFrameIntoClientArea(window,&glass);const DWORD backdrop=DWMSBT_NONE,corner=DWMWCP_DONOTROUND;const COLORREF border=DWMWA_COLOR_NONE;
+    DwmSetWindowAttribute(window,DWMWA_SYSTEMBACKDROP_TYPE,&backdrop,sizeof(backdrop));DwmSetWindowAttribute(window,DWMWA_WINDOW_CORNER_PREFERENCE,&corner,sizeof(corner));DwmSetWindowAttribute(window,DWMWA_BORDER_COLOR,&border,sizeof(border));
+    double radius;{std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);radius=std::clamp(IloSurfaceStyle::PopupCornerRadius(),0.,std::min(w,h)/(2*scale));}
+    int r=std::clamp(int(std::lround(radius*scale)),0,int(std::min(w,h)/2));if(auto shape=r?CreateRoundRectRgn(0,0,w,h,2*r,2*r):CreateRectRgn(0,0,w,h))if(!SetWindowRgn(window,shape,TRUE))DeleteObject(shape);
+    plate=Border();plate.Width(w/scale);plate.Height(h/scale);plate.CornerRadius(Radius(radius));plate.Padding(Stroke(padding));plate.RequestedTheme(dark?ElementTheme::Dark:ElementTheme::Light);plate.Background(Brush(ThemeColor(false)));
+    StackPanel rows;plate.Child(rows);std::weak_ptr<EditMenu> weak=shared_from_this();
+    auto add=[&](Command command,PCWSTR label,PCWSTR glyph,bool enabled){
+      Button button;button.HorizontalAlignment(HorizontalAlignment::Stretch);button.HorizontalContentAlignment(HorizontalAlignment::Stretch);button.Height(rowHeight);button.MinHeight(0);button.MinWidth(0);button.Padding({10,0,10,0});button.Background(Brush({0,0,0,0}));button.BorderThickness(Stroke(0));button.CornerRadius(Radius(5));button.AllowFocusOnInteraction(false);button.IsTabStop(false);button.IsEnabled(enabled);
+      Grid row;ColumnDefinition icon,caption;icon.Width({24,GridUnitType::Pixel});caption.Width({1,GridUnitType::Star});row.ColumnDefinitions().Append(icon);row.ColumnDefinitions().Append(caption);row.Children().Append(Glyph(glyph,15));auto text=Text(label,14);text.VerticalAlignment(VerticalAlignment::Center);Grid::SetColumn(text,1);row.Children().Append(text);button.Content(row);Automation::AutomationProperties::SetName(button,label);
+      buttons.push_back(button);commands.push_back(command);clicks.push_back(button.Click([weak,command](auto&&,auto&&)noexcept{try{if(auto self=weak.lock())self->Invoke(command);}catch(...){Wh_Log(L"[ILoSearch] Edit command failed: %08X",winrt::to_hresult());}}));rows.Children().Append(button);
+    };
+    for(auto const& entry:entries)if(entry.enabled||(!count&&entry.command==Command::Paste))add(entry.command,entry.label,entry.glyph,entry.enabled);
+    source=Hosting::DesktopWindowXamlSource();auto native=source.as<IDesktopWindowXamlSourceNative>();winrt::check_hresult(native->AttachToWindow(window));winrt::check_hresult(native->get_WindowHandle(&island));source.Content(plate);
+    SetWindowPos(island,nullptr,0,0,w,h,SWP_NOZORDER|SWP_NOACTIVATE|SWP_SHOWWINDOW);
+    try{std::lock_guard<std::recursive_mutex> lock(g_settingsMutex);if(IloSurfaceStyle::Enabled())if(auto brush=IloSurfaceStyle::Create(plate,true))plate.Background(brush);corners.Attach(plate,radius);}catch(...){Wh_Log(L"[ILoSearch] Edit menu styling fallback: %08X",winrt::to_hresult());}
+    if(!SetWindowPos(window,HWND_TOPMOST,x,y,w,h,SWP_NOACTIVATE|SWP_SHOWWINDOW))throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+    visible=true;mouseWasDown=MouseDown();Schedule(32);
+  }
+  void Tick(){
+    if(disposed)return;if(pending){pending=false;Show();return;}
+    if(!visible){timer.Stop();Destroy();return;}
+    const bool down=MouseDown(),pressed=down&&!mouseWasDown;mouseWasDown=down;
+    if(!ForegroundOwned()||!editor.XamlRoot()||g_unloading||(pressed&&!ContainsCursor()))Close();
+  }
+  static std::shared_ptr<EditMenu> Bind(TextBox const& editor,HWND taskbar,std::function<HWND()> owner){
+    auto menu=std::make_shared<EditMenu>();menu->editor=editor;menu->taskbar=taskbar;menu->owner=std::move(owner);std::weak_ptr<EditMenu> weak=menu;
+    editor.IsReadOnly(false);StyleEditorSelection(editor,ThemeColor(true));editor.SelectionFlyout(nullptr);editor.ContextFlyout(nullptr);
+    menu->timer=DispatcherTimer();menu->tick=menu->timer.Tick([weak](auto&&,auto&&)noexcept{if(auto self=weak.lock())try{self->Tick();}catch(...){Wh_Log(L"[ILoSearch] Edit menu failed: %08X",winrt::to_hresult());self->Close();}});
+    menu->opening=editor.ContextMenuOpening([weak](auto&&,Controls::ContextMenuEventArgs const& args)noexcept{try{if(auto self=weak.lock()){args.Handled(true);self->Request();}}catch(...){}});
+    menu->context=editor.ContextRequested([weak](auto&&,Input::ContextRequestedEventArgs const& args)noexcept{try{if(auto self=weak.lock()){args.Handled(true);winrt::Windows::Foundation::Point p{};self->Request(!args.TryGetPosition(self->editor,p));}}catch(...){}});
+    menu->rightTap=editor.RightTapped([weak](auto&&,Input::RightTappedRoutedEventArgs const& args)noexcept{try{if(auto self=weak.lock()){args.Handled(true);self->Request();}}catch(...){}});
+    menu->preview=editor.PreviewKeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto self=weak.lock())self->OnKey(args);}catch(...){}});
+    return menu;
+  }
+};
 static std::wstring WebUrl(std::wstring const& text){
   int n=WideCharToMultiByte(CP_UTF8,0,text.data(),int(text.size()),nullptr,0,nullptr,nullptr);if(n<=0)return {};
   std::string bytes(n,'\0');WideCharToMultiByte(CP_UTF8,0,text.data(),int(text.size()),bytes.data(),n,nullptr,nullptr);
@@ -19122,6 +19305,7 @@ static std::atomic<ULONGLONG> nativeDismissUntil{};
 
 struct Session:std::enable_shared_from_this<Session>{
   Config config;Flyout fly{nullptr};Border plate{nullptr};Grid body{nullptr};TextBox input{nullptr};ScrollViewer scroll{nullptr};StackPanel list{nullptr};TextBlock status{nullptr},emptyState{nullptr};
+  std::shared_ptr<EditMenu> editMenu;DispatcherTimer editTimer{nullptr};winrt::event_token editTick{};
   HWND resultsWindow{},resultsIsland{};HMODULE resultsModule{};std::wstring resultsClass;
   int resultsShapeWidth{},resultsShapeHeight{},resultsShapeRadius{-1};
   Hosting::DesktopWindowXamlSource resultsSource{nullptr};winrt::weak_ref<FrameworkElement> directAnchor;
@@ -19184,7 +19368,7 @@ struct Session:std::enable_shared_from_this<Session>{
   void HoldDock(bool held){if(dockHeld==held)return;dockHeld=held;IloHiding::SetPopupHold(taskbar,IloHiding::PopupHold::Search,held);}
   bool HasQuery()const{return std::any_of(query.begin(),query.end(),[](wchar_t ch){return !iswspace(ch);});}
   bool IsOpen()const{return externalDockOpen?resultsWindow&&IsWindowVisible(resultsWindow):fly&&fly.IsOpen();}
-  void Hide(){if(copying&&!disposing&&!g_unloading)return;closeRequested=true;try{if(externalDockOpen){if(resultsWindow)ShowWindow(resultsWindow,SW_HIDE);if(liveOpened&&nativeClosed)nativeClosed();}else if(fly)fly.Hide();}catch(...){HoldDock(false);closed=true;if(scheduleRetirement)scheduleRetirement(shared_from_this());}}
+  void Hide(){if(copying&&!disposing&&!g_unloading)return;closeRequested=true;if(editMenu)editMenu->Close();try{if(externalDockOpen){if(resultsWindow)ShowWindow(resultsWindow,SW_HIDE);if(liveOpened&&nativeClosed)nativeClosed();}else if(fly)fly.Hide();}catch(...){HoldDock(false);closed=true;if(scheduleRetirement)scheduleRetirement(shared_from_this());}}
   bool PlaceNativeWindow(){
     auto anchor=directAnchor.get();if(!anchor||!anchor.XamlRoot()||!plate)return false;
     auto xr=anchor.XamlRoot();double scale=xr.RasterizationScale();if(scale<=0)return false;
@@ -19429,7 +19613,15 @@ struct Session:std::enable_shared_from_this<Session>{
       else if(GetTickCount64()-foregroundLostAt>=80){Wh_Log(L"[ILoSearch] Results closing after foreground loss");Hide();return;}
     }else foregroundLostAt=0;
     if(!pressed)return;
+    if(editMenu&&editMenu->ContainsCursor())return;
     if(pointerOnDockField&&pointerOnDockField())return;
+    // A fast drag can leave the edit field before this polling tick sees
+    // the initial mouse press. Respect RichEdit's native mouse capture.
+    if((GetAsyncKeyState(VK_LBUTTON)&0x8000)!=0){
+      HWND capture=GetCapture();
+      if(capture&&input&&input.FocusState()!=FocusState::Unfocused&&(capture==resultsWindow||IsChild(resultsWindow,capture)))return;
+      if(auto editor=dockEditor.get();capture&&editor&&editor.FocusState()!=FocusState::Unfocused&&(capture==taskbar||IsChild(taskbar,capture)))return;
+    }
     POINT cursor{};if(!GetCursorPos(&cursor))return;
     if(auto bounds=NativePanelBounds(cursor);bounds&&PtInRect(&*bounds,cursor))return;
     if(directBounds&&PtInRect(&*directBounds,cursor))return;
@@ -19607,6 +19799,8 @@ struct Session:std::enable_shared_from_this<Session>{
   }
   void Dispose()noexcept{
     if(disposing)return;disposing=true;closed=true;HoldDock(false);
+    if(editMenu){editMenu->Dispose();editMenu.reset();}
+    try{if(editTimer){editTimer.Stop();if(editTick.value)editTimer.Tick(editTick);editTimer=nullptr;}}catch(...){}
     StopNativeHandoff();
     if(copyJob){copyJob->Cancel();copyJob.reset();}
     try{if(copyTimer){copyTimer.Stop();if(copyTick.value)copyTimer.Tick(copyTick);copyTimer=nullptr;}}catch(...){}
@@ -19898,6 +20092,10 @@ struct Session:std::enable_shared_from_this<Session>{
   }
   void OnKey(Input::KeyRoutedEventArgs const& args){using VK=winrt::Windows::System::VirtualKey;
     if(args.Handled()||copying)return;
+    // Selection shortcuts belong exclusively to the native text editor.
+    if((input&&input.FocusState()!=FocusState::Unfocused)||(dockEditor.get()&&dockEditor.get().FocusState()!=FocusState::Unfocused)){
+      if((GetKeyState(VK_SHIFT)|GetKeyState(VK_CONTROL)|GetKeyState(VK_MENU))&0x8000)return;
+    }
     if(contextOverlay){
       if(args.Key()==VK::Escape){args.Handled(true);DismissContext(true);}
       else if(args.Key()==VK::Down||args.Key()==VK::Up){args.Handled(true);auto focus=FocusedElement();int at=-1,n=int(contextButtons.size());for(int i=0;i<n;++i)if(contextButtons[i]==focus)at=i;for(int i=1;i<=n;++i){int next=(at+(args.Key()==VK::Down?i:-i)+2*n)%n;if(contextButtons[next].IsEnabled()&&contextButtons[next].Focus(FocusState::Keyboard))break;}}
@@ -20116,7 +20314,12 @@ struct Session:std::enable_shared_from_this<Session>{
     s->placementTimer=DispatcherTimer();s->placementTimer.Interval(std::chrono::milliseconds(45));s->placementTick=s->placementTimer.Tick([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&live->placementTimer){if(live->closed||++live->placementRetries>=8||live->SettlePlacement()){live->placementTimer.Stop();live->anchorTransition=false;}}}catch(...){}});
     s->timer=DispatcherTimer();s->timer.Interval(std::chrono::milliseconds(50));s->tick=s->timer.Tick([weak](auto&&,auto&&){if(auto live=weak.lock())try{live->Tick();}catch(...){live->timer.Stop();}});
     if(s->input){
-      s->changed=s->input.TextChanged([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&live->input)live->QueryChanged(std::wstring(live->input.Text()));}catch(...){}});
+      s->editMenu=EditMenu::Bind(s->input,taskbar,[weak]{if(auto live=weak.lock()){if(live->resultsWindow)return live->resultsWindow;HWND host{};live->NativePanelBounds({},&host);return host?host:live->taskbar;}return HWND{};});
+      // Changing from compact to expanded (or vice versa) resizes the
+      // editor's HWND and layout. Do that after the TextBox has finished
+      // processing the input/selection/clipboard event, not inside it.
+      s->editTimer=DispatcherTimer();s->editTimer.Interval(std::chrono::milliseconds(1));s->editTick=s->editTimer.Tick([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock()){live->editTimer.Stop();if(!live->closed&&live->input)live->QueryChanged(std::wstring(live->input.Text()));}}catch(...){Wh_Log(L"[ILoSearch] Deferred edit failed: %08X",winrt::to_hresult());}});
+      s->changed=s->input.TextChanged([weak](auto&&,auto&&)noexcept{try{if(auto live=weak.lock();live&&!live->closed&&live->editTimer){live->editTimer.Stop();live->editTimer.Start();}}catch(...){}});
       s->inputKey=s->input.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock())live->OnKey(args);}catch(...){}});
     }
     s->key=s->body.KeyDown([weak](auto&&,Input::KeyRoutedEventArgs const& args)noexcept{try{if(auto live=weak.lock())live->OnKey(args);}catch(...){}});
@@ -20126,17 +20329,16 @@ struct Session:std::enable_shared_from_this<Session>{
       Wh_Log(L"[ILoSearch] %ls opened: dock editor=%d compact=%d",live->externalDockOpen?L"Native results window":L"Flyout",int(live->dockTyping),int(live->compact));
       try{live->StyleSurface();double r=live->compact?live->compactRadius:double(live->config.radius);live->corners.Attach(live->plate,r);}catch(...){Wh_Log(L"[ILoSearch] Surface styling failed: %08X",winrt::to_hresult());}
       try{
-      if(live->input){live->input.ApplyTemplate();
-      // The stock TextBox template can measure its internal scroll viewer
-      // at the top of a short control even with VerticalContentAlignment.
-      for(PCWSTR name:{L"ContentElement",L"PlaceholderTextContentPresenter"})if(auto e=FindChildByName(live->input,name)){e.VerticalAlignment(VerticalAlignment::Center);auto m=e.Margin();m.Top=0;m.Bottom=0;e.Margin(m);if(auto control=e.try_as<Control>())control.VerticalContentAlignment(VerticalAlignment::Center);}
+      if(live->input){live->input.ApplyTemplate();StyleEditorSelection(live->input,ThemeColor(true));
+      // Do not reposition RichEdit's internal content/placeholder elements:
+      // their geometry must remain consistent with native selection hit tests.
       live->input.Focus(FocusState::Programmatic);live->input.Select(int(live->input.Text().size()),0);
       }else if(auto editor=live->dockEditor.get()){if(editor.FocusState()==FocusState::Unfocused)editor.Focus(live->externalDockOpen?FocusState::Keyboard:FocusState::Programmatic);}
       }catch(...){Wh_Log(L"[ILoSearch] Editor focus failed: %08X",winrt::to_hresult());}
       live->RestartPlacement();
       // The dock editor can receive input between ShowAt and Opened.
       // Always start with its actual text, not a stale opening seed.
-      if(auto editor=live->dockEditor.get())live->QueryChanged(std::wstring(editor.Text()));else live->QueryChanged(live->query);
+      if(auto editor=live->dockEditor.get())live->QueryChanged(std::wstring(editor.Text()));else if(live->input)live->QueryChanged(std::wstring(live->input.Text()));
       if(live->dismissTimer){live->mouseWasDown=MouseDown();live->foregroundLostAt=0;live->dismissTimer.Start();}
       if(live->nativeHandoff.search.Valid())live->BeginNativeHandoff(live->nativeHandoff);
     }}catch(...){Wh_Log(L"[ILoSearch] Search flyout initialization failed: %08X",winrt::to_hresult());}};
@@ -20146,7 +20348,7 @@ struct Session:std::enable_shared_from_this<Session>{
     }else s->opened=s->fly.Opened(onOpened);
     if(s->fly)s->closingToken=s->fly.Closing([weak](auto&&,FlyoutBaseClosingEventArgs const& args)noexcept{try{
       auto live=weak.lock();if(!live||live->disposing||g_unloading)return;
-      if(live->copying){args.Cancel(true);return;}
+      if(live->copying||(live->editMenu&&(live->editMenu->pending||live->editMenu->visible))){args.Cancel(true);return;}
       if(live->HandoffCanRetain()){args.Cancel(true);Wh_Log(L"[ILoSearch] Flyout retained while native search settles");return;}
       if(live->dockTyping&&!live->closed&&!live->closeRequested&&live->pointerOnDockField&&live->pointerOnDockField()){
         const HWND fg=GetForegroundWindow();DWORD pid{};GetWindowThreadProcessId(fg,&pid);
@@ -20162,6 +20364,7 @@ struct Session:std::enable_shared_from_this<Session>{
         if(auto editor=live->dockEditor.get())live->query=std::wstring(editor.Text());else if(live->input)live->query=std::wstring(live->input.Text());
       }
       const bool wasOpen=live->liveOpened;live->liveOpened=false;live->closed=true;if(!live->copying)live->HoldDock(false);
+      if(live->editMenu)live->editMenu->Close();if(live->editTimer)live->editTimer.Stop();
       live->StopNativeHandoff();
       Wh_Log(L"[ILoSearch] %ls closed: opened=%d requested=%d lifetime=%llu ms",live->externalDockOpen?L"Native results window":L"Flyout",int(wasOpen),int(live->closeRequested),wasOpen?GetTickCount64()-live->openedAt:0);
       if(live->dismissTimer)live->dismissTimer.Stop();
@@ -20216,6 +20419,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
   std::vector<Property> hidden;std::optional<Property> margin;
   Border field{nullptr},iconPlate{nullptr},panelAnchor{nullptr};Button button{nullptr};TextBox input{nullptr};FontIcon icon{nullptr};TextBlock label{nullptr};
   std::shared_ptr<Session> active;std::weak_ptr<IloClockMenu::Slot> menuSlot;
+  std::shared_ptr<EditMenu> editMenu;
   winrt::event_token click{},changed{},focused{},dockKey{},context{},rightTap{};bool syncing{},busy{},nativeHideBlocked{};
   DispatcherTimer openTimer{nullptr};winrt::event_token openTick{};bool openQueued{},openWatchdog{};std::wstring pendingSeed;
   bool pendingExternal{},pendingFocusPrepared{};HWND pendingOrigin{};DWORD pendingOriginPid{};unsigned openingRetries{};ULONGLONG focusPreparedAt{};
@@ -20374,11 +20578,11 @@ struct Dock:std::enable_shared_from_this<Dock>{
       if(input){if(external&&!focusPrepared)Mirror(seed);seed=std::wstring(input.Text());if(!external&&input.FocusState()==FocusState::Unfocused)input.Focus(FocusState::Programmatic);}
       stage=L"build session";Wh_Log(L"[ILoSearch] Opening requested: %ls, query length=%zu",config.mode.c_str(),seed.size());
       next=Session::Build(config,anchor,taskbar,fieldHeight,panelCenterDip,iconCenterDip,seed,input,field,
-        [weak]{auto d=weak.lock();return d&&d->CursorOverField();},
+        [weak]{auto d=weak.lock();return d&&(d->CursorOverField()||(d->editMenu&&d->editMenu->ContainsCursor()));},
         [weak](auto const& value){if(auto d=weak.lock())d->Mirror(value);},
         [weak](bool compact){if(auto d=weak.lock())d->SelectPanelAnchor(compact);},
         [weak](auto const& value){if(auto d=weak.lock();d&&d->active&&d->active->closed&&!g_unloading){d->Mirror(value);d->Open(value);}},
-        [weak](auto const& session){if(auto d=weak.lock())d->Retire(session);},external&&(bool(input)||independentIcon));
+        [weak](auto const& session){if(auto d=weak.lock())d->Retire(session);},!external||bool(input)||independentIcon);
       if(g_unloading||field!=originalField){next->Dispose();return;}
       next->nativeHandoff=handoff;
       if(external&&!focusPrepared){
@@ -20488,6 +20692,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
     try{if(openTimer){openTimer.Stop();if(openTick.value)openTimer.Tick(openTick);}}catch(...){}openTimer=nullptr;openTick={};openQueued=openWatchdog=pendingExternal=pendingFocusPrepared=false;openingRetries=0;pendingOrigin=nullptr;pendingOriginPid=0;pendingHandoff={};ClearRecovery();HoldOpening(false);pendingSeed.clear();
     try{if(cleanupTimer){cleanupTimer.Stop();if(cleanupTick.value)cleanupTimer.Tick(cleanupTick);}}catch(...){}cleanupTimer=nullptr;cleanupTick={};retired.reset();
     if(auto old=std::move(active))old->Dispose();
+    if(editMenu){editMenu->Dispose();editMenu.reset();}
     try{if(auto slot=menuSlot.lock();slot&&slot->active&&slot->active->kind==IloClockMenu::Kind::Search&&slot->active->nativeTarget.get()==button)slot->Close();}catch(...){}menuSlot.reset();
     try{if(button&&click.value)button.Click(click);if(button&&context.value)button.ContextRequested(context);if(button&&rightTap.value)button.RightTapped(rightTap);if(input&&changed.value)input.TextChanged(changed);if(input&&focused.value)input.GotFocus(focused);if(input&&dockKey.value)input.KeyDown(dockKey);}catch(...){}
     // A startup arrange can reject removing children (0x800F1000). Make
@@ -20527,6 +20732,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
       // Keep the native editing/IME/caret template, but suppress its separate
       // painted frame. These resources belong to this TextBox only.
       TransparentEditor(input);
+      editMenu=EditMenu::Bind(input,taskbar,[weak]{if(auto d=weak.lock())return d->taskbar;return HWND{};});
       Grid::SetColumn(input,1);content.Children().Append(input);
       // An independent placeholder shares the icon's vertical alignment, so
       // Windows' textbox template cannot shift the idle label off center.
@@ -20610,7 +20816,7 @@ struct Dock:std::enable_shared_from_this<Dock>{
       if(!overlap){field.Opacity(1);field.IsHitTestVisible(true);Wh_Log(L"[ILoSearch] Independent dock field ready: %.1f DIP",width);}}
     if(!lastTheme||now-lastTheme>=350||modified){lastTheme=now;auto fg=ThemeColor(true);auto theme=fg.R>128?ElementTheme::Dark:ElementTheme::Light;if(field.RequestedTheme()!=theme)field.RequestedTheme(theme);
       StyleField(iconPlate?iconPlate:field,config,h,fg);
-      Paint(icon.Foreground(),fg,[&](auto b){icon.Foreground(b);});if(input)Paint(input.Foreground(),fg,[&](auto b){input.Foreground(b);});if(label)Paint(label.Foreground(),fg,[&](auto b){label.Foreground(b);});}
+      Paint(icon.Foreground(),fg,[&](auto b){icon.Foreground(b);});if(input){Paint(input.Foreground(),fg,[&](auto b){input.Foreground(b);});StyleEditorSelection(input,fg);}if(label)Paint(label.Foreground(),fg,[&](auto b){label.Foreground(b);});}
     return modified;
   }
 };

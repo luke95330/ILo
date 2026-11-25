@@ -1,7 +1,7 @@
-# ILô 2.3.0
+# ILô 2.3.1
 
-**ILô Search now replaces Windows search from the dock, Win+S and Start.**<br>
-**ILô Search remplace désormais la recherche Windows depuis le dock, Win+S et Démarrer.**
+**ILô Search replaces Windows search from the dock, Win+S and Start — now with full text editing.**<br>
+**ILô Search remplace la recherche Windows depuis le dock, Win+S et Démarrer — avec une édition complète du texte.**
 
 [English](#english) · [Français](#français)
 
@@ -14,26 +14,22 @@
 
 [Dock changelog](CHANGELOG.md#english) · [Latest release](https://github.com/luke95330/ILo/releases/latest)
 
-### What's new in ILô 2.3.0
+### What's new in ILô 2.3.1
 
-#### ILô Search — your new Windows search experience
+#### ILô Search - a complete text editing experience
 
-- **Replace the native Windows search interface beyond the dock.** Press Win+S, start typing in the native Start menu, or search from Start11 and compatible launchers to open ILô Search directly. The two new integration settings, **Replace Win+S** and **Redirect searches**, are enabled by default and can be configured independently.
-- **A redesigned Start search entry.** ILô replaces the native Start search control with its own entry instead of waiting for SearchHost to open. When the dock displays an icon or a search field, Start's redundant field is hidden while type-to-search remains available. In Hidden mode, the ILô field remains visible in Start; Windows (original) restores the native interface.
-- **A direct, independent search window.** Search requests open the actual ILô editor before accepting typed input, reducing handoff delays, missing first characters and flashes of the native search panel. The compact-to-expanded animation, dock-field editing, keyboard navigation and existing result actions are preserved.
-- **Robust Start integration.** Reapply the search presentation when Windows rebuilds the Start menu after pinning or unpinning apps. Retain native fallback paths when a direct request cannot be handled.
-
-#### Dock layout, performance and stability
-
-- **Single-sided vertical offset:** the floating dock now reserves only its height plus the gap at the screen edge, without invisible padding above the dock. Overlap-based hiding uses the actual painted vertical extent, rather than the larger taskbar window. The apps, notification area and search window follow the same geometry.
-- **Search optimizations:** load Start-menu shortcut metadata only when application results require it, reuse cached icons, stop obsolete query work sooner, and reduce redundant XAML objects, property updates and result/category processing.
-- **Code cleanup:** remove obsolete native layout and search-positioning routines, reduce noisy layout logging, and simplify result-event and search-window cleanup. Existing settings and supported backups are preserved.
+- **Select and edit your query** with the mouse or keyboard in the dock search field and both compact and expanded search windows. Standard Ctrl+A, Ctrl+C, Ctrl+X and Ctrl+V shortcuts are supported.
+- **A dedicated ILô editing menu:** Undo, Cut, Copy, Paste, Delete and Select all. It uses the shared dock material and rounded corners, opens next to the pointer, and keeps the search open while editing.
+- **Context-aware actions:** unavailable commands are hidden and the menu automatically adjusts its height. When no action is possible, only a disabled Paste command is displayed.
+- **Clear selection and improved stability:** opaque, contrasting blue highlights in light and dark themes, including while the editing menu is open. Search window resizing is deferred until the text editing event has finished, reducing conflicts with selection and clipboard operations.
 
 See the [complete changelog](CHANGELOG.md#english) for earlier releases.
 
 ### Discover ILô Search
 
 Click the magnifying glass in the dock, press **Win+S**, or start typing in the Start menu. ILô Search also works with compatible launchers such as Start11. Find apps, documents, images, audio, video, folders and Windows or ILô settings with categorized results and a customizable Spotlight-inspired interface. Switch categories with their icons, move between results with the arrow keys, press **Enter** to open a result, or **Esc** to close the search. Right-click a result to open it, create shortcuts or copies, or access its other contextual actions.
+
+Select text directly in the search field and right-click to access the new ILô editing menu, or use your usual editing shortcuts.
 
 Open the ILô settings panel and select **Search** to switch presentation (icon only, search field, hidden or Windows original), customize the interface or change the file index. **Replace Win+S** and **Redirect searches** are on by default. Disable the relevant option to keep the corresponding native behavior, or choose Windows (original) to restore native search entirely. With Everything selected, run Everything in the background; ILô automatically uses Windows Search if it cannot connect.
 
@@ -162,26 +158,22 @@ ILô is based on [vitaliiorlov’s fork](https://github.com/vitaliiorlov/windhaw
 
 [Historique des versions du dock](CHANGELOG.md#français) · [Dernière version](https://github.com/luke95330/ILo/releases/latest)
 
-### Nouveautés d'ILô 2.3.0
+### Nouveautés d'ILô 2.3.1
 
-#### ILô Search — votre nouvelle recherche Windows
+#### ILô Search - une édition complète du texte
 
-- **Remplacement de l'interface native de recherche au-delà du dock.** Utilisez Win+S, commencez à saisir une recherche dans le menu Démarrer natif, ou recherchez depuis Start11 et les lanceurs compatibles pour ouvrir directement ILô Search. Les deux nouvelles options **Remplacer Win+S** et **Rediriger les recherches** sont activées par défaut et réglables indépendamment.
-- **Une entrée de recherche Démarrer recréée.** ILô remplace le champ natif de Démarrer par sa propre entrée, sans attendre l'ouverture de SearchHost. Lorsque la recherche est visible dans le dock (icône seule ou champ de recherche), le champ redondant de Démarrer disparaît, mais la saisie directe reste possible. En mode Masquée, le champ ILô reste visible dans Démarrer ; Windows (origine) rétablit l'interface native.
-- **Une fenêtre de recherche autonome et directe.** Les demandes de recherche ouvrent le véritable éditeur ILô avant d'accepter la saisie, afin de réduire les délais de basculement, les premiers caractères manquants et l'apparition fugace du volet Windows. L'animation de déploiement, la saisie dans le dock, la navigation clavier et les actions sur les résultats sont conservées.
-- **Intégration fiable à Démarrer.** Réapplication de la présentation lorsque Windows reconstruit le menu après l'épinglage ou le désépinglage d'applications. Les mécanismes de repli natifs sont conservés lorsqu'une demande directe ne peut être prise en charge.
-
-#### Disposition du dock, performances et stabilité
-
-- **Décalage vertical à marge unique :** le dock flottant ne réserve plus que sa hauteur et l'espace qui le sépare du bord de l'écran, sans marge invisible côté applications. Le masquage par chevauchement tient compte de la hauteur réellement dessinée, et non de la fenêtre système plus grande. Les applications, la zone de notification et la recherche partagent cette géométrie.
-- **Optimisation de la recherche :** chargement des métadonnées des raccourcis Démarrer uniquement lorsque des résultats d'applications le nécessitent, réutilisation des icônes en cache, abandon plus rapide des requêtes obsolètes et réduction des objets XAML, des mises à jour de propriétés et des traitements redondants des résultats et catégories.
-- **Nettoyage du code :** suppression des routines natives obsolètes de disposition et de positionnement de la recherche, réduction de la journalisation répétitive et simplification de la gestion des événements et de la libération des fenêtres de recherche. Les réglages existants et les sauvegardes compatibles sont préservés.
+- **Sélection et modification de la recherche** à la souris ou au clavier, dans le champ du dock et les fenêtres compacte et déployée. Les raccourcis habituels Ctrl+A, Ctrl+C, Ctrl+X et Ctrl+V sont pris en charge.
+- **Un menu d'édition propre à ILô :** Annuler, Couper, Copier, Coller, Supprimer et Tout sélectionner. Il reprend le fond et les arrondis du dock, s'ouvre au niveau du pointeur et maintient la recherche ouverte pendant l'édition.
+- **Des actions adaptées au contexte :** les commandes indisponibles sont masquées et la hauteur du menu s'ajuste automatiquement. Si aucune action n'est possible, seule la commande Coller apparaît en grisé.
+- **Surlignage lisible et stabilité améliorée :** sélection bleue, opaque et contrastée dans les thèmes clair et sombre, y compris lorsque le menu d'édition est ouvert. Le redimensionnement du volet est différé jusqu'à la fin de l'événement d'édition, afin d'éviter les conflits avec la sélection et les opérations du presse-papiers.
 
 Consultez [l'historique complet des versions](CHANGELOG.md#français) pour les évolutions précédentes.
 
 ### Découvrir ILô Search
 
 Cliquez sur la loupe dans le dock, utilisez **Win+S** ou commencez à saisir votre recherche dans le menu Démarrer. ILô Search fonctionne également avec les lanceurs compatibles comme Start11. Recherchez applications, documents, images, sons, vidéos, dossiers et réglages Windows ou ILô, avec des catégories de résultats et une interface personnalisable inspirée de Spotlight. Changez de catégorie avec les icônes, parcourez les résultats avec les flèches du clavier, appuyez sur **Entrée** pour ouvrir un résultat ou sur **Échap** pour fermer la recherche. Faites un clic droit sur un résultat pour l'ouvrir, créer des raccourcis ou des copies, ou accéder aux autres actions contextuelles.
+
+Sélectionnez directement du texte dans le champ de recherche et faites un clic droit pour accéder au nouveau menu d'édition ILô, ou utilisez vos raccourcis d'édition habituels.
 
 Ouvrez les paramètres d'ILô et sélectionnez **Zone de recherche** pour modifier la présentation (icône seule, champ de recherche, masquée ou Windows d'origine), personnaliser l'interface ou choisir l'index de fichiers. **Remplacer Win+S** et **Rediriger les recherches** sont activées par défaut. Désactivez l'option correspondante pour conserver le comportement natif souhaité, ou choisissez Windows (origine) pour rétablir entièrement la recherche native. Si vous sélectionnez Everything, laissez-le actif en arrière-plan ; ILô utilise automatiquement Windows Search si Everything n'est pas disponible.
 
